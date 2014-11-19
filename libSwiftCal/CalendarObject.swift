@@ -165,7 +165,7 @@ public func != (lhs: CalendarObject, rhs: CalendarObject) -> Bool {
 
 // MARK: - CalendarObject class
 public class CalendarObject: NSObject, CalendarType {
-    public private(set) var id: Int!
+    public private(set) var id = Int.max
     
     public private(set) var created = NSDate()
     public private(set) var updated = NSDate()

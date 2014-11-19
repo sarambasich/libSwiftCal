@@ -8,8 +8,11 @@
 
 import EventKit
 
-public class Calendar: CalendarObject {
+public class Calendar: CalendarObject, ParserObserver {
     private var calendarIdentifier: String!
+    private var parser: CalParser!
+    
+    
     public var uid: String {
         get {
             return self.calendarIdentifier
@@ -17,8 +20,16 @@ public class Calendar: CalendarObject {
     }
     
     // MARK: - ParserObserver
-    func parser(parserStr: NSString, didMatchTodoc assemblyStr: NSString) {
+    public func parser(parserStr: String!, didMatchTodoc assemblyStr: String!) {
+        let x = 10
+        let y = 20
+    }
     
+    public init(stringToParse s: String) {
+        super.init()
+        self.parser = CalParser(delegate: self)
+        var err: NSError?
+        self.parser.parseString(s, error: &err)
     }
 
     public required init(coder aDecoder: NSCoder) {

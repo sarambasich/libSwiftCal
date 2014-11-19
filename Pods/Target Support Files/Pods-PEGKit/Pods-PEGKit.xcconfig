@@ -1,0 +1,1 @@
+PODS_PEGKIT_OTHER_LDFLAGS = -framework "Foundation"

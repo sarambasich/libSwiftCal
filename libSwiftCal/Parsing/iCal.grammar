@@ -1,6 +1,6 @@
 icalobject = 'BEGIN' ':' 'VCALENDAR' crlf
                 icalbody
-                'END' ':' 'VCALENDAR' crlf;
+                'END' ':' 'VCALENDAR' crlf S* EOF?;
 
 todoc      = 'BEGIN' ':' 'VTODO' crlf
                 todoprop alarmc*
@@ -266,9 +266,19 @@ paramname    = ianatoken | xname;
 
 paramvalue   = paramtext | quotedstring;
 
-paramtext     = Any*;
+paramtext     = safechar*;
 
-value         = Any*;
+value         = valuechar*;
+
+qsafechar    = ~(crlf | control | '"');
+
+safechar     = ~(crlf | control |  '"' |  ";" |  ":" |  ",");
+
+valuechar    = ~(crlf | control | escapedchar);
+
+nonusascii  = Any*;
+
+control       = Word;
 
 quotedstring = QuotedString;
 

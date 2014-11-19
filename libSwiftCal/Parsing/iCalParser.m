@@ -97,6 +97,11 @@
 @property (nonatomic, retain) NSMutableDictionary *paramvalue_memo;
 @property (nonatomic, retain) NSMutableDictionary *paramtext_memo;
 @property (nonatomic, retain) NSMutableDictionary *value_memo;
+@property (nonatomic, retain) NSMutableDictionary *qsafechar_memo;
+@property (nonatomic, retain) NSMutableDictionary *safechar_memo;
+@property (nonatomic, retain) NSMutableDictionary *valuechar_memo;
+@property (nonatomic, retain) NSMutableDictionary *nonusascii_memo;
+@property (nonatomic, retain) NSMutableDictionary *control_memo;
 @property (nonatomic, retain) NSMutableDictionary *quotedstring_memo;
 @property (nonatomic, retain) NSMutableDictionary *ianaparam_memo;
 @property (nonatomic, retain) NSMutableDictionary *icalparameter_memo;
@@ -682,6 +687,11 @@
         self.paramvalue_memo = [NSMutableDictionary dictionary];
         self.paramtext_memo = [NSMutableDictionary dictionary];
         self.value_memo = [NSMutableDictionary dictionary];
+        self.qsafechar_memo = [NSMutableDictionary dictionary];
+        self.safechar_memo = [NSMutableDictionary dictionary];
+        self.valuechar_memo = [NSMutableDictionary dictionary];
+        self.nonusascii_memo = [NSMutableDictionary dictionary];
+        self.control_memo = [NSMutableDictionary dictionary];
         self.quotedstring_memo = [NSMutableDictionary dictionary];
         self.ianaparam_memo = [NSMutableDictionary dictionary];
         self.icalparameter_memo = [NSMutableDictionary dictionary];
@@ -907,6 +917,11 @@
     [_paramvalue_memo removeAllObjects];
     [_paramtext_memo removeAllObjects];
     [_value_memo removeAllObjects];
+    [_qsafechar_memo removeAllObjects];
+    [_safechar_memo removeAllObjects];
+    [_valuechar_memo removeAllObjects];
+    [_nonusascii_memo removeAllObjects];
+    [_control_memo removeAllObjects];
     [_quotedstring_memo removeAllObjects];
     [_ianaparam_memo removeAllObjects];
     [_icalparameter_memo removeAllObjects];
@@ -1037,16 +1052,6 @@
 }
 
 - (void)start {
-    [self execute:^{
-        
-        PKTokenizer *t = self.tokenizer;
-        
-        [t.whitespaceState setWhitespaceChars:NO from:'\n' to:'\n'];
-        [t.whitespaceState setWhitespaceChars:NO from:'\r' to:'\r'];
-        [t setTokenizerState:t.symbolState from:'\n' to:'\n'];
-        [t setTokenizerState:t.symbolState from:'\r' to:'\r'];
-        
-    }];
 
     [self icalobject_]; 
     [self matchEOF:YES]; 
@@ -1064,6 +1069,12 @@
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self match:ICALPARSER_TOKEN_KIND_VCALENDAR discard:NO]; 
     [self crlf_]; 
+    while ([self predicts:TOKEN_KIND_BUILTIN_WHITESPACE, 0]) {
+        [self matchWhitespace:NO]; 
+    }
+    if ([self predicts:TOKEN_KIND_BUILTIN_EOF, 0]) {
+        [self matchEOF:NO]; 
+    }
 
     [self fireDelegateSelector:@selector(parser:didMatchIcalobject:)];
 }
@@ -2783,7 +2794,7 @@
 
 - (void)__paramvalue {
     
-    if ([self predicts:TOKEN_KIND_BUILTIN_ANY, 0]) {
+    if ([self predicts:ICALPARSER_TOKEN_KIND_COLON, ICALPARSER_TOKEN_KIND_COMMA, ICALPARSER_TOKEN_KIND_QUOTE, ICALPARSER_TOKEN_KIND_SEMI_COLON, ICALPARSER_TOKEN_KIND__N_1, ICALPARSER_TOKEN_KIND__R, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self paramtext_]; 
     } else if ([self predicts:TOKEN_KIND_BUILTIN_QUOTEDSTRING, 0]) {
         [self quotedstring_]; 
@@ -2800,8 +2811,8 @@
 
 - (void)__paramtext {
     
-    while ([self predicts:TOKEN_KIND_BUILTIN_ANY, 0]) {
-        [self matchAny:NO]; 
+    while ([self speculate:^{ [self safechar_]; }]) {
+        [self safechar_]; 
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchParamtext:)];
@@ -2813,8 +2824,8 @@
 
 - (void)__value {
     
-    while ([self predicts:TOKEN_KIND_BUILTIN_ANY, 0]) {
-        [self matchAny:NO]; 
+    while ([self speculate:^{ [self valuechar_]; }]) {
+        [self valuechar_]; 
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchValue:)];
@@ -2822,6 +2833,75 @@
 
 - (void)value_ {
     [self parseRule:@selector(__value) withMemo:_value_memo];
+}
+
+- (void)__qsafechar {
+    
+    if (![self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND__N_1, ICALPARSER_TOKEN_KIND__R, 0]) {[self crlf_]; } else if ([self predicts:TOKEN_KIND_BUILTIN_WORD, 0]) {[self control_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_QUOTE, 0]) {[self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'qsafechar'."];}}]) {
+        [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
+    } else {
+        [self raise:@"negation test failed in qsafechar"];
+    }
+
+    [self fireDelegateSelector:@selector(parser:didMatchQsafechar:)];
+}
+
+- (void)qsafechar_ {
+    [self parseRule:@selector(__qsafechar) withMemo:_qsafechar_memo];
+}
+
+- (void)__safechar {
+    
+    if (![self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND__N_1, ICALPARSER_TOKEN_KIND__R, 0]) {[self crlf_]; } else if ([self predicts:TOKEN_KIND_BUILTIN_WORD, 0]) {[self control_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_QUOTE, 0]) {[self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COLON, 0]) {[self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COMMA, 0]) {[self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; } else {[self raise:@"No viable alternative found in rule 'safechar'."];}}]) {
+        [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
+    } else {
+        [self raise:@"negation test failed in safechar"];
+    }
+
+    [self fireDelegateSelector:@selector(parser:didMatchSafechar:)];
+}
+
+- (void)safechar_ {
+    [self parseRule:@selector(__safechar) withMemo:_safechar_memo];
+}
+
+- (void)__valuechar {
+    
+    if (![self speculate:^{ if ([self speculate:^{ [self crlf_]; }]) {[self crlf_]; } else if ([self speculate:^{ [self control_]; }]) {[self control_]; } else if ([self speculate:^{ [self escapedchar_]; }]) {[self escapedchar_]; } else {[self raise:@"No viable alternative found in rule 'valuechar'."];}}]) {
+        [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
+    } else {
+        [self raise:@"negation test failed in valuechar"];
+    }
+
+    [self fireDelegateSelector:@selector(parser:didMatchValuechar:)];
+}
+
+- (void)valuechar_ {
+    [self parseRule:@selector(__valuechar) withMemo:_valuechar_memo];
+}
+
+- (void)__nonusascii {
+    
+    while ([self predicts:TOKEN_KIND_BUILTIN_ANY, 0]) {
+        [self matchAny:NO]; 
+    }
+
+    [self fireDelegateSelector:@selector(parser:didMatchNonusascii:)];
+}
+
+- (void)nonusascii_ {
+    [self parseRule:@selector(__nonusascii) withMemo:_nonusascii_memo];
+}
+
+- (void)__control {
+    
+    [self matchWord:NO]; 
+
+    [self fireDelegateSelector:@selector(parser:didMatchControl:)];
+}
+
+- (void)control_ {
+    [self parseRule:@selector(__control) withMemo:_control_memo];
 }
 
 - (void)__quotedstring {
