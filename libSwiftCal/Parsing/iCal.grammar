@@ -1,0 +1,655 @@
+icalobject = 'BEGIN' ':' 'VCALENDAR' crlf
+                icalbody
+                'END' ':' 'VCALENDAR' crlf;
+
+todoc      = 'BEGIN' ':' 'VTODO' crlf
+                todoprop alarmc*
+                'END' ':' 'VTODO' crlf;
+
+todoprop   =    (
+                    dtstamp | uid |
+                    class | completed | created | description |
+                    dtstart | geo | lastmod | location | organizer |
+                    percent | priority | recurid | seq | status |
+                    summary | url |
+                    rrule |
+                    due | duration |
+                    attach | attendee | categories | comment | contact |
+                    exdate | rstatus | related | resources |
+                    rdate | xprop | ianaprop
+                )*;
+
+
+alarmc     = 'BEGIN' ':' 'VALARM' crlf
+                audioprop | dispprop | emailprop
+                'END' ':' 'VALARM' crlf;
+
+altrepparam = 'ALTREP' '=' '"' uri '"';
+
+audioprop  =
+                action | trigger |
+                duration | repeat |
+                attach |
+                xprop | ianaprop;
+
+cnparam    = 'CN' '=' paramvalue;
+
+cutypeparam        = 'CUTYPE' '='
+                            ('INDIVIDUAL'
+                            | 'GROUP'
+                            | 'RESOURCE'
+                            | 'ROOM'
+                            | 'UNKNOWN'
+                            | xname
+                            | ianatoken);
+
+dispprop   =
+                    action | description | trigger |
+                    duration | repeat |
+                    xprop | ianaprop;
+
+delfromparam       = 'DELEGATED-FROM' '=' '"' caladdress
+                                '"' (',' '"' caladdress '"')*;
+
+deltoparam = 'DELEGATED-TO' '=' '"' caladdress '"'
+                            (',' '"' caladdress '"')*;
+
+dirparam   = 'DIR' '=' '"' uri '"';
+
+emailprop  =
+            action | description | trigger | summary |
+            attendee |
+            duration | repeat |
+            attach | xprop | ianaprop;
+
+action      = 'ACTION' actionparam ':' actionvalue crlf;
+
+actionparam = (';' otherparam)*;
+
+actionvalue = 'AUDIO' | 'DISPLAY' | 'EMAIL'
+                | ianatoken | xname;
+
+attach     = 'ATTACH' attachparam ( ':' uri ) |
+                                    (
+                                    ';' 'ENCODING' '=' 'BASE64'
+                                    ';' 'VALUE' '=' 'BINARY'
+                                    ':' binary
+                                    )
+                                    crlf;
+
+attachparam =
+                (';' fmttypeparam) |
+                (';' otherparam);
+
+attendee   = 'ATTENDEE' attparam ':' caladdress crlf;
+
+attparam   = (
+                (';' cutypeparam) | (';' memberparam) |
+                (';' roleparam) | (';' partstatparam) |
+                (';' rsvpparam) | (';' deltoparam) |
+                (';' delfromparam) | (';' sentbyparam) |
+                (';' cnparam) | (';' dirparam) |
+                (';' languageparam) |
+                (';' otherparam)
+            )*;
+
+binary     = Any*;
+
+caladdress        = uri;
+
+calprops   =    (
+                    prodid | version |
+                    calscale | method |
+                    xprop | ianaprop
+                )*;
+
+categories = 'CATEGORIES' catparam ':' text (',' text)* crlf;
+
+catparam   = (
+                (';' languageparam ) |
+                (';' otherparam)
+            )*;
+
+calscale   = 'CALSCALE' calparam ':' calvalue crlf;
+
+calparam   = (';' otherparam)*;
+
+calvalue   = 'GREGORIAN';
+
+class      = 'CLASS' classparam ':' classvalue crlf;
+
+classparam = (';' otherparam)*;
+
+classvalue = 'PUBLIC' | 'PRIVATE' | 'CONFIDENTIAL' | ianatoken
+                | xname;
+
+comment    = 'COMMENT' commparam ':' text crlf;
+
+component  = todoc*;
+
+commparam  = (
+                (';' altrepparam) | (';' languageparam) |
+                (';' otherparam)
+             )*;
+
+completed  = 'COMPLETED' compparam ':' datetime crlf;
+
+compparam  = (';' otherparam)*;
+
+contact    = 'CONTACT' contparam ':' text crlf;
+
+contentline   = name (';' param )* ':' value crlf;
+
+contparam  = (
+                (';' altrepparam) | (';' languageparam) |
+                (';' otherparam)
+            )*;
+
+created    = 'CREATED' creaparam ':' datetime crlf;
+
+creaparam  = (';' otherparam)*;
+
+date               = datevalue;
+
+datevalue         = Number;//datefullyear datemonth datemday;
+datefullyear      = Number Number Number Number;
+datemonth         = Number Number;
+datemday          = Number Number;
+
+datetime          = Number Word;//date 'T' time;
+
+description = 'DESCRIPTION' descparam ':' text crlf;
+
+descparam   = (
+                (';' altrepparam) | (';' languageparam) |
+                (';' otherparam)
+              )*;
+
+dtstamp    = 'DTSTAMP' stmparam ':' datetime crlf;
+
+stmparam   = (';' otherparam)*;
+
+dtstart    = 'DTSTART' dtstparam ':' dtstval crlf;
+
+dtstparam  = (
+                (';' 'VALUE' '=' ('DATE-TIME' | 'DATE')) |
+                (';' tzidparam) |
+                (';' otherparam)
+            )*;
+
+dtstval    = datetime | date;
+
+dtend      = 'DTEND' dtendparam ':' dtendval crlf;
+
+dtendparam = (
+                (';' 'VALUE' '=' ('DATE-TIME' | 'DATE')) |
+                (';' tzidparam) |
+                (';' otherparam)
+            )*;
+
+dtendval   = datetime | date;
+
+due        = 'DUE' dueparam ':' dueval crlf;
+
+dueparam   = (
+                (';' 'VALUE' '=' ('DATE-TIME' | 'DATE')) |
+                (';' tzidparam) |
+                (';' otherparam)
+            )*;
+
+dueval     = datetime | date;
+
+durvalue  = (('+')* | '-') 'P' (durdate | durtime | durweek);
+
+durdate   = durday (durtime)*;
+durtime   = 'T' (durhour | durminute | dursecond);
+durweek   = Number 'W';
+durhour   = Number 'H' (durminute)*;
+durminute = Number 'M' (dursecond)*;
+dursecond = Number 'S';
+durday    = Number 'D';
+
+duration   = 'DURATION' durparam ':' durvalue crlf;
+
+durparam   = (';' otherparam)*;
+
+encodingparam      = 'ENCODING' '='
+                      '8BIT'
+                    | 'BASE64';
+
+exdate     = 'EXDATE' exdtparam ':' exdtval (',' exdtval)* crlf;
+
+exdtparam  = (
+                (';' 'VALUE' '=' ('DATE-TIME' | 'DATE')) |
+                (';' tzidparam) |
+                (';' otherparam)
+            )*;
+
+exdtval    = datetime | date;
+
+fbtypeparam        = 'FBTYPE' '=' ('FREE' | 'BUSY'
+                                            | 'BUSY-UNAVAILABLE' | 'BUSY-TENTATIVE'
+                                            | xname
+                                            | ianatoken);
+
+fmttypeparam = 'FMTTYPE' '=' typename '|' subtypename;
+
+typename = regname;
+subtypename = regname;
+
+regname = regnamechars*;
+regnamechars = Word | Number | '!' |
+                '#' | '$' | '&' | '.' |
+                '+' | '-' | '^' | '_';
+
+geo        = 'GEO' geoparam ':' geovalue crlf;
+
+geoparam   = (';' otherparam)*;
+
+geovalue   = Number ';' Number;
+
+ianacomp  = 'BEGIN' ':' ianatoken crlf
+contentline*
+'END' ':' ianatoken crlf;
+
+ianaprop = ianatoken (';' icalparameter)* ':' value crlf;
+
+name          = ianatoken | xname;
+
+ianatoken    = (Word | Number | '-')*;
+
+vendorid      = (Word | Number)*;
+
+param         = paramname '=' paramvalue (',' paramvalue)*;
+
+paramname    = ianatoken | xname;
+
+paramvalue   = paramtext | quotedstring;
+
+paramtext     = Any*;
+
+value         = Any*;
+
+quotedstring = QuotedString;
+
+ianaparam  = ianatoken '=' paramvalue (',' paramvalue)*;
+
+icalparameter = altrepparam
+                | cnparam
+                | cutypeparam
+                | delfromparam
+                | deltoparam
+                | dirparam
+                | encodingparam
+                | fmttypeparam
+                | fbtypeparam
+                | languageparam
+                | memberparam
+                | partstatparam
+                | rangeparam
+                | trigrelparam
+                | reltypeparam
+                | roleparam
+                | rsvpparam
+                | sentbyparam
+                | tzidparam
+                | valuetypeparam
+                | otherparam;
+
+icalstream = icalobject;
+
+icalbody   = calprops component;
+
+languageparam = 'LANGUAGE' '=' language;
+
+language = Any*;
+
+lastmod   = 'LAST-MODIFIED' lstparam ':' datetime crlf;
+
+lstparam   = (';' otherparam)*;
+
+location   = "LOCATION"  locparam ":" text crlf;
+
+locparam   = (
+                (";" altrepparam) | (";" languageparam) |
+                (";" otherparam)
+            )*;
+
+memberparam        = 'MEMBER' '=' '"' caladdress '"'
+                            (',' '"' caladdress '"')*;
+
+method     = 'METHOD' metparam ':' metvalue crlf;
+
+metparam   = (';' otherparam)*;
+
+metvalue   = ianatoken;
+
+organizer  = 'ORGANIZER' orgparam ':'
+caladdress crlf;
+
+orgparam   = (
+                (';' cnparam) | (';' dirparam) | (';' sentbyparam) |
+                (';' languageparam) |
+                (';' otherparam)
+            )*;
+
+
+otherparam   = (ianaparam | xparam);
+
+partstatparam    = 'PARTSTAT' '='
+                                (partstatevent
+                                | partstattodo
+                                | partstatjour);
+
+partstatevent   = ('NEEDS-ACTION'
+                    | 'ACCEPTED'
+                    | 'DECLINED'
+                    | 'TENTATIVE'
+                    | 'DELEGATED'
+                    | xname
+                    | ianatoken);
+
+
+partstattodo    = ('NEEDS-ACTION'
+                    | 'ACCEPTED'
+                    | 'DECLINED'
+                    | 'TENTATIVE'
+                    | 'DELEGATED'
+                    | 'COMPLETED'
+                    | 'IN-PROCESS'
+                    | xname
+                    | ianatoken);
+
+partstatjour    = ('NEEDS-ACTION'
+                    | 'ACCEPTED'
+                    | 'DECLINED'
+                    | xname
+                    | ianatoken);
+
+percent = 'PERCENT-COMPLETE' pctparam ':' Number crlf;
+
+period     = periodexplicit | periodstart;
+periodexplicit = datetime '/' datetime;
+periodstart = datetime '/' durvalue;
+
+pctparam   = (';' otherparam)*;
+
+priority   = 'PRIORITY' prioparam ':' priovalue crlf;
+
+prioparam  = (';' otherparam)*;
+
+priovalue   = Number;
+
+prodid     = 'PRODID' pidparam ':' pidvalue crlf;
+
+pidparam   = (';' otherparam)*;
+
+pidvalue   = text;
+
+rangeparam = 'RANGE' '=' 'THISANDFUTURE' ':';
+
+rdate      = 'RDATE' rdtparam ':' rdtval (',' rdtval)* crlf;
+
+rdtparam   = (
+                (';' 'VALUE' '=' ('DATE-TIME' | 'DATE' | 'PERIOD')) |
+                (';' tzidparam) |
+                (';' otherparam)
+            )*;
+
+rdtval     = datetime | date | period;
+
+related    = 'RELATED-TO' relparam ':' text crlf;
+
+relparam   = (
+                (';' reltypeparam) |
+                (';' otherparam)
+            )*;
+
+reltypeparam       = 'RELTYPE' '='
+                    ('PARENT'
+                    | 'CHILD'
+                    | 'SIBLING'
+                    | ianatoken
+                    | xname);
+
+resources  = 'RESOURCES' resrcparam ':' text (',' text)* crlf;
+
+resrcparam = (
+                (';' altrepparam) | (';' languageparam) |
+                (';' otherparam)
+            )*;
+
+recurid    = 'RECURRENCE-ID' ridparam ':' ridval crlf;
+
+repeat  = 'REPEAT' repparam ':' Number crlf;
+
+repparam   = (';' otherparam)*;
+
+ridparam   = (
+                (';' 'VALUE' '=' ('DATE-TIME' | 'DATE')) |
+                (';' tzidparam) | (';' rangeparam) |
+                (';' otherparam)
+            )*;
+
+ridval     = datetime | date;
+
+roleparam  = 'ROLE' '='
+            ('CHAIR'
+            | 'REQ-PARTICIPANT'
+            | 'OPT-PARTICIPANT'
+            | 'NON-PARTICIPANT'
+            | xname
+            | ianatoken);
+
+rrule      = 'RRULE' rrulparam ':' recur crlf;
+
+rrulparam  = (';' otherparam)*;
+
+recur           = recurrulepart ( ';' recurrulepart )*;
+
+recurrulepart     = ( ( 'FREQ' '=' freq )
+                    | ( 'UNTIL' '=' enddate )
+                    | ( 'COUNT' '=' Number )
+                    | ( 'INTERVAL' '=' Number )
+                    | ( 'BYSECOND' '=' byseclist )
+                    | ( 'BYMINUTE' '=' byminlist )
+                    | ( 'BYHOUR' '=' byhrlist )
+                    | ( 'BYDAY' '=' bywdaylist )
+                    | ( 'BYMONTHDAY' '=' bymodaylist )
+                    | ( 'BYYEARDAY' '=' byyrdaylist )
+                    | ( 'BYWEEKNO' '=' bywknolist )
+                    | ( 'BYMONTH' '=' bymolist )
+                    | ( 'BYSETPOS' '=' bysplist )
+                    | ( 'WKST' '=' weekday )
+                    )*;
+
+freq        = 'SECONDLY' | 'MINUTELY' | 'HOURLY' | 'DAILY'
+            | 'WEEKLY' | 'MONTHLY' | 'YEARLY';
+
+enddate     = date | datetime;
+
+byseclist   = ( seconds (',' seconds)* );
+
+seconds     = Number;
+
+byminlist   = ( minutes (',' minutes)* );
+
+minutes     = Number;
+
+byhrlist    = hour (',' hour)*;
+
+hour        = Number;
+
+bywdaylist  = weekdaynum (',' weekdaynum)*;
+
+weekdaynum  = ((plus | minus)* ordwk)* weekday;
+
+plus        = '+';
+
+minus       = '-';
+
+ordwk       = Number;
+
+weekday     = 'SU' | 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA';
+
+bymodaylist = monthdaynum (',' monthdaynum)*;
+
+monthdaynum = (plus | minus)* ordmoday;
+
+ordmoday    = Number;
+
+byyrdaylist = yeardaynum (',' yeardaynum)*;
+
+yeardaynum  = (plus | minus)* ordyrday;
+
+ordyrday    = Number;
+
+bywknolist  = ( weeknum (',' weeknum)* );
+
+weeknum     = (plus | minus)* ordwk;
+
+bymolist    = ( monthnum (',' monthnum)* );
+
+monthnum    = Number;
+
+bysplist    = ( setposday (',' setposday)* );
+
+setposday   = yeardaynum;
+
+rstatus    = 'REQUEST-STATUS' rstatparam ':'
+statcode ';' statdesc (';' extdata)*;
+
+rstatparam = (
+                (';' languageparam) |
+                (';' otherparam)
+            )*;
+
+rsvpparam = 'RSVP' '=' ('TRUE' | 'FALSE');
+
+statcode   = Number;
+
+statdesc   = text;
+
+extdata    = text;
+
+seq = 'SEQUENCE' seqparam ':' Number crlf;
+
+seqparam   = (';' otherparam)*;
+
+status          = 'STATUS' statparam ':' statvalue crlf;
+
+statparam       = (';' otherparam)*;
+
+statvalue       = (statvalueevent
+                |  statvaluetodo
+                |  statvaluejour);
+
+statvalueevent = 'TENTATIVE'
+                | 'CONFIRMED'
+                | 'CANCELLED';
+
+statvaluetodo  = 'NEEDS-ACTION'
+                | 'COMPLETED'
+                | 'IN-PROCESS'
+                | 'CANCELLED';
+
+statvaluejour  = 'DRAFT'
+                | 'FINAL'
+                | 'CANCELLED';
+
+summary    = 'SUMMARY' summparam ':' text crlf;
+
+summparam  = (
+                (';' altrepparam) | (';' languageparam) |
+                (';' otherparam)
+            )*;
+
+sentbyparam        = 'SENT-BY' '=' '"' caladdress '"';
+
+text            = (tsafechar | ':' | '"' | escapedchar)*;
+
+escapedchar     = ('\\' (Word | Number)+ | '\;' | '\,' | '\N' | '\n');
+
+tsafechar       = ~(crlf | '"' | ';' | ':' | '\\' | ',');
+
+time         = Word*; //Number timeutc?; //timehour timeminute timesecond timeutc?;
+
+timehour    = Number Number;
+timeminute  = Number Number;
+timesecond  = Number Number;
+
+timeutc     = 'Z';
+
+trigger    = 'TRIGGER' (trigrel | trigabs) crlf;
+
+trigrel    = (
+                (';' 'VALUE' '=' 'DURATION') |
+                (';' trigrelparam) |
+                (';' otherparam)
+            )* ':' durvalue;
+
+trigrelparam       = 'RELATED' '='
+                                ('START'
+                                | 'END');
+
+trigabs    = (
+                (';' 'VALUE' '=' 'DATE-TIME') |
+                (';' otherparam)
+            )* ':' datetime;
+
+tzidparam  = 'TZID' '=' (tzidprefix)* paramtext;
+
+tzidprefix = '|';
+
+uid        = 'UID' uidparam ':' text crlf;
+
+uidparam   = (';' otherparam)*;
+
+uri        = URL;
+
+url        = uri;
+
+valuetypeparam = 'VALUE' '=' valuetype;
+
+valuetype  = ('BINARY'
+            | 'BOOLEAN'
+            | 'CAL-ADDRESS'
+            | 'DATE'
+            | 'DATE-TIME'
+            | 'DURATION'
+            | 'FLOAT'
+            | 'INTEGER'
+            | 'PERIOD'
+            | 'RECUR'
+            | 'TEXT'
+            | 'TIME'
+            | 'URI'
+            | 'UTC-OFFSET'
+            | xname
+            | ianatoken);
+
+version    = 'VERSION' verparam ':' vervalue crlf;
+
+verparam   = (';' otherparam)*;
+
+vervalue   = '2.0';
+
+xcomp     = 'BEGIN' ':' xname crlf
+                contentline*
+                'END' ':' xname crlf;
+
+xparam     = xname '=' paramvalue (',' paramvalue)*;
+
+xname        = 'X-' (vendorid '-')* (Word | Number | '-')*;
+
+xprop = xname (';' icalparameter)* ':' value crlf;
+
+xwrcalname   = 'X-WR-CALNAME' xwrcalnamep ':' text crlf;
+
+xwrcalnamep  = (';' otherparam)*;
+
+xwrcalsec    = 'X-WR-CALDESC' xwrcalsecp ':' text crlf;
+
+xwrcalsecp   = (';' otherparam)*;
+
+crlf         = ('\n' | '\r')*;

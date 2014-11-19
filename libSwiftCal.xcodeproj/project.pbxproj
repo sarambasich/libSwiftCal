@@ -7,9 +7,89 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F8F8EAF21A1C3EEE0046AF23 /* libSwiftCal.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EAF11A1C3EEE0046AF23 /* libSwiftCal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
-		F8F8EAFF1A1C3EEE0046AF23 /* libSwiftCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EAFE1A1C3EEE0046AF23 /* libSwiftCalTests.swift */; };
+		F8F8ECEB1A1C3F200046AF23 /* PEGKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB121A1C3F1F0046AF23 /* PEGKit.h */; };
+		F8F8ECEC1A1C3F200046AF23 /* PKAssembly.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB131A1C3F1F0046AF23 /* PKAssembly.h */; };
+		F8F8ECED1A1C3F200046AF23 /* PKAST.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB141A1C3F1F0046AF23 /* PKAST.h */; };
+		F8F8ECEE1A1C3F200046AF23 /* PKCommentState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB151A1C3F1F0046AF23 /* PKCommentState.h */; };
+		F8F8ECEF1A1C3F200046AF23 /* PKDelimitState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB161A1C3F1F0046AF23 /* PKDelimitState.h */; };
+		F8F8ECF01A1C3F200046AF23 /* PKEmailState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB171A1C3F1F0046AF23 /* PKEmailState.h */; };
+		F8F8ECF11A1C3F200046AF23 /* PKHashtagState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB181A1C3F1F0046AF23 /* PKHashtagState.h */; };
+		F8F8ECF21A1C3F200046AF23 /* PKMultiLineCommentState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB191A1C3F1F0046AF23 /* PKMultiLineCommentState.h */; };
+		F8F8ECF31A1C3F200046AF23 /* PKNumberState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB1A1A1C3F1F0046AF23 /* PKNumberState.h */; };
+		F8F8ECF41A1C3F200046AF23 /* PKParser+Subclass.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB1B1A1C3F1F0046AF23 /* PKParser+Subclass.h */; };
+		F8F8ECF51A1C3F200046AF23 /* PKParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB1C1A1C3F1F0046AF23 /* PKParser.h */; };
+		F8F8ECF61A1C3F200046AF23 /* PKQuoteState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB1D1A1C3F1F0046AF23 /* PKQuoteState.h */; };
+		F8F8ECF71A1C3F200046AF23 /* PKReader.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB1E1A1C3F1F0046AF23 /* PKReader.h */; };
+		F8F8ECF81A1C3F200046AF23 /* PKRecognitionException.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB1F1A1C3F1F0046AF23 /* PKRecognitionException.h */; };
+		F8F8ECF91A1C3F200046AF23 /* PKSingleLineCommentState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB201A1C3F1F0046AF23 /* PKSingleLineCommentState.h */; };
+		F8F8ECFA1A1C3F200046AF23 /* PKSymbolState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB211A1C3F1F0046AF23 /* PKSymbolState.h */; };
+		F8F8ECFB1A1C3F200046AF23 /* PKToken.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB221A1C3F1F0046AF23 /* PKToken.h */; };
+		F8F8ECFC1A1C3F200046AF23 /* PKTokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB231A1C3F1F0046AF23 /* PKTokenizer.h */; };
+		F8F8ECFD1A1C3F200046AF23 /* PKTokenizerState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB241A1C3F1F0046AF23 /* PKTokenizerState.h */; };
+		F8F8ECFE1A1C3F200046AF23 /* PKTwitterState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB251A1C3F1F0046AF23 /* PKTwitterState.h */; };
+		F8F8ECFF1A1C3F200046AF23 /* PKTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB261A1C3F1F0046AF23 /* PKTypes.h */; };
+		F8F8ED001A1C3F200046AF23 /* PKURLState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB271A1C3F1F0046AF23 /* PKURLState.h */; };
+		F8F8ED011A1C3F200046AF23 /* PKWhitespaceState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB281A1C3F1F0046AF23 /* PKWhitespaceState.h */; };
+		F8F8ED021A1C3F200046AF23 /* PKWordState.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EB291A1C3F1F0046AF23 /* PKWordState.h */; };
+		F8F8ED7A1A1C3F200046AF23 /* PEGKit_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EBB21A1C3F1F0046AF23 /* PEGKit_Prefix.pch */; };
+		F8F8EDB61A1C3F200046AF23 /* NSArray+PEGKitAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EBF01A1C3F1F0046AF23 /* NSArray+PEGKitAdditions.h */; };
+		F8F8EDB71A1C3F200046AF23 /* NSArray+PEGKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBF11A1C3F1F0046AF23 /* NSArray+PEGKitAdditions.m */; };
+		F8F8EDB81A1C3F200046AF23 /* NSString+PEGKitAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EBF21A1C3F1F0046AF23 /* NSString+PEGKitAdditions.h */; };
+		F8F8EDB91A1C3F200046AF23 /* NSString+PEGKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBF31A1C3F1F0046AF23 /* NSString+PEGKitAdditions.m */; };
+		F8F8EDBA1A1C3F200046AF23 /* PKAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBF41A1C3F1F0046AF23 /* PKAssembly.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDBB1A1C3F200046AF23 /* PKAST.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBF51A1C3F1F0046AF23 /* PKAST.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDBC1A1C3F200046AF23 /* PKCommentState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBF61A1C3F1F0046AF23 /* PKCommentState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDBD1A1C3F200046AF23 /* PKDelimitDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EBF71A1C3F1F0046AF23 /* PKDelimitDescriptor.h */; };
+		F8F8EDBE1A1C3F200046AF23 /* PKDelimitDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBF81A1C3F1F0046AF23 /* PKDelimitDescriptor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDBF1A1C3F200046AF23 /* PKDelimitDescriptorCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EBF91A1C3F1F0046AF23 /* PKDelimitDescriptorCollection.h */; };
+		F8F8EDC01A1C3F200046AF23 /* PKDelimitDescriptorCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBFA1A1C3F1F0046AF23 /* PKDelimitDescriptorCollection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDC11A1C3F200046AF23 /* PKDelimitState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBFB1A1C3F1F0046AF23 /* PKDelimitState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDC21A1C3F200046AF23 /* PKEmailState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBFC1A1C3F1F0046AF23 /* PKEmailState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDC31A1C3F200046AF23 /* PKHashtagState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBFD1A1C3F1F0046AF23 /* PKHashtagState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDC41A1C3F200046AF23 /* PKMultiLineCommentState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBFE1A1C3F1F0046AF23 /* PKMultiLineCommentState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDC51A1C3F200046AF23 /* PKNumberState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EBFF1A1C3F1F0046AF23 /* PKNumberState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDC61A1C3F200046AF23 /* PKParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC001A1C3F1F0046AF23 /* PKParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDC71A1C3F200046AF23 /* PKQuoteState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC011A1C3F1F0046AF23 /* PKQuoteState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDC81A1C3F200046AF23 /* PKReader.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC021A1C3F1F0046AF23 /* PKReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDC91A1C3F200046AF23 /* PKRecognitionException.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC031A1C3F1F0046AF23 /* PKRecognitionException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDCA1A1C3F200046AF23 /* PKSingleLineCommentState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC041A1C3F1F0046AF23 /* PKSingleLineCommentState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDCB1A1C3F200046AF23 /* PKSymbolNode.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EC051A1C3F1F0046AF23 /* PKSymbolNode.h */; };
+		F8F8EDCC1A1C3F200046AF23 /* PKSymbolNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC061A1C3F1F0046AF23 /* PKSymbolNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDCD1A1C3F200046AF23 /* PKSymbolRootNode.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8EC071A1C3F1F0046AF23 /* PKSymbolRootNode.h */; };
+		F8F8EDCE1A1C3F200046AF23 /* PKSymbolRootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC081A1C3F1F0046AF23 /* PKSymbolRootNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDCF1A1C3F200046AF23 /* PKSymbolState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC091A1C3F1F0046AF23 /* PKSymbolState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDD01A1C3F200046AF23 /* PKToken.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC0A1A1C3F1F0046AF23 /* PKToken.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDD11A1C3F200046AF23 /* PKTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC0B1A1C3F1F0046AF23 /* PKTokenizer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDD21A1C3F200046AF23 /* PKTokenizerState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC0C1A1C3F1F0046AF23 /* PKTokenizerState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDD31A1C3F200046AF23 /* PKTwitterState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC0D1A1C3F1F0046AF23 /* PKTwitterState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDD41A1C3F200046AF23 /* PKURLState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC0E1A1C3F1F0046AF23 /* PKURLState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDD51A1C3F200046AF23 /* PKWhitespaceState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC0F1A1C3F1F0046AF23 /* PKWhitespaceState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EDD61A1C3F200046AF23 /* PKWordState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8EC101A1C3F1F0046AF23 /* PKWordState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8F8EE8B1A1C3F200046AF23 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECC81A1C3F200046AF23 /* Alarm.swift */; };
+		F8F8EE8C1A1C3F200046AF23 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECC91A1C3F200046AF23 /* Attachment.swift */; };
+		F8F8EE8D1A1C3F200046AF23 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECCA1A1C3F200046AF23 /* Calendar.swift */; };
+		F8F8EE8E1A1C3F200046AF23 /* CalendarObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECCB1A1C3F200046AF23 /* CalendarObject.swift */; };
+		F8F8EE8F1A1C3F200046AF23 /* CalendarType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECCC1A1C3F200046AF23 /* CalendarType.swift */; };
+		F8F8EE921A1C3F200046AF23 /* libSwiftCal.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8ECD01A1C3F200046AF23 /* libSwiftCal.h */; };
+		F8F8EE931A1C3F200046AF23 /* libSwiftCal.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8ECD11A1C3F200046AF23 /* libSwiftCal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8F8EE961A1C3F200046AF23 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECD51A1C3F200046AF23 /* Observable.swift */; };
+		F8F8EE971A1C3F200046AF23 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECD61A1C3F200046AF23 /* Observer.swift */; };
+		F8F8EE981A1C3F200046AF23 /* Organizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECD71A1C3F200046AF23 /* Organizer.swift */; };
+		F8F8EE991A1C3F200046AF23 /* CalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8ECD91A1C3F200046AF23 /* CalParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8F8EE9A1A1C3F200046AF23 /* CalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECDA1A1C3F200046AF23 /* CalParser.m */; };
+		F8F8EE9B1A1C3F200046AF23 /* iCal.grammar in Resources */ = {isa = PBXBuildFile; fileRef = F8F8ECDB1A1C3F200046AF23 /* iCal.grammar */; };
+		F8F8EE9C1A1C3F200046AF23 /* iCalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8ECDC1A1C3F200046AF23 /* iCalParser.h */; };
+		F8F8EE9D1A1C3F200046AF23 /* iCalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECDD1A1C3F200046AF23 /* iCalParser.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		F8F8EE9F1A1C3F200046AF23 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECDF1A1C3F200046AF23 /* Properties.swift */; };
+		F8F8EEA01A1C3F200046AF23 /* RecurrenceDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE01A1C3F200046AF23 /* RecurrenceDate.swift */; };
+		F8F8EEA11A1C3F200046AF23 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE11A1C3F200046AF23 /* Reminder.swift */; };
+		F8F8EEA21A1C3F200046AF23 /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE21A1C3F200046AF23 /* RequestStatus.swift */; };
+		F8F8EEA31A1C3F200046AF23 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE31A1C3F200046AF23 /* Serializable.swift */; };
+		F8F8EEB81A1C3F5A0046AF23 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EEAB1A1C3F200046AF23 /* PEGKit.framework */; };
+		F8F8EED51A1C4CF30046AF23 /* libSwiftCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */; };
+		F8F8EED71A1C4E120046AF23 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8F8EEAB1A1C3F200046AF23 /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F8F8EF3E1A1C4EF90046AF23 /* PEGKit-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8F8EF051A1C4EF90046AF23 /* PEGKit-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,15 +100,152 @@
 			remoteGlobalIDString = F8F8EAEB1A1C3EEE0046AF23;
 			remoteInfo = libSwiftCal;
 		};
+		F8F8EEAA1A1C3F200046AF23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F8F8EBAD1A1C3F1F0046AF23 /* PEGKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D3F8A48D175817DF00056188;
+			remoteInfo = PEGKit;
+		};
+		F8F8EEAC1A1C3F200046AF23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F8F8EBAD1A1C3F1F0046AF23 /* PEGKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D366C55418D1F29D00AF3EFB;
+			remoteInfo = libPEGKitOSX;
+		};
+		F8F8EEAE1A1C3F200046AF23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F8F8EBAD1A1C3F1F0046AF23 /* PEGKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D317C12B18D1F5EB0036BE75;
+			remoteInfo = libPEGKitIOS;
+		};
+		F8F8EEB01A1C3F200046AF23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F8F8EBAD1A1C3F1F0046AF23 /* PEGKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D37D8DC61571A4F700CDB822;
+			remoteInfo = PEGKitTests;
+		};
+		F8F8EED81A1C4E5B0046AF23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F8F8EBAD1A1C3F1F0046AF23 /* PEGKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D3F8A3DA175817DF00056188;
+			remoteInfo = PEGKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F8F8EED61A1C4DD90046AF23 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F8F8EED71A1C4E120046AF23 /* PEGKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8F8EAF01A1C3EEE0046AF23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8F8EAF11A1C3EEE0046AF23 /* libSwiftCal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libSwiftCal.h; sourceTree = "<group>"; };
 		F8F8EAF71A1C3EEE0046AF23 /* libSwiftCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libSwiftCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8F8EAFD1A1C3EEE0046AF23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8F8EAFE1A1C3EEE0046AF23 /* libSwiftCalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = libSwiftCalTests.swift; sourceTree = "<group>"; };
+		F8F8EB0A1A1C3F1F0046AF23 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		F8F8EB0B1A1C3F1F0046AF23 /* .gitmodules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
+		F8F8EB0D1A1C3F1F0046AF23 /* Doxyfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Doxyfile; sourceTree = "<group>"; };
+		F8F8EB0F1A1C3F1F0046AF23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F8F8EB121A1C3F1F0046AF23 /* PEGKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGKit.h; sourceTree = "<group>"; };
+		F8F8EB131A1C3F1F0046AF23 /* PKAssembly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKAssembly.h; sourceTree = "<group>"; };
+		F8F8EB141A1C3F1F0046AF23 /* PKAST.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKAST.h; sourceTree = "<group>"; };
+		F8F8EB151A1C3F1F0046AF23 /* PKCommentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKCommentState.h; sourceTree = "<group>"; };
+		F8F8EB161A1C3F1F0046AF23 /* PKDelimitState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKDelimitState.h; sourceTree = "<group>"; };
+		F8F8EB171A1C3F1F0046AF23 /* PKEmailState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKEmailState.h; sourceTree = "<group>"; };
+		F8F8EB181A1C3F1F0046AF23 /* PKHashtagState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKHashtagState.h; sourceTree = "<group>"; };
+		F8F8EB191A1C3F1F0046AF23 /* PKMultiLineCommentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMultiLineCommentState.h; sourceTree = "<group>"; };
+		F8F8EB1A1A1C3F1F0046AF23 /* PKNumberState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKNumberState.h; sourceTree = "<group>"; };
+		F8F8EB1B1A1C3F1F0046AF23 /* PKParser+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PKParser+Subclass.h"; sourceTree = "<group>"; };
+		F8F8EB1C1A1C3F1F0046AF23 /* PKParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKParser.h; sourceTree = "<group>"; };
+		F8F8EB1D1A1C3F1F0046AF23 /* PKQuoteState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKQuoteState.h; sourceTree = "<group>"; };
+		F8F8EB1E1A1C3F1F0046AF23 /* PKReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKReader.h; sourceTree = "<group>"; };
+		F8F8EB1F1A1C3F1F0046AF23 /* PKRecognitionException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRecognitionException.h; sourceTree = "<group>"; };
+		F8F8EB201A1C3F1F0046AF23 /* PKSingleLineCommentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSingleLineCommentState.h; sourceTree = "<group>"; };
+		F8F8EB211A1C3F1F0046AF23 /* PKSymbolState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSymbolState.h; sourceTree = "<group>"; };
+		F8F8EB221A1C3F1F0046AF23 /* PKToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKToken.h; sourceTree = "<group>"; };
+		F8F8EB231A1C3F1F0046AF23 /* PKTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKTokenizer.h; sourceTree = "<group>"; };
+		F8F8EB241A1C3F1F0046AF23 /* PKTokenizerState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKTokenizerState.h; sourceTree = "<group>"; };
+		F8F8EB251A1C3F1F0046AF23 /* PKTwitterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKTwitterState.h; sourceTree = "<group>"; };
+		F8F8EB261A1C3F1F0046AF23 /* PKTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKTypes.h; sourceTree = "<group>"; };
+		F8F8EB271A1C3F1F0046AF23 /* PKURLState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKURLState.h; sourceTree = "<group>"; };
+		F8F8EB281A1C3F1F0046AF23 /* PKWhitespaceState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKWhitespaceState.h; sourceTree = "<group>"; };
+		F8F8EB291A1C3F1F0046AF23 /* PKWordState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKWordState.h; sourceTree = "<group>"; };
+		F8F8EB2C1A1C3F1F0046AF23 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
+		F8F8EB2D1A1C3F1F0046AF23 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
+		F8F8EBAD1A1C3F1F0046AF23 /* PEGKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PEGKit.xcodeproj; sourceTree = "<group>"; };
+		F8F8EBB11A1C3F1F0046AF23 /* PEGKit.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = PEGKit.xcworkspace; sourceTree = "<group>"; };
+		F8F8EBB21A1C3F1F0046AF23 /* PEGKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGKit_Prefix.pch; sourceTree = "<group>"; };
+		F8F8EBEE1A1C3F1F0046AF23 /* SOFTWARE_LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SOFTWARE_LICENSE; sourceTree = "<group>"; };
+		F8F8EBF01A1C3F1F0046AF23 /* NSArray+PEGKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PEGKitAdditions.h"; sourceTree = "<group>"; };
+		F8F8EBF11A1C3F1F0046AF23 /* NSArray+PEGKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PEGKitAdditions.m"; sourceTree = "<group>"; };
+		F8F8EBF21A1C3F1F0046AF23 /* NSString+PEGKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PEGKitAdditions.h"; sourceTree = "<group>"; };
+		F8F8EBF31A1C3F1F0046AF23 /* NSString+PEGKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PEGKitAdditions.m"; sourceTree = "<group>"; };
+		F8F8EBF41A1C3F1F0046AF23 /* PKAssembly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKAssembly.m; sourceTree = "<group>"; };
+		F8F8EBF51A1C3F1F0046AF23 /* PKAST.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKAST.m; sourceTree = "<group>"; };
+		F8F8EBF61A1C3F1F0046AF23 /* PKCommentState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKCommentState.m; sourceTree = "<group>"; };
+		F8F8EBF71A1C3F1F0046AF23 /* PKDelimitDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKDelimitDescriptor.h; sourceTree = "<group>"; };
+		F8F8EBF81A1C3F1F0046AF23 /* PKDelimitDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKDelimitDescriptor.m; sourceTree = "<group>"; };
+		F8F8EBF91A1C3F1F0046AF23 /* PKDelimitDescriptorCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKDelimitDescriptorCollection.h; sourceTree = "<group>"; };
+		F8F8EBFA1A1C3F1F0046AF23 /* PKDelimitDescriptorCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKDelimitDescriptorCollection.m; sourceTree = "<group>"; };
+		F8F8EBFB1A1C3F1F0046AF23 /* PKDelimitState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKDelimitState.m; sourceTree = "<group>"; };
+		F8F8EBFC1A1C3F1F0046AF23 /* PKEmailState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKEmailState.m; sourceTree = "<group>"; };
+		F8F8EBFD1A1C3F1F0046AF23 /* PKHashtagState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKHashtagState.m; sourceTree = "<group>"; };
+		F8F8EBFE1A1C3F1F0046AF23 /* PKMultiLineCommentState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKMultiLineCommentState.m; sourceTree = "<group>"; };
+		F8F8EBFF1A1C3F1F0046AF23 /* PKNumberState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKNumberState.m; sourceTree = "<group>"; };
+		F8F8EC001A1C3F1F0046AF23 /* PKParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKParser.m; sourceTree = "<group>"; };
+		F8F8EC011A1C3F1F0046AF23 /* PKQuoteState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKQuoteState.m; sourceTree = "<group>"; };
+		F8F8EC021A1C3F1F0046AF23 /* PKReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKReader.m; sourceTree = "<group>"; };
+		F8F8EC031A1C3F1F0046AF23 /* PKRecognitionException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRecognitionException.m; sourceTree = "<group>"; };
+		F8F8EC041A1C3F1F0046AF23 /* PKSingleLineCommentState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSingleLineCommentState.m; sourceTree = "<group>"; };
+		F8F8EC051A1C3F1F0046AF23 /* PKSymbolNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSymbolNode.h; sourceTree = "<group>"; };
+		F8F8EC061A1C3F1F0046AF23 /* PKSymbolNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSymbolNode.m; sourceTree = "<group>"; };
+		F8F8EC071A1C3F1F0046AF23 /* PKSymbolRootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSymbolRootNode.h; sourceTree = "<group>"; };
+		F8F8EC081A1C3F1F0046AF23 /* PKSymbolRootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSymbolRootNode.m; sourceTree = "<group>"; };
+		F8F8EC091A1C3F1F0046AF23 /* PKSymbolState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSymbolState.m; sourceTree = "<group>"; };
+		F8F8EC0A1A1C3F1F0046AF23 /* PKToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKToken.m; sourceTree = "<group>"; };
+		F8F8EC0B1A1C3F1F0046AF23 /* PKTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKTokenizer.m; sourceTree = "<group>"; };
+		F8F8EC0C1A1C3F1F0046AF23 /* PKTokenizerState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKTokenizerState.m; sourceTree = "<group>"; };
+		F8F8EC0D1A1C3F1F0046AF23 /* PKTwitterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKTwitterState.m; sourceTree = "<group>"; };
+		F8F8EC0E1A1C3F1F0046AF23 /* PKURLState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKURLState.m; sourceTree = "<group>"; };
+		F8F8EC0F1A1C3F1F0046AF23 /* PKWhitespaceState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKWhitespaceState.m; sourceTree = "<group>"; };
+		F8F8EC101A1C3F1F0046AF23 /* PKWordState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKWordState.m; sourceTree = "<group>"; };
+		F8F8ECC81A1C3F200046AF23 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		F8F8ECC91A1C3F200046AF23 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		F8F8ECCA1A1C3F200046AF23 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		F8F8ECCB1A1C3F200046AF23 /* CalendarObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarObject.swift; sourceTree = "<group>"; };
+		F8F8ECCC1A1C3F200046AF23 /* CalendarType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarType.swift; sourceTree = "<group>"; };
+		F8F8ECCD1A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8F8ECCF1A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8F8ECD01A1C3F200046AF23 /* libSwiftCal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSwiftCal.h; sourceTree = "<group>"; };
+		F8F8ECD11A1C3F200046AF23 /* libSwiftCal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSwiftCal.h; sourceTree = "<group>"; };
+		F8F8ECD51A1C3F200046AF23 /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		F8F8ECD61A1C3F200046AF23 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		F8F8ECD71A1C3F200046AF23 /* Organizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Organizer.swift; sourceTree = "<group>"; };
+		F8F8ECD91A1C3F200046AF23 /* CalParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalParser.h; sourceTree = "<group>"; };
+		F8F8ECDA1A1C3F200046AF23 /* CalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalParser.m; sourceTree = "<group>"; };
+		F8F8ECDB1A1C3F200046AF23 /* iCal.grammar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iCal.grammar; sourceTree = "<group>"; };
+		F8F8ECDC1A1C3F200046AF23 /* iCalParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCalParser.h; sourceTree = "<group>"; };
+		F8F8ECDD1A1C3F200046AF23 /* iCalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCalParser.m; sourceTree = "<group>"; };
+		F8F8ECDE1A1C3F200046AF23 /* icalparser.parsergen */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = icalparser.parsergen; sourceTree = "<group>"; };
+		F8F8ECDF1A1C3F200046AF23 /* Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
+		F8F8ECE01A1C3F200046AF23 /* RecurrenceDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecurrenceDate.swift; sourceTree = "<group>"; };
+		F8F8ECE11A1C3F200046AF23 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		F8F8ECE21A1C3F200046AF23 /* RequestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
+		F8F8ECE31A1C3F200046AF23 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
+		F8F8ECE51A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = libSwiftCalTests.swift; sourceTree = "<group>"; };
+		F8F8EF051A1C4EF90046AF23 /* PEGKit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PEGKit-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8F8EEB81A1C3F5A0046AF23 /* PEGKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,8 +271,9 @@
 		F8F8EAE21A1C3EEE0046AF23 = {
 			isa = PBXGroup;
 			children = (
-				F8F8EAEE1A1C3EEE0046AF23 /* libSwiftCal */,
-				F8F8EAFB1A1C3EEE0046AF23 /* libSwiftCalTests */,
+				F8F8EB081A1C3F1F0046AF23 /* libs */,
+				F8F8ECC71A1C3F200046AF23 /* libSwiftCal */,
+				F8F8ECE41A1C3F200046AF23 /* libSwiftCalTests */,
 				F8F8EAED1A1C3EEE0046AF23 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,38 +287,209 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F8F8EAEE1A1C3EEE0046AF23 /* libSwiftCal */ = {
+		F8F8EB081A1C3F1F0046AF23 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				F8F8EAF11A1C3EEE0046AF23 /* libSwiftCal.h */,
-				F8F8EAEF1A1C3EEE0046AF23 /* Supporting Files */,
+				F8F8EB091A1C3F1F0046AF23 /* pegkit */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		F8F8EB091A1C3F1F0046AF23 /* pegkit */ = {
+			isa = PBXGroup;
+			children = (
+				F8F8EB0A1A1C3F1F0046AF23 /* .gitignore */,
+				F8F8EB0B1A1C3F1F0046AF23 /* .gitmodules */,
+				F8F8EB0C1A1C3F1F0046AF23 /* docs */,
+				F8F8EB0E1A1C3F1F0046AF23 /* InfoPlist.strings */,
+				F8F8EB101A1C3F1F0046AF23 /* include */,
+				F8F8EB2A1A1C3F1F0046AF23 /* lib */,
+				F8F8EEDB1A1C4EF90046AF23 /* res */,
+				F8F8EBAD1A1C3F1F0046AF23 /* PEGKit.xcodeproj */,
+				F8F8EBB11A1C3F1F0046AF23 /* PEGKit.xcworkspace */,
+				F8F8EBB21A1C3F1F0046AF23 /* PEGKit_Prefix.pch */,
+				F8F8EBEE1A1C3F1F0046AF23 /* SOFTWARE_LICENSE */,
+				F8F8EBEF1A1C3F1F0046AF23 /* src */,
+			);
+			path = pegkit;
+			sourceTree = "<group>";
+		};
+		F8F8EB0C1A1C3F1F0046AF23 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				F8F8EB0D1A1C3F1F0046AF23 /* Doxyfile */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
+		F8F8EB101A1C3F1F0046AF23 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				F8F8EB111A1C3F1F0046AF23 /* PEGKit */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		F8F8EB111A1C3F1F0046AF23 /* PEGKit */ = {
+			isa = PBXGroup;
+			children = (
+				F8F8EB121A1C3F1F0046AF23 /* PEGKit.h */,
+				F8F8EB131A1C3F1F0046AF23 /* PKAssembly.h */,
+				F8F8EB141A1C3F1F0046AF23 /* PKAST.h */,
+				F8F8EB151A1C3F1F0046AF23 /* PKCommentState.h */,
+				F8F8EB161A1C3F1F0046AF23 /* PKDelimitState.h */,
+				F8F8EB171A1C3F1F0046AF23 /* PKEmailState.h */,
+				F8F8EB181A1C3F1F0046AF23 /* PKHashtagState.h */,
+				F8F8EB191A1C3F1F0046AF23 /* PKMultiLineCommentState.h */,
+				F8F8EB1A1A1C3F1F0046AF23 /* PKNumberState.h */,
+				F8F8EB1B1A1C3F1F0046AF23 /* PKParser+Subclass.h */,
+				F8F8EB1C1A1C3F1F0046AF23 /* PKParser.h */,
+				F8F8EB1D1A1C3F1F0046AF23 /* PKQuoteState.h */,
+				F8F8EB1E1A1C3F1F0046AF23 /* PKReader.h */,
+				F8F8EB1F1A1C3F1F0046AF23 /* PKRecognitionException.h */,
+				F8F8EB201A1C3F1F0046AF23 /* PKSingleLineCommentState.h */,
+				F8F8EB211A1C3F1F0046AF23 /* PKSymbolState.h */,
+				F8F8EB221A1C3F1F0046AF23 /* PKToken.h */,
+				F8F8EB231A1C3F1F0046AF23 /* PKTokenizer.h */,
+				F8F8EB241A1C3F1F0046AF23 /* PKTokenizerState.h */,
+				F8F8EB251A1C3F1F0046AF23 /* PKTwitterState.h */,
+				F8F8EB261A1C3F1F0046AF23 /* PKTypes.h */,
+				F8F8EB271A1C3F1F0046AF23 /* PKURLState.h */,
+				F8F8EB281A1C3F1F0046AF23 /* PKWhitespaceState.h */,
+				F8F8EB291A1C3F1F0046AF23 /* PKWordState.h */,
+			);
+			path = PEGKit;
+			sourceTree = "<group>";
+		};
+		F8F8EB2A1A1C3F1F0046AF23 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				F8F8EB2B1A1C3F1F0046AF23 /* OCMock */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		F8F8EB2B1A1C3F1F0046AF23 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				F8F8EB2C1A1C3F1F0046AF23 /* OCMock.framework */,
+				F8F8EB2D1A1C3F1F0046AF23 /* VERSION */,
+			);
+			path = OCMock;
+			sourceTree = "<group>";
+		};
+		F8F8EBAE1A1C3F1F0046AF23 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F8F8EEAB1A1C3F200046AF23 /* PEGKit.framework */,
+				F8F8EEAD1A1C3F200046AF23 /* libPEGKitOSX.a */,
+				F8F8EEAF1A1C3F200046AF23 /* libPEGKitIOS.a */,
+				F8F8EEB11A1C3F200046AF23 /* PEGKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F8F8EBEF1A1C3F1F0046AF23 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F8F8EBF01A1C3F1F0046AF23 /* NSArray+PEGKitAdditions.h */,
+				F8F8EBF11A1C3F1F0046AF23 /* NSArray+PEGKitAdditions.m */,
+				F8F8EBF21A1C3F1F0046AF23 /* NSString+PEGKitAdditions.h */,
+				F8F8EBF31A1C3F1F0046AF23 /* NSString+PEGKitAdditions.m */,
+				F8F8EBF41A1C3F1F0046AF23 /* PKAssembly.m */,
+				F8F8EBF51A1C3F1F0046AF23 /* PKAST.m */,
+				F8F8EBF61A1C3F1F0046AF23 /* PKCommentState.m */,
+				F8F8EBF71A1C3F1F0046AF23 /* PKDelimitDescriptor.h */,
+				F8F8EBF81A1C3F1F0046AF23 /* PKDelimitDescriptor.m */,
+				F8F8EBF91A1C3F1F0046AF23 /* PKDelimitDescriptorCollection.h */,
+				F8F8EBFA1A1C3F1F0046AF23 /* PKDelimitDescriptorCollection.m */,
+				F8F8EBFB1A1C3F1F0046AF23 /* PKDelimitState.m */,
+				F8F8EBFC1A1C3F1F0046AF23 /* PKEmailState.m */,
+				F8F8EBFD1A1C3F1F0046AF23 /* PKHashtagState.m */,
+				F8F8EBFE1A1C3F1F0046AF23 /* PKMultiLineCommentState.m */,
+				F8F8EBFF1A1C3F1F0046AF23 /* PKNumberState.m */,
+				F8F8EC001A1C3F1F0046AF23 /* PKParser.m */,
+				F8F8EC011A1C3F1F0046AF23 /* PKQuoteState.m */,
+				F8F8EC021A1C3F1F0046AF23 /* PKReader.m */,
+				F8F8EC031A1C3F1F0046AF23 /* PKRecognitionException.m */,
+				F8F8EC041A1C3F1F0046AF23 /* PKSingleLineCommentState.m */,
+				F8F8EC051A1C3F1F0046AF23 /* PKSymbolNode.h */,
+				F8F8EC061A1C3F1F0046AF23 /* PKSymbolNode.m */,
+				F8F8EC071A1C3F1F0046AF23 /* PKSymbolRootNode.h */,
+				F8F8EC081A1C3F1F0046AF23 /* PKSymbolRootNode.m */,
+				F8F8EC091A1C3F1F0046AF23 /* PKSymbolState.m */,
+				F8F8EC0A1A1C3F1F0046AF23 /* PKToken.m */,
+				F8F8EC0B1A1C3F1F0046AF23 /* PKTokenizer.m */,
+				F8F8EC0C1A1C3F1F0046AF23 /* PKTokenizerState.m */,
+				F8F8EC0D1A1C3F1F0046AF23 /* PKTwitterState.m */,
+				F8F8EC0E1A1C3F1F0046AF23 /* PKURLState.m */,
+				F8F8EC0F1A1C3F1F0046AF23 /* PKWhitespaceState.m */,
+				F8F8EC101A1C3F1F0046AF23 /* PKWordState.m */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		F8F8ECC71A1C3F200046AF23 /* libSwiftCal */ = {
+			isa = PBXGroup;
+			children = (
+				F8F8ECC81A1C3F200046AF23 /* Alarm.swift */,
+				F8F8ECC91A1C3F200046AF23 /* Attachment.swift */,
+				F8F8ECCA1A1C3F200046AF23 /* Calendar.swift */,
+				F8F8ECCB1A1C3F200046AF23 /* CalendarObject.swift */,
+				F8F8ECCC1A1C3F200046AF23 /* CalendarType.swift */,
+				F8F8ECCD1A1C3F200046AF23 /* Info.plist */,
+				F8F8ECCE1A1C3F200046AF23 /* libSwiftCal */,
+				F8F8ECD11A1C3F200046AF23 /* libSwiftCal.h */,
+				F8F8ECD51A1C3F200046AF23 /* Observable.swift */,
+				F8F8ECD61A1C3F200046AF23 /* Observer.swift */,
+				F8F8ECD71A1C3F200046AF23 /* Organizer.swift */,
+				F8F8ECD81A1C3F200046AF23 /* Parsing */,
+				F8F8ECDF1A1C3F200046AF23 /* Properties.swift */,
+				F8F8ECE01A1C3F200046AF23 /* RecurrenceDate.swift */,
+				F8F8ECE11A1C3F200046AF23 /* Reminder.swift */,
+				F8F8ECE21A1C3F200046AF23 /* RequestStatus.swift */,
+				F8F8ECE31A1C3F200046AF23 /* Serializable.swift */,
 			);
 			path = libSwiftCal;
 			sourceTree = "<group>";
 		};
-		F8F8EAEF1A1C3EEE0046AF23 /* Supporting Files */ = {
+		F8F8ECCE1A1C3F200046AF23 /* libSwiftCal */ = {
 			isa = PBXGroup;
 			children = (
-				F8F8EAF01A1C3EEE0046AF23 /* Info.plist */,
+				F8F8ECCF1A1C3F200046AF23 /* Info.plist */,
+				F8F8ECD01A1C3F200046AF23 /* libSwiftCal.h */,
 			);
-			name = "Supporting Files";
+			path = libSwiftCal;
 			sourceTree = "<group>";
 		};
-		F8F8EAFB1A1C3EEE0046AF23 /* libSwiftCalTests */ = {
+		F8F8ECD81A1C3F200046AF23 /* Parsing */ = {
 			isa = PBXGroup;
 			children = (
-				F8F8EAFE1A1C3EEE0046AF23 /* libSwiftCalTests.swift */,
-				F8F8EAFC1A1C3EEE0046AF23 /* Supporting Files */,
+				F8F8ECD91A1C3F200046AF23 /* CalParser.h */,
+				F8F8ECDA1A1C3F200046AF23 /* CalParser.m */,
+				F8F8ECDB1A1C3F200046AF23 /* iCal.grammar */,
+				F8F8ECDC1A1C3F200046AF23 /* iCalParser.h */,
+				F8F8ECDD1A1C3F200046AF23 /* iCalParser.m */,
+				F8F8ECDE1A1C3F200046AF23 /* icalparser.parsergen */,
+			);
+			path = Parsing;
+			sourceTree = "<group>";
+		};
+		F8F8ECE41A1C3F200046AF23 /* libSwiftCalTests */ = {
+			isa = PBXGroup;
+			children = (
+				F8F8ECE51A1C3F200046AF23 /* Info.plist */,
+				F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */,
 			);
 			path = libSwiftCalTests;
 			sourceTree = "<group>";
 		};
-		F8F8EAFC1A1C3EEE0046AF23 /* Supporting Files */ = {
+		F8F8EEDB1A1C4EF90046AF23 /* res */ = {
 			isa = PBXGroup;
 			children = (
-				F8F8EAFD1A1C3EEE0046AF23 /* Info.plist */,
+				F8F8EF051A1C4EF90046AF23 /* PEGKit-Info.plist */,
 			);
-			name = "Supporting Files";
+			path = res;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,7 +499,41 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8F8EAF21A1C3EEE0046AF23 /* libSwiftCal.h in Headers */,
+				F8F8EDCB1A1C3F200046AF23 /* PKSymbolNode.h in Headers */,
+				F8F8EE921A1C3F200046AF23 /* libSwiftCal.h in Headers */,
+				F8F8ECED1A1C3F200046AF23 /* PKAST.h in Headers */,
+				F8F8ED001A1C3F200046AF23 /* PKURLState.h in Headers */,
+				F8F8EDB81A1C3F200046AF23 /* NSString+PEGKitAdditions.h in Headers */,
+				F8F8EDBD1A1C3F200046AF23 /* PKDelimitDescriptor.h in Headers */,
+				F8F8ECF81A1C3F200046AF23 /* PKRecognitionException.h in Headers */,
+				F8F8ED021A1C3F200046AF23 /* PKWordState.h in Headers */,
+				F8F8EDCD1A1C3F200046AF23 /* PKSymbolRootNode.h in Headers */,
+				F8F8ECF91A1C3F200046AF23 /* PKSingleLineCommentState.h in Headers */,
+				F8F8ECFC1A1C3F200046AF23 /* PKTokenizer.h in Headers */,
+				F8F8ECF51A1C3F200046AF23 /* PKParser.h in Headers */,
+				F8F8ED011A1C3F200046AF23 /* PKWhitespaceState.h in Headers */,
+				F8F8ECFE1A1C3F200046AF23 /* PKTwitterState.h in Headers */,
+				F8F8EE931A1C3F200046AF23 /* libSwiftCal.h in Headers */,
+				F8F8ECF71A1C3F200046AF23 /* PKReader.h in Headers */,
+				F8F8ECFB1A1C3F200046AF23 /* PKToken.h in Headers */,
+				F8F8ECF61A1C3F200046AF23 /* PKQuoteState.h in Headers */,
+				F8F8ECF21A1C3F200046AF23 /* PKMultiLineCommentState.h in Headers */,
+				F8F8EE991A1C3F200046AF23 /* CalParser.h in Headers */,
+				F8F8ECFA1A1C3F200046AF23 /* PKSymbolState.h in Headers */,
+				F8F8ECEE1A1C3F200046AF23 /* PKCommentState.h in Headers */,
+				F8F8ECF31A1C3F200046AF23 /* PKNumberState.h in Headers */,
+				F8F8EDBF1A1C3F200046AF23 /* PKDelimitDescriptorCollection.h in Headers */,
+				F8F8ED7A1A1C3F200046AF23 /* PEGKit_Prefix.pch in Headers */,
+				F8F8ECEF1A1C3F200046AF23 /* PKDelimitState.h in Headers */,
+				F8F8ECFD1A1C3F200046AF23 /* PKTokenizerState.h in Headers */,
+				F8F8ECF11A1C3F200046AF23 /* PKHashtagState.h in Headers */,
+				F8F8ECF41A1C3F200046AF23 /* PKParser+Subclass.h in Headers */,
+				F8F8ECEB1A1C3F200046AF23 /* PEGKit.h in Headers */,
+				F8F8EE9C1A1C3F200046AF23 /* iCalParser.h in Headers */,
+				F8F8ECF01A1C3F200046AF23 /* PKEmailState.h in Headers */,
+				F8F8ECFF1A1C3F200046AF23 /* PKTypes.h in Headers */,
+				F8F8ECEC1A1C3F200046AF23 /* PKAssembly.h in Headers */,
+				F8F8EDB61A1C3F200046AF23 /* NSArray+PEGKitAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,10 +548,12 @@
 				F8F8EAE81A1C3EEE0046AF23 /* Frameworks */,
 				F8F8EAE91A1C3EEE0046AF23 /* Headers */,
 				F8F8EAEA1A1C3EEE0046AF23 /* Resources */,
+				F8F8EED61A1C4DD90046AF23 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F8F8EED91A1C4E5B0046AF23 /* PBXTargetDependency */,
 			);
 			name = libSwiftCal;
 			productName = libSwiftCal;
@@ -179,6 +605,12 @@
 			mainGroup = F8F8EAE21A1C3EEE0046AF23;
 			productRefGroup = F8F8EAED1A1C3EEE0046AF23 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F8F8EBAE1A1C3F1F0046AF23 /* Products */;
+					ProjectRef = F8F8EBAD1A1C3F1F0046AF23 /* PEGKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				F8F8EAEB1A1C3EEE0046AF23 /* libSwiftCal */,
@@ -187,11 +619,44 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		F8F8EEAB1A1C3F200046AF23 /* PEGKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PEGKit.framework;
+			remoteRef = F8F8EEAA1A1C3F200046AF23 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F8F8EEAD1A1C3F200046AF23 /* libPEGKitOSX.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPEGKitOSX.a;
+			remoteRef = F8F8EEAC1A1C3F200046AF23 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F8F8EEAF1A1C3F200046AF23 /* libPEGKitIOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPEGKitIOS.a;
+			remoteRef = F8F8EEAE1A1C3F200046AF23 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F8F8EEB11A1C3F200046AF23 /* PEGKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PEGKitTests.xctest;
+			remoteRef = F8F8EEB01A1C3F200046AF23 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		F8F8EAEA1A1C3EEE0046AF23 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8F8EF3E1A1C4EF90046AF23 /* PEGKit-Info.plist in Resources */,
+				F8F8EE9B1A1C3F200046AF23 /* iCal.grammar in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +674,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8F8EE9A1A1C3F200046AF23 /* CalParser.m in Sources */,
+				F8F8EE981A1C3F200046AF23 /* Organizer.swift in Sources */,
+				F8F8EDD61A1C3F200046AF23 /* PKWordState.m in Sources */,
+				F8F8EDCA1A1C3F200046AF23 /* PKSingleLineCommentState.m in Sources */,
+				F8F8EDD51A1C3F200046AF23 /* PKWhitespaceState.m in Sources */,
+				F8F8EE9D1A1C3F200046AF23 /* iCalParser.m in Sources */,
+				F8F8EDBA1A1C3F200046AF23 /* PKAssembly.m in Sources */,
+				F8F8EDD21A1C3F200046AF23 /* PKTokenizerState.m in Sources */,
+				F8F8EDC81A1C3F200046AF23 /* PKReader.m in Sources */,
+				F8F8EDCF1A1C3F200046AF23 /* PKSymbolState.m in Sources */,
+				F8F8EDC91A1C3F200046AF23 /* PKRecognitionException.m in Sources */,
+				F8F8EDC41A1C3F200046AF23 /* PKMultiLineCommentState.m in Sources */,
+				F8F8EE8D1A1C3F200046AF23 /* Calendar.swift in Sources */,
+				F8F8EEA31A1C3F200046AF23 /* Serializable.swift in Sources */,
+				F8F8EDC31A1C3F200046AF23 /* PKHashtagState.m in Sources */,
+				F8F8EDCC1A1C3F200046AF23 /* PKSymbolNode.m in Sources */,
+				F8F8EE9F1A1C3F200046AF23 /* Properties.swift in Sources */,
+				F8F8EDC61A1C3F200046AF23 /* PKParser.m in Sources */,
+				F8F8EDC01A1C3F200046AF23 /* PKDelimitDescriptorCollection.m in Sources */,
+				F8F8EEA01A1C3F200046AF23 /* RecurrenceDate.swift in Sources */,
+				F8F8EDC51A1C3F200046AF23 /* PKNumberState.m in Sources */,
+				F8F8EDB91A1C3F200046AF23 /* NSString+PEGKitAdditions.m in Sources */,
+				F8F8EE8C1A1C3F200046AF23 /* Attachment.swift in Sources */,
+				F8F8EDD11A1C3F200046AF23 /* PKTokenizer.m in Sources */,
+				F8F8EDD41A1C3F200046AF23 /* PKURLState.m in Sources */,
+				F8F8EE961A1C3F200046AF23 /* Observable.swift in Sources */,
+				F8F8EEA11A1C3F200046AF23 /* Reminder.swift in Sources */,
+				F8F8EDC11A1C3F200046AF23 /* PKDelimitState.m in Sources */,
+				F8F8EDBB1A1C3F200046AF23 /* PKAST.m in Sources */,
+				F8F8EDC71A1C3F200046AF23 /* PKQuoteState.m in Sources */,
+				F8F8EDCE1A1C3F200046AF23 /* PKSymbolRootNode.m in Sources */,
+				F8F8EE8E1A1C3F200046AF23 /* CalendarObject.swift in Sources */,
+				F8F8EDBE1A1C3F200046AF23 /* PKDelimitDescriptor.m in Sources */,
+				F8F8EDBC1A1C3F200046AF23 /* PKCommentState.m in Sources */,
+				F8F8EDC21A1C3F200046AF23 /* PKEmailState.m in Sources */,
+				F8F8EDD31A1C3F200046AF23 /* PKTwitterState.m in Sources */,
+				F8F8EE971A1C3F200046AF23 /* Observer.swift in Sources */,
+				F8F8EE8B1A1C3F200046AF23 /* Alarm.swift in Sources */,
+				F8F8EEA21A1C3F200046AF23 /* RequestStatus.swift in Sources */,
+				F8F8EDB71A1C3F200046AF23 /* NSArray+PEGKitAdditions.m in Sources */,
+				F8F8EDD01A1C3F200046AF23 /* PKToken.m in Sources */,
+				F8F8EE8F1A1C3F200046AF23 /* CalendarType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +723,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8F8EAFF1A1C3EEE0046AF23 /* libSwiftCalTests.swift in Sources */,
+				F8F8EED51A1C4CF30046AF23 /* libSwiftCalTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +735,23 @@
 			target = F8F8EAEB1A1C3EEE0046AF23 /* libSwiftCal */;
 			targetProxy = F8F8EAF91A1C3EEE0046AF23 /* PBXContainerItemProxy */;
 		};
+		F8F8EED91A1C4E5B0046AF23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PEGKit;
+			targetProxy = F8F8EED81A1C4E5B0046AF23 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F8F8EB0E1A1C3F1F0046AF23 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F8F8EB0F1A1C3F1F0046AF23 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F8F8EB001A1C3EEE0046AF23 /* Debug */ = {
@@ -323,11 +846,21 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs/**",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs/**",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = libSwiftCal/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Debug;
 		};
@@ -338,11 +871,21 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs/**",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs/**",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = libSwiftCal/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Release;
 		};
@@ -395,6 +938,7 @@
 				F8F8EB041A1C3EEE0046AF23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F8F8EB051A1C3EEE0046AF23 /* Build configuration list for PBXNativeTarget "libSwiftCalTests" */ = {
 			isa = XCConfigurationList;
@@ -403,6 +947,7 @@
 				F8F8EB071A1C3EEE0046AF23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

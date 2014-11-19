@@ -2,13 +2,11 @@
 //  libSwiftCal.h
 //  libSwiftCal
 //
-//  Created by Stefan Arambasich on 11/10/14.
+//  Created by Stefan Arambasich on 11/17/14.
 //  Copyright (c) 2014 Stefan Arambasich. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
-#import "CalParser.h"
 
 //! Project version number for libSwiftCal.
 FOUNDATION_EXPORT double libSwiftCalVersionNumber;
