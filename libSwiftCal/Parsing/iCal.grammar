@@ -33,6 +33,8 @@ audioprop  =   (
                     xprop | ianaprop
                 )*;
 
+bslash      = '\\';
+
 cnparam    = 'CN' '=' paramvalue;
 
 cutypeparam        = 'CUTYPE' '='
@@ -583,11 +585,16 @@ summparam  = (
 
 sentbyparam        = 'SENT-BY' '=' '"' caladdress '"';
 
-text            = (Word | Symbol | Number)*;//(tsafechar | ':' | '"' | escapedchar)*;
+text            = (tsafechar | ':' | '"' | escapedchar)*;
 
-escapedchar     = ('\\' | '\;' | '\,' | '\N' | '\n');
+escapedchar     =  (('\\' (crlf S)? '\\')
+                    | ('\\' (crlf S)? ';')
+                    | ('\\' (crlf S)? ',')
+                    | ('\\' (crlf S)? 'N')
+                    | ('\\' (crlf S)? 'n')
+                    );                                      //('\\' | '\;' | '\,' | '\N' | '\n');
 
-tsafechar       = ~(crlf | '"' | ';' | ':' | '\ ' | ' \ ' | ',');
+tsafechar       = ~(crlf | control | '"' | ';' | ':' | bslash | ',');
 
 time         = Number timeutc?; //timehour timeminute timesecond timeutc?;
 

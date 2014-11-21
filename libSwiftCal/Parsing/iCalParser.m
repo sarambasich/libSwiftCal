@@ -10,6 +10,7 @@
 @property (nonatomic, retain) NSMutableDictionary *alarmc_memo;
 @property (nonatomic, retain) NSMutableDictionary *altrepparam_memo;
 @property (nonatomic, retain) NSMutableDictionary *audioprop_memo;
+@property (nonatomic, retain) NSMutableDictionary *bslash_memo;
 @property (nonatomic, retain) NSMutableDictionary *cnparam_memo;
 @property (nonatomic, retain) NSMutableDictionary *cutypeparam_memo;
 @property (nonatomic, retain) NSMutableDictionary *dispprop_memo;
@@ -274,7 +275,6 @@
         self.tokenKindTab[@"\x1f"] = @(ICALPARSER_TOKEN_KIND__X1F);
         self.tokenKindTab[@"\x19"] = @(ICALPARSER_TOKEN_KIND__X19);
         self.tokenKindTab[@"CALSCALE"] = @(ICALPARSER_TOKEN_KIND_CALSCALE);
-        self.tokenKindTab[@"\N"] = @(ICALPARSER_TOKEN_KIND__N);
         self.tokenKindTab[@"INTERVAL"] = @(ICALPARSER_TOKEN_KIND_INTERVAL);
         self.tokenKindTab[@"NEEDS-ACTION"] = @(ICALPARSER_TOKEN_KIND_NEEDS_ACTION);
         self.tokenKindTab[@"BYMONTH"] = @(ICALPARSER_TOKEN_KIND_BYMONTH);
@@ -300,7 +300,7 @@
         self.tokenKindTab[@"UID"] = @(ICALPARSER_TOKEN_KIND_UID);
         self.tokenKindTab[@"RESOURCE"] = @(ICALPARSER_TOKEN_KIND_RESOURCE);
         self.tokenKindTab[@"+"] = @(ICALPARSER_TOKEN_KIND_PLUS);
-        self.tokenKindTab[@"X-"] = @(ICALPARSER_TOKEN_KIND_6);
+        self.tokenKindTab[@"X-"] = @(ICALPARSER_TOKEN_KIND_1);
         self.tokenKindTab[@"INDIVIDUAL"] = @(ICALPARSER_TOKEN_KIND_INDIVIDUAL);
         self.tokenKindTab[@","] = @(ICALPARSER_TOKEN_KIND_COMMA);
         self.tokenKindTab[@"BYSECOND"] = @(ICALPARSER_TOKEN_KIND_BYSECOND);
@@ -312,10 +312,10 @@
         self.tokenKindTab[@"CONTACT"] = @(ICALPARSER_TOKEN_KIND_CONTACT);
         self.tokenKindTab[@"FREQ"] = @(ICALPARSER_TOKEN_KIND_FREQ);
         self.tokenKindTab[@"\x00"] = @(ICALPARSER_TOKEN_KIND__X00);
+        self.tokenKindTab[@"\\"] = @(ICALPARSER_TOKEN_KIND_BSLASH);
         self.tokenKindTab[@"PRIVATE"] = @(ICALPARSER_TOKEN_KIND_PRIVATE);
         self.tokenKindTab[@"/"] = @(ICALPARSER_TOKEN_KIND_FORWARD_SLASH);
         self.tokenKindTab[@"ORGANIZER"] = @(ICALPARSER_TOKEN_KIND_ORGANIZER);
-        self.tokenKindTab[@"\\"] = @(ICALPARSER_TOKEN_KIND_1);
         self.tokenKindTab[@"TRIGGER"] = @(ICALPARSER_TOKEN_KIND_TRIGGER);
         self.tokenKindTab[@"TZID"] = @(ICALPARSER_TOKEN_KIND_TZID);
         self.tokenKindTab[@"YEARLY"] = @(ICALPARSER_TOKEN_KIND_YEARLY);
@@ -369,15 +369,15 @@
         self.tokenKindTab[@"DISPLAY"] = @(ICALPARSER_TOKEN_KIND_DISPLAY);
         self.tokenKindTab[@"\x05"] = @(ICALPARSER_TOKEN_KIND__X05);
         self.tokenKindTab[@"\x0b"] = @(ICALPARSER_TOKEN_KIND__X0B);
-        self.tokenKindTab[@"\ "] = @(ICALPARSER_TOKEN_KIND_4);
         self.tokenKindTab[@"BUSY"] = @(ICALPARSER_TOKEN_KIND_BUSY);
         self.tokenKindTab[@"M"] = @(ICALPARSER_TOKEN_KIND_M);
         self.tokenKindTab[@"HOURLY"] = @(ICALPARSER_TOKEN_KIND_HOURLY);
         self.tokenKindTab[@"CANCELLED"] = @(ICALPARSER_TOKEN_KIND_CANCELLED);
-        self.tokenKindTab[@"\n"] = @(ICALPARSER_TOKEN_KIND__N_1);
+        self.tokenKindTab[@"N"] = @(ICALPARSER_TOKEN_KIND_N);
         self.tokenKindTab[@"TENTATIVE"] = @(ICALPARSER_TOKEN_KIND_TENTATIVE);
         self.tokenKindTab[@"\x7f"] = @(ICALPARSER_TOKEN_KIND__X7F);
         self.tokenKindTab[@"RECUR"] = @(ICALPARSER_TOKEN_KIND_RECUR);
+        self.tokenKindTab[@"\n"] = @(ICALPARSER_TOKEN_KIND__N);
         self.tokenKindTab[@"P"] = @(ICALPARSER_TOKEN_KIND_P);
         self.tokenKindTab[@"BINARY"] = @(ICALPARSER_TOKEN_KIND_BINARY);
         self.tokenKindTab[@"RELATED-TO"] = @(ICALPARSER_TOKEN_KIND_RELATED_TO);
@@ -410,11 +410,9 @@
         self.tokenKindTab[@"^"] = @(ICALPARSER_TOKEN_KIND_CARET);
         self.tokenKindTab[@"ATTENDEE"] = @(ICALPARSER_TOKEN_KIND_ATTENDEE);
         self.tokenKindTab[@"_"] = @(ICALPARSER_TOKEN_KIND_UNDERSCORE);
-        self.tokenKindTab[@"\,"] = @(ICALPARSER_TOKEN_KIND_3);
         self.tokenKindTab[@"NON-PARTICIPANT"] = @(ICALPARSER_TOKEN_KIND_NON_PARTICIPANT);
         self.tokenKindTab[@"CONFIRMED"] = @(ICALPARSER_TOKEN_KIND_CONFIRMED);
         self.tokenKindTab[@"8BIT"] = @(ICALPARSER_TOKEN_KIND_8BIT);
-        self.tokenKindTab[@" \ "] = @(ICALPARSER_TOKEN_KIND_5);
         self.tokenKindTab[@"\x0f"] = @(ICALPARSER_TOKEN_KIND__X0F);
         self.tokenKindTab[@"\x10"] = @(ICALPARSER_TOKEN_KIND__X10);
         self.tokenKindTab[@"BUSY-TENTATIVE"] = @(ICALPARSER_TOKEN_KIND_BUSY_TENTATIVE);
@@ -429,6 +427,7 @@
         self.tokenKindTab[@"FMTTYPE"] = @(ICALPARSER_TOKEN_KIND_FMTTYPE);
         self.tokenKindTab[@"REPEAT"] = @(ICALPARSER_TOKEN_KIND_REPEAT);
         self.tokenKindTab[@"TRUE"] = @(ICALPARSER_TOKEN_KIND_TRUE_UPPER);
+        self.tokenKindTab[@"n"] = @(ICALPARSER_TOKEN_KIND_N_1);
         self.tokenKindTab[@"BASE64"] = @(ICALPARSER_TOKEN_KIND_BASE64);
         self.tokenKindTab[@"\x12"] = @(ICALPARSER_TOKEN_KIND__X12);
         self.tokenKindTab[@"GREGORIAN"] = @(ICALPARSER_TOKEN_KIND_CALVALUE);
@@ -446,7 +445,6 @@
         self.tokenKindTab[@"CREATED"] = @(ICALPARSER_TOKEN_KIND_CREATED);
         self.tokenKindTab[@"ALTREP"] = @(ICALPARSER_TOKEN_KIND_ALTREP);
         self.tokenKindTab[@"START"] = @(ICALPARSER_TOKEN_KIND_START);
-        self.tokenKindTab[@"\;"] = @(ICALPARSER_TOKEN_KIND_2);
         self.tokenKindTab[@"PARENT"] = @(ICALPARSER_TOKEN_KIND_PARENT);
         self.tokenKindTab[@"\x1a"] = @(ICALPARSER_TOKEN_KIND__X1A);
         self.tokenKindTab[@"\x14"] = @(ICALPARSER_TOKEN_KIND__X14);
@@ -488,7 +486,6 @@
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X1F] = @"\x1f";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X19] = @"\x19";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_CALSCALE] = @"CALSCALE";
-        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__N] = @"\N";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_INTERVAL] = @"INTERVAL";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_NEEDS_ACTION] = @"NEEDS-ACTION";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_BYMONTH] = @"BYMONTH";
@@ -514,7 +511,7 @@
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_UID] = @"UID";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_RESOURCE] = @"RESOURCE";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_PLUS] = @"+";
-        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_6] = @"X-";
+        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_1] = @"X-";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_INDIVIDUAL] = @"INDIVIDUAL";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_COMMA] = @",";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_BYSECOND] = @"BYSECOND";
@@ -526,10 +523,10 @@
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_CONTACT] = @"CONTACT";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_FREQ] = @"FREQ";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X00] = @"\x00";
+        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_BSLASH] = @"\\";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_PRIVATE] = @"PRIVATE";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_FORWARD_SLASH] = @"/";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_ORGANIZER] = @"ORGANIZER";
-        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_1] = @"\\";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_TRIGGER] = @"TRIGGER";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_TZID] = @"TZID";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_YEARLY] = @"YEARLY";
@@ -583,15 +580,15 @@
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_DISPLAY] = @"DISPLAY";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X05] = @"\x05";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X0B] = @"\x0b";
-        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_4] = @"\ ";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_BUSY] = @"BUSY";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_M] = @"M";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_HOURLY] = @"HOURLY";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_CANCELLED] = @"CANCELLED";
-        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__N_1] = @"\n";
+        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_N] = @"N";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_TENTATIVE] = @"TENTATIVE";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X7F] = @"\x7f";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_RECUR] = @"RECUR";
+        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__N] = @"\n";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_P] = @"P";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_BINARY] = @"BINARY";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_RELATED_TO] = @"RELATED-TO";
@@ -624,11 +621,9 @@
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_CARET] = @"^";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_ATTENDEE] = @"ATTENDEE";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_UNDERSCORE] = @"_";
-        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_3] = @"\,";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_NON_PARTICIPANT] = @"NON-PARTICIPANT";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_CONFIRMED] = @"CONFIRMED";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_8BIT] = @"8BIT";
-        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_5] = @" \ ";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X0F] = @"\x0f";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X10] = @"\x10";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_BUSY_TENTATIVE] = @"BUSY-TENTATIVE";
@@ -643,6 +638,7 @@
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_FMTTYPE] = @"FMTTYPE";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_REPEAT] = @"REPEAT";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_TRUE_UPPER] = @"TRUE";
+        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_N_1] = @"n";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_BASE64] = @"BASE64";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X12] = @"\x12";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_CALVALUE] = @"GREGORIAN";
@@ -660,7 +656,6 @@
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_CREATED] = @"CREATED";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_ALTREP] = @"ALTREP";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_START] = @"START";
-        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_2] = @"\;";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_PARENT] = @"PARENT";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X1A] = @"\x1a";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X14] = @"\x14";
@@ -672,6 +667,7 @@
         self.alarmc_memo = [NSMutableDictionary dictionary];
         self.altrepparam_memo = [NSMutableDictionary dictionary];
         self.audioprop_memo = [NSMutableDictionary dictionary];
+        self.bslash_memo = [NSMutableDictionary dictionary];
         self.cnparam_memo = [NSMutableDictionary dictionary];
         self.cutypeparam_memo = [NSMutableDictionary dictionary];
         self.dispprop_memo = [NSMutableDictionary dictionary];
@@ -902,6 +898,7 @@
     [_alarmc_memo removeAllObjects];
     [_altrepparam_memo removeAllObjects];
     [_audioprop_memo removeAllObjects];
+    [_bslash_memo removeAllObjects];
     [_cnparam_memo removeAllObjects];
     [_cutypeparam_memo removeAllObjects];
     [_dispprop_memo removeAllObjects];
@@ -1169,7 +1166,7 @@
 
 - (void)__todoprop {
     
-    while ([self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND_DTSTAMP, 0]) {[self dtstamp_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_UID, 0]) {[self uid_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_CLASS, 0]) {[self class_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COMPLETED, 0]) {[self completed_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_CREATED, 0]) {[self created_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DESCRIPTION, 0]) {[self description_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DTSTART, 0]) {[self dtstart_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_GEO, 0]) {[self geo_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_LAST_MODIFIED, 0]) {[self lastmod_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_LOCATION, 0]) {[self location_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ORGANIZER, 0]) {[self organizer_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_PERCENT_COMPLETE, 0]) {[self percent_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_PRIORITY, 0]) {[self priority_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_RECURRENCE_ID, 0]) {[self recurid_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_SEQUENCE, 0]) {[self seq_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_STATUS, 0]) {[self status_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_SUMMARY, 0]) {[self summary_]; } else if ([self predicts:TOKEN_KIND_BUILTIN_URL, 0]) {[self url_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_RRULE, 0]) {[self rrule_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DUE, 0]) {[self due_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DURATION, 0]) {[self duration_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTACH, ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {[self attach_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTENDEE, 0]) {[self attendee_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_CATEGORIES, 0]) {[self categories_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COMMENT, 0]) {[self comment_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_CONTACT, 0]) {[self contact_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_EXDATE, 0]) {[self exdate_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_REQUEST_STATUS, 0]) {[self rstatus_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_RELATED_TO, 0]) {[self related_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_RESOURCES, 0]) {[self resources_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_RDATE, 0]) {[self rdate_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {[self xprop_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {[self ianaprop_]; } else {[self raise:@"No viable alternative found in rule 'todoprop'."];}}]) {
+    while ([self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND_DTSTAMP, 0]) {[self dtstamp_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_UID, 0]) {[self uid_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_CLASS, 0]) {[self class_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COMPLETED, 0]) {[self completed_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_CREATED, 0]) {[self created_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DESCRIPTION, 0]) {[self description_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DTSTART, 0]) {[self dtstart_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_GEO, 0]) {[self geo_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_LAST_MODIFIED, 0]) {[self lastmod_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_LOCATION, 0]) {[self location_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ORGANIZER, 0]) {[self organizer_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_PERCENT_COMPLETE, 0]) {[self percent_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_PRIORITY, 0]) {[self priority_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_RECURRENCE_ID, 0]) {[self recurid_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_SEQUENCE, 0]) {[self seq_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_STATUS, 0]) {[self status_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_SUMMARY, 0]) {[self summary_]; } else if ([self predicts:TOKEN_KIND_BUILTIN_URL, 0]) {[self url_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_RRULE, 0]) {[self rrule_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DUE, 0]) {[self due_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DURATION, 0]) {[self duration_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTACH, ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {[self attach_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTENDEE, 0]) {[self attendee_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_CATEGORIES, 0]) {[self categories_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COMMENT, 0]) {[self comment_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_CONTACT, 0]) {[self contact_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_EXDATE, 0]) {[self exdate_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_REQUEST_STATUS, 0]) {[self rstatus_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_RELATED_TO, 0]) {[self related_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_RESOURCES, 0]) {[self resources_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_RDATE, 0]) {[self rdate_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {[self xprop_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {[self ianaprop_]; } else {[self raise:@"No viable alternative found in rule 'todoprop'."];}}]) {
         if ([self predicts:ICALPARSER_TOKEN_KIND_DTSTAMP, 0]) {
             [self dtstamp_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_UID, 0]) {
@@ -1232,7 +1229,7 @@
             [self resources_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_RDATE, 0]) {
             [self rdate_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+        } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
             [self xprop_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
             [self ianaprop_]; 
@@ -1292,7 +1289,7 @@
 
 - (void)__audioprop {
     
-    while ([self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND_ACTION, 0]) {[self action_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_TRIGGER, 0]) {[self trigger_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DURATION, 0]) {[self duration_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_REPEAT, 0]) {[self repeat_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTACH, ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {[self attach_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {[self xprop_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {[self ianaprop_]; } else {[self raise:@"No viable alternative found in rule 'audioprop'."];}}]) {
+    while ([self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND_ACTION, 0]) {[self action_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_TRIGGER, 0]) {[self trigger_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DURATION, 0]) {[self duration_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_REPEAT, 0]) {[self repeat_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTACH, ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {[self attach_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {[self xprop_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {[self ianaprop_]; } else {[self raise:@"No viable alternative found in rule 'audioprop'."];}}]) {
         if ([self predicts:ICALPARSER_TOKEN_KIND_ACTION, 0]) {
             [self action_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_TRIGGER, 0]) {
@@ -1303,7 +1300,7 @@
             [self repeat_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTACH, ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {
             [self attach_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+        } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
             [self xprop_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
             [self ianaprop_]; 
@@ -1317,6 +1314,17 @@
 
 - (void)audioprop_ {
     [self parseRule:@selector(__audioprop) withMemo:_audioprop_memo];
+}
+
+- (void)__bslash {
+    
+    [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; 
+
+    [self fireDelegateSelector:@selector(parser:didMatchBslash:)];
+}
+
+- (void)bslash_ {
+    [self parseRule:@selector(__bslash) withMemo:_bslash_memo];
 }
 
 - (void)__cnparam {
@@ -1346,7 +1354,7 @@
         [self match:ICALPARSER_TOKEN_KIND_ROOM discard:NO]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_UNKNOWN, 0]) {
         [self match:ICALPARSER_TOKEN_KIND_UNKNOWN discard:NO]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
@@ -1363,7 +1371,7 @@
 
 - (void)__dispprop {
     
-    while ([self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND_ACTION, 0]) {[self action_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DESCRIPTION, 0]) {[self description_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_TRIGGER, 0]) {[self trigger_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DURATION, 0]) {[self duration_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_REPEAT, 0]) {[self repeat_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {[self xprop_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {[self ianaprop_]; } else {[self raise:@"No viable alternative found in rule 'dispprop'."];}}]) {
+    while ([self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND_ACTION, 0]) {[self action_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DESCRIPTION, 0]) {[self description_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_TRIGGER, 0]) {[self trigger_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DURATION, 0]) {[self duration_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_REPEAT, 0]) {[self repeat_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {[self xprop_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {[self ianaprop_]; } else {[self raise:@"No viable alternative found in rule 'dispprop'."];}}]) {
         if ([self predicts:ICALPARSER_TOKEN_KIND_ACTION, 0]) {
             [self action_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_DESCRIPTION, 0]) {
@@ -1374,7 +1382,7 @@
             [self duration_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_REPEAT, 0]) {
             [self repeat_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+        } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
             [self xprop_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
             [self ianaprop_]; 
@@ -1449,7 +1457,7 @@
 
 - (void)__emailprop {
     
-    while ([self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND_ACTION, 0]) {[self action_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DESCRIPTION, 0]) {[self description_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_TRIGGER, 0]) {[self trigger_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_SUMMARY, 0]) {[self summary_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTENDEE, 0]) {[self attendee_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DURATION, 0]) {[self duration_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_REPEAT, 0]) {[self repeat_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTACH, ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {[self attach_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {[self xprop_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {[self ianaprop_]; } else {[self raise:@"No viable alternative found in rule 'emailprop'."];}}]) {
+    while ([self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND_ACTION, 0]) {[self action_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DESCRIPTION, 0]) {[self description_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_TRIGGER, 0]) {[self trigger_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_SUMMARY, 0]) {[self summary_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTENDEE, 0]) {[self attendee_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DURATION, 0]) {[self duration_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_REPEAT, 0]) {[self repeat_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTACH, ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {[self attach_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {[self xprop_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {[self ianaprop_]; } else {[self raise:@"No viable alternative found in rule 'emailprop'."];}}]) {
         if ([self predicts:ICALPARSER_TOKEN_KIND_ACTION, 0]) {
             [self action_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_DESCRIPTION, 0]) {
@@ -1466,7 +1474,7 @@
             [self repeat_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_ATTACH, ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {
             [self attach_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+        } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
             [self xprop_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
             [self ianaprop_]; 
@@ -1521,7 +1529,7 @@
         [self match:ICALPARSER_TOKEN_KIND_EMAIL discard:NO]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else {
         [self raise:@"No viable alternative found in rule 'actionvalue'."];
@@ -1675,7 +1683,7 @@
 
 - (void)__calprops {
     
-    while ([self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND_PRODID, 0]) {[self prodid_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_VERSION, 0]) {[self version_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_CALSCALE, 0]) {[self calscale_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_METHOD, 0]) {[self method_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {[self xprop_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {[self ianaprop_]; } else {[self raise:@"No viable alternative found in rule 'calprops'."];}}]) {
+    while ([self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND_PRODID, 0]) {[self prodid_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_VERSION, 0]) {[self version_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_CALSCALE, 0]) {[self calscale_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_METHOD, 0]) {[self method_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {[self xprop_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {[self ianaprop_]; } else {[self raise:@"No viable alternative found in rule 'calprops'."];}}]) {
         if ([self predicts:ICALPARSER_TOKEN_KIND_PRODID, 0]) {
             [self prodid_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_VERSION, 0]) {
@@ -1684,7 +1692,7 @@
             [self calscale_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_METHOD, 0]) {
             [self method_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+        } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
             [self xprop_]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
             [self ianaprop_]; 
@@ -1819,7 +1827,7 @@
         [self match:ICALPARSER_TOKEN_KIND_CONFIDENTIAL discard:NO]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else {
         [self raise:@"No viable alternative found in rule 'classvalue'."];
@@ -2588,7 +2596,7 @@
         [self match:ICALPARSER_TOKEN_KIND_BUSY_UNAVAILABLE discard:NO]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_BUSY_TENTATIVE, 0]) {
         [self match:ICALPARSER_TOKEN_KIND_BUSY_TENTATIVE discard:NO]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
@@ -2773,7 +2781,7 @@
     
     if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else {
         [self raise:@"No viable alternative found in rule 'name'."];
@@ -2847,7 +2855,7 @@
     
     if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else {
         [self raise:@"No viable alternative found in rule 'paramname'."];
@@ -2862,7 +2870,7 @@
 
 - (void)__paramvalue {
     
-    if ([self predicts:ICALPARSER_TOKEN_KIND_COLON, ICALPARSER_TOKEN_KIND_COMMA, ICALPARSER_TOKEN_KIND_QUOTE, ICALPARSER_TOKEN_KIND_SEMI_COLON, ICALPARSER_TOKEN_KIND__N_1, ICALPARSER_TOKEN_KIND__R, ICALPARSER_TOKEN_KIND__X00, ICALPARSER_TOKEN_KIND__X01, ICALPARSER_TOKEN_KIND__X02, ICALPARSER_TOKEN_KIND__X03, ICALPARSER_TOKEN_KIND__X04, ICALPARSER_TOKEN_KIND__X05, ICALPARSER_TOKEN_KIND__X06, ICALPARSER_TOKEN_KIND__X07, ICALPARSER_TOKEN_KIND__X08, ICALPARSER_TOKEN_KIND__X0A, ICALPARSER_TOKEN_KIND__X0B, ICALPARSER_TOKEN_KIND__X0C, ICALPARSER_TOKEN_KIND__X0D, ICALPARSER_TOKEN_KIND__X0E, ICALPARSER_TOKEN_KIND__X0F, ICALPARSER_TOKEN_KIND__X10, ICALPARSER_TOKEN_KIND__X11, ICALPARSER_TOKEN_KIND__X12, ICALPARSER_TOKEN_KIND__X13, ICALPARSER_TOKEN_KIND__X14, ICALPARSER_TOKEN_KIND__X15, ICALPARSER_TOKEN_KIND__X16, ICALPARSER_TOKEN_KIND__X17, ICALPARSER_TOKEN_KIND__X18, ICALPARSER_TOKEN_KIND__X19, ICALPARSER_TOKEN_KIND__X1A, ICALPARSER_TOKEN_KIND__X1B, ICALPARSER_TOKEN_KIND__X1C, ICALPARSER_TOKEN_KIND__X1D, ICALPARSER_TOKEN_KIND__X1E, ICALPARSER_TOKEN_KIND__X1F, ICALPARSER_TOKEN_KIND__X7F, 0]) {
+    if ([self predicts:ICALPARSER_TOKEN_KIND_COLON, ICALPARSER_TOKEN_KIND_COMMA, ICALPARSER_TOKEN_KIND_QUOTE, ICALPARSER_TOKEN_KIND_SEMI_COLON, ICALPARSER_TOKEN_KIND__N, ICALPARSER_TOKEN_KIND__R, ICALPARSER_TOKEN_KIND__X00, ICALPARSER_TOKEN_KIND__X01, ICALPARSER_TOKEN_KIND__X02, ICALPARSER_TOKEN_KIND__X03, ICALPARSER_TOKEN_KIND__X04, ICALPARSER_TOKEN_KIND__X05, ICALPARSER_TOKEN_KIND__X06, ICALPARSER_TOKEN_KIND__X07, ICALPARSER_TOKEN_KIND__X08, ICALPARSER_TOKEN_KIND__X0A, ICALPARSER_TOKEN_KIND__X0B, ICALPARSER_TOKEN_KIND__X0C, ICALPARSER_TOKEN_KIND__X0D, ICALPARSER_TOKEN_KIND__X0E, ICALPARSER_TOKEN_KIND__X0F, ICALPARSER_TOKEN_KIND__X10, ICALPARSER_TOKEN_KIND__X11, ICALPARSER_TOKEN_KIND__X12, ICALPARSER_TOKEN_KIND__X13, ICALPARSER_TOKEN_KIND__X14, ICALPARSER_TOKEN_KIND__X15, ICALPARSER_TOKEN_KIND__X16, ICALPARSER_TOKEN_KIND__X17, ICALPARSER_TOKEN_KIND__X18, ICALPARSER_TOKEN_KIND__X19, ICALPARSER_TOKEN_KIND__X1A, ICALPARSER_TOKEN_KIND__X1B, ICALPARSER_TOKEN_KIND__X1C, ICALPARSER_TOKEN_KIND__X1D, ICALPARSER_TOKEN_KIND__X1E, ICALPARSER_TOKEN_KIND__X1F, ICALPARSER_TOKEN_KIND__X7F, 0]) {
         [self paramtext_]; 
     } else if ([self predicts:TOKEN_KIND_BUILTIN_QUOTEDSTRING, 0]) {
         [self quotedstring_]; 
@@ -2905,7 +2913,7 @@
 
 - (void)__qsafechar {
     
-    if (![self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND__N_1, ICALPARSER_TOKEN_KIND__R, 0]) {[self crlf_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND__X00, ICALPARSER_TOKEN_KIND__X01, ICALPARSER_TOKEN_KIND__X02, ICALPARSER_TOKEN_KIND__X03, ICALPARSER_TOKEN_KIND__X04, ICALPARSER_TOKEN_KIND__X05, ICALPARSER_TOKEN_KIND__X06, ICALPARSER_TOKEN_KIND__X07, ICALPARSER_TOKEN_KIND__X08, ICALPARSER_TOKEN_KIND__X0A, ICALPARSER_TOKEN_KIND__X0B, ICALPARSER_TOKEN_KIND__X0C, ICALPARSER_TOKEN_KIND__X0D, ICALPARSER_TOKEN_KIND__X0E, ICALPARSER_TOKEN_KIND__X0F, ICALPARSER_TOKEN_KIND__X10, ICALPARSER_TOKEN_KIND__X11, ICALPARSER_TOKEN_KIND__X12, ICALPARSER_TOKEN_KIND__X13, ICALPARSER_TOKEN_KIND__X14, ICALPARSER_TOKEN_KIND__X15, ICALPARSER_TOKEN_KIND__X16, ICALPARSER_TOKEN_KIND__X17, ICALPARSER_TOKEN_KIND__X18, ICALPARSER_TOKEN_KIND__X19, ICALPARSER_TOKEN_KIND__X1A, ICALPARSER_TOKEN_KIND__X1B, ICALPARSER_TOKEN_KIND__X1C, ICALPARSER_TOKEN_KIND__X1D, ICALPARSER_TOKEN_KIND__X1E, ICALPARSER_TOKEN_KIND__X1F, ICALPARSER_TOKEN_KIND__X7F, 0]) {[self control_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_QUOTE, 0]) {[self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'qsafechar'."];}}]) {
+    if (![self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND__N, ICALPARSER_TOKEN_KIND__R, 0]) {[self crlf_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND__X00, ICALPARSER_TOKEN_KIND__X01, ICALPARSER_TOKEN_KIND__X02, ICALPARSER_TOKEN_KIND__X03, ICALPARSER_TOKEN_KIND__X04, ICALPARSER_TOKEN_KIND__X05, ICALPARSER_TOKEN_KIND__X06, ICALPARSER_TOKEN_KIND__X07, ICALPARSER_TOKEN_KIND__X08, ICALPARSER_TOKEN_KIND__X0A, ICALPARSER_TOKEN_KIND__X0B, ICALPARSER_TOKEN_KIND__X0C, ICALPARSER_TOKEN_KIND__X0D, ICALPARSER_TOKEN_KIND__X0E, ICALPARSER_TOKEN_KIND__X0F, ICALPARSER_TOKEN_KIND__X10, ICALPARSER_TOKEN_KIND__X11, ICALPARSER_TOKEN_KIND__X12, ICALPARSER_TOKEN_KIND__X13, ICALPARSER_TOKEN_KIND__X14, ICALPARSER_TOKEN_KIND__X15, ICALPARSER_TOKEN_KIND__X16, ICALPARSER_TOKEN_KIND__X17, ICALPARSER_TOKEN_KIND__X18, ICALPARSER_TOKEN_KIND__X19, ICALPARSER_TOKEN_KIND__X1A, ICALPARSER_TOKEN_KIND__X1B, ICALPARSER_TOKEN_KIND__X1C, ICALPARSER_TOKEN_KIND__X1D, ICALPARSER_TOKEN_KIND__X1E, ICALPARSER_TOKEN_KIND__X1F, ICALPARSER_TOKEN_KIND__X7F, 0]) {[self control_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_QUOTE, 0]) {[self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'qsafechar'."];}}]) {
         [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
     } else {
         [self raise:@"negation test failed in qsafechar"];
@@ -2920,7 +2928,7 @@
 
 - (void)__safechar {
     
-    if (![self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND__N_1, ICALPARSER_TOKEN_KIND__R, 0]) {[self crlf_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND__X00, ICALPARSER_TOKEN_KIND__X01, ICALPARSER_TOKEN_KIND__X02, ICALPARSER_TOKEN_KIND__X03, ICALPARSER_TOKEN_KIND__X04, ICALPARSER_TOKEN_KIND__X05, ICALPARSER_TOKEN_KIND__X06, ICALPARSER_TOKEN_KIND__X07, ICALPARSER_TOKEN_KIND__X08, ICALPARSER_TOKEN_KIND__X0A, ICALPARSER_TOKEN_KIND__X0B, ICALPARSER_TOKEN_KIND__X0C, ICALPARSER_TOKEN_KIND__X0D, ICALPARSER_TOKEN_KIND__X0E, ICALPARSER_TOKEN_KIND__X0F, ICALPARSER_TOKEN_KIND__X10, ICALPARSER_TOKEN_KIND__X11, ICALPARSER_TOKEN_KIND__X12, ICALPARSER_TOKEN_KIND__X13, ICALPARSER_TOKEN_KIND__X14, ICALPARSER_TOKEN_KIND__X15, ICALPARSER_TOKEN_KIND__X16, ICALPARSER_TOKEN_KIND__X17, ICALPARSER_TOKEN_KIND__X18, ICALPARSER_TOKEN_KIND__X19, ICALPARSER_TOKEN_KIND__X1A, ICALPARSER_TOKEN_KIND__X1B, ICALPARSER_TOKEN_KIND__X1C, ICALPARSER_TOKEN_KIND__X1D, ICALPARSER_TOKEN_KIND__X1E, ICALPARSER_TOKEN_KIND__X1F, ICALPARSER_TOKEN_KIND__X7F, 0]) {[self control_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_QUOTE, 0]) {[self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COLON, 0]) {[self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COMMA, 0]) {[self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; } else {[self raise:@"No viable alternative found in rule 'safechar'."];}}]) {
+    if (![self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND__N, ICALPARSER_TOKEN_KIND__R, 0]) {[self crlf_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND__X00, ICALPARSER_TOKEN_KIND__X01, ICALPARSER_TOKEN_KIND__X02, ICALPARSER_TOKEN_KIND__X03, ICALPARSER_TOKEN_KIND__X04, ICALPARSER_TOKEN_KIND__X05, ICALPARSER_TOKEN_KIND__X06, ICALPARSER_TOKEN_KIND__X07, ICALPARSER_TOKEN_KIND__X08, ICALPARSER_TOKEN_KIND__X0A, ICALPARSER_TOKEN_KIND__X0B, ICALPARSER_TOKEN_KIND__X0C, ICALPARSER_TOKEN_KIND__X0D, ICALPARSER_TOKEN_KIND__X0E, ICALPARSER_TOKEN_KIND__X0F, ICALPARSER_TOKEN_KIND__X10, ICALPARSER_TOKEN_KIND__X11, ICALPARSER_TOKEN_KIND__X12, ICALPARSER_TOKEN_KIND__X13, ICALPARSER_TOKEN_KIND__X14, ICALPARSER_TOKEN_KIND__X15, ICALPARSER_TOKEN_KIND__X16, ICALPARSER_TOKEN_KIND__X17, ICALPARSER_TOKEN_KIND__X18, ICALPARSER_TOKEN_KIND__X19, ICALPARSER_TOKEN_KIND__X1A, ICALPARSER_TOKEN_KIND__X1B, ICALPARSER_TOKEN_KIND__X1C, ICALPARSER_TOKEN_KIND__X1D, ICALPARSER_TOKEN_KIND__X1E, ICALPARSER_TOKEN_KIND__X1F, ICALPARSER_TOKEN_KIND__X7F, 0]) {[self control_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_QUOTE, 0]) {[self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COLON, 0]) {[self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COMMA, 0]) {[self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; } else {[self raise:@"No viable alternative found in rule 'safechar'."];}}]) {
         [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
     } else {
         [self raise:@"negation test failed in safechar"];
@@ -2935,7 +2943,7 @@
 
 - (void)__valuechar {
     
-    if (![self speculate:^{ if ([self speculate:^{ [self crlf_]; }]) {[self crlf_]; } else if ([self speculate:^{ [self control_]; }]) {[self control_]; } else if ([self speculate:^{ [self escapedchar_]; }]) {[self escapedchar_]; } else {[self raise:@"No viable alternative found in rule 'valuechar'."];}}]) {
+    if (![self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND__N, ICALPARSER_TOKEN_KIND__R, 0]) {[self crlf_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND__X00, ICALPARSER_TOKEN_KIND__X01, ICALPARSER_TOKEN_KIND__X02, ICALPARSER_TOKEN_KIND__X03, ICALPARSER_TOKEN_KIND__X04, ICALPARSER_TOKEN_KIND__X05, ICALPARSER_TOKEN_KIND__X06, ICALPARSER_TOKEN_KIND__X07, ICALPARSER_TOKEN_KIND__X08, ICALPARSER_TOKEN_KIND__X0A, ICALPARSER_TOKEN_KIND__X0B, ICALPARSER_TOKEN_KIND__X0C, ICALPARSER_TOKEN_KIND__X0D, ICALPARSER_TOKEN_KIND__X0E, ICALPARSER_TOKEN_KIND__X0F, ICALPARSER_TOKEN_KIND__X10, ICALPARSER_TOKEN_KIND__X11, ICALPARSER_TOKEN_KIND__X12, ICALPARSER_TOKEN_KIND__X13, ICALPARSER_TOKEN_KIND__X14, ICALPARSER_TOKEN_KIND__X15, ICALPARSER_TOKEN_KIND__X16, ICALPARSER_TOKEN_KIND__X17, ICALPARSER_TOKEN_KIND__X18, ICALPARSER_TOKEN_KIND__X19, ICALPARSER_TOKEN_KIND__X1A, ICALPARSER_TOKEN_KIND__X1B, ICALPARSER_TOKEN_KIND__X1C, ICALPARSER_TOKEN_KIND__X1D, ICALPARSER_TOKEN_KIND__X1E, ICALPARSER_TOKEN_KIND__X1F, ICALPARSER_TOKEN_KIND__X7F, 0]) {[self control_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BSLASH, 0]) {[self escapedchar_]; } else {[self raise:@"No viable alternative found in rule 'valuechar'."];}}]) {
         [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
     } else {
         [self raise:@"negation test failed in valuechar"];
@@ -3115,7 +3123,7 @@
         [self tzidparam_]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_VALUE, 0]) {
         [self valuetypeparam_]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self otherparam_]; 
     } else {
         [self raise:@"No viable alternative found in rule 'icalparameter'."];
@@ -3355,7 +3363,7 @@
     
     if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianaparam_]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xparam_]; 
     } else {
         [self raise:@"No viable alternative found in rule 'otherparam'."];
@@ -3401,7 +3409,7 @@
         [self match:ICALPARSER_TOKEN_KIND_TENTATIVE discard:NO]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_DELEGATED, 0]) {
         [self match:ICALPARSER_TOKEN_KIND_DELEGATED discard:NO]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
@@ -3432,7 +3440,7 @@
         [self match:ICALPARSER_TOKEN_KIND_COMPLETED discard:NO]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_IN_PROCESS, 0]) {
         [self match:ICALPARSER_TOKEN_KIND_IN_PROCESS discard:NO]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
@@ -3455,7 +3463,7 @@
         [self match:ICALPARSER_TOKEN_KIND_ACCEPTED discard:NO]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_DECLINED, 0]) {
         [self match:ICALPARSER_TOKEN_KIND_DECLINED discard:NO]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
@@ -3756,7 +3764,7 @@
         [self match:ICALPARSER_TOKEN_KIND_SIBLING discard:NO]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else {
         [self raise:@"No viable alternative found in rule 'reltypeparam'."];
@@ -3920,7 +3928,7 @@
         [self match:ICALPARSER_TOKEN_KIND_OPT_PARTICIPANT discard:NO]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_NON_PARTICIPANT, 0]) {
         [self match:ICALPARSER_TOKEN_KIND_NON_PARTICIPANT discard:NO]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
@@ -4734,13 +4742,15 @@
 
 - (void)__text {
     
-    while ([self predicts:TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_SYMBOL, TOKEN_KIND_BUILTIN_WORD, 0]) {
-        if ([self predicts:TOKEN_KIND_BUILTIN_WORD, 0]) {
-            [self matchWord:NO]; 
-        } else if ([self predicts:TOKEN_KIND_BUILTIN_SYMBOL, 0]) {
-            [self matchSymbol:NO]; 
-        } else if ([self predicts:TOKEN_KIND_BUILTIN_NUMBER, 0]) {
-            [self matchNumber:NO]; 
+    while ([self speculate:^{ if ([self speculate:^{ [self tsafechar_]; }]) {[self tsafechar_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; } else if ([self speculate:^{ [self escapedchar_]; }]) {[self escapedchar_]; } else {[self raise:@"No viable alternative found in rule 'text'."];}}]) {
+        if ([self speculate:^{ [self tsafechar_]; }]) {
+            [self tsafechar_]; 
+        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; }]) {
+            [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
+        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; }]) {
+            [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+        } else if ([self speculate:^{ [self escapedchar_]; }]) {
+            [self escapedchar_]; 
         } else {
             [self raise:@"No viable alternative found in rule 'text'."];
         }
@@ -4755,16 +4765,41 @@
 
 - (void)__escapedchar {
     
-    if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
-        [self match:ICALPARSER_TOKEN_KIND_1 discard:NO]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_2, 0]) {
-        [self match:ICALPARSER_TOKEN_KIND_2 discard:NO]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_3, 0]) {
-        [self match:ICALPARSER_TOKEN_KIND_3 discard:NO]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND__N, 0]) {
-        [self match:ICALPARSER_TOKEN_KIND__N discard:NO]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND__N_1, 0]) {
-        [self match:ICALPARSER_TOKEN_KIND__N_1 discard:NO]; 
+    if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; if ([self speculate:^{ [self crlf_]; [self matchWhitespace:NO]; }]) {[self crlf_]; [self matchWhitespace:NO]; }[self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; 
+        if ([self speculate:^{ [self crlf_]; [self matchWhitespace:NO]; }]) {
+            [self crlf_]; 
+            [self matchWhitespace:NO]; 
+        }
+        [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; if ([self speculate:^{ [self crlf_]; [self matchWhitespace:NO]; }]) {[self crlf_]; [self matchWhitespace:NO]; }[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; 
+        if ([self speculate:^{ [self crlf_]; [self matchWhitespace:NO]; }]) {
+            [self crlf_]; 
+            [self matchWhitespace:NO]; 
+        }
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; if ([self speculate:^{ [self crlf_]; [self matchWhitespace:NO]; }]) {[self crlf_]; [self matchWhitespace:NO]; }[self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; 
+        if ([self speculate:^{ [self crlf_]; [self matchWhitespace:NO]; }]) {
+            [self crlf_]; 
+            [self matchWhitespace:NO]; 
+        }
+        [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; if ([self speculate:^{ [self crlf_]; [self matchWhitespace:NO]; }]) {[self crlf_]; [self matchWhitespace:NO]; }[self match:ICALPARSER_TOKEN_KIND_N discard:NO]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; 
+        if ([self speculate:^{ [self crlf_]; [self matchWhitespace:NO]; }]) {
+            [self crlf_]; 
+            [self matchWhitespace:NO]; 
+        }
+        [self match:ICALPARSER_TOKEN_KIND_N discard:NO]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; if ([self speculate:^{ [self crlf_]; [self matchWhitespace:NO]; }]) {[self crlf_]; [self matchWhitespace:NO]; }[self match:ICALPARSER_TOKEN_KIND_N_1 discard:NO]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_BSLASH discard:NO]; 
+        if ([self speculate:^{ [self crlf_]; [self matchWhitespace:NO]; }]) {
+            [self crlf_]; 
+            [self matchWhitespace:NO]; 
+        }
+        [self match:ICALPARSER_TOKEN_KIND_N_1 discard:NO]; 
     } else {
         [self raise:@"No viable alternative found in rule 'escapedchar'."];
     }
@@ -4778,7 +4813,7 @@
 
 - (void)__tsafechar {
     
-    if (![self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND__N_1, ICALPARSER_TOKEN_KIND__R, 0]) {[self crlf_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_QUOTE, 0]) {[self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COLON, 0]) {[self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_4, 0]) {[self match:ICALPARSER_TOKEN_KIND_4 discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_5, 0]) {[self match:ICALPARSER_TOKEN_KIND_5 discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COMMA, 0]) {[self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; } else {[self raise:@"No viable alternative found in rule 'tsafechar'."];}}]) {
+    if (![self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND__N, ICALPARSER_TOKEN_KIND__R, 0]) {[self crlf_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND__X00, ICALPARSER_TOKEN_KIND__X01, ICALPARSER_TOKEN_KIND__X02, ICALPARSER_TOKEN_KIND__X03, ICALPARSER_TOKEN_KIND__X04, ICALPARSER_TOKEN_KIND__X05, ICALPARSER_TOKEN_KIND__X06, ICALPARSER_TOKEN_KIND__X07, ICALPARSER_TOKEN_KIND__X08, ICALPARSER_TOKEN_KIND__X0A, ICALPARSER_TOKEN_KIND__X0B, ICALPARSER_TOKEN_KIND__X0C, ICALPARSER_TOKEN_KIND__X0D, ICALPARSER_TOKEN_KIND__X0E, ICALPARSER_TOKEN_KIND__X0F, ICALPARSER_TOKEN_KIND__X10, ICALPARSER_TOKEN_KIND__X11, ICALPARSER_TOKEN_KIND__X12, ICALPARSER_TOKEN_KIND__X13, ICALPARSER_TOKEN_KIND__X14, ICALPARSER_TOKEN_KIND__X15, ICALPARSER_TOKEN_KIND__X16, ICALPARSER_TOKEN_KIND__X17, ICALPARSER_TOKEN_KIND__X18, ICALPARSER_TOKEN_KIND__X19, ICALPARSER_TOKEN_KIND__X1A, ICALPARSER_TOKEN_KIND__X1B, ICALPARSER_TOKEN_KIND__X1C, ICALPARSER_TOKEN_KIND__X1D, ICALPARSER_TOKEN_KIND__X1E, ICALPARSER_TOKEN_KIND__X1F, ICALPARSER_TOKEN_KIND__X7F, 0]) {[self control_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_QUOTE, 0]) {[self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COLON, 0]) {[self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BSLASH, 0]) {[self bslash_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COMMA, 0]) {[self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; } else {[self raise:@"No viable alternative found in rule 'tsafechar'."];}}]) {
         [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
     } else {
         [self raise:@"negation test failed in tsafechar"];
@@ -5064,7 +5099,7 @@
         [self match:ICALPARSER_TOKEN_KIND_URI discard:NO]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_UTC_OFFSET, 0]) {
         [self match:ICALPARSER_TOKEN_KIND_UTC_OFFSET discard:NO]; 
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_6, 0]) {
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_1, 0]) {
         [self xname_]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, TOKEN_KIND_BUILTIN_NUMBER, TOKEN_KIND_BUILTIN_WORD, 0]) {
         [self ianatoken_]; 
@@ -5159,7 +5194,7 @@
 
 - (void)__xname {
     
-    [self match:ICALPARSER_TOKEN_KIND_6 discard:NO]; 
+    [self match:ICALPARSER_TOKEN_KIND_1 discard:NO]; 
     while ([self speculate:^{ [self vendorid_]; [self match:ICALPARSER_TOKEN_KIND_MINUS discard:NO]; }]) {
         [self vendorid_]; 
         [self match:ICALPARSER_TOKEN_KIND_MINUS discard:NO]; 
@@ -5261,9 +5296,9 @@
 
 - (void)__crlf {
     
-    while ([self predicts:ICALPARSER_TOKEN_KIND__N_1, ICALPARSER_TOKEN_KIND__R, 0]) {
-        if ([self predicts:ICALPARSER_TOKEN_KIND__N_1, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND__N_1 discard:NO]; 
+    while ([self predicts:ICALPARSER_TOKEN_KIND__N, ICALPARSER_TOKEN_KIND__R, 0]) {
+        if ([self predicts:ICALPARSER_TOKEN_KIND__N, 0]) {
+            [self match:ICALPARSER_TOKEN_KIND__N discard:NO]; 
         } else if ([self predicts:ICALPARSER_TOKEN_KIND__R, 0]) {
             [self match:ICALPARSER_TOKEN_KIND__R discard:NO]; 
         } else {
