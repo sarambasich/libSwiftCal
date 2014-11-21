@@ -1,10 +1,10 @@
 icalobject = 'BEGIN' ':' 'VCALENDAR' crlf
                 icalbody
-                'END' ':' 'VCALENDAR' crlf S* EOF?;
+            'END:VCALENDAR' crlf;
 
 todoc      = 'BEGIN' ':' 'VTODO' crlf
                 todoprop alarmc*
-                'END' ':' 'VTODO' crlf;
+            'END:VTODO' crlf;
 
 todoprop   =    (
                     dtstamp | uid |
@@ -26,11 +26,12 @@ alarmc     = 'BEGIN' ':' 'VALARM' crlf
 
 altrepparam = 'ALTREP' '=' '"' uri '"';
 
-audioprop  =
-                action | trigger |
-                duration | repeat |
-                attach |
-                xprop | ianaprop;
+audioprop  =   (
+                    action | trigger |
+                    duration | repeat |
+                    attach |
+                    xprop | ianaprop
+                )*;
 
 cnparam    = 'CN' '=' paramvalue;
 
@@ -43,10 +44,11 @@ cutypeparam        = 'CUTYPE' '='
                             | xname
                             | ianatoken);
 
-dispprop   =
+dispprop   =    (
                     action | description | trigger |
                     duration | repeat |
-                    xprop | ianaprop;
+                    xprop | ianaprop
+                )*;
 
 delfromparam       = 'DELEGATED-FROM' '=' '"' caladdress
                                 '"' (',' '"' caladdress '"')*;
@@ -57,10 +59,10 @@ deltoparam = 'DELEGATED-TO' '=' '"' caladdress '"'
 dirparam   = 'DIR' '=' '"' uri '"';
 
 emailprop  =
-            action | description | trigger | summary |
+            (action | description | trigger | summary |
             attendee |
             duration | repeat |
-            attach | xprop | ianaprop;
+            attach | xprop | ianaprop)*;
 
 action      = 'ACTION' actionparam ':' actionvalue crlf;
 
@@ -276,9 +278,14 @@ safechar     = ~(crlf | control |  '"' |  ";" |  ":" |  ",");
 
 valuechar    = ~(crlf | control | escapedchar);
 
-nonusascii  = Any*;
+nonusascii  = (Word | Number Symbol)*;
 
-control       = Word;
+control       = '\x00' | '\x01' | '\x02' | '\x03' | '\x04' | '\x05' |
+                '\x06' | '\x07' | '\x08' | '\x0a' | '\x0b' | '\x0c' |
+                '\x0d' | '\x0e' | '\x0f' | '\x10' | '\x11' | '\x12' |
+                '\x13' | '\x14' | '\x15' | '\x16' | '\x17' | '\x18' |
+                '\x19' | '\x1a' | '\x1b' | '\x1c' | '\x1d' | '\x1e' |
+                '\x1f' | '\x7f';
 
 quotedstring = QuotedString;
 
@@ -576,13 +583,13 @@ summparam  = (
 
 sentbyparam        = 'SENT-BY' '=' '"' caladdress '"';
 
-text            = (tsafechar | ':' | '"' | escapedchar)*;
+text            = (Word | Symbol | Number)*;//(tsafechar | ':' | '"' | escapedchar)*;
 
-escapedchar     = ('\\' (Word | Number)+ | '\;' | '\,' | '\N' | '\n');
+escapedchar     = ('\\' | '\;' | '\,' | '\N' | '\n');
 
-tsafechar       = ~(crlf | '"' | ';' | ':' | '\\' | ',');
+tsafechar       = ~(crlf | '"' | ';' | ':' | '\ ' | ' \ ' | ',');
 
-time         = Word*; //Number timeutc?; //timehour timeminute timesecond timeutc?;
+time         = Number timeutc?; //timehour timeminute timesecond timeutc?;
 
 timehour    = Number Number;
 timeminute  = Number Number;

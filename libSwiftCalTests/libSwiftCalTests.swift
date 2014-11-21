@@ -26,11 +26,16 @@ class libSwiftCalTests: XCTestCase {
         // This is an example of a functional test case.
         XCTAssert(true, "Pass")
         
+        let exp = expectationWithDescription("parse")
         let str: String = NSString(data: NSData(contentsOfFile: "/Users/Stefan/Documents/Applications/iOS/Frameworks/libSwiftCal/libSwiftCalTests/EasyInput.ics")!, encoding: NSUTF8StringEncoding)!
         var cal = Calendar(stringToParse: str)
 //        var cal = CalendarObject(dictionary: ["id": 1337, "created": NSDate(), "last_updated": NSDate()])
         let x = 10
         let y = 20
+        
+        waitForExpectationsWithTimeout(20.0, handler: { (e) -> Void in
+            println(e)
+        })
     }
     
     func testPerformanceExample() {
