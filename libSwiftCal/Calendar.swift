@@ -10,9 +10,7 @@ import EventKit
 
 public class Calendar: CalendarObject, ParserObserver {
     private var calendarIdentifier: String!
-    private var parser: CalParser!
-    
-    private var currentTodo: Reminder?
+    public internal(set) var reminders = [Reminder]()
     
     public var uid: String {
         get {
@@ -20,22 +18,34 @@ public class Calendar: CalendarObject, ParserObserver {
         }
     }
     
+    // Parsing
+    private var parser: CalParser!
+    private var currentTodoDict: [String : AnyObject]?
+    
     // MARK: - ParserObserver
-    public func parser(key: String!, didMatchTodoprop value: String!) {
-        let x = 10
-        let y = kVTODO
+    public func parser(key: String!, didMatchCalprops value: String!) {
+        model__setValue(value, forSerializationKey: key, model: self)
     }
     
     public func parser(key: String!, willMatchTodoc value: String!) {
-        
+        currentTodoDict = [String : AnyObject]()
     }
     
-    public func parser(key: String!, didMatchCalprops value: String!) {
-        let x = 10
+    public func parser(key: String!, didMatchTodoprop value: String!) {
+        let k = key
+        let v = value
+        currentTodoDict![key] = value
     }
     
-    public func parser(key: String!, didMatchSummary value: String!) {
+    public func parser(key: String!, didMatchTodoc value: String!) {
+        let d = self.currentTodoDict
+        self.reminders.append(Reminder(dictionary: self.currentTodoDict!))
+        self.currentTodoDict = nil
+    }
+    
+    public func parser(key: String!, didMatchIcalobject value: String!) {
         let x = 10
+        let y = 20
     }
     
     public init(stringToParse s: String) {

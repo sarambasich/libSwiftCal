@@ -16,7 +16,7 @@
 
 @interface CalParser ()
 
-- (NSString *) matchStringProerty:(PKParser *) parser assembly:(PKAssembly *) assembly;
+- (void) matchStringProperty:(PKParser *) parser assembly:(PKAssembly *) assembly propName:(NSString **) key propValue:(NSString **) value;
 
 @property (atomic, strong, readwrite) iCalParser * parser;
 
@@ -48,8 +48,10 @@
 }
 
 - (void) parser:(PKParser *) parser didMatchTodoprop:(PKAssembly *) assembly {
+    NSString * k, * v;
+    [self matchStringProperty:parser assembly:assembly propName:&k propValue:&v];
     if ([self.delegate respondsToSelector:@selector(parser:didMatchTodoprop:)]) {
-        [self.delegate parser:@"" didMatchTodoprop:@""];
+        [self.delegate parser:k didMatchTodoprop:v];
     }
 }
 
@@ -59,19 +61,20 @@
     }
 }
 
-- (void) parser:(PKParser *) parser didMatchSummary:(PKAssembly *) assembly {
-    NSString * summary = [self matchStringProerty:parser assembly:assembly];
-    
-    if ([self.delegate respondsToSelector:@selector(parser:didMatchSummary:)]) {
-        [self.delegate parser:kSUMMARY didMatchSummary:summary];
+- (void) parser:(PKParser *) parser didMatchIcalobject:(PKAssembly *) assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchIcalobject:)]) {
+        [self.delegate parser:kVCALENDAR didMatchIcalobject:nil];
     }
 }
 
-- (void) parser:(PKParser *) parser didMatchProdid:(PKAssembly *) assembly {
-    
+- (void) parser:(PKParser *) parser didMatchTodoc:(PKAssembly *) assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchTodoc:)]) {
+        [self.delegate parser:kVTODO didMatchTodoc:nil];
+    }
 }
 
-- (NSString *) matchStringProerty:(PKParser *) parser assembly:(PKAssembly *) assembly {
+
+- (void) matchStringProperty:(PKParser *) parser assembly:(PKAssembly *) assembly propName:(NSString **) key propValue:(NSString **) value {
     // TODO: Handle for property params
     NSUInteger stackEndPos = assembly.stack.count - 1 - 1,
     startPos, endPos;
@@ -88,11 +91,13 @@
         curTok = assembly.stack[stackEndPos--];
     }
     
+    *key = [assembly.stack[stackEndPos - 1] stringValue];
+    
     // 4.) Mark where beginning is found to be
     startPos = curTok.offset;
     
     // 5.) Make substring from beginning to end
-    return [self.parser.tokenizer.string substringWithRange:NSMakeRange(startPos, endPos - startPos)];
+    *value = [self.parser.tokenizer.string substringWithRange:NSMakeRange(startPos, endPos - startPos)];
 }
 
 @end

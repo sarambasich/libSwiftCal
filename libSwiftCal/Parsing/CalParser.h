@@ -13,13 +13,17 @@
 
 @protocol ParserObserver <NSObject>
 
-- (void) parser:(NSString *) key willMatchTodoc:(NSString *) value;
+@optional
 
-- (void) parser:(NSString *) key didMatchTodoprop:(NSString *) value;
+- (void) parser:(NSString *) key willMatchTodoc:(NSString *) value;
 
 - (void) parser:(NSString *) key didMatchCalprops:(NSString *) value;
 
-- (void) parser:(NSString *) key didMatchSummary:(NSString *) value;
+- (void) parser:(NSString *) key didMatchTodoprop:(NSString *) value;
+
+- (void) parser:(NSString *) key didMatchTodoc:(NSString *) value;
+
+- (void) parser:(NSString *) key didMatchIcalobject:(NSString *) value;
 
 @end
 
@@ -37,8 +41,8 @@
 
 - (void) parser:(PKParser *) parser didMatchCalprops:(PKAssembly *) assembly;
 
-- (void) parser:(PKParser *) parser didMatchSummary:(PKAssembly *) assembly;
+- (void) parser:(PKParser *) parser didMatchIcalobject:(PKAssembly *) assembly;
 
-- (void) parser:(PKParser *) parser didMatchProdid:(PKAssembly *) assembly;
+- (void) parser:(PKParser *) parser didMatchTodoc:(PKAssembly *) assembly;
 
 @end

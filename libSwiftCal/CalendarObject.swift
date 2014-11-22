@@ -68,6 +68,13 @@ func model__getDiffBetweenCalendarObjects(modelOne m1: MirrorType, modelTwo m2: 
     return results
 }
 
+func model__setValue<T where T: NSObject, T: Serializable>(value: NSObject, forSerializationKey key: String, model m: T) {
+    if let i = find(m.serializationKeys, key) {
+        let varNames = object__getVarNames(mirror: reflect(m))
+        m.setValue(value, forKey: varNames[i])
+    }
+}
+
 //func model__update<T where T: CalendarType, T: NSObject>(currentCalendarObject cm: T, newCalendarObject nm: T) {
 //    let diffs = model__getDiffBetweenCalendarObjects(modelOne: reflect(cm), modelTwo: reflect(nm))
 //    var newVals = [NSObject]()
