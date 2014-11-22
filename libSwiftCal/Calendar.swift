@@ -12,6 +12,7 @@ public class Calendar: CalendarObject, ParserObserver {
     private var calendarIdentifier: String!
     private var parser: CalParser!
     
+    private var currentTodo: Reminder?
     
     public var uid: String {
         get {
@@ -22,10 +23,11 @@ public class Calendar: CalendarObject, ParserObserver {
     // MARK: - ParserObserver
     public func parser(key: String!, didMatchTodoprop value: String!) {
         let x = 10
+        let y = kVTODO
     }
     
     public func parser(key: String!, willMatchTodoc value: String!) {
-        let x = 10
+        
     }
     
     public func parser(key: String!, didMatchCalprops value: String!) {

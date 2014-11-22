@@ -9,22 +9,29 @@
 #import "CalParser.h"
 #import "iCalParser.h"
 #import "PKAssembly.h"
+#import "PKToken.h"
+#import "iCalendarElements.h"
+
+#import "NSString+CalParser.h"
 
 @interface CalParser ()
 
+- (NSString *) matchStringProerty:(PKParser *) parser assembly:(PKAssembly *) assembly;
+
 @property (atomic, strong, readwrite) iCalParser * parser;
-@property (atomic, weak, readwrite) id delegate;
 
 @end
 
 @implementation CalParser
 
-- (id) initWithDelegate:(id) delegate {
+@synthesize delegate;
+
+- (id) initWithDelegate:(id) del {
     self = [super init];
     
     if (self) {
         self.parser = [[iCalParser alloc] initWithDelegate:self];
-        self.delegate = delegate;
+        self.delegate = del;
     }
     
     return self;
@@ -53,15 +60,39 @@
 }
 
 - (void) parser:(PKParser *) parser didMatchSummary:(PKAssembly *) assembly {
+    NSString * summary = [self matchStringProerty:parser assembly:assembly];
+    
     if ([self.delegate respondsToSelector:@selector(parser:didMatchSummary:)]) {
-        [self.delegate parser:@"" didMatchSummary:@""];
+        [self.delegate parser:kSUMMARY didMatchSummary:summary];
     }
 }
 
-//- (void) parser:(PKParser *) parser didMatchTodoc:(PKAssembly *) assembly {
-//    if ([self.delegate respondsToSelector:@selector(parser:didMatchTodoc:)]) {
-//        [self.delegate parser:parser.debugDescription didMatchTodoc:[assembly debugDescription]];
-//    }
-//}
+- (void) parser:(PKParser *) parser didMatchProdid:(PKAssembly *) assembly {
+    
+}
+
+- (NSString *) matchStringProerty:(PKParser *) parser assembly:(PKAssembly *) assembly {
+    // TODO: Handle for property params
+    NSUInteger stackEndPos = assembly.stack.count - 1 - 1,
+    startPos, endPos;
+    
+    // 1.) Find beginning of PROPERTY in stack
+    PKToken * endTok = assembly.stack[stackEndPos];
+    
+    // 2.) Mark where the end of the PROPERTY is
+    endPos = endTok.offset;
+    
+    // 3.) Traverse the parse stack top down to find the beginning
+    PKToken * curTok = assembly.stack[stackEndPos - 1];
+    while (!([[assembly.stack[stackEndPos] stringValue] isEqualToString:@":"] && [[assembly.stack[stackEndPos - 1] stringValue] isiCalendarElement])) {
+        curTok = assembly.stack[stackEndPos--];
+    }
+    
+    // 4.) Mark where beginning is found to be
+    startPos = curTok.offset;
+    
+    // 5.) Make substring from beginning to end
+    return [self.parser.tokenizer.string substringWithRange:NSMakeRange(startPos, endPos - startPos)];
+}
 
 @end

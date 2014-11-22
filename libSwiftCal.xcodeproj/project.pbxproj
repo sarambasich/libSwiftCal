@@ -10,21 +10,24 @@
 		256B00A313F91DF87590D625 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D008A3D155461280B0352B /* libPods.a */; };
 		A9AA345213E26B53BDD85F35 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D008A3D155461280B0352B /* libPods.a */; };
 		F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82909B41A1C5ADA0091366E /* EasyInput.ics */; };
+		F89DE8BB1A2105ED009BCFE1 /* iCalendarElements.h in Headers */ = {isa = PBXBuildFile; fileRef = F89DE8B91A2105ED009BCFE1 /* iCalendarElements.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F89DE8BD1A210C2D009BCFE1 /* iCalendarElements.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DE8BA1A2105ED009BCFE1 /* iCalendarElements.m */; };
+		F89DE8BF1A210EFD009BCFE1 /* libSwiftCal.h in Headers */ = {isa = PBXBuildFile; fileRef = F89DE8BE1A210EFD009BCFE1 /* libSwiftCal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F89DE8C61A211678009BCFE1 /* NSString+CalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F89DE8C41A211678009BCFE1 /* NSString+CalParser.h */; };
+		F89DE8C71A211678009BCFE1 /* NSString+CalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DE8C51A211678009BCFE1 /* NSString+CalParser.m */; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
 		F8F8EE8B1A1C3F200046AF23 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECC81A1C3F200046AF23 /* Alarm.swift */; };
 		F8F8EE8C1A1C3F200046AF23 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECC91A1C3F200046AF23 /* Attachment.swift */; };
 		F8F8EE8D1A1C3F200046AF23 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECCA1A1C3F200046AF23 /* Calendar.swift */; };
 		F8F8EE8E1A1C3F200046AF23 /* CalendarObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECCB1A1C3F200046AF23 /* CalendarObject.swift */; };
 		F8F8EE8F1A1C3F200046AF23 /* CalendarType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECCC1A1C3F200046AF23 /* CalendarType.swift */; };
-		F8F8EE921A1C3F200046AF23 /* libSwiftCal.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8ECD01A1C3F200046AF23 /* libSwiftCal.h */; };
-		F8F8EE931A1C3F200046AF23 /* libSwiftCal.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8ECD11A1C3F200046AF23 /* libSwiftCal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8F8EE961A1C3F200046AF23 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECD51A1C3F200046AF23 /* Observable.swift */; };
 		F8F8EE971A1C3F200046AF23 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECD61A1C3F200046AF23 /* Observer.swift */; };
 		F8F8EE981A1C3F200046AF23 /* Organizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECD71A1C3F200046AF23 /* Organizer.swift */; };
 		F8F8EE991A1C3F200046AF23 /* CalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8ECD91A1C3F200046AF23 /* CalParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8F8EE9A1A1C3F200046AF23 /* CalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECDA1A1C3F200046AF23 /* CalParser.m */; };
 		F8F8EE9B1A1C3F200046AF23 /* iCal.grammar in Resources */ = {isa = PBXBuildFile; fileRef = F8F8ECDB1A1C3F200046AF23 /* iCal.grammar */; };
-		F8F8EE9C1A1C3F200046AF23 /* iCalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8ECDC1A1C3F200046AF23 /* iCalParser.h */; };
+		F8F8EE9C1A1C3F200046AF23 /* iCalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8ECDC1A1C3F200046AF23 /* iCalParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8F8EE9D1A1C3F200046AF23 /* iCalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECDD1A1C3F200046AF23 /* iCalParser.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		F8F8EE9F1A1C3F200046AF23 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECDF1A1C3F200046AF23 /* Properties.swift */; };
 		F8F8EEA01A1C3F200046AF23 /* RecurrenceDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE01A1C3F200046AF23 /* RecurrenceDate.swift */; };
@@ -61,6 +64,11 @@
 		64D008A3D155461280B0352B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8C57D38159AF3E5242B680 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F82909B41A1C5ADA0091366E /* EasyInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = EasyInput.ics; sourceTree = "<group>"; };
+		F89DE8B91A2105ED009BCFE1 /* iCalendarElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCalendarElements.h; sourceTree = "<group>"; };
+		F89DE8BA1A2105ED009BCFE1 /* iCalendarElements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCalendarElements.m; sourceTree = "<group>"; };
+		F89DE8BE1A210EFD009BCFE1 /* libSwiftCal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSwiftCal.h; sourceTree = "<group>"; };
+		F89DE8C41A211678009BCFE1 /* NSString+CalParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CalParser.h"; sourceTree = "<group>"; };
+		F89DE8C51A211678009BCFE1 /* NSString+CalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CalParser.m"; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8EAF71A1C3EEE0046AF23 /* libSwiftCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libSwiftCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8ECC81A1C3F200046AF23 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
@@ -70,8 +78,6 @@
 		F8F8ECCC1A1C3F200046AF23 /* CalendarType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarType.swift; sourceTree = "<group>"; };
 		F8F8ECCD1A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8F8ECCF1A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8F8ECD01A1C3F200046AF23 /* libSwiftCal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSwiftCal.h; sourceTree = "<group>"; };
-		F8F8ECD11A1C3F200046AF23 /* libSwiftCal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSwiftCal.h; sourceTree = "<group>"; };
 		F8F8ECD51A1C3F200046AF23 /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		F8F8ECD61A1C3F200046AF23 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		F8F8ECD71A1C3F200046AF23 /* Organizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Organizer.swift; sourceTree = "<group>"; };
@@ -167,7 +173,6 @@
 				F8F8ECCB1A1C3F200046AF23 /* CalendarObject.swift */,
 				F8F8ECCC1A1C3F200046AF23 /* CalendarType.swift */,
 				F8F8ECCD1A1C3F200046AF23 /* Info.plist */,
-				F8F8ECD11A1C3F200046AF23 /* libSwiftCal.h */,
 				F8F8ECD51A1C3F200046AF23 /* Observable.swift */,
 				F8F8ECD61A1C3F200046AF23 /* Observer.swift */,
 				F8F8ECD71A1C3F200046AF23 /* Organizer.swift */,
@@ -183,8 +188,8 @@
 		F8F8ECCE1A1C3F200046AF23 /* libSwiftCal */ = {
 			isa = PBXGroup;
 			children = (
+				F89DE8BE1A210EFD009BCFE1 /* libSwiftCal.h */,
 				F8F8ECCF1A1C3F200046AF23 /* Info.plist */,
-				F8F8ECD01A1C3F200046AF23 /* libSwiftCal.h */,
 			);
 			path = libSwiftCal;
 			sourceTree = "<group>";
@@ -198,6 +203,10 @@
 				F8F8ECDC1A1C3F200046AF23 /* iCalParser.h */,
 				F8F8ECDD1A1C3F200046AF23 /* iCalParser.m */,
 				F8F8ECDE1A1C3F200046AF23 /* icalparser.parsergen */,
+				F89DE8B91A2105ED009BCFE1 /* iCalendarElements.h */,
+				F89DE8BA1A2105ED009BCFE1 /* iCalendarElements.m */,
+				F89DE8C41A211678009BCFE1 /* NSString+CalParser.h */,
+				F89DE8C51A211678009BCFE1 /* NSString+CalParser.m */,
 			);
 			path = Parsing;
 			sourceTree = "<group>";
@@ -219,10 +228,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8F8EE921A1C3F200046AF23 /* libSwiftCal.h in Headers */,
-				F8F8EE931A1C3F200046AF23 /* libSwiftCal.h in Headers */,
-				F8F8EE991A1C3F200046AF23 /* CalParser.h in Headers */,
+				F89DE8BF1A210EFD009BCFE1 /* libSwiftCal.h in Headers */,
 				F8F8EE9C1A1C3F200046AF23 /* iCalParser.h in Headers */,
+				F8F8EE991A1C3F200046AF23 /* CalParser.h in Headers */,
+				F89DE8BB1A2105ED009BCFE1 /* iCalendarElements.h in Headers */,
+				F89DE8C61A211678009BCFE1 /* NSString+CalParser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +405,7 @@
 				F8F8EE9A1A1C3F200046AF23 /* CalParser.m in Sources */,
 				F8F8EE981A1C3F200046AF23 /* Organizer.swift in Sources */,
 				F8F8EE9D1A1C3F200046AF23 /* iCalParser.m in Sources */,
+				F89DE8C71A211678009BCFE1 /* NSString+CalParser.m in Sources */,
 				F8F8EE8D1A1C3F200046AF23 /* Calendar.swift in Sources */,
 				F8F8EEA31A1C3F200046AF23 /* Serializable.swift in Sources */,
 				F8F8EE9F1A1C3F200046AF23 /* Properties.swift in Sources */,
@@ -406,6 +417,7 @@
 				F8F8EE971A1C3F200046AF23 /* Observer.swift in Sources */,
 				F8F8EE8B1A1C3F200046AF23 /* Alarm.swift in Sources */,
 				F8F8EEA21A1C3F200046AF23 /* RequestStatus.swift in Sources */,
+				F89DE8BD1A210C2D009BCFE1 /* iCalendarElements.m in Sources */,
 				F8F8EE8F1A1C3F200046AF23 /* CalendarType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,6 +548,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Debug;
@@ -562,6 +576,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Release;

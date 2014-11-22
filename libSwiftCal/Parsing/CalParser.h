@@ -25,7 +25,9 @@
 
 @interface CalParser : NSObject
 
-- (id) initWithDelegate:(id) delegate;
+@property (atomic, weak, readwrite) id delegate;
+
+- (id) initWithDelegate:(id) del;
 
 - (id) parseString:(NSString *)input error:(NSError **) outErr;
 
@@ -36,5 +38,7 @@
 - (void) parser:(PKParser *) parser didMatchCalprops:(PKAssembly *) assembly;
 
 - (void) parser:(PKParser *) parser didMatchSummary:(PKAssembly *) assembly;
+
+- (void) parser:(PKParser *) parser didMatchProdid:(PKAssembly *) assembly;
 
 @end

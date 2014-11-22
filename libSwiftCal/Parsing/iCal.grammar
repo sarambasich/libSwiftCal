@@ -631,7 +631,7 @@ summparam  = (
 
 sentbyparam        = 'SENT-BY' '=' '"' caladdress '"';
 
-text            = (tsafechar | ':' | '"' | escapedchar)*;
+text               = (tsafechar | ':' | '"' | escapedchar)*;
 
 escapedchar     = ('\\' (crlf S)? '\\')
                     | ('\\' (crlf S)? ';')
