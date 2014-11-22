@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "libSwiftCal/Parsing/CalParser.m"
-            timestampString = "438379606.143904"
+            timestampString = "438388644.503931"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "-parser:didMatchTodoprop:"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "-matchStringProperty:assembly:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,44 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "libSwiftCal/Parsing/CalParser.m"
-            timestampString = "438379990.794607"
+            timestampString = "438388519.794439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "-matchStringProperty:assembly:propName:propValue:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "libSwiftCal/Parsing/iCalParser.m"
-            timestampString = "438379912.687276"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2624"
-            endingLineNumber = "2624"
-            landmarkName = "-__calprops"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "libSwiftCal/Parsing/iCalParser.m"
-            timestampString = "438379856.974812"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2677"
-            endingLineNumber = "2677"
-            landmarkName = "-__calscale"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "-matchStringProperty:assembly:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

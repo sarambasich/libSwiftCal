@@ -14,9 +14,34 @@
 
 #import "NSString+CalParser.h"
 
+@implementation PropertyMatch
+
+@synthesize key;
+@synthesize value;
+@synthesize params;
+
+- (id) init {
+    self = [super init];
+    
+    if (self) {
+        params = [NSMutableArray new];
+    }
+    
+    return self;
+}
+
+@end
+
+@implementation ParameterMatch
+
+@synthesize key;
+@synthesize value;
+
+@end
+
 @interface CalParser ()
 
-- (void) matchStringProperty:(PKParser *) parser assembly:(PKAssembly *) assembly propName:(NSString **) key propValue:(NSString **) value;
+- (PropertyMatch *) matchStringProperty:(PKParser *) parser assembly:(PKAssembly *) assembly;
 
 @property (atomic, strong, readwrite) iCalParser * parser;
 
@@ -48,10 +73,9 @@
 }
 
 - (void) parser:(PKParser *) parser didMatchTodoprop:(PKAssembly *) assembly {
-    NSString * k, * v;
-    [self matchStringProperty:parser assembly:assembly propName:&k propValue:&v];
+    PropertyMatch * m = [self matchStringProperty:parser assembly:assembly];
     if ([self.delegate respondsToSelector:@selector(parser:didMatchTodoprop:)]) {
-        [self.delegate parser:k didMatchTodoprop:v];
+        [self.delegate parser:m.key didMatchTodoprop:m.value];
     }
 }
 
@@ -74,30 +98,55 @@
 }
 
 
-- (void) matchStringProperty:(PKParser *) parser assembly:(PKAssembly *) assembly propName:(NSString **) key propValue:(NSString **) value {
-    // TODO: Handle for property params
-    NSUInteger stackEndPos = assembly.stack.count - 1 - 1,
-    startPos, endPos;
+- (PropertyMatch *) matchStringProperty:(PKParser *) parser assembly:(PKAssembly *) assembly {
+    PropertyMatch * result = [[PropertyMatch alloc] init];
+    NSUInteger stackCursor = assembly.stack.count - 1 - 1,
+        propStartPos, propEndPos, paramStartPos, paramEndPos;
     
-    // 1.) Find beginning of PROPERTY in stack
-    PKToken * endTok = assembly.stack[stackEndPos];
+    // 1.) Find beginning of PROPERTY's value in stack
+    PKToken * endTok = assembly.stack[stackCursor];
     
-    // 2.) Mark where the end of the PROPERTY is
-    endPos = endTok.offset;
+    // 2.) Mark where the end of the PROPERTY's value is
+    propEndPos = endTok.offset;
     
-    // 3.) Traverse the parse stack top down to find the beginning
-    PKToken * curTok = assembly.stack[stackEndPos - 1];
-    while (!([[assembly.stack[stackEndPos] stringValue] isEqualToString:@":"] && [[assembly.stack[stackEndPos - 1] stringValue] isiCalendarElement])) {
-        curTok = assembly.stack[stackEndPos--];
+    // 3.) Traverse the parse stack top down to find the beginning of the value
+    PKToken * valTok = assembly.stack[stackCursor - 1];
+    while (![[assembly.stack[stackCursor] stringValue] isEqualToString:@":"]) {
+        valTok = assembly.stack[stackCursor--];
     }
     
-    *key = [assembly.stack[stackEndPos - 1] stringValue];
-    
     // 4.) Mark where beginning is found to be
-    startPos = curTok.offset;
+    propStartPos = valTok.offset;
     
-    // 5.) Make substring from beginning to end
-    *value = [self.parser.tokenizer.string substringWithRange:NSMakeRange(startPos, endPos - startPos)];
+    // 5.) Make substring from beginning to end of value
+    result.value = [self.parser.tokenizer.string substringWithRange:NSMakeRange(propStartPos, propEndPos - propStartPos)];
+    
+    // 6.) Handle for property parameters
+    stackCursor--;
+    paramEndPos = valTok.offset - 1;
+    PKToken * paramTok = assembly.stack[stackCursor];
+    while (!([[assembly.stack[stackCursor] stringValue] isEqualToString:@";"] && [[assembly.stack[stackCursor - 1] stringValue] isPropertyName])) {
+        while (![[assembly.stack[stackCursor] stringValue] isPropertyParameterName])  {
+            paramTok = assembly.stack[stackCursor];
+            stackCursor--;
+        }
+        
+        paramStartPos = paramTok.offset + 1;
+        
+        ParameterMatch * pm = [ParameterMatch new];
+        pm.key = [assembly.stack[stackCursor] stringValue];
+        pm.value = [self.parser.tokenizer.string substringWithRange:NSMakeRange(paramStartPos, paramEndPos - paramStartPos)];
+        
+        [result.params addObject:pm];
+        stackCursor--;
+        paramTok = assembly.stack[stackCursor];
+        paramEndPos = paramTok.offset;
+    }
+    
+    
+    result.key = [assembly.stack[stackCursor - 1] stringValue];
+    
+    return result;
 }
 
 @end

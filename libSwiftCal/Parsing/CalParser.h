@@ -27,6 +27,21 @@
 
 @end
 
+@interface PropertyMatch : NSObject
+
+@property (strong, readwrite) NSString * key;
+@property (strong, readwrite) NSMutableArray * params;
+@property (strong, readwrite) id value;
+
+@end
+
+@interface ParameterMatch : NSObject
+
+@property (strong, readwrite) NSString * key;
+@property (strong, readwrite) id value;
+
+@end
+
 @interface CalParser : NSObject
 
 @property (atomic, weak, readwrite) id delegate;

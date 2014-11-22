@@ -12,4 +12,8 @@
 
 - (BOOL) isiCalendarElement;
 
+- (BOOL) isPropertyName;
+
+- (BOOL) isPropertyParameterName;
+
 @end
