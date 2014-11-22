@@ -5,15 +5,13 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>C6F8EA27-BF92-49EA-A02F-5C9A73418F28</string>
+	<string>B2EE9023-8A52-4E81-AE13-2E60A93F08AD</string>
 	<key>IDESourceControlProjectName</key>
 	<string>libSwiftCal</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>02D6EB18616B8A40E170013B2D93F112BD8B8EA5</key>
 		<string>https://bitbucket.org/ArtisOracle/libswiftcal.git</string>
-		<key>59BCCFF68011542A051983972F0A0E4EA5C0D708</key>
-		<string>https://github.com/itod/pegkit.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>libSwiftCal.xcworkspace</string>
@@ -21,8 +19,6 @@
 	<dict>
 		<key>02D6EB18616B8A40E170013B2D93F112BD8B8EA5</key>
 		<string>..</string>
-		<key>59BCCFF68011542A051983972F0A0E4EA5C0D708</key>
-		<string>..libs/pegkit</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/ArtisOracle/libswiftcal.git</string>
@@ -39,14 +35,6 @@
 			<string>02D6EB18616B8A40E170013B2D93F112BD8B8EA5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>libSwiftCal</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>59BCCFF68011542A051983972F0A0E4EA5C0D708</string>
-			<key>IDESourceControlWCCName</key>
-			<string>pegkit</string>
 		</dict>
 	</array>
 </dict>

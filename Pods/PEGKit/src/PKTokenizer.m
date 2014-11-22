@@ -33,7 +33,7 @@
 @end
 
 @interface PKTokenizer ()
-- (id)initWithString:(NSString *)str stream:(NSInputStream *)stm;
+- (instancetype)initWithString:(NSString *)str stream:(NSInputStream *)stm;
 - (PKTokenizerState *)tokenizerStateFor:(PKUniChar)c;
 - (PKTokenizerState *)defaultTokenizerStateFor:(PKUniChar)c;
 - (NSInteger)tokenKindForStringValue:(NSString *)str;
@@ -59,24 +59,24 @@
 }
 
 
-- (id)init {
+- (instancetype)init {
     return [self initWithString:nil stream:nil];
 }
 
 
-- (id)initWithString:(NSString *)s {
+- (instancetype)initWithString:(NSString *)s {
     self = [self initWithString:s stream:nil];
     return self;
 }
 
 
-- (id)initWithStream:(NSInputStream *)s {
+- (instancetype)initWithStream:(NSInputStream *)s {
     self = [self initWithString:nil stream:s];
     return self;
 }
 
 
-- (id)initWithString:(NSString *)str stream:(NSInputStream *)stm {
+- (instancetype)initWithString:(NSString *)str stream:(NSInputStream *)stm {
     self = [super init];
     if (self) {
         self.string = str;
@@ -207,26 +207,25 @@
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)len {
     NSUInteger count = 0;
 
+    PKToken *tok = nil;
+    PKToken *eof = [PKToken EOFToken];
+    
     if (0 == state->state) {
-        state->mutationsPtr = &state->extra[0];
+        tok = [self nextToken];
+    } else {
+        tok = (PKToken *)state->state;
     }
     
-    PKToken *eof = [PKToken EOFToken];
-    PKToken *tok = [self nextToken];
-
-    if (eof != tok) {
-        state->itemsPtr = stackbuf;
-
-        do  {
-            stackbuf[count] = tok;
-            state->state++;
-            count++;
-        } while (eof != (tok = [self nextToken]) && (count < len));
-
-    } else {
-        count = 0;
+    while (tok != eof && count < len) {
+        stackbuf[count] = tok;
+        tok = [self nextToken];
+        count++;
     }
-
+    
+    state->state = (unsigned long)tok;
+    state->itemsPtr = stackbuf;
+    state->mutationsPtr = (unsigned long *)self;
+    
     return count;
 }
 

@@ -4,4 +4,4 @@ workspace 'libSwiftCal'
 xcodeproj 'libSwiftCal.xcodeproj'
 
 link_with 'libSwiftCal', 'libSwiftCalTests'
-pod 'PEGKit'
+pod 'PEGKit', :git => 'https://github.com/itod/pegkit.git', :commit => '22ae4eb225'

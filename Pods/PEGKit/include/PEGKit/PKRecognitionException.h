@@ -24,7 +24,10 @@
 
 @interface PKRecognitionException : NSException
 
-- (id)init; // use me
+- (instancetype)init; // use me
 
+@property (nonatomic, retain) NSString *currentName;
 @property (nonatomic, retain) NSString *currentReason;
+@property (nonatomic, assign) NSRange range;
+@property (nonatomic, assign) NSUInteger lineNumber;
 @end

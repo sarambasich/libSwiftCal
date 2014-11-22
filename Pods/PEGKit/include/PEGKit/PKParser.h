@@ -24,7 +24,12 @@
 #import <PEGKit/PKTokenizer.h>
 
 extern NSString * const PEGKitErrorDomain;
+extern NSString * const PEGKitErrorRangeKey;
+extern NSString * const PEGKitErrorLineNumberKey;
+
 extern NSInteger PEGKitRecognitionErrorCode;
+extern NSString * const PEGKitRecognitionTokenMatchFailed;
+extern NSString * const PEGKitRecognitionPredicateFailed;
 
 @class PKAssembly;
 
@@ -53,7 +58,7 @@ enum {
 
 @interface PKParser : NSObject <PKTokenizerDelegate>
 
-- (id)initWithDelegate:(id)d; // designated initializer
+- (instancetype)initWithDelegate:(id)d; // designated initializer
 
 - (id)parseString:(NSString *)input error:(NSError **)outErr;
 - (id)parseStream:(NSInputStream *)input error:(NSError **)outErr;

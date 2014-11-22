@@ -94,6 +94,8 @@
 @property (nonatomic, retain) NSString *startRuleName;
 @property (nonatomic, retain) NSString *statementTerminator;
 @property (nonatomic, retain) NSString *singleLineCommentMarker;
+@property (nonatomic, retain) NSString *multiLineCommentStartMarker;
+@property (nonatomic, retain) NSString *multiLineCommentEndMarker;
 @property (nonatomic, retain) NSString *blockStartMarker;
 @property (nonatomic, retain) NSString *blockEndMarker;
 @property (nonatomic, retain) NSString *braces;
@@ -102,7 +104,7 @@
 #define LT(i) [self LT:(i)]
 #define LA(i) [self LA:(i)]
 #define LS(i) [self LS:(i)]
-#define LF(i) [self LD:(i)]
+#define LD(i) [self LD:(i)]
 
 #define POP()            [self.assembly pop]
 #define POP_STR()        [self popString]

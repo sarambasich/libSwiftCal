@@ -52,20 +52,16 @@
 @interface PKDelimitState ()
 @property (nonatomic, retain) PKSymbolRootNode *rootNode;
 @property (nonatomic, retain) PKDelimitDescriptorCollection *collection;
-
 @end
 
-@implementation PKDelimitState {
-    NSInteger _nestedCount;
-}
+@implementation PKDelimitState
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.rootNode = [[[PKSymbolRootNode alloc] init] autorelease];
         _rootNode.reportsAddedSymbolsOnly = YES;
         self.collection = [[[PKDelimitDescriptorCollection alloc] init] autorelease];
-        self.allowsNestedMarkers = YES;
     }
     return self;
 }
@@ -136,14 +132,25 @@
         c = [r read];
         if ('\\' == c) {
             c = [r read];
-            [self append:c];
-            continue;
+            if ('\\' == c) {
+                [self append:c];
+                [self append:c];
+                continue;
+            }
+            NSString *marker = [currRootNode nextSymbol:r startingWith:c];
+            if ([marker length]) {
+                [self append:'\\'];
+                [self append:c];
+                continue;
+            } else {
+                [self append:'\\'];
+            }
         }
         
         if (PKEOF == c) {
             if (!_balancesEOFTerminatedStrings) {
                 for (PKDelimitDescriptor *desc in [[matchingDescs copy] autorelease]) {
-                    if (desc.endMarker) {
+                    if ([desc.endMarker length]) {
                         [matchingDescs removeObject:desc];
                     }
                 }
@@ -170,12 +177,19 @@
             }
             if (matchedDesc) {
                 break;
+            } else {
+                [r unread:[marker length] - 1];
             }
         }
         
         for (PKDelimitDescriptor *desc in [[matchingDescs copy] autorelease]) {
             if (desc.characterSet && ![desc.characterSet characterIsMember:c]) {
-                [matchingDescs removeObject:desc];
+                if ([desc.endMarker length]) {
+                    [matchingDescs removeObject:desc];
+                } else {
+                    if (PKEOF != c) [r unread];
+                    goto done;
+                }
             }
         }
         
@@ -187,6 +201,7 @@
         [self append:c];
     }
     
+done:
     if (!matchedDesc && [matchingDescs count]) {
         matchedDesc = matchingDescs[0];
 

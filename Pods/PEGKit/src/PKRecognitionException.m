@@ -24,7 +24,7 @@
 
 @implementation PKRecognitionException
 
-- (id)init {
+- (instancetype)init {
     self = [super initWithName:NSStringFromClass([self class]) reason:nil userInfo:nil];
     if (self) {
         
@@ -34,8 +34,14 @@
 
 
 - (void)dealloc {
+    self.currentName = nil;
     self.currentReason = nil;
     [super dealloc];
+}
+
+
+- (NSString *)name {
+    return self.currentName;
 }
 
 

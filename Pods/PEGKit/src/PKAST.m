@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "PKAST.h"
+#import <PEGKit/PKAST.h>
 
 @interface PKAST ()
 @end
@@ -32,12 +32,12 @@
 }
 
 
-- (id)init {
+- (instancetype)init {
     return [self initWithToken:nil];
 }
 
 
-- (id)initWithToken:(PKToken *)tok {
+- (instancetype)initWithToken:(PKToken *)tok {
     self = [super init];
     if (self) {
         self.token = tok;

@@ -1,10 +1,19 @@
+@before {
+    PKTokenizer *t = self.tokenizer;
+
+    [t.whitespaceState setWhitespaceChars:NO from:'\n' to:'\n'];
+    [t.whitespaceState setWhitespaceChars:NO from:'\r' to:'\r'];
+    [t setTokenizerState:t.symbolState from:'\n' to:'\n'];
+    [t setTokenizerState:t.symbolState from:'\r' to:'\r'];
+}
+
 icalobject = 'BEGIN' ':' 'VCALENDAR' crlf
                 icalbody
-            'END:VCALENDAR' crlf;
+            'END' ':' 'VCALENDAR' crlf;
 
 todoc      = 'BEGIN' ':' 'VTODO' crlf
                 todoprop alarmc*
-            'END:VTODO' crlf;
+            'END' ':' 'VTODO' crlf;
 
 todoprop   =    (
                     dtstamp | uid |
@@ -24,6 +33,58 @@ alarmc     = 'BEGIN' ':' 'VALARM' crlf
                 audioprop | dispprop | emailprop
                 'END' ':' 'VALARM' crlf;
 
+alpha = lA | lB | lC | lD | lE | lF | lG | lH | lI | lJ | lK | lL | lM |
+        lN | lO | lP | lQ | lR | lS | lT | lU | lV | lW | lX | lY | lZ;
+
+lA = 'A' | 'a';
+lB = 'B' | 'b';
+lC = 'C' | 'c';
+lD = 'D' | 'd';
+lE = 'E' | 'e';
+lF = 'F' | 'f';
+lG = 'G' | 'g';
+lH = 'H' | 'h';
+lI = 'I' | 'i';
+lJ = 'J' | 'j';
+lK = 'K' | 'k';
+lL = 'L' | 'l';
+lM = 'M' | 'm';
+lN = 'N' | 'n';
+lO = 'O' | 'o';
+lP = 'P' | 'p';
+lQ = 'Q' | 'q';
+lR = 'R' | 'r';
+lS = 'S' | 's';
+lT = 'T' | 't';
+lU = 'U' | 'u';
+lV = 'V' | 'v';
+lW = 'W' | 'w';
+lX = 'X' | 'x';
+lY = 'Y' | 'y';
+lZ = 'Z' | 'z';
+
+digit = d0
+        | d1
+        | d2
+        | d3
+        | d4
+        | d5
+        | d6
+        | d7
+        | d8
+        | d9;
+
+d0 = '0';
+d1 = '1';
+d2 = '2';
+d3 = '3';
+d4 = '4';
+d5 = '5';
+d6 = '6';
+d7 = '7';
+d8 = '8';
+d9 = '9';
+
 altrepparam = 'ALTREP' '=' '"' uri '"';
 
 audioprop  =   (
@@ -31,7 +92,7 @@ audioprop  =   (
                     duration | repeat |
                     attach |
                     xprop | ianaprop
-                )*;
+                )+;
 
 bslash      = '\\';
 
@@ -50,7 +111,7 @@ dispprop   =    (
                     action | description | trigger |
                     duration | repeat |
                     xprop | ianaprop
-                )*;
+                )+;
 
 delfromparam       = 'DELEGATED-FROM' '=' '"' caladdress
                                 '"' (',' '"' caladdress '"')*;
@@ -64,7 +125,7 @@ emailprop  =
             (action | description | trigger | summary |
             attendee |
             duration | repeat |
-            attach | xprop | ianaprop)*;
+            attach | xprop | ianaprop)+;
 
 action      = 'ACTION' actionparam ':' actionvalue crlf;
 
@@ -260,9 +321,9 @@ ianaprop = ianatoken (';' icalparameter)* ':' value crlf;
 
 name          = ianatoken | xname;
 
-ianatoken    = (Word | Number | '-')*;
+ianatoken    = (alpha | digit | '-')+;
 
-vendorid      = (Word | Number)*;
+vendorid      = (alpha | digit)+;
 
 param         = paramname '=' paramvalue (',' paramvalue)*;
 
@@ -274,11 +335,11 @@ paramtext     = safechar*;
 
 value         = valuechar*;
 
-qsafechar    = ~(crlf | control | '"');
+qsafechar    = ~(control | '"');
 
-safechar     = ~(crlf | control |  '"' |  ";" |  ":" |  ",");
+safechar     = ~(control |  '"' |  ";" |  ":" |  ",");
 
-valuechar    = ~(crlf | control | escapedchar);
+valuechar    = ~(control | escapedchar);
 
 nonusascii  = (Word | Number Symbol)*;
 
@@ -664,7 +725,7 @@ xcomp     = 'BEGIN' ':' xname crlf
 
 xparam     = xname '=' paramvalue (',' paramvalue)*;
 
-xname        = 'X-' (vendorid '-')* (Word | Number | '-')*;
+xname        = 'X-' (vendorid '-')* (alpha | digit | '-')+;
 
 xprop = xname (';' icalparameter)* ':' value crlf;
 
@@ -676,4 +737,4 @@ xwrcalsec    = 'X-WR-CALDESC' xwrcalsecp ':' text crlf;
 
 xwrcalsecp   = (';' otherparam)*;
 
-crlf         = ('\n' | '\r')*;
+crlf         =  ('\x0d'? '\x0a') | '\0d';
