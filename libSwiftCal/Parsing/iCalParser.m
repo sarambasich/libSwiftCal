@@ -5431,7 +5431,9 @@
     [self match:ICALPARSER_TOKEN_KIND_SEQUENCE discard:NO]; 
     [self seqparam_]; 
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
-    [self matchNumber:NO]; 
+    do {
+        [self digit_]; 
+    } while ([self predicts:ICALPARSER_TOKEN_KIND_D0, ICALPARSER_TOKEN_KIND_D1, ICALPARSER_TOKEN_KIND_D2, ICALPARSER_TOKEN_KIND_D3, ICALPARSER_TOKEN_KIND_D4, ICALPARSER_TOKEN_KIND_D5, ICALPARSER_TOKEN_KIND_D6, ICALPARSER_TOKEN_KIND_D7, ICALPARSER_TOKEN_KIND_D8, ICALPARSER_TOKEN_KIND_D9, 0]);
     [self crlf_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchSeq:)];

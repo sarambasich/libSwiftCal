@@ -612,7 +612,7 @@ statdesc   = text;
 
 extdata    = text;
 
-seq = 'SEQUENCE' seqparam ':' Number crlf;
+seq = 'SEQUENCE' seqparam ':' digit+ crlf;
 
 seqparam   = (';' otherparam)*;
 
@@ -648,12 +648,11 @@ sentbyparam        = 'SENT-BY' '=' '"' caladdress '"';
 
 text            = (tsafechar | ':' | '"' | escapedchar)*;
 
-escapedchar     =  (('\\' (crlf S)? '\\')
+escapedchar     = ('\\' (crlf S)? '\\')
                     | ('\\' (crlf S)? ';')
                     | ('\\' (crlf S)? ',')
                     | ('\\' (crlf S)? 'N')
-                    | ('\\' (crlf S)? 'n')
-                    );                                      //('\\' | '\;' | '\,' | '\N' | '\n');
+                    | ('\\' (crlf S)? 'n');
 
 tsafechar       = ~(crlf | control | '"' | ';' | ':' | bslash | ',');
 
