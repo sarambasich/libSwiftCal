@@ -30,8 +30,14 @@ todoprop   =    (
 
 
 alarmc     = 'BEGIN' ':' 'VALARM' crlf
-                audioprop | dispprop | emailprop
+                alarmprop+
                 'END' ':' 'VALARM' crlf;
+
+alarmprop  =
+                (action | description | trigger | summary |
+                attendee |
+                duration | repeat |
+                attach | xprop | ianaprop);
 
 alpha = lA | lB | lC | lD | lE | lF | lG | lH | lI | lJ | lK | lL | lM |
         lN | lO | lP | lQ | lR | lS | lT | lU | lV | lW | lX | lY | lZ;
@@ -87,13 +93,6 @@ d9 = '9';
 
 altrepparam = 'ALTREP' '=' '"' uri '"';
 
-audioprop  =   (
-                    action | trigger |
-                    duration | repeat |
-                    attach |
-                    xprop | ianaprop
-                )+;
-
 bslash      = '\\';
 
 cnparam    = 'CN' '=' paramvalue;
@@ -107,12 +106,6 @@ cutypeparam        = 'CUTYPE' '='
                             | xname
                             | ianatoken);
 
-dispprop   =    (
-                    action | description | trigger |
-                    duration | repeat |
-                    xprop | ianaprop
-                )+;
-
 delfromparam       = 'DELEGATED-FROM' '=' '"' caladdress
                                 '"' (',' '"' caladdress '"')*;
 
@@ -120,12 +113,6 @@ deltoparam = 'DELEGATED-TO' '=' '"' caladdress '"'
                             (',' '"' caladdress '"')*;
 
 dirparam   = 'DIR' '=' '"' uri '"';
-
-emailprop  =
-            (action | description | trigger | summary |
-            attendee |
-            duration | repeat |
-            attach | xprop | ianaprop)+;
 
 action      = 'ACTION' actionparam ':' actionvalue crlf;
 
@@ -216,12 +203,12 @@ creaparam  = (';' otherparam)*;
 
 date               = datevalue;
 
-datevalue         = Number;//datefullyear datemonth datemday;
-datefullyear      = Number Number Number Number;
-datemonth         = Number Number;
-datemday          = Number Number;
+datevalue         = Number; // datefullyear datemonth datemday;
+datefullyear      = digit digit digit digit;
+datemonth         = digit digit;
+datemday          = digit digit;
 
-datetime          = Number Word;//date 'T' time;
+datetime          = Number Word; // date 'T' time;
 
 description = 'DESCRIPTION' descparam ':' text crlf;
 
@@ -314,16 +301,14 @@ geoparam   = (';' otherparam)*;
 geovalue   = Number ';' Number;
 
 ianacomp  = 'BEGIN' ':' ianatoken crlf
-contentline*
-'END' ':' ianatoken crlf;
+                contentline*
+                'END' ':' ianatoken crlf;
 
 ianaprop = ianatoken (';' icalparameter)* ':' value crlf;
 
 name          = ianatoken | xname;
 
 ianatoken    = (alpha | digit | '-')+;
-
-vendorid      = (alpha | digit)+;
 
 param         = paramname '=' paramvalue (',' paramvalue)*;
 
@@ -656,7 +641,7 @@ escapedchar     = ('\\' (crlf S)? '\\')
 
 tsafechar       = ~(crlf | control | '"' | ';' | ':' | bslash | ',');
 
-time         = Number timeutc?; //timehour timeminute timesecond timeutc?;
+time         = Word;//Number timeutc?; //timehour timeminute timesecond timeutc?;
 
 timehour    = Number Number;
 timeminute  = Number Number;
@@ -712,6 +697,8 @@ valuetype  = ('BINARY'
             | xname
             | ianatoken);
 
+vendorid      = (alpha | digit)+;
+
 version    = 'VERSION' verparam ':' vervalue crlf;
 
 verparam   = (';' otherparam)*;
@@ -724,7 +711,7 @@ xcomp     = 'BEGIN' ':' xname crlf
 
 xparam     = xname '=' paramvalue (',' paramvalue)*;
 
-xname        = 'X-' (vendorid '-')* (alpha | digit | '-')+;
+xname        = { [LS(1) hasPrefix:@"X-"] }? Word; //'X-' (vendorid '-')* (alpha | digit | '-')+;
 
 xprop = xname (';' icalparameter)* ':' value crlf;
 
