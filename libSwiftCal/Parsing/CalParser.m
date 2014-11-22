@@ -34,10 +34,34 @@
     return [self.parser parseString:input error:outErr];
 }
 
-- (void) parser:(PKParser *) parser didMatchTodoc:(PKAssembly *) assembly {
-    if ([self.delegate respondsToSelector:@selector(parser:didMatchTodoc:)]) {
-        [self.delegate parser:parser.debugDescription didMatchTodoc:[assembly debugDescription]];
+- (void) parser:(PKParser *) parser willMatchTodoc:(PKAssembly *) assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:willMatchTodoc:)]) {
+        [self.delegate parser:@"" willMatchTodoc:@""];
     }
 }
+
+- (void) parser:(PKParser *) parser didMatchTodoprop:(PKAssembly *) assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchTodoprop:)]) {
+        [self.delegate parser:@"" didMatchTodoprop:@""];
+    }
+}
+
+- (void) parser:(PKParser *)parser didMatchCalprops:(PKAssembly *)assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchCalprops:)]) {
+        [self.delegate parser:@"" didMatchCalprops:@""];
+    }
+}
+
+- (void) parser:(PKParser *) parser didMatchSummary:(PKAssembly *) assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchSummary:)]) {
+        [self.delegate parser:@"" didMatchSummary:@""];
+    }
+}
+
+//- (void) parser:(PKParser *) parser didMatchTodoc:(PKAssembly *) assembly {
+//    if ([self.delegate respondsToSelector:@selector(parser:didMatchTodoc:)]) {
+//        [self.delegate parser:parser.debugDescription didMatchTodoc:[assembly debugDescription]];
+//    }
+//}
 
 @end

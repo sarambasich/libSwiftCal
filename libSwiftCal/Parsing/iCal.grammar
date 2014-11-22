@@ -12,7 +12,7 @@ icalobject = 'BEGIN' ':' 'VCALENDAR' crlf
             'END' ':' 'VCALENDAR' crlf;
 
 todoc      = 'BEGIN' ':' 'VTODO' crlf
-                todoprop alarmc*
+                todoprop+ alarmc*
             'END' ':' 'VTODO' crlf;
 
 todoprop   =    (
@@ -26,7 +26,7 @@ todoprop   =    (
                     attach | attendee | categories | comment | contact |
                     exdate | rstatus | related | resources |
                     rdate | xprop | ianaprop
-                )*;
+                );
 
 
 alarmc     = 'BEGIN' ':' 'VALARM' crlf
@@ -153,7 +153,7 @@ calprops   =    (
                     prodid | version |
                     calscale | method |
                     xprop | ianaprop
-                )*;
+                );
 
 categories = 'CATEGORIES' catparam ':' text (',' text)* crlf;
 
@@ -363,7 +363,7 @@ icalparameter = altrepparam
 
 icalstream = icalobject;
 
-icalbody   = calprops component;
+icalbody   = calprops* component;
 
 languageparam = 'LANGUAGE' '=' language;
 

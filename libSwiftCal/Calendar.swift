@@ -20,9 +20,20 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     // MARK: - ParserObserver
-    public func parser(parserStr: String!, didMatchTodoc assemblyStr: String!) {
+    public func parser(key: String!, didMatchTodoprop value: String!) {
         let x = 10
-        let y = 20
+    }
+    
+    public func parser(key: String!, willMatchTodoc value: String!) {
+        let x = 10
+    }
+    
+    public func parser(key: String!, didMatchCalprops value: String!) {
+        let x = 10
+    }
+    
+    public func parser(key: String!, didMatchSummary value: String!) {
+        let x = 10
     }
     
     public init(stringToParse s: String) {
