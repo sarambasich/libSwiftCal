@@ -191,7 +191,7 @@
             formatter.dateFormat = fmt;
             formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
             if ([formatter getObjectValue:&date forString:str range:nil error:&err]) {
-                result = date;
+                result = (NSDate *) date;
                 break;
             }
 //            NSDate * dt = [formatter dateFromString:str];

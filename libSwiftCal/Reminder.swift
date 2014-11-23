@@ -22,8 +22,6 @@ public class Reminder: CalendarObject {
         static let public_ = "PUBLIC"
         static let private_ = "PRIVATE"
         static let confidential = "CONFIDENTIAL"
-        static var IANAToken: String?
-        static var XName: String?
     }
     
     public private(set) var dateTimestamp = NSDate()
@@ -34,7 +32,7 @@ public class Reminder: CalendarObject {
     public private(set) var eventCreated = NSDate()
     public private(set) var description_: String!
     public private(set) var start: NSDate!
-    public private(set) var geo: CLLocationCoordinate2D?
+    public private(set) var geo: CLLocationCoordinate2D!
     public private(set) var lastModified: NSDate!
     public private(set) var location: String!
     public private(set) var organizer: Organizer!
@@ -112,7 +110,7 @@ public class Reminder: CalendarObject {
     // MARK: - Serializable
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + [kDTSTAMP, kUID, kCLASS, kCOMPLETED, kCREATED, kDESCRIPTION, kDTSTART, kGEO, kLAST_MODIFIED, kLOCATION, kORGANIZER, kPERCENT_COMPLETE, kPRIORITY, kRECURRENCE_ID, kSEQUENCE, kSTATUS, kSUMMARY, kURL, kRRULE, kDUE, kDURATION, kATTACH, kATTENDEE, kCATEGORIES, kCOMMENT, kCONTACT, kEXDATE, kREQUEST_STATUS, kRELATED, kRESOURCES, kRDATE, "xprop", "iana_prop"]
+            return super.serializationKeys + [kDTSTAMP as String, kUID as String, kCLASS as String, kCOMPLETED as String, kCREATED as String, kDESCRIPTION as String, kDTSTART as String, kGEO as String, kLAST_MODIFIED as String, kLOCATION as String, kORGANIZER as String, kPERCENT_COMPLETE as String, kPRIORITY as String, kRECURRENCE_ID as String, kSEQUENCE as String, kSTATUS as String, kSUMMARY as String, kURL as String, kRRULE as String, kDUE as String, kDURATION as String, kATTACH as String, kATTENDEE as String, kCATEGORIES as String, kCOMMENT as String, kCONTACT as String, kEXDATE as String, kREQUEST_STATUS as String, kRELATED as String, kRESOURCES as String, kRDATE, "xprop", "iana_prop"]
         }
     }
     

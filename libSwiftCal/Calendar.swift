@@ -72,9 +72,9 @@ public class Calendar: CalendarObject, ParserObserver {
     
     public func parser(key: String!, didMatchTodoc value: String!) {
         let y = 10
-        let newTodoc = Reminder(dictionary: currentTodoDict!)
-        self.reminders.append(newTodoc)
-        currentTodoDict = nil
+        let newTodoc = Reminder(dictionary: self.currentTodoDict!)
+        self.reminders.append(Reminder())
+        self.currentTodoDict = nil
     }
     
     public func parser(key: String!, didMatchIcalobject value: String!) {
