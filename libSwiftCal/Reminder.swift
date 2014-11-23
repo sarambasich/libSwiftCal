@@ -11,7 +11,7 @@ import EventKit
 
 
 public class Reminder: CalendarObject {
-    enum Status: String {
+    public enum Status: String {
         case NeedsAcction = "Needs action"
         case Completed = "Completeted"
         case InProcess = "In-Process"
@@ -26,17 +26,20 @@ public class Reminder: CalendarObject {
         static var XName: String?
     }
     
-    private(set) var dateTimestamp = NSDate()
-    private(set) var uid = NSUUID()
+    public private(set) var dateTimestamp = NSDate()
+    public private(set) var uid = NSUUID()
     
-    var accessClass: String?
-    private(set) var eventCreated = NSDate()
-    var description_: String?
-    var geo: CLLocationCoordinate2D?
+    public private(set) var accessClass: String!
+    public private(set) var completed: NSDate!
+    public private(set) var eventCreated = NSDate()
+    public private(set) var description_: String!
+    public private(set) var start: NSDate!
+    public private(set) var geo: CLLocationCoordinate2D?
+    public private(set) var lastModified: NSDate!
+    public private(set) var location: String!
+    public private(set) var organizer: Organizer!
     
-    var lastModified: NSDate?
-    var organizer: Organizer?
-    var percentComplete: UInt8? {
+    public private(set) var percentComplete: UInt8 = 0 {
         didSet {
             if percentComplete < 0 {
                 percentComplete = 0
@@ -45,26 +48,33 @@ public class Reminder: CalendarObject {
             }
         }
     }
+    public private(set) var priority: Int!
+    public private(set) var recurrenceID: NSDate!
+    public private(set) var sequence = 0
+    public private(set) var status: String!
     
-    var recurrenceID: NSDate?
-    var sequence = 0
-    var status = Status.NeedsAcction
-    var summary: String?
+    public private(set) var summary: String!
+    public private(set) var URL: String!
     
-    var attachments: [Attachment]?
-    var categories: [String]?
-    var comments: [String]?
-    var contacts: [String]?
-    var exceptions: [NSDate]?
-    var requestStatus: [RequestStatus]?
-    var related: [CalendarObject]?
-    var resources: [String]?
-    var recurrenceDates: [RecurrenceDate]?
-    var xProperties: [GenericProperty]?
-    var IANAProperties: [IANAProperty]?
+    public private(set) var rrule: String!
     
-    var due: NSDate?
-    var duration: NSTimeInterval?
+    public private(set) var due: NSDate!
+    public private(set) var duration: NSTimeInterval = 0.0
+    
+    public private(set) var attachments = [Attachment]()
+    public private(set) var attendees = [Attendee]()
+    public private(set) var categories = [String]()
+    public private(set) var comments = [String]()
+    public private(set) var contacts = [String]()
+    
+    public private(set) var exceptions = [NSDate]()
+    public private(set) var requestStatus = [RequestStatus]()
+    public private(set) var related = [CalendarObject]() // TODO: weak ref
+    public private(set) var resources = [String]()
+    
+    public private(set) var recurrenceDates = [RecurrenceDate]()
+    public private(set) var xProperties = [GenericProperty]()
+    public private(set) var IANAProperties = [IANAProperty]()
     
     
     // MARK: - Init
@@ -102,12 +112,7 @@ public class Reminder: CalendarObject {
     // MARK: - Serializable
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + ["dtstamp", "uid", "class", "created", "description",
-                "geo", "last-mod", "organizer", "percent", "recurid",
-                "seq", "status", "summary", "attachments", "categories",
-                "comments", "contacts", "exceptions", "request_status", "related",
-                "resources", "recurrence_dates", "x_properties", "IANA_properties", "due",
-                "duration", "location", "priority", "url"]
+            return super.serializationKeys + [kDTSTAMP, kUID, kCLASS, kCOMPLETED, kCREATED, kDESCRIPTION, kDTSTART, kGEO, kLAST_MODIFIED, kLOCATION, kORGANIZER, kPERCENT_COMPLETE, kPRIORITY, kRECURRENCE_ID, kSEQUENCE, kSTATUS, kSUMMARY, kURL, kRRULE, kDUE, kDURATION, kATTACH, kATTENDEE, kCATEGORIES, kCOMMENT, kCONTACT, kEXDATE, kREQUEST_STATUS, kRELATED, kRESOURCES, kRDATE, "xprop", "iana_prop"]
         }
     }
     

@@ -9,14 +9,24 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "libSwiftCal/Parsing/CalParser.m"
-            timestampString = "438398560.506422"
+            filePath = "libSwiftCal/Calendar.swift"
+            timestampString = "438410306.036584"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "-matchStringProperty:assembly:"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "parser(_:didMatchTodoc:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

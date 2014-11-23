@@ -8,8 +8,8 @@
 
 import Foundation
 
-typealias CalAddress = NSURL
+public typealias CalAddress = NSURL
 
-class Organizer: Property {
-    var URI: CalAddress?
+public class Organizer: Property {
+    public private(set) var URI: CalAddress?
 }

@@ -1,4 +1,4 @@
-//
+
 //  Parsing.m
 //  libSwiftCal
 //
@@ -30,6 +30,10 @@
     return self;
 }
 
+- (NSString *) debugDescription {
+    return [NSString stringWithFormat:@"<Prop(%@): %@\nParams: %@>", key, value, [params description]];
+}
+
 @end
 
 @implementation ParameterMatch
@@ -37,11 +41,17 @@
 @synthesize key;
 @synthesize value;
 
+- (NSString *) debugDescription {
+    return [NSString stringWithFormat:@"<Param(%@): %@>", key, value];
+}
+
 @end
 
 @interface CalParser ()
 
 - (PropertyMatch *) matchStringProperty:(PKParser *) parser assembly:(PKAssembly *) assembly;
+
+- (id) toTypeFromString:(NSString *) str;
 
 @property (atomic, strong, readwrite) iCalParser * parser;
 
@@ -66,9 +76,22 @@
     return [self.parser parseString:input error:outErr];
 }
 
+- (void) parser:(PKParser *)parser willMatchIcalobject:(PKAssembly *)assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:willMatchIcalobject:)]) {
+        [self.delegate parser:parser.debugDescription willMatchIcalobject:[assembly debugDescription]];
+    }
+}
+
+- (void) parser:(PKParser *)parser didMatchCalprops:(PKAssembly *)assembly {
+    PropertyMatch * m = [self matchStringProperty:parser assembly:assembly];
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchCalprops:)]) {
+        [self.delegate parser:m.key didMatchCalprops:m.value];
+    }
+}
+
 - (void) parser:(PKParser *) parser willMatchTodoc:(PKAssembly *) assembly {
     if ([self.delegate respondsToSelector:@selector(parser:willMatchTodoc:)]) {
-        [self.delegate parser:@"" willMatchTodoc:@""];
+        [self.delegate parser:parser.debugDescription willMatchTodoc:[assembly debugDescription]];
     }
 }
 
@@ -79,21 +102,15 @@
     }
 }
 
-- (void) parser:(PKParser *)parser didMatchCalprops:(PKAssembly *)assembly {
-    if ([self.delegate respondsToSelector:@selector(parser:didMatchCalprops:)]) {
-        [self.delegate parser:@"" didMatchCalprops:@""];
+- (void) parser:(PKParser *) parser didMatchTodoc:(PKAssembly *) assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchTodoc:)]) {
+        [self.delegate parser:kVTODO didMatchTodoc:[assembly debugDescription]];
     }
 }
 
 - (void) parser:(PKParser *) parser didMatchIcalobject:(PKAssembly *) assembly {
     if ([self.delegate respondsToSelector:@selector(parser:didMatchIcalobject:)]) {
         [self.delegate parser:kVCALENDAR didMatchIcalobject:nil];
-    }
-}
-
-- (void) parser:(PKParser *) parser didMatchTodoc:(PKAssembly *) assembly {
-    if ([self.delegate respondsToSelector:@selector(parser:didMatchTodoc:)]) {
-        [self.delegate parser:kVTODO didMatchTodoc:nil];
     }
 }
 
@@ -119,32 +136,75 @@
     propStartPos = valTok.offset;
     
     // 5.) Make substring from beginning to end of value
-    result.value = [self.parser.tokenizer.string substringWithRange:NSMakeRange(propStartPos, propEndPos - propStartPos)];
+    result.value = [self toTypeFromString:[self.parser.tokenizer.string substringWithRange:NSMakeRange(propStartPos, propEndPos - propStartPos)]];
     
-    // 6.) Handle for property parameters
+    // 6.) Handle for possible property parameters using same methodology above
     stackCursor--;
     paramEndPos = valTok.offset - 1;
     PKToken * paramTok = assembly.stack[stackCursor];
-    while (!([[assembly.stack[stackCursor] stringValue] isEqualToString:@";"] && [[assembly.stack[stackCursor - 1] stringValue] isPropertyName])) {
-        while (![[assembly.stack[stackCursor] stringValue] isPropertyParameterName])  {
-            paramTok = assembly.stack[stackCursor];
+    if (![[assembly.stack[stackCursor] stringValue] isPropertyName]) {
+        while (!([[assembly.stack[stackCursor] stringValue] isEqualToString:@";"] && [[assembly.stack[stackCursor - 1] stringValue] isPropertyName])) {
+            while (![[assembly.stack[stackCursor] stringValue] isPropertyParameterName])  {
+                paramTok = assembly.stack[stackCursor];
+                stackCursor--;
+            }
+            
+            paramStartPos = paramTok.offset + 1;
+            
+            ParameterMatch * pm = [ParameterMatch new];
+            pm.key = [assembly.stack[stackCursor] stringValue];
+            pm.value = [self toTypeFromString:[self.parser.tokenizer.string substringWithRange:NSMakeRange(paramStartPos, paramEndPos - paramStartPos)]];
+            
+            [result.params addObject:pm];
             stackCursor--;
+            paramTok = assembly.stack[stackCursor];
+            paramEndPos = paramTok.offset;
         }
         
-        paramStartPos = paramTok.offset + 1;
-        
-        ParameterMatch * pm = [ParameterMatch new];
-        pm.key = [assembly.stack[stackCursor] stringValue];
-        pm.value = [self.parser.tokenizer.string substringWithRange:NSMakeRange(paramStartPos, paramEndPos - paramStartPos)];
-        
-        [result.params addObject:pm];
         stackCursor--;
-        paramTok = assembly.stack[stackCursor];
-        paramEndPos = paramTok.offset;
     }
     
+    // 7.) Get the property's name
+    result.key = [assembly.stack[stackCursor] stringValue];
     
-    result.key = [assembly.stack[stackCursor - 1] stringValue];
+    return result;
+}
+
+- (id) toTypeFromString:(NSString *) str {
+    id result = str;
+    NSInteger anInt;
+    double aDouble;
+    
+    NSDate * date;
+    
+    NSDateFormatter * formatter = [NSDateFormatter new];
+    NSMutableCharacterSet * dateCharSet = [[NSMutableCharacterSet alloc] init];
+    [dateCharSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"1234567890TZ"]];
+
+    NSScanner * scanner = [NSScanner scannerWithString:str];
+    if ([str rangeOfCharacterFromSet:[dateCharSet invertedSet]].location == NSNotFound &&
+        str.length >= 8) {
+        NSArray * dateFormats = @[@"YYYYMMDD'T'HHmmssZ", @"YYYYMMDD'T'HHmmss", @"YYYYMMDD"];
+        
+        for (NSString * fmt in dateFormats) {
+            NSError * err;
+            formatter.dateFormat = fmt;
+            formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+            if ([formatter getObjectValue:&date forString:str range:nil error:&err]) {
+                result = date;
+                break;
+            }
+//            NSDate * dt = [formatter dateFromString:str];
+//            if (dt != nil) {
+//                result = date;
+//                break;
+//            }
+        }
+    } else if ([scanner scanInteger:&anInt]) {
+        result = [NSNumber numberWithInteger:anInt];
+    } else if ([scanner scanDouble:&aDouble]) {
+        result = [NSNumber numberWithDouble:aDouble];
+    }
     
     return result;
 }

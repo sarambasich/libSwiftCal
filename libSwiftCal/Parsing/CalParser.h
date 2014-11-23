@@ -11,22 +11,6 @@
 @class PKParser;
 @class PKAssembly;
 
-@protocol ParserObserver <NSObject>
-
-@optional
-
-- (void) parser:(NSString *) key willMatchTodoc:(NSString *) value;
-
-- (void) parser:(NSString *) key didMatchCalprops:(NSString *) value;
-
-- (void) parser:(NSString *) key didMatchTodoprop:(NSString *) value;
-
-- (void) parser:(NSString *) key didMatchTodoc:(NSString *) value;
-
-- (void) parser:(NSString *) key didMatchIcalobject:(NSString *) value;
-
-@end
-
 @interface PropertyMatch : NSObject
 
 @property (strong, readwrite) NSString * key;
@@ -35,12 +19,33 @@
 
 @end
 
+
 @interface ParameterMatch : NSObject
 
 @property (strong, readwrite) NSString * key;
 @property (strong, readwrite) id value;
 
 @end
+
+
+@protocol ParserObserver <NSObject>
+
+@optional
+
+- (void) parser:(NSString *) key willMatchIcalobject:(NSString *) value;
+
+- (void) parser:(NSString *) key didMatchCalprops:(PropertyMatch *) value;
+
+- (void) parser:(NSString *) key willMatchTodoc:(NSString *) value;
+
+- (void) parser:(NSString *) key didMatchTodoprop:(PropertyMatch *) value;
+
+- (void) parser:(NSString *) key didMatchTodoc:(NSString *) value;
+
+- (void) parser:(NSString *) key didMatchIcalobject:(NSString *) value;
+
+@end
+
 
 @interface CalParser : NSObject
 
@@ -50,14 +55,16 @@
 
 - (id) parseString:(NSString *)input error:(NSError **) outErr;
 
+- (void) parser:(PKParser *) parser willMatchIcalobject:(PKAssembly *) assembly;
+
+- (void) parser:(PKParser *) parser didMatchCalprops:(PKAssembly *) assembly;
+
 - (void) parser:(PKParser *) parser willMatchTodoc:(PKAssembly *) assembly;
 
 - (void) parser:(PKParser *) parser didMatchTodoprop:(PKAssembly *) assembly;
 
-- (void) parser:(PKParser *) parser didMatchCalprops:(PKAssembly *) assembly;
+- (void) parser:(PKParser *) parser didMatchTodoc:(PKAssembly *) assembly;
 
 - (void) parser:(PKParser *) parser didMatchIcalobject:(PKAssembly *) assembly;
-
-- (void) parser:(PKParser *) parser didMatchTodoc:(PKAssembly *) assembly;
 
 @end

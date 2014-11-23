@@ -34,6 +34,10 @@ public class Attendee: Property {
 }
 
 
+public class CalendarProperty: Property {
+    var value = ""
+}
+
 public class GenericProperty: Property {
     var value = GenericPropertyValue()
 }
