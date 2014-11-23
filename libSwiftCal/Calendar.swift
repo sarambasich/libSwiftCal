@@ -23,8 +23,10 @@ public class Calendar: CalendarObject, ParserObserver {
         }
     }
     
-    public init(stringToParse s: String) {
+    private var closure: ((cal: Calendar) -> Void)?
+    public init(stringToParse s: String, completion: (cal: Calendar) -> Void) {
         super.init()
+        self.closure = completion
         self.parser = CalParser(delegate: self)
         var err: NSError?
         self.parser.parseString(s, error: &err)
@@ -44,7 +46,7 @@ public class Calendar: CalendarObject, ParserObserver {
     
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + ["", kCALSCALE, kMETHOD, kPRODID, kVERSION, "", ""]
+            return super.serializationKeys + ["", kCALSCALE, kMETHOD, kPRODID, kVERSION, "", "", ""] // maybe only 2 ""s?
         }
     }
     
@@ -58,8 +60,14 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     public func parser(key: String!, didMatchCalprops value: PropertyMatch!) {
-        model__setValue(value, forSerializationKey: key, model: self)
-        println("set cal prop")
+        let k = key as NSString
+        if k.isPropertyName() {
+            let p = Property(dictionary: [k: value.value])
+            model__setValue(p, forSerializationKey: key, model: self)
+        } else {
+            model__setValue(value, forSerializationKey: key, model: self)
+        }
+        
     }
     
     public func parser(key: String!, willMatchTodoc value: String!) {
@@ -71,13 +79,13 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     public func parser(key: String!, didMatchTodoc value: String!) {
-        let y = 10
         let newTodoc = Reminder(dictionary: self.currentTodoDict!)
-        self.reminders.append(Reminder())
-        self.currentTodoDict = nil
+//        self.reminders.append(Reminder())
     }
     
     public func parser(key: String!, didMatchIcalobject value: String!) {
+        self.closure!(cal: self)
+        self.closure = nil
         println("Finished")
     }
 }

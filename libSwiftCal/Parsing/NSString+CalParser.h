@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+NSArray * getSortediCalendarElements();
+NSArray * getSortedPropertyNames();
+NSArray * getSortedPropertyParameterNames();
+
 @interface NSString (CalParser)
 
 - (BOOL) isiCalendarElement;

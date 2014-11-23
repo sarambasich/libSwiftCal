@@ -9,16 +9,8 @@
 import Foundation
 
 public class RecurrenceDate: Property {
-    var date: NSDate?
-    var dateTime: NSDate?
-    var timePeriod: NSTimeInterval?
-    var timeZone: NSTimeZone?
-
-    public required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
-    public required init(dictionary: [String : AnyObject]) {
-        super.init(dictionary: dictionary)
-    }
+    var date: NSDate!
+    var dateTime: NSDate!
+    var timePeriod: NSTimeInterval!
+    var timeZone: NSTimeZone!
 }

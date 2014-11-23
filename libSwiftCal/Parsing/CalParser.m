@@ -85,7 +85,7 @@
 - (void) parser:(PKParser *)parser didMatchCalprops:(PKAssembly *)assembly {
     PropertyMatch * m = [self matchStringProperty:parser assembly:assembly];
     if ([self.delegate respondsToSelector:@selector(parser:didMatchCalprops:)]) {
-        [self.delegate parser:m.key didMatchCalprops:m.value];
+        [self.delegate parser:m.key didMatchCalprops:m];
     }
 }
 
@@ -98,7 +98,7 @@
 - (void) parser:(PKParser *) parser didMatchTodoprop:(PKAssembly *) assembly {
     PropertyMatch * m = [self matchStringProperty:parser assembly:assembly];
     if ([self.delegate respondsToSelector:@selector(parser:didMatchTodoprop:)]) {
-        [self.delegate parser:m.key didMatchTodoprop:m.value];
+        [self.delegate parser:m.key didMatchTodoprop:m];
     }
 }
 

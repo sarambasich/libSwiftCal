@@ -10,6 +10,7 @@
 
 #import "CalParser.h"
 #import "iCalendarElements.h"
+#import "NSString+CalParser.h"
 
 //! Project version number for libSwiftCal.
 FOUNDATION_EXPORT double libSwiftCalVersionNumber;

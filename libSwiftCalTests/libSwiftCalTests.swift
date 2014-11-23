@@ -28,10 +28,14 @@ class libSwiftCalTests: XCTestCase {
         
         let exp = expectationWithDescription("parse")
         let str: String = NSString(data: NSData(contentsOfFile: "/Users/Stefan/Documents/Applications/iOS/Frameworks/libSwiftCal/libSwiftCalTests/EasyInput.ics")!, encoding: NSUTF8StringEncoding)!
-        var cal = Calendar(stringToParse: str)
-//        var cal = CalendarObject(dictionary: ["id": 1337, "created": NSDate(), "last_updated": NSDate()])
-        let x = 10
-        let y = 20
+        
+        let c = { (cal: Calendar) -> Void in
+            let p1 = cal.prodID
+            let p2 = cal.prodID.propertyValue
+            XCTAssert(p2 as String == "-/MyList App/0.1a/EN", "FAILED")
+        }
+        
+        var cal = Calendar(stringToParse: str, completion: c)
         
         waitForExpectationsWithTimeout(20.0, handler: { (e) -> Void in
             println(e)
