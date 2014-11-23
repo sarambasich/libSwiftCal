@@ -90,6 +90,7 @@
 @property (nonatomic, retain) NSMutableDictionary *datetime_memo;
 @property (nonatomic, retain) NSMutableDictionary *description_memo;
 @property (nonatomic, retain) NSMutableDictionary *descparam_memo;
+@property (nonatomic, retain) NSMutableDictionary *dquote_memo;
 @property (nonatomic, retain) NSMutableDictionary *dtstamp_memo;
 @property (nonatomic, retain) NSMutableDictionary *stmparam_memo;
 @property (nonatomic, retain) NSMutableDictionary *dtstart_memo;
@@ -133,8 +134,8 @@
 @property (nonatomic, retain) NSMutableDictionary *paramvalue_memo;
 @property (nonatomic, retain) NSMutableDictionary *paramtext_memo;
 @property (nonatomic, retain) NSMutableDictionary *value_memo;
-@property (nonatomic, retain) NSMutableDictionary *qsafechar_memo;
 @property (nonatomic, retain) NSMutableDictionary *safechar_memo;
+@property (nonatomic, retain) NSMutableDictionary *qsafechar_memo;
 @property (nonatomic, retain) NSMutableDictionary *valuechar_memo;
 @property (nonatomic, retain) NSMutableDictionary *nonusascii_memo;
 @property (nonatomic, retain) NSMutableDictionary *control_memo;
@@ -354,7 +355,7 @@
         self.tokenKindTab[@"TH"] = @(ICALPARSER_TOKEN_KIND_TH);
         self.tokenKindTab[@"!"] = @(ICALPARSER_TOKEN_KIND_BANG);
         self.tokenKindTab[@"\x0f"] = @(ICALPARSER_TOKEN_KIND__X0F);
-        self.tokenKindTab[@"\""] = @(ICALPARSER_TOKEN_KIND_QUOTE);
+        self.tokenKindTab[@"\""] = @(ICALPARSER_TOKEN_KIND_DQUOTE);
         self.tokenKindTab[@"#"] = @(ICALPARSER_TOKEN_KIND_POUND);
         self.tokenKindTab[@"$"] = @(ICALPARSER_TOKEN_KIND_DOLLAR);
         self.tokenKindTab[@"SUMMARY"] = @(ICALPARSER_TOKEN_KIND_SUMMARY);
@@ -613,7 +614,7 @@
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_TH] = @"TH";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_BANG] = @"!";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND__X0F] = @"\x0f";
-        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_QUOTE] = @"\"";
+        self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_DQUOTE] = @"\"";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_POUND] = @"#";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_DOLLAR] = @"$";
         self.tokenKindNameTab[ICALPARSER_TOKEN_KIND_SUMMARY] = @"SUMMARY";
@@ -879,6 +880,7 @@
         self.datetime_memo = [NSMutableDictionary dictionary];
         self.description_memo = [NSMutableDictionary dictionary];
         self.descparam_memo = [NSMutableDictionary dictionary];
+        self.dquote_memo = [NSMutableDictionary dictionary];
         self.dtstamp_memo = [NSMutableDictionary dictionary];
         self.stmparam_memo = [NSMutableDictionary dictionary];
         self.dtstart_memo = [NSMutableDictionary dictionary];
@@ -922,8 +924,8 @@
         self.paramvalue_memo = [NSMutableDictionary dictionary];
         self.paramtext_memo = [NSMutableDictionary dictionary];
         self.value_memo = [NSMutableDictionary dictionary];
-        self.qsafechar_memo = [NSMutableDictionary dictionary];
         self.safechar_memo = [NSMutableDictionary dictionary];
+        self.qsafechar_memo = [NSMutableDictionary dictionary];
         self.valuechar_memo = [NSMutableDictionary dictionary];
         self.nonusascii_memo = [NSMutableDictionary dictionary];
         self.control_memo = [NSMutableDictionary dictionary];
@@ -1146,6 +1148,7 @@
     [_datetime_memo removeAllObjects];
     [_description_memo removeAllObjects];
     [_descparam_memo removeAllObjects];
+    [_dquote_memo removeAllObjects];
     [_dtstamp_memo removeAllObjects];
     [_stmparam_memo removeAllObjects];
     [_dtstart_memo removeAllObjects];
@@ -1189,8 +1192,8 @@
     [_paramvalue_memo removeAllObjects];
     [_paramtext_memo removeAllObjects];
     [_value_memo removeAllObjects];
-    [_qsafechar_memo removeAllObjects];
     [_safechar_memo removeAllObjects];
+    [_qsafechar_memo removeAllObjects];
     [_valuechar_memo removeAllObjects];
     [_nonusascii_memo removeAllObjects];
     [_control_memo removeAllObjects];
@@ -2259,9 +2262,9 @@
 
     [self match:ICALPARSER_TOKEN_KIND_ALTREP discard:NO]; 
     [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+    [self dquote_]; 
     [self uri_]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+    [self dquote_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchAltrepparam:)];
 }
@@ -2335,14 +2338,14 @@
 
     [self match:ICALPARSER_TOKEN_KIND_DELEGATED_FROM discard:NO]; 
     [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+    [self dquote_]; 
     [self caladdress_]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; [self caladdress_]; [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; }]) {
+    [self dquote_]; 
+    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; [self dquote_]; [self caladdress_]; [self dquote_]; }]) {
         [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; 
-        [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+        [self dquote_]; 
         [self caladdress_]; 
-        [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+        [self dquote_]; 
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchDelfromparam:)];
@@ -2358,14 +2361,14 @@
 
     [self match:ICALPARSER_TOKEN_KIND_DELEGATED_TO discard:NO]; 
     [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+    [self dquote_]; 
     [self caladdress_]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; [self caladdress_]; [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; }]) {
+    [self dquote_]; 
+    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; [self dquote_]; [self caladdress_]; [self dquote_]; }]) {
         [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; 
-        [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+        [self dquote_]; 
         [self caladdress_]; 
-        [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+        [self dquote_]; 
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchDeltoparam:)];
@@ -2381,9 +2384,9 @@
 
     [self match:ICALPARSER_TOKEN_KIND_DIR discard:NO]; 
     [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+    [self dquote_]; 
     [self uri_]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+    [self dquote_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchDirparam:)];
 }
@@ -2397,7 +2400,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchAction:)];
 
     [self match:ICALPARSER_TOKEN_KIND_ACTION discard:NO]; 
-    [self actionparam_]; 
+    while ([self speculate:^{ [self actionparam_]; }]) {
+        [self actionparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self actionvalue_]; 
     [self crlf_]; 
@@ -2413,10 +2418,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchActionparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchActionparam:)];
 }
@@ -2456,7 +2459,9 @@
 
     if ([self predicts:ICALPARSER_TOKEN_KIND_ATTACH, 0]) {
         [self match:ICALPARSER_TOKEN_KIND_ATTACH discard:NO]; 
-        [self attachparam_]; 
+        while ([self speculate:^{ [self attachparam_]; }]) {
+            [self attachparam_]; 
+        }
         [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
         [self uri_]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_SEMI_COLON, 0]) {
@@ -2508,7 +2513,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchAttendee:)];
 
     [self match:ICALPARSER_TOKEN_KIND_ATTENDEE discard:NO]; 
-    [self attparam_]; 
+    while ([self speculate:^{ [self attparam_]; }]) {
+        [self attparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self caladdress_]; 
     [self crlf_]; 
@@ -2524,46 +2531,44 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchAttparam:)];
 
-    while ([self speculate:^{ if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self cutypeparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self cutypeparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self memberparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self memberparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self roleparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self roleparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self partstatparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self partstatparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self rsvpparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self rsvpparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self deltoparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self deltoparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self delfromparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self delfromparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self sentbyparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self sentbyparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self cnparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self cnparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self dirparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self dirparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; } else {[self raise:@"No viable alternative found in rule 'attparam'."];}}]) {
-        if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self cutypeparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self cutypeparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self memberparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self memberparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self roleparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self roleparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self partstatparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self partstatparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self rsvpparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self rsvpparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self deltoparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self deltoparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self delfromparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self delfromparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self sentbyparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self sentbyparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self cnparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self cnparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self dirparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self dirparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self languageparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self otherparam_]; 
-        } else {
-            [self raise:@"No viable alternative found in rule 'attparam'."];
-        }
+    if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self cutypeparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self cutypeparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self memberparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self memberparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self roleparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self roleparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self partstatparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self partstatparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self rsvpparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self rsvpparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self deltoparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self deltoparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self delfromparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self delfromparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self sentbyparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self sentbyparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self cnparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self cnparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self dirparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self dirparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self languageparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self otherparam_]; 
+    } else {
+        [self raise:@"No viable alternative found in rule 'attparam'."];
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchAttparam:)];
@@ -2633,7 +2638,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchCategories:)];
 
     [self match:ICALPARSER_TOKEN_KIND_CATEGORIES discard:NO]; 
-    [self catparam_]; 
+    while ([self speculate:^{ [self catparam_]; }]) {
+        [self catparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self text_]; 
     while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; [self text_]; }]) {
@@ -2653,16 +2660,14 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchCatparam:)];
 
-    while ([self speculate:^{ if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; } else {[self raise:@"No viable alternative found in rule 'catparam'."];}}]) {
-        if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self languageparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self otherparam_]; 
-        } else {
-            [self raise:@"No viable alternative found in rule 'catparam'."];
-        }
+    if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self languageparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self otherparam_]; 
+    } else {
+        [self raise:@"No viable alternative found in rule 'catparam'."];
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchCatparam:)];
@@ -2677,7 +2682,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchCalscale:)];
 
     [self match:ICALPARSER_TOKEN_KIND_CALSCALE discard:NO]; 
-    [self calparam_]; 
+    while ([self speculate:^{ [self calparam_]; }]) {
+        [self calparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self calvalue_]; 
     [self crlf_]; 
@@ -2693,10 +2700,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchCalparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchCalparam:)];
 }
@@ -2723,7 +2728,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchClass:)];
 
     [self match:ICALPARSER_TOKEN_KIND_CLASS discard:NO]; 
-    [self classparam_]; 
+    while ([self speculate:^{ [self classparam_]; }]) {
+        [self classparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self classvalue_]; 
     [self crlf_]; 
@@ -2739,10 +2746,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchClassparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchClassparam:)];
 }
@@ -2781,7 +2786,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchComment:)];
 
     [self match:ICALPARSER_TOKEN_KIND_COMMENT discard:NO]; 
-    [self commparam_]; 
+    while ([self speculate:^{ [self commparam_]; }]) {
+        [self commparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self text_]; 
     [self crlf_]; 
@@ -2812,19 +2819,17 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchCommparam:)];
 
-    while ([self speculate:^{ if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; } else {[self raise:@"No viable alternative found in rule 'commparam'."];}}]) {
-        if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self altrepparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self languageparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self otherparam_]; 
-        } else {
-            [self raise:@"No viable alternative found in rule 'commparam'."];
-        }
+    if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self altrepparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self languageparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self otherparam_]; 
+    } else {
+        [self raise:@"No viable alternative found in rule 'commparam'."];
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchCommparam:)];
@@ -2839,7 +2844,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchCompleted:)];
 
     [self match:ICALPARSER_TOKEN_KIND_COMPLETED discard:NO]; 
-    [self compparam_]; 
+    while ([self speculate:^{ [self compparam_]; }]) {
+        [self compparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self datetime_]; 
     [self crlf_]; 
@@ -2855,10 +2862,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchCompparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchCompparam:)];
 }
@@ -2872,7 +2877,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchContact:)];
 
     [self match:ICALPARSER_TOKEN_KIND_CONTACT discard:NO]; 
-    [self contparam_]; 
+    while ([self speculate:^{ [self contparam_]; }]) {
+        [self contparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self text_]; 
     [self crlf_]; 
@@ -2908,19 +2915,17 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchContparam:)];
 
-    while ([self speculate:^{ if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; } else {[self raise:@"No viable alternative found in rule 'contparam'."];}}]) {
-        if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self altrepparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self languageparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self otherparam_]; 
-        } else {
-            [self raise:@"No viable alternative found in rule 'contparam'."];
-        }
+    if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self altrepparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self languageparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self otherparam_]; 
+    } else {
+        [self raise:@"No viable alternative found in rule 'contparam'."];
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchContparam:)];
@@ -2935,7 +2940,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchCreated:)];
 
     [self match:ICALPARSER_TOKEN_KIND_CREATED discard:NO]; 
-    [self creaparam_]; 
+    while ([self speculate:^{ [self creaparam_]; }]) {
+        [self creaparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self datetime_]; 
     [self crlf_]; 
@@ -2951,10 +2958,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchCreaparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchCreaparam:)];
 }
@@ -3052,7 +3057,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchDescription:)];
 
     [self match:ICALPARSER_TOKEN_KIND_DESCRIPTION discard:NO]; 
-    [self descparam_]; 
+    while ([self speculate:^{ [self descparam_]; }]) {
+        [self descparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self text_]; 
     [self crlf_]; 
@@ -3068,19 +3075,17 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchDescparam:)];
 
-    while ([self speculate:^{ if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; } else {[self raise:@"No viable alternative found in rule 'descparam'."];}}]) {
-        if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self altrepparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self languageparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self otherparam_]; 
-        } else {
-            [self raise:@"No viable alternative found in rule 'descparam'."];
-        }
+    if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self altrepparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self altrepparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self languageparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self languageparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self otherparam_]; 
+    } else {
+        [self raise:@"No viable alternative found in rule 'descparam'."];
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchDescparam:)];
@@ -3090,12 +3095,27 @@
     [self parseRule:@selector(__descparam) withMemo:_descparam_memo];
 }
 
+- (void)__dquote {
+    
+    [self fireDelegateSelector:@selector(parser:willMatchDquote:)];
+
+    [self match:ICALPARSER_TOKEN_KIND_DQUOTE discard:NO]; 
+
+    [self fireDelegateSelector:@selector(parser:didMatchDquote:)];
+}
+
+- (void)dquote_ {
+    [self parseRule:@selector(__dquote) withMemo:_dquote_memo];
+}
+
 - (void)__dtstamp {
     
     [self fireDelegateSelector:@selector(parser:willMatchDtstamp:)];
 
     [self match:ICALPARSER_TOKEN_KIND_DTSTAMP discard:NO]; 
-    [self stmparam_]; 
+    while ([self speculate:^{ [self stmparam_]; }]) {
+        [self stmparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self datetime_]; 
     [self crlf_]; 
@@ -3111,10 +3131,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchStmparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchStmparam:)];
 }
@@ -3128,7 +3146,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchDtstart:)];
 
     [self match:ICALPARSER_TOKEN_KIND_DTSTART discard:NO]; 
-    [self dtstparam_]; 
+    while ([self speculate:^{ [self dtstparam_]; }]) {
+        [self dtstparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self dtstval_]; 
     [self crlf_]; 
@@ -3144,27 +3164,25 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchDtstparam:)];
 
-    while ([self speculate:^{ if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dtstparam'."];}}]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dtstparam'."];}} else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; } else {[self raise:@"No viable alternative found in rule 'dtstparam'."];}}]) {
-        if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dtstparam'."];}}]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {
-                [self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; 
-            } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {
-                [self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; 
-            } else {
-                [self raise:@"No viable alternative found in rule 'dtstparam'."];
-            }
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self tzidparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self otherparam_]; 
+    if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dtstparam'."];}}]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {
+            [self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; 
+        } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {
+            [self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; 
         } else {
             [self raise:@"No viable alternative found in rule 'dtstparam'."];
         }
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self tzidparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self otherparam_]; 
+    } else {
+        [self raise:@"No viable alternative found in rule 'dtstparam'."];
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchDtstparam:)];
@@ -3198,7 +3216,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchDtend:)];
 
     [self match:ICALPARSER_TOKEN_KIND_DTEND discard:NO]; 
-    [self dtendparam_]; 
+    while ([self speculate:^{ [self dtendparam_]; }]) {
+        [self dtendparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self dtendval_]; 
     [self crlf_]; 
@@ -3214,27 +3234,25 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchDtendparam:)];
 
-    while ([self speculate:^{ if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dtendparam'."];}}]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dtendparam'."];}} else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; } else {[self raise:@"No viable alternative found in rule 'dtendparam'."];}}]) {
-        if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dtendparam'."];}}]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {
-                [self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; 
-            } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {
-                [self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; 
-            } else {
-                [self raise:@"No viable alternative found in rule 'dtendparam'."];
-            }
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self tzidparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self otherparam_]; 
+    if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dtendparam'."];}}]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {
+            [self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; 
+        } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {
+            [self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; 
         } else {
             [self raise:@"No viable alternative found in rule 'dtendparam'."];
         }
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self tzidparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self otherparam_]; 
+    } else {
+        [self raise:@"No viable alternative found in rule 'dtendparam'."];
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchDtendparam:)];
@@ -3268,7 +3286,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchDue:)];
 
     [self match:ICALPARSER_TOKEN_KIND_DUE discard:NO]; 
-    [self dueparam_]; 
+    while ([self speculate:^{ [self dueparam_]; }]) {
+        [self dueparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self dueval_]; 
     [self crlf_]; 
@@ -3284,27 +3304,25 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchDueparam:)];
 
-    while ([self speculate:^{ if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dueparam'."];}}]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dueparam'."];}} else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; } else {[self raise:@"No viable alternative found in rule 'dueparam'."];}}]) {
-        if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dueparam'."];}}]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {
-                [self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; 
-            } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {
-                [self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; 
-            } else {
-                [self raise:@"No viable alternative found in rule 'dueparam'."];
-            }
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self tzidparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self otherparam_]; 
+    if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'dueparam'."];}}]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {
+            [self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; 
+        } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {
+            [self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; 
         } else {
             [self raise:@"No viable alternative found in rule 'dueparam'."];
         }
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self tzidparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self otherparam_]; 
+    } else {
+        [self raise:@"No viable alternative found in rule 'dueparam'."];
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchDueparam:)];
@@ -3483,7 +3501,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchDuration:)];
 
     [self match:ICALPARSER_TOKEN_KIND_DURATION discard:NO]; 
-    [self durparam_]; 
+    while ([self speculate:^{ [self durparam_]; }]) {
+        [self durparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self durvalue_]; 
     [self crlf_]; 
@@ -3499,10 +3519,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchDurparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchDurparam:)];
 }
@@ -3537,7 +3555,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchExdate:)];
 
     [self match:ICALPARSER_TOKEN_KIND_EXDATE discard:NO]; 
-    [self exdtparam_]; 
+    while ([self speculate:^{ [self exdtparam_]; }]) {
+        [self exdtparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self exdtval_]; 
     while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; [self exdtval_]; }]) {
@@ -3557,27 +3577,25 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchExdtparam:)];
 
-    while ([self speculate:^{ if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'exdtparam'."];}}]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'exdtparam'."];}} else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; } else {[self raise:@"No viable alternative found in rule 'exdtparam'."];}}]) {
-        if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'exdtparam'."];}}]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {
-                [self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; 
-            } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {
-                [self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; 
-            } else {
-                [self raise:@"No viable alternative found in rule 'exdtparam'."];
-            }
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self tzidparam_]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-            [self otherparam_]; 
+    if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {[self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; } else {[self raise:@"No viable alternative found in rule 'exdtparam'."];}}]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_VALUE discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        if ([self predicts:ICALPARSER_TOKEN_KIND_DATE_TIME, 0]) {
+            [self match:ICALPARSER_TOKEN_KIND_DATE_TIME discard:NO]; 
+        } else if ([self predicts:ICALPARSER_TOKEN_KIND_DATE, 0]) {
+            [self match:ICALPARSER_TOKEN_KIND_DATE discard:NO]; 
         } else {
             [self raise:@"No viable alternative found in rule 'exdtparam'."];
         }
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self tzidparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self tzidparam_]; 
+    } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
+        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+        [self otherparam_]; 
+    } else {
+        [self raise:@"No viable alternative found in rule 'exdtparam'."];
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchExdtparam:)];
@@ -3735,7 +3753,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchGeo:)];
 
     [self match:ICALPARSER_TOKEN_KIND_GEO discard:NO]; 
-    [self geoparam_]; 
+    while ([self speculate:^{ [self geoparam_]; }]) {
+        [self geoparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self geovalue_]; 
     [self crlf_]; 
@@ -3751,10 +3771,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchGeoparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchGeoparam:)];
 }
@@ -3905,8 +3923,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchParamvalue:)];
 
-    if ([self predicts:ICALPARSER_TOKEN_KIND_COLON, ICALPARSER_TOKEN_KIND_COMMA, ICALPARSER_TOKEN_KIND_QUOTE, ICALPARSER_TOKEN_KIND_SEMI_COLON, ICALPARSER_TOKEN_KIND__X00, ICALPARSER_TOKEN_KIND__X01, ICALPARSER_TOKEN_KIND__X02, ICALPARSER_TOKEN_KIND__X03, ICALPARSER_TOKEN_KIND__X04, ICALPARSER_TOKEN_KIND__X05, ICALPARSER_TOKEN_KIND__X06, ICALPARSER_TOKEN_KIND__X07, ICALPARSER_TOKEN_KIND__X08, ICALPARSER_TOKEN_KIND__X0A, ICALPARSER_TOKEN_KIND__X0B, ICALPARSER_TOKEN_KIND__X0C, ICALPARSER_TOKEN_KIND__X0D, ICALPARSER_TOKEN_KIND__X0E, ICALPARSER_TOKEN_KIND__X0F, ICALPARSER_TOKEN_KIND__X10, ICALPARSER_TOKEN_KIND__X11, ICALPARSER_TOKEN_KIND__X12, ICALPARSER_TOKEN_KIND__X13, ICALPARSER_TOKEN_KIND__X14, ICALPARSER_TOKEN_KIND__X15, ICALPARSER_TOKEN_KIND__X16, ICALPARSER_TOKEN_KIND__X17, ICALPARSER_TOKEN_KIND__X18, ICALPARSER_TOKEN_KIND__X19, ICALPARSER_TOKEN_KIND__X1A, ICALPARSER_TOKEN_KIND__X1B, ICALPARSER_TOKEN_KIND__X1C, ICALPARSER_TOKEN_KIND__X1D, ICALPARSER_TOKEN_KIND__X1E, ICALPARSER_TOKEN_KIND__X1F, ICALPARSER_TOKEN_KIND__X7F, 0]) {
-        [self paramtext_]; 
+    if (![self predicts:ICALPARSER_TOKEN_KIND_COLON, ICALPARSER_TOKEN_KIND_COMMA, ICALPARSER_TOKEN_KIND_DQUOTE, ICALPARSER_TOKEN_KIND_SEMI_COLON, ICALPARSER_TOKEN_KIND__0D, ICALPARSER_TOKEN_KIND__X00, ICALPARSER_TOKEN_KIND__X01, ICALPARSER_TOKEN_KIND__X02, ICALPARSER_TOKEN_KIND__X03, ICALPARSER_TOKEN_KIND__X04, ICALPARSER_TOKEN_KIND__X05, ICALPARSER_TOKEN_KIND__X06, ICALPARSER_TOKEN_KIND__X07, ICALPARSER_TOKEN_KIND__X08, ICALPARSER_TOKEN_KIND__X0A, ICALPARSER_TOKEN_KIND__X0B, ICALPARSER_TOKEN_KIND__X0C, ICALPARSER_TOKEN_KIND__X0D, ICALPARSER_TOKEN_KIND__X0E, ICALPARSER_TOKEN_KIND__X0F, ICALPARSER_TOKEN_KIND__X10, ICALPARSER_TOKEN_KIND__X11, ICALPARSER_TOKEN_KIND__X12, ICALPARSER_TOKEN_KIND__X13, ICALPARSER_TOKEN_KIND__X14, ICALPARSER_TOKEN_KIND__X15, ICALPARSER_TOKEN_KIND__X16, ICALPARSER_TOKEN_KIND__X17, ICALPARSER_TOKEN_KIND__X18, ICALPARSER_TOKEN_KIND__X19, ICALPARSER_TOKEN_KIND__X1A, ICALPARSER_TOKEN_KIND__X1B, ICALPARSER_TOKEN_KIND__X1C, ICALPARSER_TOKEN_KIND__X1D, ICALPARSER_TOKEN_KIND__X1E, ICALPARSER_TOKEN_KIND__X1F, ICALPARSER_TOKEN_KIND__X7F, 0]) {
+        [self safechar_]; 
     } else if ([self predicts:TOKEN_KIND_BUILTIN_QUOTEDSTRING, 0]) {
         [self quotedstring_]; 
     } else {
@@ -3950,28 +3968,11 @@
     [self parseRule:@selector(__value) withMemo:_value_memo];
 }
 
-- (void)__qsafechar {
-    
-    [self fireDelegateSelector:@selector(parser:willMatchQsafechar:)];
-
-    if (![self predicts:ICALPARSER_TOKEN_KIND_QUOTE, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X00, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X01, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X02, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X03, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X04, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X05, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X06, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X07, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X08, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0A, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0B, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0C, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0D, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0E, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0F, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X10, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X11, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X12, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X13, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X14, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X15, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X16, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X17, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X18, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X19, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1A, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1B, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1C, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1D, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1E, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1F, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X7F, 0]) {
-        [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
-    } else {
-        [self raise:@"negation test failed in qsafechar"];
-    }
-
-    [self fireDelegateSelector:@selector(parser:didMatchQsafechar:)];
-}
-
-- (void)qsafechar_ {
-    [self parseRule:@selector(__qsafechar) withMemo:_qsafechar_memo];
-}
-
 - (void)__safechar {
     
     [self fireDelegateSelector:@selector(parser:willMatchSafechar:)];
 
-    if (![self predicts:ICALPARSER_TOKEN_KIND_COLON, 0] && ![self predicts:ICALPARSER_TOKEN_KIND_COMMA, 0] && ![self predicts:ICALPARSER_TOKEN_KIND_QUOTE, 0] && ![self predicts:ICALPARSER_TOKEN_KIND_SEMI_COLON, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X00, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X01, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X02, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X03, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X04, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X05, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X06, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X07, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X08, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0A, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0B, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0C, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0D, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0E, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X0F, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X10, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X11, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X12, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X13, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X14, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X15, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X16, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X17, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X18, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X19, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1A, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1B, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1C, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1D, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1E, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X1F, 0] && ![self predicts:ICALPARSER_TOKEN_KIND__X7F, 0]) {
+    if (![self speculate:^{ if ([self speculate:^{ [self crlf_]; }]) {[self crlf_]; } else if ([self speculate:^{ [self control_]; }]) {[self control_]; } else if ([self speculate:^{ [self dquote_]; }]) {[self dquote_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; } else {[self raise:@"No viable alternative found in rule 'safechar'."];}}]) {
         [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
     } else {
         [self raise:@"negation test failed in safechar"];
@@ -3984,11 +3985,28 @@
     [self parseRule:@selector(__safechar) withMemo:_safechar_memo];
 }
 
+- (void)__qsafechar {
+    
+    [self fireDelegateSelector:@selector(parser:willMatchQsafechar:)];
+
+    if (![self speculate:^{ if ([self speculate:^{ [self crlf_]; }]) {[self crlf_]; } else if ([self speculate:^{ [self control_]; }]) {[self control_]; } else if ([self speculate:^{ [self dquote_]; }]) {[self dquote_]; } else {[self raise:@"No viable alternative found in rule 'qsafechar'."];}}]) {
+        [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
+    } else {
+        [self raise:@"negation test failed in qsafechar"];
+    }
+
+    [self fireDelegateSelector:@selector(parser:didMatchQsafechar:)];
+}
+
+- (void)qsafechar_ {
+    [self parseRule:@selector(__qsafechar) withMemo:_qsafechar_memo];
+}
+
 - (void)__valuechar {
     
     [self fireDelegateSelector:@selector(parser:willMatchValuechar:)];
 
-    if (![self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND__X00, ICALPARSER_TOKEN_KIND__X01, ICALPARSER_TOKEN_KIND__X02, ICALPARSER_TOKEN_KIND__X03, ICALPARSER_TOKEN_KIND__X04, ICALPARSER_TOKEN_KIND__X05, ICALPARSER_TOKEN_KIND__X06, ICALPARSER_TOKEN_KIND__X07, ICALPARSER_TOKEN_KIND__X08, ICALPARSER_TOKEN_KIND__X0A, ICALPARSER_TOKEN_KIND__X0B, ICALPARSER_TOKEN_KIND__X0C, ICALPARSER_TOKEN_KIND__X0D, ICALPARSER_TOKEN_KIND__X0E, ICALPARSER_TOKEN_KIND__X0F, ICALPARSER_TOKEN_KIND__X10, ICALPARSER_TOKEN_KIND__X11, ICALPARSER_TOKEN_KIND__X12, ICALPARSER_TOKEN_KIND__X13, ICALPARSER_TOKEN_KIND__X14, ICALPARSER_TOKEN_KIND__X15, ICALPARSER_TOKEN_KIND__X16, ICALPARSER_TOKEN_KIND__X17, ICALPARSER_TOKEN_KIND__X18, ICALPARSER_TOKEN_KIND__X19, ICALPARSER_TOKEN_KIND__X1A, ICALPARSER_TOKEN_KIND__X1B, ICALPARSER_TOKEN_KIND__X1C, ICALPARSER_TOKEN_KIND__X1D, ICALPARSER_TOKEN_KIND__X1E, ICALPARSER_TOKEN_KIND__X1F, ICALPARSER_TOKEN_KIND__X7F, 0]) {[self control_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BSLASH, 0]) {[self escapedchar_]; } else {[self raise:@"No viable alternative found in rule 'valuechar'."];}}]) {
+    if (![self speculate:^{ if ([self speculate:^{ [self crlf_]; }]) {[self crlf_]; } else if ([self speculate:^{ [self control_]; }]) {[self control_]; } else if ([self speculate:^{ [self escapedchar_]; }]) {[self escapedchar_]; } else {[self raise:@"No viable alternative found in rule 'valuechar'."];}}]) {
         [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
     } else {
         [self raise:@"negation test failed in valuechar"];
@@ -4255,7 +4273,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchLastmod:)];
 
     [self match:ICALPARSER_TOKEN_KIND_LAST_MODIFIED discard:NO]; 
-    [self lstparam_]; 
+    while ([self speculate:^{ [self lstparam_]; }]) {
+        [self lstparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self datetime_]; 
     [self crlf_]; 
@@ -4271,10 +4291,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchLstparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchLstparam:)];
 }
@@ -4332,14 +4350,14 @@
 
     [self match:ICALPARSER_TOKEN_KIND_MEMBER discard:NO]; 
     [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+    [self dquote_]; 
     [self caladdress_]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; [self caladdress_]; [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; }]) {
+    [self dquote_]; 
+    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; [self dquote_]; [self caladdress_]; [self dquote_]; }]) {
         [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; 
-        [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+        [self dquote_]; 
         [self caladdress_]; 
-        [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+        [self dquote_]; 
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchMemberparam:)];
@@ -4354,7 +4372,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchMethod:)];
 
     [self match:ICALPARSER_TOKEN_KIND_METHOD discard:NO]; 
-    [self metparam_]; 
+    while ([self speculate:^{ [self metparam_]; }]) {
+        [self metparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self metvalue_]; 
     [self crlf_]; 
@@ -4370,10 +4390,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchMetparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchMetparam:)];
 }
@@ -4578,7 +4596,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchPercent:)];
 
     [self match:ICALPARSER_TOKEN_KIND_PERCENT_COMPLETE discard:NO]; 
-    [self pctparam_]; 
+    while ([self speculate:^{ [self pctparam_]; }]) {
+        [self pctparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self matchNumber:NO]; 
     [self crlf_]; 
@@ -4643,10 +4663,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchPctparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchPctparam:)];
 }
@@ -4660,7 +4678,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchPriority:)];
 
     [self match:ICALPARSER_TOKEN_KIND_PRIORITY discard:NO]; 
-    [self prioparam_]; 
+    while ([self speculate:^{ [self prioparam_]; }]) {
+        [self prioparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self priovalue_]; 
     [self crlf_]; 
@@ -4676,10 +4696,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchPrioparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchPrioparam:)];
 }
@@ -4706,7 +4724,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchProdid:)];
 
     [self match:ICALPARSER_TOKEN_KIND_PRODID discard:NO]; 
-    [self pidparam_]; 
+    while ([self speculate:^{ [self pidparam_]; }]) {
+        [self pidparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self pidvalue_]; 
     [self crlf_]; 
@@ -4722,10 +4742,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchPidparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchPidparam:)];
 }
@@ -4977,7 +4995,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchRepeat:)];
 
     [self match:ICALPARSER_TOKEN_KIND_REPEAT discard:NO]; 
-    [self repparam_]; 
+    while ([self speculate:^{ [self repparam_]; }]) {
+        [self repparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self matchNumber:NO]; 
     [self crlf_]; 
@@ -4993,10 +5013,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchRepparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchRepparam:)];
 }
@@ -5095,7 +5113,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchRrule:)];
 
     [self match:ICALPARSER_TOKEN_KIND_RRULE discard:NO]; 
-    [self rrulparam_]; 
+    while ([self speculate:^{ [self rrulparam_]; }]) {
+        [self rrulparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self recur_]; 
     [self crlf_]; 
@@ -5111,10 +5131,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchRrulparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchRrulparam:)];
 }
@@ -5774,7 +5792,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchSeq:)];
 
     [self match:ICALPARSER_TOKEN_KIND_SEQUENCE discard:NO]; 
-    [self seqparam_]; 
+    while ([self speculate:^{ [self seqparam_]; }]) {
+        [self seqparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     do {
         [self digit_]; 
@@ -5792,10 +5812,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchSeqparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchSeqparam:)];
 }
@@ -5809,7 +5827,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchStatus:)];
 
     [self match:ICALPARSER_TOKEN_KIND_STATUS discard:NO]; 
-    [self statparam_]; 
+    while ([self speculate:^{ [self statparam_]; }]) {
+        [self statparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self statvalue_]; 
     [self crlf_]; 
@@ -5825,10 +5845,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchStatparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchStatparam:)];
 }
@@ -5972,9 +5990,9 @@
 
     [self match:ICALPARSER_TOKEN_KIND_SENT_BY discard:NO]; 
     [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+    [self dquote_]; 
     [self caladdress_]; 
-    [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+    [self dquote_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchSentbyparam:)];
 }
@@ -5987,13 +6005,13 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchText:)];
 
-    while ([self speculate:^{ if ([self speculate:^{ [self tsafechar_]; }]) {[self tsafechar_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; } else if ([self speculate:^{ [self escapedchar_]; }]) {[self escapedchar_]; } else {[self raise:@"No viable alternative found in rule 'text'."];}}]) {
+    while ([self speculate:^{ if ([self speculate:^{ [self tsafechar_]; }]) {[self tsafechar_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; } else if ([self speculate:^{ [self dquote_]; }]) {[self dquote_]; } else if ([self speculate:^{ [self escapedchar_]; }]) {[self escapedchar_]; } else {[self raise:@"No viable alternative found in rule 'text'."];}}]) {
         if ([self speculate:^{ [self tsafechar_]; }]) {
             [self tsafechar_]; 
         } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; }]) {
             [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
-        } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; }]) {
-            [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; 
+        } else if ([self speculate:^{ [self dquote_]; }]) {
+            [self dquote_]; 
         } else if ([self speculate:^{ [self escapedchar_]; }]) {
             [self escapedchar_]; 
         } else {
@@ -6062,7 +6080,7 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchTsafechar:)];
 
-    if (![self speculate:^{ if ([self speculate:^{ [self crlf_]; }]) {[self crlf_]; } else if ([self speculate:^{ [self control_]; }]) {[self control_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_QUOTE discard:NO]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; } else if ([self speculate:^{ [self bslash_]; }]) {[self bslash_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; } else {[self raise:@"No viable alternative found in rule 'tsafechar'."];}}]) {
+    if (![self speculate:^{ if ([self speculate:^{ [self crlf_]; }]) {[self crlf_]; } else if ([self speculate:^{ [self control_]; }]) {[self control_]; } else if ([self speculate:^{ [self dquote_]; }]) {[self dquote_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; } else if ([self speculate:^{ [self bslash_]; }]) {[self bslash_]; } else if ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; }]) {[self match:ICALPARSER_TOKEN_KIND_COMMA discard:NO]; } else {[self raise:@"No viable alternative found in rule 'tsafechar'."];}}]) {
         [self match:TOKEN_KIND_BUILTIN_ANY discard:NO];
     } else {
         [self raise:@"negation test failed in tsafechar"];
@@ -6278,7 +6296,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchUid:)];
 
     [self match:ICALPARSER_TOKEN_KIND_UID discard:NO]; 
-    [self uidparam_]; 
+    while ([self speculate:^{ [self uidparam_]; }]) {
+        [self uidparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self text_]; 
     [self crlf_]; 
@@ -6294,10 +6314,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchUidparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchUidparam:)];
 }
@@ -6420,7 +6438,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchVersion:)];
 
     [self match:ICALPARSER_TOKEN_KIND_VERSION discard:NO]; 
-    [self verparam_]; 
+    while ([self speculate:^{ [self verparam_]; }]) {
+        [self verparam_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self vervalue_]; 
     [self crlf_]; 
@@ -6436,10 +6456,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchVerparam:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchVerparam:)];
 }
@@ -6542,7 +6560,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchXwrcalname:)];
 
     [self match:ICALPARSER_TOKEN_KIND_X_WR_CALNAME discard:NO]; 
-    [self xwrcalnamep_]; 
+    while ([self speculate:^{ [self xwrcalnamep_]; }]) {
+        [self xwrcalnamep_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self text_]; 
     [self crlf_]; 
@@ -6558,10 +6578,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchXwrcalnamep:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchXwrcalnamep:)];
 }
@@ -6575,7 +6593,9 @@
     [self fireDelegateSelector:@selector(parser:willMatchXwrcalsec:)];
 
     [self match:ICALPARSER_TOKEN_KIND_X_WR_CALDESC discard:NO]; 
-    [self xwrcalsecp_]; 
+    while ([self speculate:^{ [self xwrcalsecp_]; }]) {
+        [self xwrcalsecp_]; 
+    }
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self text_]; 
     [self crlf_]; 
@@ -6591,10 +6611,8 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchXwrcalsecp:)];
 
-    while ([self speculate:^{ [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; [self otherparam_]; }]) {
-        [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
-        [self otherparam_]; 
-    }
+    [self match:ICALPARSER_TOKEN_KIND_SEMI_COLON discard:NO]; 
+    [self otherparam_]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchXwrcalsecp:)];
 }

@@ -91,7 +91,7 @@ d7 = '7';
 d8 = '8';
 d9 = '9';
 
-altrepparam = 'ALTREP' '=' '"' uri '"';
+altrepparam = 'ALTREP' '=' dquote uri dquote;
 
 bslash      = '\\';
 
@@ -106,22 +106,22 @@ cutypeparam        = 'CUTYPE' '='
                             | xname
                             | ianatoken);
 
-delfromparam       = 'DELEGATED-FROM' '=' '"' caladdress
-                                '"' (',' '"' caladdress '"')*;
+delfromparam       = 'DELEGATED-FROM' '=' dquote caladdress
+                                dquote (',' dquote caladdress dquote)*;
 
-deltoparam = 'DELEGATED-TO' '=' '"' caladdress '"'
-                            (',' '"' caladdress '"')*;
+deltoparam = 'DELEGATED-TO' '=' dquote caladdress dquote
+                            (',' dquote caladdress dquote)*;
 
-dirparam   = 'DIR' '=' '"' uri '"';
+dirparam   = 'DIR' '=' dquote uri dquote;
 
-action      = 'ACTION' actionparam ':' actionvalue crlf;
+action      = 'ACTION' actionparam* ':' actionvalue crlf;
 
-actionparam = (';' otherparam)*;
+actionparam = (';' otherparam);
 
 actionvalue = 'AUDIO' | 'DISPLAY' | 'EMAIL'
                 | ianatoken | xname;
 
-attach     = 'ATTACH' attachparam ( ':' uri ) |
+attach     = 'ATTACH' attachparam* ( ':' uri ) |
                                     (
                                     ';' 'ENCODING' '=' 'BASE64'
                                     ';' 'VALUE' '=' 'BINARY'
@@ -133,7 +133,7 @@ attachparam =
                 (';' fmttypeparam) |
                 (';' otherparam);
 
-attendee   = 'ATTENDEE' attparam ':' caladdress crlf;
+attendee   = 'ATTENDEE' attparam* ':' caladdress crlf;
 
 attparam   = (
                 (';' cutypeparam) | (';' memberparam) |
@@ -143,7 +143,7 @@ attparam   = (
                 (';' cnparam) | (';' dirparam) |
                 (';' languageparam) |
                 (';' otherparam)
-            )*;
+            );
 
 binary     = Any*;
 
@@ -155,51 +155,51 @@ calprops   =    (
                     xprop | ianaprop
                 );
 
-categories = 'CATEGORIES' catparam ':' text (',' text)* crlf;
+categories = 'CATEGORIES' catparam* ':' text (',' text)* crlf;
 
 catparam   = (
                 (';' languageparam ) |
                 (';' otherparam)
-            )*;
+            );
 
-calscale   = 'CALSCALE' calparam ':' calvalue crlf;
+calscale   = 'CALSCALE' calparam* ':' calvalue crlf;
 
-calparam   = (';' otherparam)*;
+calparam   = (';' otherparam);
 
 calvalue   = 'GREGORIAN';
 
-class      = 'CLASS' classparam ':' classvalue crlf;
+class      = 'CLASS' classparam* ':' classvalue crlf;
 
-classparam = (';' otherparam)*;
+classparam = (';' otherparam);
 
 classvalue = 'PUBLIC' | 'PRIVATE' | 'CONFIDENTIAL' | ianatoken
                 | xname;
 
-comment    = 'COMMENT' commparam ':' text crlf;
+comment    = 'COMMENT' commparam* ':' text crlf;
 
 component  = todoc*;
 
 commparam  = (
                 (';' altrepparam) | (';' languageparam) |
                 (';' otherparam)
-             )*;
+             );
 
-completed  = 'COMPLETED' compparam ':' datetime crlf;
+completed  = 'COMPLETED' compparam* ':' datetime crlf;
 
-compparam  = (';' otherparam)*;
+compparam  = (';' otherparam);
 
-contact    = 'CONTACT' contparam ':' text crlf;
+contact    = 'CONTACT' contparam* ':' text crlf;
 
 contentline   = name (';' param )* ':' value crlf;
 
 contparam  = (
                 (';' altrepparam) | (';' languageparam) |
                 (';' otherparam)
-            )*;
+            );
 
-created    = 'CREATED' creaparam ':' datetime crlf;
+created    = 'CREATED' creaparam* ':' datetime crlf;
 
-creaparam  = (';' otherparam)*;
+creaparam  = (';' otherparam);
 
 date               = datevalue;
 
@@ -210,44 +210,46 @@ datemday          = digit digit;
 
 datetime          = Number Word; // date 'T' time;
 
-description = 'DESCRIPTION' descparam ':' text crlf;
+description = 'DESCRIPTION' descparam* ':' text crlf;
 
 descparam   = (
                 (';' altrepparam) | (';' languageparam) |
                 (';' otherparam)
-              )*;
+              );
 
-dtstamp    = 'DTSTAMP' stmparam ':' datetime crlf;
+dquote     = '"';
 
-stmparam   = (';' otherparam)*;
+dtstamp    = 'DTSTAMP' stmparam* ':' datetime crlf;
 
-dtstart    = 'DTSTART' dtstparam ':' dtstval crlf;
+stmparam   = (';' otherparam);
+
+dtstart    = 'DTSTART' dtstparam* ':' dtstval crlf;
 
 dtstparam  = (
                 (';' 'VALUE' '=' ('DATE-TIME' | 'DATE')) |
                 (';' tzidparam) |
                 (';' otherparam)
-            )*;
+            );
 
 dtstval    = datetime | date;
 
-dtend      = 'DTEND' dtendparam ':' dtendval crlf;
+dtend      = 'DTEND' dtendparam* ':' dtendval crlf;
 
 dtendparam = (
                 (';' 'VALUE' '=' ('DATE-TIME' | 'DATE')) |
                 (';' tzidparam) |
                 (';' otherparam)
-            )*;
+            );
 
 dtendval   = datetime | date;
 
-due        = 'DUE' dueparam ':' dueval crlf;
+due        = 'DUE' dueparam* ':' dueval crlf;
 
 dueparam   = (
                 (';' 'VALUE' '=' ('DATE-TIME' | 'DATE')) |
                 (';' tzidparam) |
                 (';' otherparam)
-            )*;
+            );
 
 dueval     = datetime | date;
 
@@ -261,21 +263,21 @@ durminute = Number 'M' (dursecond)*;
 dursecond = Number 'S';
 durday    = Number 'D';
 
-duration   = 'DURATION' durparam ':' durvalue crlf;
+duration   = 'DURATION' durparam* ':' durvalue crlf;
 
-durparam   = (';' otherparam)*;
+durparam   = (';' otherparam);
 
 encodingparam      = 'ENCODING' '='
                       '8BIT'
                     | 'BASE64';
 
-exdate     = 'EXDATE' exdtparam ':' exdtval (',' exdtval)* crlf;
+exdate     = 'EXDATE' exdtparam* ':' exdtval (',' exdtval)* crlf;
 
 exdtparam  = (
                 (';' 'VALUE' '=' ('DATE-TIME' | 'DATE')) |
                 (';' tzidparam) |
                 (';' otherparam)
-            )*;
+            );
 
 exdtval    = datetime | date;
 
@@ -294,9 +296,9 @@ regnamechars = Word | Number | '!' |
                 '#' | '$' | '&' | '.' |
                 '+' | '-' | '^' | '_';
 
-geo        = 'GEO' geoparam ':' geovalue crlf;
+geo        = 'GEO' geoparam* ':' geovalue crlf;
 
-geoparam   = (';' otherparam)*;
+geoparam   = (';' otherparam);
 
 geovalue   = Number ';' Number;
 
@@ -314,17 +316,17 @@ param         = paramname '=' paramvalue (',' paramvalue)*;
 
 paramname    = ianatoken | xname;
 
-paramvalue   = paramtext | quotedstring;
+paramvalue   = safechar | quotedstring; //paramtext | quotedstring;
 
-paramtext     = safechar*;
+paramtext     = safechar*; // WARNING: this doesn't match right in the grammar. I had to negate the condition in paramvalue.
 
 value         = valuechar*;
 
-qsafechar    = ~(control | '"');
+safechar     = ~(crlf | control |  dquote |  ';' |  ':' |  ',');
 
-safechar     = ~(control |  '"' |  ";" |  ":" |  ",");
+qsafechar    = ~(crlf | control | dquote);
 
-valuechar    = ~(control | escapedchar);
+valuechar    = ~(crlf | control | escapedchar);
 
 nonusascii  = (Word | Number Symbol)*;
 
@@ -369,23 +371,23 @@ languageparam = 'LANGUAGE' '=' language;
 
 language = Any*;
 
-lastmod   = 'LAST-MODIFIED' lstparam ':' datetime crlf;
+lastmod   = 'LAST-MODIFIED' lstparam* ':' datetime crlf;
 
-lstparam   = (';' otherparam)*;
+lstparam   = (';' otherparam);
 
-location   = "LOCATION"  locparam ":" text crlf;
+location   = 'LOCATION' locparam ':' text crlf;
 
 locparam   = (
-                (";" altrepparam) | (";" languageparam) |
-                (";" otherparam)
+                (';' altrepparam) | (';' languageparam) |
+                (';' otherparam)
             )*;
 
-memberparam        = 'MEMBER' '=' '"' caladdress '"'
-                            (',' '"' caladdress '"')*;
+memberparam        = 'MEMBER' '=' dquote caladdress dquote
+                            (',' dquote caladdress dquote)*;
 
-method     = 'METHOD' metparam ':' metvalue crlf;
+method     = 'METHOD' metparam* ':' metvalue crlf;
 
-metparam   = (';' otherparam)*;
+metparam   = (';' otherparam);
 
 metvalue   = ianatoken;
 
@@ -431,23 +433,23 @@ partstatjour    = ('NEEDS-ACTION'
                     | xname
                     | ianatoken);
 
-percent = 'PERCENT-COMPLETE' pctparam ':' Number crlf;
+percent = 'PERCENT-COMPLETE' pctparam* ':' Number crlf;
 
 period     = periodexplicit | periodstart;
 periodexplicit = datetime '/' datetime;
 periodstart = datetime '/' durvalue;
 
-pctparam   = (';' otherparam)*;
+pctparam   = (';' otherparam);
 
-priority   = 'PRIORITY' prioparam ':' priovalue crlf;
+priority   = 'PRIORITY' prioparam* ':' priovalue crlf;
 
-prioparam  = (';' otherparam)*;
+prioparam  = (';' otherparam);
 
 priovalue   = Number;
 
-prodid     = 'PRODID' pidparam ':' pidvalue crlf;
+prodid     = 'PRODID' pidparam* ':' pidvalue crlf;
 
-pidparam   = (';' otherparam)*;
+pidparam   = (';' otherparam);
 
 pidvalue   = text;
 
@@ -486,9 +488,9 @@ resrcparam = (
 
 recurid    = 'RECURRENCE-ID' ridparam ':' ridval crlf;
 
-repeat  = 'REPEAT' repparam ':' Number crlf;
+repeat  = 'REPEAT' repparam* ':' Number crlf;
 
-repparam   = (';' otherparam)*;
+repparam   = (';' otherparam);
 
 ridparam   = (
                 (';' 'VALUE' '=' ('DATE-TIME' | 'DATE')) |
@@ -506,9 +508,9 @@ roleparam  = 'ROLE' '='
             | xname
             | ianatoken);
 
-rrule      = 'RRULE' rrulparam ':' recur crlf;
+rrule      = 'RRULE' rrulparam* ':' recur crlf;
 
-rrulparam  = (';' otherparam)*;
+rrulparam  = (';' otherparam);
 
 recur           = recurrulepart ( ';' recurrulepart )*;
 
@@ -597,13 +599,13 @@ statdesc   = text;
 
 extdata    = text;
 
-seq = 'SEQUENCE' seqparam ':' digit+ crlf;
+seq = 'SEQUENCE' seqparam* ':' digit+ crlf;
 
-seqparam   = (';' otherparam)*;
+seqparam   = (';' otherparam);
 
-status          = 'STATUS' statparam ':' statvalue crlf;
+status          = 'STATUS' statparam* ':' statvalue crlf;
 
-statparam       = (';' otherparam)*;
+statparam       = (';' otherparam);
 
 statvalue       = (statvalueevent
                 |  statvaluetodo
@@ -629,9 +631,9 @@ summparam  = (
                 (';' otherparam)
             )*;
 
-sentbyparam        = 'SENT-BY' '=' '"' caladdress '"';
+sentbyparam        = 'SENT-BY' '=' dquote caladdress dquote;
 
-text               = (tsafechar | ':' | '"' | escapedchar)*;
+text               = (tsafechar | ':' | dquote | escapedchar)*;
 
 escapedchar     = ('\\' (crlf S)? '\\')
                     | ('\\' (crlf S)? ';')
@@ -639,7 +641,7 @@ escapedchar     = ('\\' (crlf S)? '\\')
                     | ('\\' (crlf S)? 'N')
                     | ('\\' (crlf S)? 'n');
 
-tsafechar       = ~(crlf | control | '"' | ';' | ':' | bslash | ',');
+tsafechar       = ~(crlf | control | dquote | ';' | ':' | bslash | ',');
 
 time         = Word;//Number timeutc?; //timehour timeminute timesecond timeutc?;
 
@@ -670,9 +672,9 @@ tzidparam  = 'TZID' '=' (tzidprefix)* paramtext;
 
 tzidprefix = '|';
 
-uid        = 'UID' uidparam ':' text crlf;
+uid        = 'UID' uidparam* ':' text crlf;
 
-uidparam   = (';' otherparam)*;
+uidparam   = (';' otherparam);
 
 uri        = URL;
 
@@ -699,9 +701,9 @@ valuetype  = ('BINARY'
 
 vendorid      = (alpha | digit)+;
 
-version    = 'VERSION' verparam ':' vervalue crlf;
+version    = 'VERSION' verparam* ':' vervalue crlf;
 
-verparam   = (';' otherparam)*;
+verparam   = (';' otherparam);
 
 vervalue   = '2.0';
 
@@ -711,16 +713,16 @@ xcomp     = 'BEGIN' ':' xname crlf
 
 xparam     = xname '=' paramvalue (',' paramvalue)*;
 
-xname        = { [LS(1) hasPrefix:@"X-"] }? Word; //'X-' (vendorid '-')* (alpha | digit | '-')+;
+xname        = { [LS(1) hasPrefix:@"X-"] }? Word;
 
 xprop = xname (';' icalparameter)* ':' value crlf;
 
-xwrcalname   = 'X-WR-CALNAME' xwrcalnamep ':' text crlf;
+xwrcalname   = 'X-WR-CALNAME' xwrcalnamep* ':' text crlf;
 
-xwrcalnamep  = (';' otherparam)*;
+xwrcalnamep  = (';' otherparam);
 
-xwrcalsec    = 'X-WR-CALDESC' xwrcalsecp ':' text crlf;
+xwrcalsec    = 'X-WR-CALDESC' xwrcalsecp* ':' text crlf;
 
-xwrcalsecp   = (';' otherparam)*;
+xwrcalsecp   = (';' otherparam);
 
 crlf         =  ('\x0d'? '\x0a') | '\0d';

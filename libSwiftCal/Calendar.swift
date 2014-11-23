@@ -44,8 +44,7 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     public func parser(key: String!, didMatchIcalobject value: String!) {
-        let x = 10
-        let y = 20
+        println("Matched iCal object to swift!")
     }
     
     public init(stringToParse s: String) {
