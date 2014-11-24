@@ -18,14 +18,14 @@ public func != (lhs: Alarm, rhs: Alarm) -> Bool {
 }
 
 public class Alarm: CalendarObject {
-    weak var reminder: Reminder?
+    public private(set) weak var reminder: Reminder?
     
-    var action: AlarmProperty
-    var trigger: TriggerProperty
-    var duration: Duration?
-    var repeat: Int?
-    var xProperties: [GenericProperty]?
-    var IANAProperties: [IANAProperty]?
+    public private(set) var action: AlarmProperty!
+    public private(set) var trigger: TriggerProperty!
+    public private(set) var duration: Duration!
+    public private(set) var repeat = 0
+    public private(set) var xProperties = [GenericProperty]()
+    public private(set) var IANAProperties = [IANAProperty]()
     
     
     // MARK: - Hashable
@@ -36,32 +36,22 @@ public class Alarm: CalendarObject {
     }
     
     
-    // MARK: - iCal type
-    public required init(data: NSData) {
-        self.reminder = Reminder()
-        self.action = AlarmProperty()
-        self.trigger = TriggerProperty()
-        
-        super.init()
-    }
-    
-    
     // MARK: - NSCoding
     public required init(coder aDecoder: NSCoder) {
-        self.reminder = Reminder()
-        self.action = AlarmProperty()
-        self.trigger = TriggerProperty()
-        
         super.init(coder: aDecoder)
         
         nscoder__initWithCoder(aDecoder, mirror: reflect(self), onObject: self)
     }
 
+    
+    // MARK: - Serializable
     public required init(dictionary: [String : AnyObject]) {
-        self.reminder = Reminder()
-        self.action = AlarmProperty()
-        self.trigger = TriggerProperty()
-        
         super.init(dictionary: dictionary)
+    }
+    
+    public override var serializationKeys: [String] {
+        get {
+            return super.serializationKeys + ["", kACTION, kTRIGGER, kDURATION, kREPEAT, SerializationKeys.XPropertiesKey, SerializationKeys.IANAPropertiesKey]
+        }
     }
 }

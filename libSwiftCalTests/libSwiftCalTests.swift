@@ -31,8 +31,8 @@ class libSwiftCalTests: XCTestCase {
         
         let c = { (cal: Calendar) -> Void in
             let p1 = cal.prodID
-            let p2 = cal.prodID.propertyValue
-            XCTAssert(p2 as String == "-/MyList App/0.1a/EN", "FAILED")
+            let p2 = cal.prodID.propertyValue as String
+            XCTAssert(p2 == "-/MyList App/0.1a/EN", "FAILED")
         }
         
         var cal = Calendar(stringToParse: str, completion: c)

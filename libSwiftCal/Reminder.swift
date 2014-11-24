@@ -24,40 +24,32 @@ public class Reminder: CalendarObject {
         static let confidential = "CONFIDENTIAL"
     }
     
-    public private(set) var dateTimestamp = NSDate()
-    public private(set) var uid = NSUUID()
+    public private(set) var dateTimestamp: ReminderProperty!
+    public private(set) var uid: ReminderProperty!
     
-    public private(set) var accessClass: String!
-    public private(set) var completed: NSDate!
-    public private(set) var eventCreated = NSDate()
-    public private(set) var description_: String!
-    public private(set) var start: NSDate!
-    public private(set) var geo: CLLocationCoordinate2D!
-    public private(set) var lastModified: NSDate!
-    public private(set) var location: String!
-    public private(set) var organizer: Organizer!
+    public private(set) var accessClass: ReminderProperty!
+    public private(set) var completed: ReminderProperty!
+    public private(set) var eventCreated: ReminderProperty!
+    public private(set) var description_: ReminderProperty!
+    public private(set) var start: ReminderProperty!
+    public private(set) var geo: ReminderProperty!
+    public private(set) var lastModified: ReminderProperty!
+    public private(set) var location: ReminderProperty!
+    public private(set) var organizer: ReminderProperty!
     
-    public private(set) var percentComplete: UInt8 = 0 {
-        didSet {
-            if percentComplete < 0 {
-                percentComplete = 0
-            } else if percentComplete > 100 {
-                percentComplete = 100
-            }
-        }
-    }
-    public private(set) var priority: Int!
-    public private(set) var recurrenceID: NSDate!
-    public private(set) var sequence = 0
-    public private(set) var status: String!
+    public private(set) var percentComplete: ReminderProperty!
+    public private(set) var priority: ReminderProperty!
+    public private(set) var recurrenceID: ReminderProperty!
+    public private(set) var sequence: ReminderProperty!
+    public private(set) var status: ReminderProperty!
     
-    public private(set) var summary: String!
-    public private(set) var URL: String!
+    public private(set) var summary: ReminderProperty!
+    public private(set) var URL: ReminderProperty!
     
-    public private(set) var rrule: String!
+    public private(set) var rrule: ReminderProperty!
     
-    public private(set) var due: NSDate!
-    public private(set) var duration: NSTimeInterval = 0.0
+    public private(set) var due: ReminderProperty!
+    public private(set) var duration: ReminderProperty!
     
     public private(set) var attachments = [Attachment]()
     public private(set) var attendees = [Attendee]()
@@ -73,6 +65,8 @@ public class Reminder: CalendarObject {
     public private(set) var recurrenceDates = [RecurrenceDate]()
     public private(set) var xProperties = [GenericProperty]()
     public private(set) var IANAProperties = [IANAProperty]()
+    
+    public internal(set) var alarms = [Alarm]()
     
     
     // MARK: - Init
@@ -110,7 +104,7 @@ public class Reminder: CalendarObject {
     // MARK: - Serializable
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + [kDTSTAMP as String, kUID as String, kCLASS as String, kCOMPLETED as String, kCREATED as String, kDESCRIPTION as String, kDTSTART as String, kGEO as String, kLAST_MODIFIED as String, kLOCATION as String, kORGANIZER as String, kPERCENT_COMPLETE as String, kPRIORITY as String, kRECURRENCE_ID as String, kSEQUENCE as String, kSTATUS as String, kSUMMARY as String, kURL as String, kRRULE as String, kDUE as String, kDURATION as String, kATTACH as String, kATTENDEE as String, kCATEGORIES as String, kCOMMENT as String, kCONTACT as String, kEXDATE as String, kREQUEST_STATUS as String, kRELATED as String, kRESOURCES as String, kRDATE, "xprop", "iana_prop"]
+            return super.serializationKeys + [kDTSTAMP, kUID, kCLASS, kCOMPLETED, kCREATED, kDESCRIPTION, kDTSTART, kGEO, kLAST_MODIFIED, kLOCATION, kORGANIZER, kPERCENT_COMPLETE, kPRIORITY, kRECURRENCE_ID, kSEQUENCE, kSTATUS, kSUMMARY, kURL, kRRULE, kDUE, kDURATION, kATTACH, kATTENDEE, kCATEGORIES, kCOMMENT, kCONTACT, kEXDATE, kREQUEST_STATUS, kRELATED, kRESOURCES, kRDATE, SerializationKeys.XPropertiesKey, SerializationKeys.IANAPropertiesKey, SerializationKeys.AlarmsKey]
         }
     }
     

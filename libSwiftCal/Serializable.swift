@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol Serializable {
+@objc public protocol Serializable {
     var serializationKeys: [String] { get }
     init(dictionary: [String : AnyObject])
     func toDictionary() -> [String : AnyObject]

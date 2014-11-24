@@ -8,7 +8,14 @@
 
 import UIKit
 
-public class Attachment: CalendarObject {
-    var URI: String?
-    var binary: NSData?
+public class Attachment: Property {
+    public var URI: String {
+        get {
+            return self.propertyValue as String
+        } set {
+            self.propertyValue = newValue
+        }
+    }
+    
+    public private(set)var binary: NSData!
 }

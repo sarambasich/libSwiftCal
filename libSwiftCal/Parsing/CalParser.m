@@ -14,6 +14,12 @@
 
 #import "NSString+CalParser.h"
 
+#import <libSwiftCal-Swift.h>
+
+@interface PropertyMatch ()
+
+@end
+
 @implementation PropertyMatch
 
 @synthesize key;
@@ -34,6 +40,13 @@
     return [NSString stringWithFormat:@"<Prop(%@): %@\nParams: %@>", key, value, [params description]];
 }
 
+- (NSDictionary *) toDictionary {
+    return @{@"prop_key": key,
+             @"prop_value": value,
+             @"parameters": params
+             };
+}
+
 @end
 
 @implementation ParameterMatch
@@ -45,11 +58,17 @@
     return [NSString stringWithFormat:@"<Param(%@): %@>", key, value];
 }
 
+- (NSDictionary *) toDictionary {
+    return @{@"key": key,
+             @"value": value,
+             };
+}
+
 @end
 
 @interface CalParser ()
 
-- (PropertyMatch *) matchStringProperty:(PKParser *) parser assembly:(PKAssembly *) assembly;
+- (PropertyMatch *) matchProperty:(PKParser *) parser assembly:(PKAssembly *) assembly;
 
 - (id) toTypeFromString:(NSString *) str;
 
@@ -83,7 +102,7 @@
 }
 
 - (void) parser:(PKParser *)parser didMatchCalprops:(PKAssembly *)assembly {
-    PropertyMatch * m = [self matchStringProperty:parser assembly:assembly];
+    PropertyMatch * m = [self matchProperty:parser assembly:assembly];
     if ([self.delegate respondsToSelector:@selector(parser:didMatchCalprops:)]) {
         [self.delegate parser:m.key didMatchCalprops:m];
     }
@@ -96,9 +115,28 @@
 }
 
 - (void) parser:(PKParser *) parser didMatchTodoprop:(PKAssembly *) assembly {
-    PropertyMatch * m = [self matchStringProperty:parser assembly:assembly];
+    PropertyMatch * m = [self matchProperty:parser assembly:assembly];
     if ([self.delegate respondsToSelector:@selector(parser:didMatchTodoprop:)]) {
         [self.delegate parser:m.key didMatchTodoprop:m];
+    }
+}
+
+- (void) parser:(PKParser *) parser willMatchAlarmc:(PKAssembly *) assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:willMatchAlarmc:)]) {
+        [self.delegate parser:parser.debugDescription willMatchAlarmc:[assembly debugDescription]];
+    }
+}
+
+- (void) parser:(PKParser *) parser didMatchAlarmprop:(PKAssembly *) assembly {
+    PropertyMatch * m = [self matchProperty:parser assembly:assembly];
+    if ([self.delegate respondsToSelector:@selector(parser:willMatchAlarmc:)]) {
+        [self.delegate parser:m.key didMatchAlarmprop:m];
+    }
+}
+
+- (void) parser:(PKParser *) parser didMatchAlarmc:(PKAssembly *) assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:willMatchAlarmc:)]) {
+        [self.delegate parser:parser.debugDescription didMatchAlarmc:[assembly debugDescription]];
     }
 }
 
@@ -115,7 +153,7 @@
 }
 
 
-- (PropertyMatch *) matchStringProperty:(PKParser *) parser assembly:(PKAssembly *) assembly {
+- (PropertyMatch *) matchProperty:(PKParser *) parser assembly:(PKAssembly *) assembly {
     PropertyMatch * result = [[PropertyMatch alloc] init];
     NSUInteger stackCursor = assembly.stack.count - 1 - 1,
         propStartPos, propEndPos, paramStartPos, paramEndPos;
@@ -176,8 +214,8 @@
     double aDouble;
     
     NSDate * date;
-    
     NSDateFormatter * formatter = [NSDateFormatter new];
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     NSMutableCharacterSet * dateCharSet = [[NSMutableCharacterSet alloc] init];
     [dateCharSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"1234567890TZ"]];
 
@@ -189,16 +227,10 @@
         for (NSString * fmt in dateFormats) {
             NSError * err;
             formatter.dateFormat = fmt;
-            formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
             if ([formatter getObjectValue:&date forString:str range:nil error:&err]) {
                 result = (NSDate *) date;
                 break;
             }
-//            NSDate * dt = [formatter dateFromString:str];
-//            if (dt != nil) {
-//                result = date;
-//                break;
-//            }
         }
     } else if ([scanner scanInteger:&anInt]) {
         result = [NSNumber numberWithInteger:anInt];

@@ -40,6 +40,18 @@ import UIKit
 //    }
 //}
 
+public struct SerializationKeys {
+    static let XPropertiesKey = "x-prop"
+    static let IANAPropertiesKey = "iana-prop"
+    static let RemindersKey = "reminders"
+    static let PropertyKeyKey = "prop_key"
+    static let PropertyValKey = "prop_value"
+    static let ParametersKey = "parameters"
+    static let ParameterKeyKey = "param_key"
+    static let ParamValueKey = "param_value"
+    static let AlarmsKey = "alarms"
+}
+
 func model__defaultHash<T where T: Hashable, T: CalendarObject>(model m: T) -> Int {
     return (31 &* m.created.hash) &+ m.updated.hash
 }
@@ -68,10 +80,27 @@ func model__getDiffBetweenCalendarObjects(modelOne m1: MirrorType, modelTwo m2: 
     return results
 }
 
-func model__setValue<T where T: NSObject, T: Serializable>(value: NSObject, forSerializationKey key: String, model m: T) {
+func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, forSerializationKey key: String, model m: T) {
+    let varNames = object__getVarNames(mirror: reflect(m))
     if let i = find(m.serializationKeys, key) {
-        let varNames = object__getVarNames(mirror: reflect(m))
-        m.setValue(value, forKey: varNames[i])
+        if value is [String : AnyObject] {
+            // This allows us to have nested dictionary representations of Serializable constructs and have them init properly
+            let mr = reflect(m)
+            let mri = mr[i]
+//            let ar: [AnyObject] = [AnyObject](mri as )
+            let mrip = mri.0
+            let mric = mri.1
+            let v = reflect(m)[i].1
+            let varType = reflect(m)[i].1.valueType
+            if varType is T.Type {
+                let finalObj = T.init(dictionary: value as [String : AnyObject])
+                m.setValue(finalObj, forKey: varNames[i])
+            } else {
+                m.setValue(value, forKey: varNames[i])
+            }
+        } else {
+            m.setValue(value, forKey: varNames[i])
+        }
     }
 }
 
@@ -100,10 +129,9 @@ func nscoder__addToCoder<T: Serializable>(aCoder: NSCoder, mirror m: MirrorType,
 
 func nscoder__initWithCoder<T where T: NSObject, T: Serializable>(aDecoder: NSCoder, mirror m: MirrorType, onObject o: T) {
     for i in 0 ..< o.serializationKeys.count {
-        let varName = o.serializationKeys[i]
-        let varNames = object__getVarNames(mirror: reflect(o))
-        if let val: AnyObject = aDecoder.valueForKey(varName) {
-            o.setValue(val, forKey: varNames[i])
+        let keyName = o.serializationKeys[i]
+        if let val: AnyObject = aDecoder.valueForKey(keyName) {
+            model__setValue(val, forSerializationKey: keyName, model: o)
         }
     }
 }
@@ -140,8 +168,7 @@ func object__getVarNames(mirror m: MirrorType) -> [String] {
 func serializable__dictInit<T where T: NSObject, T: Serializable>(dictionary: [String: AnyObject], model m: T) {
     for (key, value) in dictionary {
         if let i = find(m.serializationKeys, key) {
-            let varNames = object__getVarNames(mirror: reflect(m))
-            m.setValue(value, forKey: varNames[i])
+            model__setValue(value as NSObject, forSerializationKey: key, model: m)
         }
     }
 }

@@ -8,8 +8,6 @@
 
 import Foundation
 
-public typealias CalAddress = NSURL
-
 public class Organizer: Property {
     public private(set) var URI: CalAddress!
 }

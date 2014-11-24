@@ -23,13 +23,13 @@ public class Calendar: CalendarObject, ParserObserver {
         }
     }
     
-    private var closure: ((cal: Calendar) -> Void)?
+    private var closure: ((cal: Calendar) -> Void)!
     public init(stringToParse s: String, completion: (cal: Calendar) -> Void) {
         super.init()
         self.closure = completion
         self.parser = CalParser(delegate: self)
         var err: NSError?
-        self.parser.parseString(s, error: &err)
+        self.parser!.parseString(s, error: &err)
     }
 
     
@@ -46,13 +46,14 @@ public class Calendar: CalendarObject, ParserObserver {
     
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + ["", kCALSCALE, kMETHOD, kPRODID, kVERSION, "", "", ""] // maybe only 2 ""s?
+            return super.serializationKeys + [kUID, SerializationKeys.RemindersKey, kCALSCALE, kMETHOD, kPRODID, kVERSION, "", "", "", ""]
         }
     }
     
     // Parsing
     private var parser: CalParser!
-    private var currentTodoDict: [String : AnyObject]?
+    private var currentTodoDict: [String : AnyObject]!
+    private var currentAlarmDict: [String : AnyObject]!
     
     // MARK: - ParserObserver
     public func parser(key: String!, willMatchIcalobject value: String!) {
@@ -60,13 +61,7 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     public func parser(key: String!, didMatchCalprops value: PropertyMatch!) {
-        let k = key as NSString
-        if k.isPropertyName() {
-            let p = Property(dictionary: [k: value.value])
-            model__setValue(p, forSerializationKey: key, model: self)
-        } else {
-            model__setValue(value, forSerializationKey: key, model: self)
-        }
+        model__setValue(value.toDictionary(), forSerializationKey: key, model: self)
         
     }
     
@@ -75,7 +70,25 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     public func parser(key: String!, didMatchTodoprop value: PropertyMatch!) {
-        currentTodoDict![key] = value
+        currentTodoDict![key] = value.toDictionary()
+    }
+    
+    public func parser(key: String!, willMatchAlarmc value: String!) {
+        currentAlarmDict = [String : AnyObject]()
+    }
+    
+    public func parser(key: String!, didMatchAlarmprop value: PropertyMatch!) {
+        currentAlarmDict![key] = value.toDictionary()
+    }
+    
+    public func parser(key: String!, didMatchAlarmc value: String!) {
+        var alarmsArr: [[String : AnyObject]]? = currentTodoDict![SerializationKeys.AlarmsKey] as? [[String : AnyObject]]
+        if alarmsArr == nil {
+            currentTodoDict![SerializationKeys.AlarmsKey] = [[String : AnyObject]]()
+            alarmsArr = currentTodoDict![SerializationKeys.AlarmsKey] as? [[String : AnyObject]]
+        }
+        
+        alarmsArr?.append(currentAlarmDict!)
     }
     
     public func parser(key: String!, didMatchTodoc value: String!) {

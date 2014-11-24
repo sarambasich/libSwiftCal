@@ -14,74 +14,19 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.AddressBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            symbolName = "*0x10edd4c85">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
-            ignoreCount = "0"
+            ignoreCount = "5"
             continueAfterRunningActions = "No"
-            filePath = "libSwiftCalTests/libSwiftCalTests.swift"
-            timestampString = "438416562.824905"
+            filePath = "libSwiftCal/CalendarObject.swift"
+            timestampString = "438484246.686905"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "testExample()"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "libSwiftCalTests.libSwiftCalTests.(testExample (libSwiftCalTests.libSwiftCalTests) -&gt; () -&gt; ()).(closure #1)"
-                  moduleName = "libSwiftCalTests"
-                  urlString = "file:///Users/Stefan/Documents/Applications/iOS/Frameworks/libSwiftCal/libSwiftCalTests/libSwiftCalTests.swift"
-                  timestampString = "438418045.154759"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "391">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "libSwiftCalTests.libSwiftCalTests.(testExample (libSwiftCalTests.libSwiftCalTests) -&gt; () -&gt; ()).(closure #1).(implicit closure #1)"
-                  moduleName = "libSwiftCalTests"
-                  urlString = "file:///Users/Stefan/Documents/Applications/iOS/Frameworks/libSwiftCal/libSwiftCalTests/libSwiftCalTests.swift"
-                  timestampString = "438418045.155"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "43">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "libSwiftCal/Calendar.swift"
-            timestampString = "438417703.49387"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "parser(_:didMatchCalprops:)"
-            landmarkType = "5">
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "model__setValue(_:forSerializationKey:model:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

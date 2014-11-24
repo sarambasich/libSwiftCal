@@ -9,23 +9,62 @@
 import Foundation
 import EventKit
 
-typealias Duration = NSTimeInterval
-
-typealias IANAPropertyValue = String
-typealias GenericPropertyValue = String
-
 public class Property: CalendarObject {
+    public internal(set) var key: String!
     public internal(set) var propertyValue: AnyObject!
     public internal(set) var parameters = [Parameter]()
+    
+    override init() {
+        super.init()
+    }
+
+    
+    public required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    
+    public required init(dictionary: [String : AnyObject]) {
+        super.init(dictionary: dictionary)
+    }
+    
+    public override var serializationKeys: [String] {
+        get {
+            return super.serializationKeys + [SerializationKeys.PropertyKeyKey, SerializationKeys.PropertyValKey, SerializationKeys.ParametersKey]
+        }
+    }
 }
 
 
 public class Attendee: Property {
-
+    
 }
 
 
 public class CalendarProperty: Property {
+    override init() {
+        super.init()
+    }
+    
+    
+    public required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    public required init(dictionary: [String : AnyObject]) {
+        super.init(dictionary: dictionary)
+    }
+    
+    public override var serializationKeys: [String] {
+        get {
+            return super.serializationKeys + [SerializationKeys.PropertyValKey, SerializationKeys.ParametersKey]
+        }
+    }
+}
+
+
+public class ReminderProperty: Property {
     
 }
 
@@ -46,24 +85,24 @@ public class AlarmProperty: Property {
 
 
 public class TriggerProperty: AlarmProperty {
-    var offsetTrigger: NSTimeInterval!
-    var absoluteTrigger: NSDate!
+    public internal(set) var offsetTrigger: NSTimeInterval!
+    public internal(set) var absoluteTrigger: NSDate!
 }
 
 
 public class AudioAction: AlarmProperty {
-    public var attach: Attachment!
+    public internal(set) var attach: Attachment!
 }
 
 
 public class DisplayAction: AlarmProperty {
-    var desc: String!
+    public internal(set)var desc: String!
 }
 
 
 public class EmailAction: AlarmProperty {
-    var desc: String!
-    var summary: String!
-    var attendees = [Attendee]()
-    var attach = [Attachment]()
+    public internal(set) var desc: String!
+    public internal(set) var summary: String!
+    public internal(set) var attendees = [Attendee]()
+    public internal(set) var attach = [Attachment]()
 }
