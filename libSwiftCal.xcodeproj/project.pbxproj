@@ -26,7 +26,6 @@
 		F8F8EE8F1A1C3F200046AF23 /* CalendarType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECCC1A1C3F200046AF23 /* CalendarType.swift */; };
 		F8F8EE961A1C3F200046AF23 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECD51A1C3F200046AF23 /* Observable.swift */; };
 		F8F8EE971A1C3F200046AF23 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECD61A1C3F200046AF23 /* Observer.swift */; };
-		F8F8EE981A1C3F200046AF23 /* Organizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECD71A1C3F200046AF23 /* Organizer.swift */; };
 		F8F8EE991A1C3F200046AF23 /* CalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F8ECD91A1C3F200046AF23 /* CalParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8F8EE9A1A1C3F200046AF23 /* CalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECDA1A1C3F200046AF23 /* CalParser.m */; };
 		F8F8EE9B1A1C3F200046AF23 /* iCal.grammar in Resources */ = {isa = PBXBuildFile; fileRef = F8F8ECDB1A1C3F200046AF23 /* iCal.grammar */; };
@@ -87,7 +86,6 @@
 		F8F8ECCF1A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8F8ECD51A1C3F200046AF23 /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		F8F8ECD61A1C3F200046AF23 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
-		F8F8ECD71A1C3F200046AF23 /* Organizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Organizer.swift; sourceTree = "<group>"; };
 		F8F8ECD91A1C3F200046AF23 /* CalParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalParser.h; sourceTree = "<group>"; };
 		F8F8ECDA1A1C3F200046AF23 /* CalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalParser.m; sourceTree = "<group>"; };
 		F8F8ECDB1A1C3F200046AF23 /* iCal.grammar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iCal.grammar; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 				F8F8ECCD1A1C3F200046AF23 /* Info.plist */,
 				F8F8ECD51A1C3F200046AF23 /* Observable.swift */,
 				F8F8ECD61A1C3F200046AF23 /* Observer.swift */,
-				F8F8ECD71A1C3F200046AF23 /* Organizer.swift */,
 				F8C266E91A21B5FE008370E2 /* Parameter.swift */,
 				F8F8ECDF1A1C3F200046AF23 /* Properties.swift */,
 				F8F8ECE01A1C3F200046AF23 /* RecurrenceDate.swift */,
@@ -423,7 +420,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8F8EE9A1A1C3F200046AF23 /* CalParser.m in Sources */,
-				F8F8EE981A1C3F200046AF23 /* Organizer.swift in Sources */,
 				F8F8EE9D1A1C3F200046AF23 /* iCalParser.m in Sources */,
 				F8C266EA1A21B5FE008370E2 /* Parameter.swift in Sources */,
 				F89DE8C71A211678009BCFE1 /* NSString+CalParser.m in Sources */,

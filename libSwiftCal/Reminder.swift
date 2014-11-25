@@ -32,10 +32,10 @@ public class Reminder: CalendarObject {
     public private(set) var eventCreated: ReminderProperty!
     public private(set) var description_: ReminderProperty!
     public private(set) var start: ReminderProperty!
-    public private(set) var geo: ReminderProperty!
+    public private(set) var geo: Geo!
     public private(set) var lastModified: ReminderProperty!
     public private(set) var location: ReminderProperty!
-    public private(set) var organizer: ReminderProperty!
+    public private(set) var organizer: Organizer!
     
     public private(set) var percentComplete: ReminderProperty!
     public private(set) var priority: ReminderProperty!
@@ -53,14 +53,14 @@ public class Reminder: CalendarObject {
     
     public private(set) var attachments = [Attachment]()
     public private(set) var attendees = [Attendee]()
-    public private(set) var categories = [String]()
-    public private(set) var comments = [String]()
-    public private(set) var contacts = [String]()
+    public private(set) var categories = [ReminderProperty]()
+    public private(set) var comments = [ReminderProperty]()
+    public private(set) var contacts = [ReminderProperty]()
     
-    public private(set) var exceptions = [NSDate]()
+    public private(set) var exceptions = [ReminderProperty]()
     public private(set) var requestStatus = [RequestStatus]()
     public private(set) var related = [CalendarObject]() // TODO: weak ref
-    public private(set) var resources = [String]()
+    public private(set) var resources = [ReminderProperty]()
     
     public private(set) var recurrenceDates = [RecurrenceDate]()
     public private(set) var xProperties = [GenericProperty]()
@@ -82,16 +82,6 @@ public class Reminder: CalendarObject {
         }
     }
     
-    
-    // MARK: - iCal type
-//    public required init(data: NSData) {
-//
-//        super.init(data: data)
-//    }
-//    
-//    public override func stringifyToiCal() -> String {
-//        return super.stringifyToiCal()
-//    }
     
     // MARK: - NSCoding
     public required init(coder aDecoder: NSCoder) {

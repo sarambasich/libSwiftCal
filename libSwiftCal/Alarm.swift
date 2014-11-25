@@ -21,7 +21,7 @@ public class Alarm: CalendarObject {
     public private(set) weak var reminder: Reminder?
     
     public private(set) var action: AlarmProperty!
-    public private(set) var trigger: TriggerProperty!
+    public private(set) var trigger: Trigger!
     public private(set) var duration: Duration!
     public private(set) var repeat = 0
     public private(set) var xProperties = [GenericProperty]()
