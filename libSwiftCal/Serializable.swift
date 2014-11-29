@@ -11,5 +11,6 @@ import UIKit
 @objc public protocol Serializable {
     var serializationKeys: [String] { get }
     init(dictionary: [String : AnyObject])
+    optional func initFromDict(dictionary: [String : AnyObject])
     func toDictionary() -> [String : AnyObject]
 }

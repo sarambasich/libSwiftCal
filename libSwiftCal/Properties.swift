@@ -18,11 +18,11 @@ public protocol TypedValue {
 }
 
 public class Property: CalendarObject, TypedValue {
-    public internal(set) var key: String!
+    public internal(set) var key: String! = ""
     public internal(set) var propertyValue: AnyObject!
     public internal(set) var parameters = [Parameter]()
     
-    override init() {
+    public required init() {
         super.init()
     }
 
@@ -122,6 +122,10 @@ public class Geo: Property {
     public var lat: CLLocationDegrees = 0.0
     public var lon: CLLocationDegrees = 0.0
     
+    public required init() {
+        super.init()
+    }
+    
     // MARK: - NSCoding
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -142,18 +146,48 @@ public class Geo: Property {
 
 // MARK: - Generic wrappers
 public class CalendarProperty: Property {
+    public required init(dictionary: [String : AnyObject]) {
+        super.init(dictionary: dictionary)
+    }
     
+    public required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    public required init() {
+        super.init()
+    }
 }
 
 
 public class ReminderProperty: Property {
+    public required init(dictionary: [String : AnyObject]) {
+        super.init(dictionary: dictionary)
+    }
     
+    public required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    public required init() {
+        super.init()
+    }
 }
 
 
 // MARK: - Alarm properties
 public class AlarmProperty: Property {
+    public required init(dictionary: [String : AnyObject]) {
+        super.init(dictionary: dictionary)
+    }
     
+    public required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    public required init() {
+        super.init()
+    }
 }
 
 
@@ -191,8 +225,8 @@ public class DisplayAction: AlarmProperty {
 
 
 public class EmailAction: AlarmProperty {
-    public internal(set) var desc: String!
-    public internal(set) var summary: String!
+    public internal(set) var desc: String! = ""
+    public internal(set) var summary: String! = ""
     public internal(set) var attendees = [Attendee]()
     public internal(set) var attach = [Attachment]()
     

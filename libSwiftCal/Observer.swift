@@ -11,7 +11,3 @@ import Foundation
 @objc public protocol Observer: NSObjectProtocol {
     optional func didRefresh(model: CalendarObject, error e: NSError?)
 }
-
-//public protocol CollectionObserver: NSObjectProtocol {
-//    func didRefresh(models: [CalendarObject], error e: NSError?)
-//}

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Stefan Arambasich. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 //func model__addListener<T: CalendarType>(l: CalendarObjectListener, model m: T) {
 //    var found = false
@@ -80,29 +80,67 @@ func model__getDiffBetweenCalendarObjects(modelOne m1: MirrorType, modelTwo m2: 
     return results
 }
 
+typealias myType = NSObject
+
+func getOptionalGenericType<T>(optional: Optional<T>.Type) -> T.Type {
+    return T.self
+}
+
+func getArrayType<T>(arr: [T].Type) -> T.Type {
+    return T.self
+}
+
 func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, forSerializationKey key: String, model m: T) {
     let varNames = object__getVarNames(mirror: reflect(m))
     if let i = find(m.serializationKeys, key) {
-        if value is [String : AnyObject] {
-            // This allows us to have nested dictionary representations of Serializable constructs and have them init properly
-            let mr = reflect(m)
-            let mri = mr[i]
-//            let ar: [AnyObject] = [AnyObject](mri as )
-            let mrip = mri.0
-            let mric = mri.1
-            let v = reflect(m)[i].1
-            let varType = reflect(m)[i].1.valueType
-            if varType is T.Type {
-                let finalObj = T.init(dictionary: value as [String : AnyObject])
-                m.setValue(finalObj, forKey: varNames[i])
-            } else {
-                m.setValue(value, forKey: varNames[i])
+        let mrs = object__getAllMirrorValues(mirror: reflect(m))
+        let mr = mrs[i]
+        
+        // This allows us to have nested dictionary representations
+        // of Serializable constructs and have them init properly TODO: not generic :(
+        if let dict = value as? [String : AnyObject] {
+            if let t1 = mr.1.value as? NSObject {
+                if let t2 = t1 as? CalendarObject {
+                    let finalObj = t2.dynamicType(dictionary: dict)
+                    m.setValue(finalObj, forKey: varNames[i])
+                }
+            }
+        } else if let arr = value as? [[String : AnyObject]] {
+            // TODO: this really needs a better solution...
+            var params = [Parameter]()
+            var remProps = [ReminderProperty]()
+            var rems = [Reminder]()
+            
+            for dict in arr {
+                if let t1 = mr.1.value as? [Parameter] {
+                    let t2 = getArrayType(t1.dynamicType)
+                    let t3 = t2(dictionary: dict)
+                    params.append(t3)
+                } else if let t1 = mr.1.value as? [ReminderProperty] {
+                    let t2 = getArrayType(t1.dynamicType)
+                    let t3 = t2(dictionary: dict)
+                    remProps.append(t3)
+                } else if let t1 = mr.1.value as? [Reminder] {
+                    let t2 = getArrayType(t1.dynamicType)
+                    let t3 = t2(dictionary: dict)
+                    rems.append(t3)
+                }
+            }
+            
+            if params.count > 0 {
+                m.setValue(params, forKey: varNames[i])
+            } else if remProps.count > 0 {
+                m.setValue(remProps, forKey: varNames[i])
+            }  else if rems.count > 0 {
+                m.setValue(rems, forKey: varNames[i])
             }
         } else {
+            let v = value as? String
             m.setValue(value, forKey: varNames[i])
         }
     }
 }
+
 
 //func model__update<T where T: CalendarType, T: NSObject>(currentCalendarObject cm: T, newCalendarObject nm: T) {
 //    let diffs = model__getDiffBetweenCalendarObjects(modelOne: reflect(cm), modelTwo: reflect(nm))
@@ -152,13 +190,29 @@ func nscopying__copyWithZone<T: NSObject where T: NSCopying>(fromMirror fm: Mirr
 func object__getVarNames(mirror m: MirrorType) -> [String] {
     var result = [String]()
     for i in 0 ..< m.count {
-        if m[i].0 == "super"{
+        if m[i].0 == "super" {
             let rs = object__getVarNames(mirror: m[i].1)
             for r in rs {
                 result.append(r)
             }
         } else {
             result.append(m[i].0)
+        }
+    }
+    
+    return result
+}
+
+func object__getAllMirrorValues(mirror m: MirrorType) -> [(String, MirrorType)] {
+    var result = [(String, MirrorType)]()
+    for i in 0 ..< m.count {
+        if m[i].0 == "super" {
+            let rs = object__getAllMirrorValues(mirror: m[i].1)
+            for r in rs {
+                result.append(r)
+            }
+        } else {
+            result.append(m[i])
         }
     }
     
@@ -208,7 +262,7 @@ public class CalendarObject: NSObject, CalendarType {
     
     
     // MARK: - Init
-    override init() {
+    public override required init() {
         
     }
     
@@ -249,6 +303,16 @@ public class CalendarObject: NSObject, CalendarType {
         observers.append(o)
     }
     
+    public func removeObserver(observer o: Observer) {
+        for i in 0 ..< self.observers.count {
+            let ob = self.observers[i]
+            if o === ob {
+                self.observers.removeAtIndex(i)
+                break
+            }
+        }
+    }
+    
     
     // MARK: - Serializable
     public var serializationKeys: [String] {
@@ -260,6 +324,10 @@ public class CalendarObject: NSObject, CalendarType {
     public required init(dictionary: [String : AnyObject]) {
         super.init()
         
+        serializable__dictInit(dictionary, model: self)
+    }
+    
+    public func initFromDict(dictionary: [String : AnyObject]) {
         serializable__dictInit(dictionary, model: self)
     }
     

@@ -30,9 +30,17 @@ class libSwiftCalTests: XCTestCase {
         let str: String = NSString(data: NSData(contentsOfFile: "/Users/Stefan/Documents/Applications/iOS/Frameworks/libSwiftCal/libSwiftCalTests/EasyInput.ics")!, encoding: NSUTF8StringEncoding)!
         
         let c = { (cal: Calendar) -> Void in
-            let p1 = cal.prodID
-            let p2 = cal.prodID.propertyValue as String
-            XCTAssert(p2 == "-/MyList App/0.1a/EN", "FAILED")
+            XCTAssert(cal.prodID.stringValue! == "-/MyList App/0.1a/EN", "FAILED")
+            XCTAssert(cal.version.intValue! == 2, "FAILED")
+            XCTAssert(cal.calscale.stringValue! == "GREGORIAN", "FAILED")
+            
+            XCTAssert(cal.reminders.count == 1, "FAILED")
+            let firstRem = cal.reminders.first?
+            let due = firstRem?.due
+            XCTAssert(due?.dateValue != nil, "FAILED")
+            XCTAssert(due?.parameters.count == 3, "FAILED")
+            XCTAssert(firstRem?.summary?.stringValue? == "Reminders are cool", "FAILED")
+            exp.fulfill()
         }
         
         var cal = Calendar(stringToParse: str, completion: c)

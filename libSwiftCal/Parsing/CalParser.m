@@ -37,13 +37,18 @@
 }
 
 - (NSString *) debugDescription {
-    return [NSString stringWithFormat:@"<Prop(%@): %@\nParams: %@>", key, value, [params description]];
+    return [NSString stringWithFormat:@"<Prop(%@): %@\nParams: %@>", key, value, [params debugDescription]];
 }
 
 - (NSDictionary *) toDictionary {
+    NSMutableArray * paramsArr = [[NSMutableArray alloc] init];
+    for (ParameterMatch * pm in params) {
+        [paramsArr addObject:[pm toDictionary]];
+    }
+    
     return @{@"prop_key": key,
              @"prop_value": value,
-             @"parameters": params
+             @"parameters": paramsArr
              };
 }
 
@@ -59,8 +64,8 @@
 }
 
 - (NSDictionary *) toDictionary {
-    return @{@"key": key,
-             @"value": value,
+    return @{@"param_key": key,
+             @"param_value": value,
              };
 }
 

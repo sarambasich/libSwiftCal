@@ -12,11 +12,3 @@ import Foundation
     optional func addObserver(observer o: Observer)
     optional func removeObserver(observer o: Observer)
 }
-
-//protocol ObservableCollection {
-//    func refreshCollection<T: CalendarType>(type: T)
-//    
-//    var listeners: [CollectionObserver] { get }
-//    func addListener(listener l: CollectionObserver)
-//    func removeListener(listener l: CollectionObserver)
-//}

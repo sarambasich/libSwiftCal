@@ -11,10 +11,10 @@ import Foundation
 public class Parameter: CalendarObject {
     public private(set) weak var property: Property?
     
-    public internal(set) var key: AnyObject!
-    public internal(set) var value: AnyObject!
+    public internal(set) var key: String! = ""
+    public internal(set) var value = NSObject()
     
-    override init() {
+    public required init() {
         super.init()
     }
     
@@ -30,7 +30,7 @@ public class Parameter: CalendarObject {
     
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + [SerializationKeys.ParameterKeyKey, SerializationKeys.ParamValueKey]
+            return super.serializationKeys + ["", SerializationKeys.ParameterKeyKey, SerializationKeys.ParamValueKey]
         }
     }
 }

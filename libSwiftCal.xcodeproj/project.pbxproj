@@ -73,6 +73,7 @@
 		F89DE8BE1A210EFD009BCFE1 /* libSwiftCal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSwiftCal.h; sourceTree = "<group>"; };
 		F89DE8C41A211678009BCFE1 /* NSString+CalParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CalParser.h"; sourceTree = "<group>"; };
 		F89DE8C51A211678009BCFE1 /* NSString+CalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CalParser.m"; sourceTree = "<group>"; };
+		F8AC39FB1A2978C500558B8C /* Serializer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Serializer.playground; sourceTree = "<group>"; };
 		F8AF2BCE1A21836900BCFE8C /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		F8C266E91A21B5FE008370E2 /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +207,7 @@
 				F89DE8BE1A210EFD009BCFE1 /* libSwiftCal.h */,
 				F8F8ECCF1A1C3F200046AF23 /* Info.plist */,
 				F8AF2BCE1A21836900BCFE8C /* MyPlayground.playground */,
+				F8AC39FB1A2978C500558B8C /* Serializer.playground */,
 			);
 			path = libSwiftCal;
 			sourceTree = "<group>";

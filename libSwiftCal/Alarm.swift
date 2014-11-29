@@ -17,6 +17,9 @@ public func != (lhs: Alarm, rhs: Alarm) -> Bool {
     return !(lhs == rhs)
 }
 
+/**
+    Defines a VALARM calendar component.
+*/
 public class Alarm: CalendarObject {
     public private(set) weak var reminder: Reminder?
     
@@ -26,6 +29,10 @@ public class Alarm: CalendarObject {
     public private(set) var repeat = 0
     public private(set) var xProperties = [GenericProperty]()
     public private(set) var IANAProperties = [IANAProperty]()
+    
+    public required init() {
+        super.init()
+    }
     
     
     // MARK: - Hashable

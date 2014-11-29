@@ -24,32 +24,32 @@ public class Reminder: CalendarObject {
         static let confidential = "CONFIDENTIAL"
     }
     
-    public private(set) var dateTimestamp: ReminderProperty!
-    public private(set) var uid: ReminderProperty!
+    public private(set) var dateTimestamp: ReminderProperty! = ReminderProperty()
+    public private(set) var uid: ReminderProperty! = ReminderProperty()
     
-    public private(set) var accessClass: ReminderProperty!
-    public private(set) var completed: ReminderProperty!
-    public private(set) var eventCreated: ReminderProperty!
-    public private(set) var description_: ReminderProperty!
-    public private(set) var start: ReminderProperty!
-    public private(set) var geo: Geo!
-    public private(set) var lastModified: ReminderProperty!
-    public private(set) var location: ReminderProperty!
-    public private(set) var organizer: Organizer!
+    public private(set) var accessClass: ReminderProperty! = ReminderProperty()
+    public private(set) var completed: ReminderProperty! = ReminderProperty()
+    public private(set) var eventCreated: ReminderProperty! = ReminderProperty()
+    public private(set) var description_: ReminderProperty! = ReminderProperty()
+    public private(set) var start: ReminderProperty! = ReminderProperty()
+    public private(set) var geo: Geo! = Geo()
+    public private(set) var lastModified: ReminderProperty! = ReminderProperty()
+    public private(set) var location: ReminderProperty! = ReminderProperty()
+    public private(set) var organizer: Organizer! = Organizer()
     
-    public private(set) var percentComplete: ReminderProperty!
-    public private(set) var priority: ReminderProperty!
-    public private(set) var recurrenceID: ReminderProperty!
-    public private(set) var sequence: ReminderProperty!
-    public private(set) var status: ReminderProperty!
+    public private(set) var percentComplete: ReminderProperty! = ReminderProperty()
+    public private(set) var priority: ReminderProperty! = ReminderProperty()
+    public private(set) var recurrenceID: ReminderProperty! = ReminderProperty()
+    public private(set) var sequence: ReminderProperty! = ReminderProperty()
+    public private(set) var status: ReminderProperty! = ReminderProperty()
     
-    public private(set) var summary: ReminderProperty!
-    public private(set) var URL: ReminderProperty!
+    public private(set) var summary: ReminderProperty! = ReminderProperty()
+    public private(set) var URL: ReminderProperty! = ReminderProperty()
     
-    public private(set) var rrule: ReminderProperty!
+    public private(set) var rrule: ReminderProperty! = ReminderProperty()
     
-    public private(set) var due: ReminderProperty!
-    public private(set) var duration: ReminderProperty!
+    public private(set) var due: ReminderProperty! = ReminderProperty()
+    public private(set) var duration: ReminderProperty! = ReminderProperty()
     
     public private(set) var attachments = [Attachment]()
     public private(set) var attendees = [Attendee]()
@@ -70,7 +70,7 @@ public class Reminder: CalendarObject {
     
     
     // MARK: - Init
-    override init() {
+    public required init() {
         super.init()
     }
     

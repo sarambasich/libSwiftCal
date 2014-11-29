@@ -12,10 +12,10 @@ public class Calendar: CalendarObject, ParserObserver {
     private var calendarIdentifier: String!
     public internal(set) var reminders = [Reminder]()
     
-    public internal(set) var calscale: CalendarProperty!
-    public internal(set) var method: CalendarProperty!
-    public internal(set) var prodID: CalendarProperty!
-    public internal(set) var version: CalendarProperty!
+    public internal(set) var calscale = CalendarProperty()
+    public internal(set) var method = CalendarProperty()
+    public internal(set) var prodID = CalendarProperty()
+    public internal(set) var version = CalendarProperty()
     
     public var uid: String {
         get {
@@ -30,6 +30,10 @@ public class Calendar: CalendarObject, ParserObserver {
         self.parser = CalParser(delegate: self)
         var err: NSError?
         self.parser!.parseString(s, error: &err)
+    }
+    
+    public required init() {
+        super.init()
     }
 
     
@@ -51,9 +55,9 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     // Parsing
-    private var parser: CalParser!
-    private var currentTodoDict: [String : AnyObject]!
-    private var currentAlarmDict: [String : AnyObject]!
+    private var parser: CalParser! = CalParser()
+    private var currentTodoDict: [String : AnyObject]! = [String : AnyObject]()
+    private var currentAlarmDict: [String : AnyObject]! = [String : AnyObject]()
     
     // MARK: - ParserObserver
     public func parser(key: String!, willMatchIcalobject value: String!) {
@@ -61,8 +65,9 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     public func parser(key: String!, didMatchCalprops value: PropertyMatch!) {
+//        self.version = CalendarProperty()
+//        self.version.propertyValue = "hai"
         model__setValue(value.toDictionary(), forSerializationKey: key, model: self)
-        
     }
     
     public func parser(key: String!, willMatchTodoc value: String!) {
@@ -70,7 +75,8 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     public func parser(key: String!, didMatchTodoprop value: PropertyMatch!) {
-        currentTodoDict![key] = value.toDictionary()
+        let val: [NSObject : AnyObject] = value.toDictionary()
+        currentTodoDict![key] = val
     }
     
     public func parser(key: String!, willMatchAlarmc value: String!) {
@@ -93,7 +99,7 @@ public class Calendar: CalendarObject, ParserObserver {
     
     public func parser(key: String!, didMatchTodoc value: String!) {
         let newTodoc = Reminder(dictionary: self.currentTodoDict!)
-//        self.reminders.append(Reminder())
+        self.reminders.append(newTodoc)
     }
     
     public func parser(key: String!, didMatchIcalobject value: String!) {
