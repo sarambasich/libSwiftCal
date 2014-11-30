@@ -11,7 +11,7 @@ import EventKit
 
 /**
     A `TypedValue` type has only a generic representation of an object
-    that it holds. This protocol provides facilities to convert that 
+    that it holds. This protocol provides methods to convert that
     object to a more specific type. Conversion is best-effort and may
     fail if the underlyng data does not match or cannot be converted.
 */

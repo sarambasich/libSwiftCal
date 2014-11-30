@@ -11,7 +11,7 @@ import Foundation
 /**
     Protocol describing an observer type.
 
-    An observer type is an object that listens for 'observes' changes to
+    An observer type is an object that listens for ('observes') changes to
     a target model object. As soon as that object is modified, a callback
     is invoked on the observer.
 */

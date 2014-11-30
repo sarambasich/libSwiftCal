@@ -115,7 +115,6 @@ public class Reminder: CalendarObject {
     
     /// A list of recurrence dates for this reminder object
     public private(set) var recurrenceDates = [RecurrenceDate]()
-    public private(set) var repeat: AlarmProperty! = AlarmProperty()
     /// Non-standard "X-" properties
     public private(set) var xProperties = [GenericProperty]()
     /// IANA-registered property names

@@ -114,6 +114,9 @@ func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, for
             var alarms = [Alarm]()
             var xProps = [GenericProperty]()
             
+            let v = varNames
+            let s = m.serializationKeys
+            
             for dict in arr {
                 if let t1 = mr.1.value as? [Parameter] {
                     let t2 = getArrayType(t1.dynamicType)

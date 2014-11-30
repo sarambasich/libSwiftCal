@@ -26,3 +26,4 @@ for fmt in fmts {
 
 let x: NSDate = result as NSDate
 let n = x.timeIntervalSinceReferenceDate
+let d = NSDate(timeIntervalSinceReferenceDate: 411695400.0)
