@@ -8,6 +8,29 @@
 
 import Foundation
 
+/**
+    Defines the status codes returned for a scheduling request.
+
+    - PreliminarySuccess: Preliminary success.  This class of status code
+        indicates that the request has been initially processed but that
+        completion is pending.
+
+    - Successful: Successful.  This class of status code indicates that
+        the request was completed successfully.  However, the
+        exact status code can indicate that a fallback has been
+        taken.
+
+    - ClientError: Client Error.  This class of status code indicates that
+        the request was not successful.  The error is the result
+        of either a syntax or a semantic error in the client-
+        formatted request.  Request should not be retried until
+        the condition in the request is corrected.
+
+    - SchedulingError: Scheduling Error.  This class of status code indicates
+        that the request was not successful.  Some sort of error
+        occurred within the calendaring and scheduling service,
+        not directly related to the request itself.
+*/
 public struct RequestStatus {
     public enum StatusReturnCode: Int {
         case PreliminarySuccess = 100
@@ -16,7 +39,10 @@ public struct RequestStatus {
         case SchedulingError = 400
     }
     
+    /// The status as an integer
     public private(set) var status: Int!
+    
+    /// The status as a string
     public var statusStr: String? {
         get {
             var result: String?

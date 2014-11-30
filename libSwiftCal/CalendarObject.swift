@@ -366,17 +366,23 @@ public class CalendarObject: NSObject, CalendarType {
     
     
     // MARK: - Observable
-    public func addObserver(observer o: Observer) {
+    public func addObserver(o: Observer) {
         observers.append(o)
     }
     
-    public func removeObserver(observer o: Observer) {
+    public func removeObserver(o: Observer) {
         for i in 0 ..< self.observers.count {
             let ob = self.observers[i]
             if o === ob {
                 self.observers.removeAtIndex(i)
                 break
             }
+        }
+    }
+    
+    public func notifyObservers(e: NSError?) {
+        for o in self.observers {
+            o.didRefresh?(self, error: e)
         }
     }
     
@@ -394,9 +400,9 @@ public class CalendarObject: NSObject, CalendarType {
         serializable__dictInit(dictionary, model: self)
     }
     
-    public func initFromDict(dictionary: [String : AnyObject]) {
-        serializable__dictInit(dictionary, model: self)
-    }
+//    public func initFromDict(dictionary: [String : AnyObject]) {
+//        serializable__dictInit(dictionary, model: self)
+//    }
     
     public func toDictionary() -> [String : AnyObject] {
         var result = [String: AnyObject]()

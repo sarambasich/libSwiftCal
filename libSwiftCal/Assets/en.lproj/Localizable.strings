@@ -7,3 +7,6 @@
 */
 
 "PreliminarySuccess" = "Preliminary success";
+"Successful" = "Success";
+"ClientError" = "Client error";
+"SchedulingError" = "Scheduling error";
