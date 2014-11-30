@@ -20,4 +20,6 @@ NSArray * getSortedPropertyParameterNames();
 
 - (BOOL) isPropertyParameterName;
 
+- (BOOL) isXValue;
+
 @end

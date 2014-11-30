@@ -58,15 +58,15 @@ public class Calendar: CalendarObject, ParserObserver {
     private var parser: CalParser! = CalParser()
     private var currentTodoDict: [String : AnyObject]! = [String : AnyObject]()
     private var currentAlarmDict: [String : AnyObject]! = [String : AnyObject]()
+    private var currentAlarmXProps: [[String : AnyObject]]! = [[String : AnyObject]]()
+    private var currentAlarms: [[String : AnyObject]] = [[String : AnyObject]]()
     
     // MARK: - ParserObserver
     public func parser(key: String!, willMatchIcalobject value: String!) {
-        println("Starting...")
+        
     }
     
     public func parser(key: String!, didMatchCalprops value: PropertyMatch!) {
-//        self.version = CalendarProperty()
-//        self.version.propertyValue = "hai"
         model__setValue(value.toDictionary(), forSerializationKey: key, model: self)
     }
     
@@ -84,22 +84,30 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     public func parser(key: String!, didMatchAlarmprop value: PropertyMatch!) {
-        currentAlarmDict![key] = value.toDictionary()
+        let k = key as NSString
+        if k.isXValue() {
+            if currentAlarmXProps == nil {
+                currentAlarmXProps = [[String : AnyObject]]()
+            }
+            
+            currentAlarmXProps.append(value.toDictionary() as [String : AnyObject])
+        } else {
+            currentAlarmDict[key] = value.toDictionary()
+        }
     }
     
     public func parser(key: String!, didMatchAlarmc value: String!) {
-        var alarmsArr: [[String : AnyObject]]? = currentTodoDict![SerializationKeys.AlarmsKey] as? [[String : AnyObject]]
-        if alarmsArr == nil {
-            currentTodoDict![SerializationKeys.AlarmsKey] = [[String : AnyObject]]()
-            alarmsArr = currentTodoDict![SerializationKeys.AlarmsKey] as? [[String : AnyObject]]
-        }
-        
-        alarmsArr?.append(currentAlarmDict!)
+        currentAlarmDict[SerializationKeys.XPropertiesKey] = currentAlarmXProps
+        currentAlarms.append(currentAlarmDict)
+        currentAlarmDict = nil
     }
     
     public func parser(key: String!, didMatchTodoc value: String!) {
+        self.currentTodoDict[SerializationKeys.AlarmsKey] = currentAlarms
         let newTodoc = Reminder(dictionary: self.currentTodoDict!)
         self.reminders.append(newTodoc)
+        self.currentAlarms.removeAll()
+        self.currentAlarmXProps.removeAll()
     }
     
     public func parser(key: String!, didMatchIcalobject value: String!) {

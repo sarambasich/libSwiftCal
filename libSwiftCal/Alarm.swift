@@ -23,10 +23,11 @@ public func != (lhs: Alarm, rhs: Alarm) -> Bool {
 public class Alarm: CalendarObject {
     public private(set) weak var reminder: Reminder?
     
-    public private(set) var action: AlarmProperty!
-    public private(set) var trigger: Trigger!
-    public private(set) var duration: Duration!
-    public private(set) var repeat = 0
+    public private(set) var action: AlarmProperty! = AlarmProperty()
+    public private(set) var trigger: Trigger! = Trigger()
+    public private(set) var duration: Duration! = Duration()
+    public private(set) var desc: AlarmProperty! = AlarmProperty()
+    public private(set) var repeat: AlarmProperty! = AlarmProperty()
     public private(set) var xProperties = [GenericProperty]()
     public private(set) var IANAProperties = [IANAProperty]()
     
@@ -58,7 +59,7 @@ public class Alarm: CalendarObject {
     
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + ["", kACTION, kTRIGGER, kDURATION, kREPEAT, SerializationKeys.XPropertiesKey, SerializationKeys.IANAPropertiesKey]
+            return super.serializationKeys + ["", kACTION, kTRIGGER, kDURATION, kDESCRIPTION, kREPEAT, SerializationKeys.XPropertiesKey, SerializationKeys.IANAPropertiesKey]
         }
     }
 }

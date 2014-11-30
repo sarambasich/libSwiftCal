@@ -29,7 +29,7 @@ public class Reminder: CalendarObject {
     
     public private(set) var accessClass: ReminderProperty! = ReminderProperty()
     public private(set) var completed: ReminderProperty! = ReminderProperty()
-    public private(set) var eventCreated: ReminderProperty! = ReminderProperty()
+    public private(set) var createdTime: ReminderProperty! = ReminderProperty()
     public private(set) var description_: ReminderProperty! = ReminderProperty()
     public private(set) var start: ReminderProperty! = ReminderProperty()
     public private(set) var geo: Geo! = Geo()

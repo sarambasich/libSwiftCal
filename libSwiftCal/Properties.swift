@@ -240,10 +240,30 @@ public class EmailAction: AlarmProperty {
 
 // MARK: - X- and IANA properties
 public class GenericProperty: Property {
+    public required init(dictionary: [String : AnyObject]) {
+        super.init(dictionary: dictionary)
+    }
     
+    public required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    public required init() {
+        super.init()
+    }
 }
 
 
 public class IANAProperty: Property {
+    public required init(dictionary: [String : AnyObject]) {
+        super.init(dictionary: dictionary)
+    }
     
+    public required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    public required init() {
+        super.init()
+    }
 }

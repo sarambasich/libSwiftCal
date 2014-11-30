@@ -17,5 +17,5 @@ public class Attachment: Property {
         }
     }
     
-    public private(set)var binary: NSData!
+    public private(set) var binary: NSData!
 }

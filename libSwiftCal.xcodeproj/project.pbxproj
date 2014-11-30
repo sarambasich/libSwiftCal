@@ -18,6 +18,7 @@
 		F89DE8C61A211678009BCFE1 /* NSString+CalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F89DE8C41A211678009BCFE1 /* NSString+CalParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F89DE8C71A211678009BCFE1 /* NSString+CalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DE8C51A211678009BCFE1 /* NSString+CalParser.m */; };
 		F8C266EA1A21B5FE008370E2 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C266E91A21B5FE008370E2 /* Parameter.swift */; };
+		F8F0C5861A2A8F910007732E /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F0C5851A2A8F910007732E /* ModelType.swift */; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
 		F8F8EE8B1A1C3F200046AF23 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECC81A1C3F200046AF23 /* Alarm.swift */; };
 		F8F8EE8C1A1C3F200046AF23 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECC91A1C3F200046AF23 /* Attachment.swift */; };
@@ -76,6 +77,7 @@
 		F8AC39FB1A2978C500558B8C /* Serializer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Serializer.playground; sourceTree = "<group>"; };
 		F8AF2BCE1A21836900BCFE8C /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		F8C266E91A21B5FE008370E2 /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
+		F8F0C5851A2A8F910007732E /* ModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8EAF71A1C3EEE0046AF23 /* libSwiftCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libSwiftCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8ECC81A1C3F200046AF23 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				F8F8ECCC1A1C3F200046AF23 /* CalendarType.swift */,
 				F87865121A2252D300A99B97 /* Extensions.swift */,
 				F8F8ECCD1A1C3F200046AF23 /* Info.plist */,
+				F8F0C5851A2A8F910007732E /* ModelType.swift */,
 				F8F8ECD51A1C3F200046AF23 /* Observable.swift */,
 				F8F8ECD61A1C3F200046AF23 /* Observer.swift */,
 				F8C266E91A21B5FE008370E2 /* Parameter.swift */,
@@ -433,6 +436,7 @@
 				F8F8EE8C1A1C3F200046AF23 /* Attachment.swift in Sources */,
 				F8F8EE961A1C3F200046AF23 /* Observable.swift in Sources */,
 				F8F8EEA11A1C3F200046AF23 /* Reminder.swift in Sources */,
+				F8F0C5861A2A8F910007732E /* ModelType.swift in Sources */,
 				F8F8EE8E1A1C3F200046AF23 /* CalendarObject.swift in Sources */,
 				F8F8EE971A1C3F200046AF23 /* Observer.swift in Sources */,
 				F8F8EE8B1A1C3F200046AF23 /* Alarm.swift in Sources */,

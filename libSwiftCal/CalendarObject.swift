@@ -99,6 +99,7 @@ func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, for
         // This allows us to have nested dictionary representations
         // of Serializable constructs and have them init properly TODO: not generic :(
         if let dict = value as? [String : AnyObject] {
+            let v = mr.1.value
             if let t1 = mr.1.value as? NSObject {
                 if let t2 = t1 as? CalendarObject {
                     let finalObj = t2.dynamicType(dictionary: dict)
@@ -110,6 +111,8 @@ func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, for
             var params = [Parameter]()
             var remProps = [ReminderProperty]()
             var rems = [Reminder]()
+            var alarms = [Alarm]()
+            var xProps = [GenericProperty]()
             
             for dict in arr {
                 if let t1 = mr.1.value as? [Parameter] {
@@ -124,6 +127,14 @@ func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, for
                     let t2 = getArrayType(t1.dynamicType)
                     let t3 = t2(dictionary: dict)
                     rems.append(t3)
+                } else if let t1 = mr.1.value as? [Alarm] {
+                    let t2 = getArrayType(t1.dynamicType)
+                    let t3 = t2(dictionary: dict)
+                    alarms.append(t3)
+                } else if let t1 = mr.1.value as? [GenericProperty] {
+                    let t2 = getArrayType(t1.dynamicType)
+                    let t3 = t2(dictionary: dict)
+                    xProps.append(t3)
                 }
             }
             
@@ -133,10 +144,16 @@ func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, for
                 m.setValue(remProps, forKey: varNames[i])
             }  else if rems.count > 0 {
                 m.setValue(rems, forKey: varNames[i])
+            } else if alarms.count > 0 {
+                m.setValue(alarms, forKey: varNames[i])
+            } else if xProps.count > 0 {
+                m.setValue(xProps, forKey: varNames[i])
             }
         } else {
             let v = value as? String
             m.setValue(value, forKey: varNames[i])
+            let v2 = m.valueForKey(varNames[i]) as? NSDate
+            let y = 10
         }
     }
 }
