@@ -8,15 +8,35 @@
 
 import EventKit
 
+/**
+    Defines a VCALENDAR calendar component.
+
+    This object describes a calendar object, a collection of calendaring
+    and scheduling information.
+
+    This class features an iCalendar parser which takes an input string
+    and receives callbacks when an item in the iCalendar file is matched.
+    Use this to parse and create new instances of calendar objects.
+
+    :URL: https://tools.ietf.org/html/rfc5545#section-3.4
+*/
 public class Calendar: CalendarObject, ParserObserver {
+    /// Non-standard unique identifier for the calendar
     private var calendarIdentifier: String!
+    
+    /// List of VTODO components belonging to this calendar
     public internal(set) var reminders = [Reminder]()
     
+    /// Only supports the "GREGORIAN" calendar
     public internal(set) var calscale = CalendarProperty()
+    /// Defines the iCalendar object method associated with the calendar object
     public internal(set) var method = CalendarProperty()
+    /// Specifies the identifier for the product that created the iCalendar object.
     public internal(set) var prodID = CalendarProperty()
+    /// The calendar's required version
     public internal(set) var version = CalendarProperty()
     
+    /// UID
     public var uid: String {
         get {
             return self.calendarIdentifier
@@ -24,6 +44,13 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     private var closure: ((cal: Calendar) -> Void)!
+    /**
+        Returns a new representation of a VCALENDAR object and beings parsing the inputted
+        string value.
+    
+        :param: s The string to parse from iCalendar into libSwiftCal.
+        :completion: A completion block called upon the parsing's completion.
+    */
     public init(stringToParse s: String, completion: (cal: Calendar) -> Void) {
         super.init()
         self.closure = completion

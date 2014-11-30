@@ -8,27 +8,51 @@
 
 #import <Foundation/Foundation.h>
 
-FOUNDATION_EXPORT id toTypeFromString(NSString * str);
+id toTypeFromString(NSString * str);
 
 @class PKParser;
 @class PKAssembly;
 
+/**
+    Representation of a property match found by the iCalendar parser.
+    Contains a key/value pair as well as an array of any property parameters.
+ */
 @interface PropertyMatch : NSObject
 
+/** The property's key */
 @property (strong, readwrite) NSString * key;
+/** The property's parameter list */
 @property (strong, readwrite) NSMutableArray * params;
+/** The property's value */
 @property (strong, readwrite) id value;
 
+/**
+     Returns a dictionary representation of this object.
+     
+     @return A dictionary of this object.
+ */
 - (NSDictionary *) toDictionary;
 
 @end
 
+/**
+    Representation of a parameter match found by the iCalendar parser.
+    Contains a key/value pair describing the parameter.
+ */
 
 @interface ParameterMatch : NSObject
 
+/** The parameter's key */
 @property (strong, readwrite) NSString * key;
+/** The parameter's value */
 @property (strong, readwrite) id value;
 
+
+/**
+     Returns a dictionary representation of this object.
+     
+     @return A dictionary of this object.
+ */
 - (NSDictionary *) toDictionary;
 
 @end

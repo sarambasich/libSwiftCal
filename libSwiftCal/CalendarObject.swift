@@ -310,13 +310,22 @@ public func != (lhs: CalendarObject, rhs: CalendarObject) -> Bool {
 
 
 // MARK: - CalendarObject class
+/**
+    The root object representing all model objects in the libSwiftCal framework.
+    Provides convenient interfaces for initialization, serialization, and 
+    observation for re-use in subclasses.
+*/
 public class CalendarObject: NSObject, CalendarType {
+    /// A unique identifier of this object
     public private(set) var id: String! = ""
     
+    /// The time this object was constructed
     public private(set) var created = NSDate()
+    /// The time this object was last updated
     public private(set) var updated = NSDate()
     
-    var observers = [Observer]()
+    /// A list of other objects listening for changes to this object
+    private var observers = [Observer]()
     
     
     // MARK: - Init

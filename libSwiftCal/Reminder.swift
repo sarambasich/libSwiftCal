@@ -9,7 +9,14 @@
 import UIKit
 import EventKit
 
+/**
+    Defines a VTODO calendar component.
 
+    This object describes a to-do event that is part of a VCALENDAR
+    component.
+
+    :URL: https://tools.ietf.org/html/rfc5545#section-3.6.2
+*/
 public class Reminder: CalendarObject {
     public enum Status: String {
         case NeedsAcction = "NEEDS-ACTION"

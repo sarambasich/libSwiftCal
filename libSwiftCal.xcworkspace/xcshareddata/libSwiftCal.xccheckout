@@ -12,6 +12,8 @@
 	<dict>
 		<key>02D6EB18616B8A40E170013B2D93F112BD8B8EA5</key>
 		<string>https://bitbucket.org/ArtisOracle/libswiftcal.git</string>
+		<key>62A49EEB93B7AE725FFEF50A5C3A5D336428C2B9</key>
+		<string>https://bitbucket.org/ArtisOracle/mylist-app.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>libSwiftCal.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>02D6EB18616B8A40E170013B2D93F112BD8B8EA5</key>
 		<string>..</string>
+		<key>62A49EEB93B7AE725FFEF50A5C3A5D336428C2B9</key>
+		<string>../../MyList</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/ArtisOracle/libswiftcal.git</string>
@@ -35,6 +39,14 @@
 			<string>02D6EB18616B8A40E170013B2D93F112BD8B8EA5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>libSwiftCal</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>62A49EEB93B7AE725FFEF50A5C3A5D336428C2B9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MyList</string>
 		</dict>
 	</array>
 </dict>

@@ -16,6 +16,15 @@
 
 #import <libSwiftCal-Swift.h>
 
+/**
+    Takes an input string and converts it to a more concrete type,
+    such as an NSString, an NSDate, a double, or an int. If no
+    suitable datatype is found, returns the same string.
+ 
+    @param str The string to convert to a data type.
+ 
+    @return The typed version of the input.
+ */
 id toTypeFromString(NSString * str) {
     id result = str;
     NSInteger anInt;

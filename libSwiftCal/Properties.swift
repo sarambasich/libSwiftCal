@@ -9,14 +9,32 @@
 import Foundation
 import EventKit
 
+/**
+    A `TypedValue` type has only a generic representation of an object
+    that it holds. This protocol provides facilities to convert that 
+    object to a more specific type. Conversion is best-effort and may
+    fail if the underlyng data does not match or cannot be converted.
+*/
 public protocol TypedValue {
+    /// The value's `Int` representation
     var intValue: Int? { get set }
+    /// The value's `Bool` representation
     var boolValue: Bool? { get set }
+    /// The value's `Double` representation
     var doubleValue: Double? { get set }
+    /// The value's `String` representation
     var stringValue: String? { get set }
+    /// The value's date representation
     var dateValue: NSDate? { get set }
 }
 
+
+/**
+    A property is the definition of an individual attribute describing a
+    calendar object or a calendar component.
+
+    :URL: https://tools.ietf.org/html/rfc5545#section-3.5
+*/
 public class Property: CalendarObject, TypedValue {
     public internal(set) var key: String! = ""
     public internal(set) var propertyValue: AnyObject!
@@ -103,6 +121,12 @@ public class Property: CalendarObject, TypedValue {
 
 
 // MARK: - Specific wrappers
+/**
+    Defines a person who is an "attendee" to a particular calendar
+    component.
+
+    :URL: https://tools.ietf.org/html/rfc5545#section-3.8.4.1
+*/
 public class Attendee: Property {
     public var calAddress: CalAddress? {
         get {
@@ -115,7 +139,11 @@ public class Attendee: Property {
     }
 }
 
+/**
+    The organizer of the calendar event.
 
+    :URL: https://tools.ietf.org/html/rfc5545#section-3.8.4.3
+*/
 public class Organizer: Property {
     public var calAddress: CalAddress? {
         get {
@@ -128,6 +156,12 @@ public class Organizer: Property {
     }
 }
 
+/**
+    The geographic location of a component specfied by latitude
+    and longitude values.
+
+    :URL: https://tools.ietf.org/html/rfc5545#section-3.8.1.6
+*/
 public class Geo: Property {
     public var lat: CLLocationDegrees = 0.0
     public var lon: CLLocationDegrees = 0.0
@@ -155,6 +189,10 @@ public class Geo: Property {
 
 
 // MARK: - Generic wrappers
+/**
+    Abstract class representing any one of property parameters that
+    are defined on a calendar component.
+*/
 public class CalendarProperty: Property {
     public required init(dictionary: [String : AnyObject]) {
         super.init(dictionary: dictionary)
@@ -170,6 +208,10 @@ public class CalendarProperty: Property {
 }
 
 
+/**
+    Abstract class representing any one of property parameters that
+    are defined on a reminder component.
+*/
 public class ReminderProperty: Property {
     public required init(dictionary: [String : AnyObject]) {
         super.init(dictionary: dictionary)
@@ -186,6 +228,10 @@ public class ReminderProperty: Property {
 
 
 // MARK: - Alarm properties
+/**
+    Abstract class representing any one of property parameters that
+    are defined on an alarm component.
+*/
 public class AlarmProperty: Property {
     public required init(dictionary: [String : AnyObject]) {
         super.init(dictionary: dictionary)
@@ -200,11 +246,15 @@ public class AlarmProperty: Property {
     }
 }
 
+/**
+    Specifies when an alarm will trigger.
 
+    :URL: https://tools.ietf.org/html/rfc5545#section-3.8.6.3
+*/
 public class Trigger: AlarmProperty {
     public var offsetTrigger: NSTimeInterval? {
         get {
-            return self.propertyValue as? NSTimeInterval
+            return self.propertyValue as? Duration
         }
     }
     
@@ -216,6 +266,11 @@ public class Trigger: AlarmProperty {
 }
 
 
+/**
+    Specifies audio to play when an alarm triggers.
+
+    :URL: https://tools.ietf.org/html/rfc5545#section-3.8.6.1
+*/
 public class AudioAction: AlarmProperty {
     public var attach: Attachment? {
         get {
@@ -225,6 +280,11 @@ public class AudioAction: AlarmProperty {
 }
 
 
+/**
+    Specifies a message to display when an alarm triggers.
+
+    :URL: https://tools.ietf.org/html/rfc5545#section-3.8.6.1
+*/
 public class DisplayAction: AlarmProperty {
     public var desc: String? {
         get {
@@ -234,6 +294,11 @@ public class DisplayAction: AlarmProperty {
 }
 
 
+/**
+    Specifies an email message to send when an alarm triggers.
+
+    :URL: https://tools.ietf.org/html/rfc5545#section-3.8.6.1
+*/
 public class EmailAction: AlarmProperty {
     public internal(set) var desc: String! = ""
     public internal(set) var summary: String! = ""
@@ -249,6 +314,9 @@ public class EmailAction: AlarmProperty {
 
 
 // MARK: - X- and IANA properties
+/**
+    Non-standard "X-" property
+*/
 public class GenericProperty: Property {
     public required init(dictionary: [String : AnyObject]) {
         super.init(dictionary: dictionary)
@@ -264,6 +332,9 @@ public class GenericProperty: Property {
 }
 
 
+/**
+    An IANA-registered property
+*/
 public class IANAProperty: Property {
     public required init(dictionary: [String : AnyObject]) {
         super.init(dictionary: dictionary)
