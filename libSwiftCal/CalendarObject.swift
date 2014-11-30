@@ -151,9 +151,11 @@ func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, for
             }
         } else {
             let v = value as? String
-            m.setValue(value, forKey: varNames[i])
-            let v2 = m.valueForKey(varNames[i]) as? NSDate
-            let y = 10
+            if let valStr = value as? String {
+                m.setValue(toTypeFromString(valStr), forKey: varNames[i])
+            } else {
+                m.setValue(value, forKey: varNames[i])
+            }
         }
     }
 }
@@ -258,16 +260,43 @@ func serializable__addToDict<T: Serializable>(inout dict: [String : AnyObject], 
             let k = o.serializationKeys[j!]
             if !k.isEmpty {
                 if let val = c.value as? NSObject {
-                    if val is CalendarObject {
-                        var c = val as CalendarObject
-                        dict[k] = c.toDictionary()
-                    } else {
-                        dict[k] = val
+                    if let cal = val as? CalendarObject {
+                        let d = cal.toDictionary()
+                        if d.count > 0 {
+                            dict[k] = d
+                        }
+                    } else if let vals = val as? [CalendarObject] {
+                        var arr = [[String : AnyObject]]()
+                        for v in vals {
+                            arr.append(v.toDictionary())
+                        }
+                        
+                        if arr.count > 0 {
+                            dict[k] = arr
+                        }
+                    } else if let safeVal: AnyObject = JSONify(val) {
+                        dict[k] = safeVal
                     }
                 }
             }
         }
     }
+}
+
+func JSONify(o: AnyObject) -> AnyObject? {
+    if o is String {
+        return o as String
+    } else if o is Int {
+        return o as Int
+    } else if o is Double {
+        return o as Double
+    } else if o is Bool {
+        return o as Bool
+    } else if o is NSDate {
+        return (o as NSDate).toString()
+    }
+    
+    return nil
 }
 
 // MARK: - Equatable (CalendarObject class)
@@ -282,7 +311,7 @@ public func != (lhs: CalendarObject, rhs: CalendarObject) -> Bool {
 
 // MARK: - CalendarObject class
 public class CalendarObject: NSObject, CalendarType {
-    public private(set) var id = Int.max
+    public private(set) var id: String! = ""
     
     public private(set) var created = NSDate()
     public private(set) var updated = NSDate()
@@ -346,7 +375,7 @@ public class CalendarObject: NSObject, CalendarType {
     // MARK: - Serializable
     public var serializationKeys: [String] {
         get {
-            return ["id", "created", "last_updated", ""]
+            return ["", "", "", ""]
         }
     }
     

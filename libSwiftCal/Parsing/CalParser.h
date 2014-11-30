@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+FOUNDATION_EXPORT id toTypeFromString(NSString * str);
+
 @class PKParser;
 @class PKAssembly;
 

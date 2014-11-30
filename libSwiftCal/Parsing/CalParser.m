@@ -16,6 +16,41 @@
 
 #import <libSwiftCal-Swift.h>
 
+id toTypeFromString(NSString * str) {
+    id result = str;
+    NSInteger anInt;
+    double aDouble;
+    
+    NSDate * date;
+    NSDateFormatter * formatter = [NSDateFormatter new];
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSMutableCharacterSet * dateCharSet = [[NSMutableCharacterSet alloc] init];
+    [dateCharSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"1234567890TZ"]];
+    
+    NSScanner * scanner = [NSScanner scannerWithString:str];
+    if ([str rangeOfCharacterFromSet:[dateCharSet invertedSet]].location == NSNotFound &&
+        str.length >= 8) {
+        NSArray * dateFormats = @[@"YYYYMMDD'T'HHmmssZ", @"YYYYMMDD'T'HHmmss", @"YYYYMMDD"];
+        
+        for (NSString * fmt in dateFormats) {
+            NSError * err;
+            formatter.dateFormat = fmt;
+            if ([formatter getObjectValue:&date forString:str range:nil error:&err]) {
+                result = (NSDate *) date;
+                break;
+            }
+        }
+    } else if ([scanner scanInteger:&anInt]) {
+        if ([NSString stringWithFormat:@"%ld", (long) anInt].length == str.length) {
+            result = [NSNumber numberWithInteger:anInt];
+        }
+    } else if ([scanner scanDouble:&aDouble]) {
+        result = [NSNumber numberWithDouble:aDouble];
+    }
+    
+    return result;
+}
+
 @interface PropertyMatch ()
 
 @end
@@ -74,8 +109,6 @@
 @interface CalParser ()
 
 - (PropertyMatch *) matchProperty:(PKParser *) parser assembly:(PKAssembly *) assembly;
-
-- (id) toTypeFromString:(NSString *) str;
 
 @property (atomic, strong, readwrite) iCalParser * parser;
 
@@ -180,7 +213,7 @@
     
     // 5.) Make substring from beginning to end of value
     NSString * subStr = [self.parser.tokenizer.string substringWithRange:NSMakeRange(propStartPos, propEndPos - propStartPos)];
-    result.value = [self toTypeFromString:subStr];
+    result.value = toTypeFromString(subStr);
     
     // 6.) Handle for possible property parameters using same methodology above
     stackCursor--;
@@ -197,7 +230,7 @@
             
             ParameterMatch * pm = [ParameterMatch new];
             pm.key = [assembly.stack[stackCursor] stringValue];
-            pm.value = [self toTypeFromString:[self.parser.tokenizer.string substringWithRange:NSMakeRange(paramStartPos, paramEndPos - paramStartPos)]];
+            pm.value = toTypeFromString([self.parser.tokenizer.string substringWithRange:NSMakeRange(paramStartPos, paramEndPos - paramStartPos)]);
             
             [result.params addObject:pm];
             stackCursor--;
@@ -210,41 +243,6 @@
     
     // 7.) Get the property's name
     result.key = [assembly.stack[stackCursor] stringValue];
-    
-    return result;
-}
-
-- (id) toTypeFromString:(NSString *) str {
-    id result = str;
-    NSInteger anInt;
-    double aDouble;
-    
-    NSDate * date;
-    NSDateFormatter * formatter = [NSDateFormatter new];
-    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
-    NSMutableCharacterSet * dateCharSet = [[NSMutableCharacterSet alloc] init];
-    [dateCharSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"1234567890TZ"]];
-
-    NSScanner * scanner = [NSScanner scannerWithString:str];
-    if ([str rangeOfCharacterFromSet:[dateCharSet invertedSet]].location == NSNotFound &&
-        str.length >= 8) {
-        NSArray * dateFormats = @[@"YYYYMMDD'T'HHmmssZ", @"YYYYMMDD'T'HHmmss", @"YYYYMMDD"];
-        
-        for (NSString * fmt in dateFormats) {
-            NSError * err;
-            formatter.dateFormat = fmt;
-            if ([formatter getObjectValue:&date forString:str range:nil error:&err]) {
-                result = (NSDate *) date;
-                break;
-            }
-        }
-    } else if ([scanner scanInteger:&anInt]) {
-        if ([NSString stringWithFormat:@"%ld", (long) anInt].length == str.length) {
-            result = [NSNumber numberWithInteger:anInt];
-        }
-    } else if ([scanner scanDouble:&aDouble]) {
-        result = [NSNumber numberWithDouble:aDouble];
-    }
     
     return result;
 }

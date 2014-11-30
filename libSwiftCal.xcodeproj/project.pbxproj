@@ -10,6 +10,7 @@
 		256B00A313F91DF87590D625 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D008A3D155461280B0352B /* libPods.a */; };
 		A9AA345213E26B53BDD85F35 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D008A3D155461280B0352B /* libPods.a */; };
 		F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82909B41A1C5ADA0091366E /* EasyInput.ics */; };
+		F83ACB631A2AD66600423215 /* EasyInput.json in Resources */ = {isa = PBXBuildFile; fileRef = F83ACB621A2AD66600423215 /* EasyInput.json */; };
 		F87865131A2252D300A99B97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87865121A2252D300A99B97 /* Extensions.swift */; };
 		F87865171A22574E00A99B97 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F87865191A22574E00A99B97 /* Localizable.strings */; };
 		F89DE8BB1A2105ED009BCFE1 /* iCalendarElements.h in Headers */ = {isa = PBXBuildFile; fileRef = F89DE8B91A2105ED009BCFE1 /* iCalendarElements.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -67,6 +68,7 @@
 		64D008A3D155461280B0352B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8C57D38159AF3E5242B680 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F82909B41A1C5ADA0091366E /* EasyInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = EasyInput.ics; sourceTree = "<group>"; };
+		F83ACB621A2AD66600423215 /* EasyInput.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EasyInput.json; sourceTree = "<group>"; };
 		F87865121A2252D300A99B97 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F87865181A22574E00A99B97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F89DE8B91A2105ED009BCFE1 /* iCalendarElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCalendarElements.h; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				F8F8ECE51A1C3F200046AF23 /* Info.plist */,
 				F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */,
 				F82909B41A1C5ADA0091366E /* EasyInput.ics */,
+				F83ACB621A2AD66600423215 /* EasyInput.json */,
 			);
 			path = libSwiftCalTests;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F83ACB631A2AD66600423215 /* EasyInput.json in Resources */,
 				F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

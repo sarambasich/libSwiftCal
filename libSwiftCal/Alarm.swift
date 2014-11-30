@@ -25,7 +25,7 @@ public class Alarm: CalendarObject {
     
     public private(set) var action: AlarmProperty! = AlarmProperty()
     public private(set) var trigger: Trigger! = Trigger()
-    public private(set) var duration: Duration! = Duration()
+    public private(set) var duration: AlarmProperty! = AlarmProperty()
     public private(set) var desc: AlarmProperty! = AlarmProperty()
     public private(set) var repeat: AlarmProperty! = AlarmProperty()
     public private(set) var xProperties = [GenericProperty]()

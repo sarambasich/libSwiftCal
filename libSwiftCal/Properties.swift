@@ -39,7 +39,17 @@ public class Property: CalendarObject, TypedValue {
     }
     
     public override func toDictionary() -> [String : AnyObject] {
-        return [key : propertyValue]
+        if let k = self.key {
+            if let p: AnyObject = propertyValue {
+                if let j: AnyObject = JSONify(propertyValue) {
+                    var dict = [String : AnyObject]()
+                    serializable__addToDict(&dict, mirror: reflect(self), onObject: self)
+                    return dict
+                }
+            }
+        }
+        
+        return [:]
     }
     
     public override var serializationKeys: [String] {
