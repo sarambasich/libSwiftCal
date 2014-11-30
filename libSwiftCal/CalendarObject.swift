@@ -252,8 +252,20 @@ func serializable__addToDict<T: Serializable>(inout dict: [String : AnyObject], 
         if p == "super" {
             serializable__addToDict(&dict, mirror: c, onObject: o)
         } else {
+            let ks = o.serializationKeys
+            let vs = object__getVarNames(mirror: reflect(o))
             let j = find(object__getVarNames(mirror: reflect(o)), p)
-            dict[o.serializationKeys[j!]] = c.value as? NSObject
+            let k = o.serializationKeys[j!]
+            if !k.isEmpty {
+                if let val = c.value as? NSObject {
+                    if val is CalendarObject {
+                        var c = val as CalendarObject
+                        dict[k] = c.toDictionary()
+                    } else {
+                        dict[k] = val
+                    }
+                }
+            }
         }
     }
 }

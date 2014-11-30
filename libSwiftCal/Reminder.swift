@@ -12,10 +12,10 @@ import EventKit
 
 public class Reminder: CalendarObject {
     public enum Status: String {
-        case NeedsAcction = "Needs action"
-        case Completed = "Completeted"
-        case InProcess = "In-Process"
-        case Canceled = "Canceled"
+        case NeedsAcction = "NEEDS-ACTION"
+        case Completed = "COMPLETED"
+        case InProcess = "IN-PROCESS"
+        case Canceled = "CANCELLED"
     }
     
     struct AccessClass {
@@ -30,7 +30,7 @@ public class Reminder: CalendarObject {
     public private(set) var accessClass: ReminderProperty! = ReminderProperty()
     public private(set) var completed: ReminderProperty! = ReminderProperty()
     public private(set) var createdTime: ReminderProperty! = ReminderProperty()
-    public private(set) var description_: ReminderProperty! = ReminderProperty()
+    public private(set) var desc: ReminderProperty! = ReminderProperty()
     public private(set) var start: ReminderProperty! = ReminderProperty()
     public private(set) var geo: Geo! = Geo()
     public private(set) var lastModified: ReminderProperty! = ReminderProperty()
@@ -67,6 +67,22 @@ public class Reminder: CalendarObject {
     public private(set) var IANAProperties = [IANAProperty]()
     
     public internal(set) var alarms = [Alarm]()
+    
+    // ***
+    
+    public var reminderStatus: Status? {
+        get {
+            if let s = self.status.stringValue {
+                if let st = Status(rawValue: self.status.stringValue!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())) {
+                    return st
+                }
+            }
+            
+            return nil
+        } set {
+            self.status.stringValue = newValue?.rawValue
+        }
+    }
     
     
     // MARK: - Init

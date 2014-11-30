@@ -50,7 +50,7 @@ public class Calendar: CalendarObject, ParserObserver {
     
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + [kUID, SerializationKeys.RemindersKey, kCALSCALE, kMETHOD, kPRODID, kVERSION, "", "", "", ""]
+            return super.serializationKeys + [kUID, SerializationKeys.RemindersKey, kCALSCALE, kMETHOD, kPRODID, kVERSION, "", "", "", "", "", ""]
         }
     }
     
@@ -113,6 +113,5 @@ public class Calendar: CalendarObject, ParserObserver {
     public func parser(key: String!, didMatchIcalobject value: String!) {
         self.closure!(cal: self)
         self.closure = nil
-        println("Finished")
     }
 }

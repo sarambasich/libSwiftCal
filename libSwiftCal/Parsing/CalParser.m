@@ -179,7 +179,8 @@
     propStartPos = valTok.offset;
     
     // 5.) Make substring from beginning to end of value
-    result.value = [self toTypeFromString:[self.parser.tokenizer.string substringWithRange:NSMakeRange(propStartPos, propEndPos - propStartPos)]];
+    NSString * subStr = [self.parser.tokenizer.string substringWithRange:NSMakeRange(propStartPos, propEndPos - propStartPos)];
+    result.value = [self toTypeFromString:subStr];
     
     // 6.) Handle for possible property parameters using same methodology above
     stackCursor--;
@@ -238,7 +239,9 @@
             }
         }
     } else if ([scanner scanInteger:&anInt]) {
-        result = [NSNumber numberWithInteger:anInt];
+        if ([NSString stringWithFormat:@"%ld", (long) anInt].length == str.length) {
+            result = [NSNumber numberWithInteger:anInt];
+        }
     } else if ([scanner scanDouble:&aDouble]) {
         result = [NSNumber numberWithDouble:aDouble];
     }
