@@ -40,6 +40,9 @@ import Foundation
 //    }
 //}
 
+/**
+    A set of serialization keys used on models in the app.
+*/
 public struct SerializationKeys {
     static let XPropertiesKey = "x-prop"
     static let IANAPropertiesKey = "iana-prop"
@@ -335,7 +338,6 @@ public class CalendarObject: NSObject, CalendarType {
     public override required init() {
         
     }
-    
     
     
     // MARK: - Hashable
