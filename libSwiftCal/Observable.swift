@@ -40,7 +40,7 @@ public protocol Observable: NSObjectProtocol {
         optional error object to indicate a failure of an operation.
         
         :param: e An NSError object describing an error if one has occurred.
-        Defaults to nil.
+            Defaults to nil.
     */
     func notifyObservers(e: NSError?)
 }

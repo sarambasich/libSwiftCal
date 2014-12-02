@@ -33,18 +33,35 @@ public class Parameter: CalendarObject {
     }
     
     
+    // MARK: - CalendarType
+    public override func serializeToiCal() -> String {
+        var result = String()
+        
+        if let s = value as? String {
+            result += self.key + kEQUALS + s
+        } else if let v: AnyObject = JSONify(value) {
+            result += "\(v)"
+        }
+        
+        return result
+    }
+    
+    
+    // MARK: - NSCoding
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     
+    // MARK: - Serializable
     public required init(dictionary: [String : AnyObject]) {
         super.init(dictionary: dictionary)
     }
     
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + ["", SerializationKeys.ParameterKeyKey, SerializationKeys.ParamValueKey]
+            return super.serializationKeys + ["", SerializationKeys.ParameterKeyKey,
+                SerializationKeys.ParamValueKey]
         }
     }
 }

@@ -129,7 +129,8 @@ public class Reminder: CalendarObject {
     public var reminderStatus: Status? {
         get {
             if let s = self.status.stringValue {
-                if let st = Status(rawValue: self.status.stringValue!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())) {
+                let wsp = NSCharacterSet.whitespaceAndNewlineCharacterSet()
+                if let st = Status(rawValue: self.status.stringValue!.stringByTrimmingCharactersInSet(wsp)) {
                     return st
                 }
             }
@@ -144,6 +145,20 @@ public class Reminder: CalendarObject {
     // MARK: - Init
     public required init() {
         super.init()
+    }
+    
+    
+    // MARK: - CalendarType
+    public override func serializeToiCal() -> String {
+        var result = String()
+        
+        result += kBEGIN + kCOLON + kVTODO + kCRLF
+        
+        result += model__serializeiCalChildren(self)
+        
+        result += kEND + kCOLON + kVTODO + kCRLF
+        
+        return result
     }
     
     
@@ -166,7 +181,12 @@ public class Reminder: CalendarObject {
     // MARK: - Serializable
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + [kDTSTAMP, kUID, kCLASS, kCOMPLETED, kCREATED, kDESCRIPTION, kDTSTART, kGEO, kLAST_MODIFIED, kLOCATION, kORGANIZER, kPERCENT_COMPLETE, kPRIORITY, kRECURRENCE_ID, kSEQUENCE, kSTATUS, kSUMMARY, kURL, kRRULE, kDUE, kDURATION, kATTACH, kATTENDEE, kCATEGORIES, kCOMMENT, kCONTACT, kEXDATE, kREQUEST_STATUS, kRELATED, kRESOURCES, kRDATE, SerializationKeys.XPropertiesKey, SerializationKeys.IANAPropertiesKey, SerializationKeys.AlarmsKey]
+            return super.serializationKeys + [kDTSTAMP, kUID, kCLASS, kCOMPLETED, kCREATED, kDESCRIPTION,
+                kDTSTART, kGEO, kLAST_MODIFIED, kLOCATION, kORGANIZER, kPERCENT_COMPLETE, kPRIORITY,
+                kRECURRENCE_ID, kSEQUENCE, kSTATUS, kSUMMARY, kURL, kRRULE, kDUE, kDURATION, kATTACH,
+                kATTENDEE, kCATEGORIES, kCOMMENT, kCONTACT, kEXDATE, kREQUEST_STATUS, kRELATED,
+                kRESOURCES, kRDATE, SerializationKeys.XPropertiesKey, SerializationKeys.IANAPropertiesKey,
+                SerializationKeys.AlarmsKey]
         }
     }
     

@@ -21,7 +21,7 @@ import Foundation
         
         :param: model The model that has been refreshed.
         :param: e An NSError object describing an error if one has occurred.
-        Defaults to nil.
+            Defaults to nil.
     */
     optional func didRefresh(model: CalendarObject, error e: NSError?)
 }

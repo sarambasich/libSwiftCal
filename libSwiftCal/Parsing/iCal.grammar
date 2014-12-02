@@ -316,9 +316,9 @@ param         = paramname '=' paramvalue (',' paramvalue)*;
 
 paramname    = ianatoken | xname;
 
-paramvalue   = safechar | quotedstring; //paramtext | quotedstring;
+paramvalue   = paramtext | quotedstring; //paramtext | quotedstring;
 
-paramtext     = safechar*; // WARNING: this doesn't match right in the grammar. I had to negate the condition in paramvalue.
+paramtext     = safechar*; // WARNING: this doesn't match right in the grammar. I had to negate the condition in the __paramvalue method.
 
 value         = valuechar*;
 

@@ -72,11 +72,11 @@ public class Weak<T: AnyObject> {
 
 
 // MARK: - NSDate extension
-let dateFormats = ["YYYYMMDD'T'HHmmssZ", "YYYYMMDD'T'HHmmss", "YYYYMMDD"]
+let DateFormats = ["YYYYMMDD'T'HHmmssZ", "YYYYMMDD'T'HHmmss", "YYYYMMDD", "YYYYMMDD'T'HHmmss'Z'"]
 public extension NSDate {
     public class func parseDate(string: String, format: String? = nil) -> NSDate? {
         let formatter = NSDateFormatter()
-        formatter.dateFormat = dateFormats.first
+        formatter.dateFormat = DateFormats.first
         
         formatter.locale = NSLocale.currentLocale()
         
@@ -94,7 +94,8 @@ public extension NSDate {
     
     public func toString(format: String? = nil) -> String {
         let df = NSDateFormatter()
-        df.dateFormat = format ?? dateFormats[1]
+        df.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        df.dateFormat = format ?? DateFormats.last
         return df.stringFromDate(self)
     }
 }
@@ -117,58 +118,23 @@ extension NSData {
 
 
 // MARK: - String extension
-extension String {
-    func substring(startIndex: Int, endIndex: Int) -> String {
+public extension String {
+    internal func substring(startIndex: Int, endIndex: Int) -> String {
         return self.substringWithRange(Range(start: advance(self.startIndex, startIndex), end: advance(self.startIndex, endIndex)))
     }
     
-    func substring(startIndex: Int, len: Int) -> String {
+    internal func substring(startIndex: Int, len: Int) -> String {
         return self.substringWithRange(Range(start: advance(self.startIndex, startIndex), end: advance(self.startIndex, startIndex + len)))
     }
     
-    var len: Int {
+    public var len: Int {
         get {
             return countElements(self) as Int
         }
     }
     
-    func URLEncode() -> String? {
+    internal func URLEncode() -> String? {
         let charSet = NSCharacterSet.URLQueryAllowedCharacterSet()
         return self.stringByAddingPercentEncodingWithAllowedCharacters(charSet)?
-    }
-    
-    func replaceTemplateKeyword(keyword: String, withValue value: String) -> String {
-        return self.stringByReplacingOccurrencesOfString("{{\(keyword)}}", withString: value, options:.CaseInsensitiveSearch, range: nil)
-    }
-    
-    func replaceTemplatedKeywordsWithValues(kwsVals: [String : String]) -> String {
-        var final = self
-        for (keyword, value) in kwsVals {
-            final = final.replaceTemplateKeyword(keyword, withValue: value)
-        }
-        
-        return final
-    }
-    
-    func getTemplatedKeywords() -> [String]? {
-        var result: [String]?
-        var error: NSError?
-        var regex = NSRegularExpression(pattern: "\\{\\{\\w*\\}\\}", options: .CaseInsensitive, error: &error)
-        if error != nil {
-            println("Error occurrred: " + error.debugDescription)
-        } else {
-            result = [String]()
-            if let ms = regex?.matchesInString(self, options: nil, range: NSMakeRange(0, countElements(self))) {
-                for m in ms {
-                    var nsstring = self as NSString
-                    var str = nsstring.substringWithRange(m.range)
-                    str = str.stringByReplacingOccurrencesOfString("{", withString: "", options: .CaseInsensitiveSearch, range: nil)
-                        .stringByReplacingOccurrencesOfString("}", withString: "", options: .CaseInsensitiveSearch, range: nil)
-                    result?.append(str)
-                }
-            }
-        }
-        
-        return result
     }
 }

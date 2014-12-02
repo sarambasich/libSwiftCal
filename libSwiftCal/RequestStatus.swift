@@ -26,8 +26,8 @@ import Foundation
         formatted request.  Request should not be retried until
         the condition in the request is corrected.
 
-    - SchedulingError: Scheduling Error.  This class of status code indicates
-        that the request was not successful.  Some sort of error
+    - SchedulingError: Scheduling Error.  This class of status code
+        indicates that the request was not successful.  Some sort of error
         occurred within the calendaring and scheduling service,
         not directly related to the request itself.
 */

@@ -8,4 +8,6 @@
 
 import Foundation
 
-protocol CalendarType: NSObjectProtocol, NSCopying, NSCoding, Hashable, Equatable, Observable, Serializable { }
+protocol CalendarType: NSObjectProtocol, NSCopying, NSCoding, Hashable, Equatable, Observable, Serializable {
+    func serializeToiCal() -> String
+}

@@ -43,6 +43,37 @@ public class Property: CalendarObject, TypedValue {
     public required init() {
         super.init()
     }
+    
+    
+    // MARK: - CalendarType
+    public override func serializeToiCal() -> String {
+        if key.isEmpty {
+            return ""
+        }
+        
+        var result = String()
+        
+        result += key
+        
+        if self.parameters.count > 0 {
+            for p in self.parameters {
+                result += kSEMICOLON
+                result += p.serializeToiCal()
+            }
+        }
+        
+        result += kCOLON
+        
+        if let s = self.propertyValue as? String {
+            result += s
+        } else if let v: AnyObject = JSONify(self.propertyValue) {
+            result += "\(v)"
+        }
+        
+        result += kCRLF
+        
+        return result
+    }
 
     
     // MARK: - NSCoding

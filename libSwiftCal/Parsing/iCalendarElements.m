@@ -8,6 +8,18 @@
 
 #import "iCalendarElements.h"
 
+
+NSString * const kBEGIN = @"BEGIN";
+NSString * const kEND = @"END";
+
+NSString * const kCRLF = @"\r\n";
+NSString * const kDOUBLE_QUOTE = @"\"";
+NSString * const kSEMICOLON = @";";
+NSString * const kCOLON = @":";
+NSString * const kBACKSLASH = @"\\";
+NSString * const kCOMMA = @",";
+NSString * const kEQUALS = @"=";
+
 NSString * const kVCALENDAR = @"VCALENDAR";
 NSString * const kVEVENT = @"VEVENT";
 NSString * const kVTODO = @"VTODO";

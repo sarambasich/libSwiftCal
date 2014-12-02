@@ -24,9 +24,6 @@ public class Calendar: CalendarObject, ParserObserver {
     /// Non-standard unique identifier for the calendar
     private var calendarIdentifier: String!
     
-    /// List of VTODO components belonging to this calendar
-    public internal(set) var reminders = [Reminder]()
-    
     /// Only supports the "GREGORIAN" calendar
     public internal(set) var calscale = CalendarProperty()
     /// Defines the iCalendar object method associated with the calendar object
@@ -35,6 +32,9 @@ public class Calendar: CalendarObject, ParserObserver {
     public internal(set) var prodID = CalendarProperty()
     /// The calendar's required version
     public internal(set) var version = CalendarProperty()
+    
+    /// List of VTODO components belonging to this calendar
+    public internal(set) var reminders = [Reminder]()
     
     /// UID
     public var uid: String {
@@ -62,6 +62,20 @@ public class Calendar: CalendarObject, ParserObserver {
     public required init() {
         super.init()
     }
+    
+    
+    // MARK: - CalendarType
+    public override func serializeToiCal() -> String {
+        var result = String()
+        
+        result += kBEGIN + kCOLON + kVCALENDAR + kCRLF
+        
+        result += model__serializeiCalChildren(self)
+        
+        result += kEND + kCOLON + kVCALENDAR + kCRLF
+        
+        return result
+    }
 
     
     // MARK: - NSCoding
@@ -77,7 +91,7 @@ public class Calendar: CalendarObject, ParserObserver {
     
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + [kUID, SerializationKeys.RemindersKey, kCALSCALE, kMETHOD, kPRODID, kVERSION, "", "", "", "", "", ""]
+            return super.serializationKeys + [kUID, kCALSCALE, kMETHOD, kPRODID, kVERSION, SerializationKeys.RemindersKey, "", "", "", "", "", ""]
         }
     }
     

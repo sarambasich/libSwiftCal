@@ -53,6 +53,7 @@ public struct SerializationKeys {
     static let ParameterKeyKey = "param_key"
     static let ParamValueKey = "param_value"
     static let AlarmsKey = "alarms"
+    static let AttendeesKey = "attendees"
 }
 
 func model__defaultHash<T where T: Hashable, T: CalendarObject>(model m: T) -> Int {
@@ -91,6 +92,28 @@ func getOptionalGenericType<T>(optional: Optional<T>.Type) -> T.Type {
 
 func getArrayType<T>(arr: [T].Type) -> T.Type {
     return T.self
+}
+
+func model__serializeiCalChildren(model: CalendarObject) -> String {
+    var result = String()
+    
+    let mirrors = object__getAllMirrorValues(mirror: reflect(model))
+    for m in mirrors {
+        let child = m.1.value
+        if let calObj = child as? CalendarObject {
+            result += calObj.serializeToiCal()
+        } else if let calObjects = child as? NSArray {
+            for c in calObjects {
+                result += c.serializeToiCal()
+            }
+        }
+        
+        let p = m.0
+        let c = child as? NSArray
+        let y = 10
+    }
+    
+    return result
 }
 
 func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, forSerializationKey key: String, model m: T) {
@@ -345,6 +368,12 @@ public class CalendarObject: NSObject, CalendarType {
         get {
             return (31 &* created.hash) &+ updated.hash
         }
+    }
+    
+    
+    // MARK: - ModelType
+    public func serializeToiCal() -> String {
+        fatalError("serializaToiCal has not been implemented")
     }
     
     

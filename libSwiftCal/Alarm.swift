@@ -38,6 +38,10 @@ public class Alarm: CalendarObject {
     public private(set) var duration: AlarmProperty! = AlarmProperty()
     /// A description of the alarm
     public private(set) var desc: AlarmProperty! = AlarmProperty()
+    /// Summary for use in email action
+    public private(set) var summary: AlarmProperty! = AlarmProperty()
+    /// Attendees for use in email action
+    public private(set) var attendees = [Attendee]()
     /// An integer representing the number of times to repeat the alarm after its initial trigger
     public private(set) var repeat: AlarmProperty! = AlarmProperty()
     /// Non-standard "X-" properties
@@ -58,6 +62,21 @@ public class Alarm: CalendarObject {
     }
     
     
+    // MARK: - CalendarType
+    public override func serializeToiCal() -> String {
+        var result = String()
+        
+        result += kBEGIN + kCOLON + kVALARM + kCRLF
+        
+        result += model__serializeiCalChildren(self)
+        
+        result += kEND + kCOLON + kVALARM + kCRLF
+        
+        return result
+    }
+    
+    
+    
     // MARK: - NSCoding
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -73,7 +92,9 @@ public class Alarm: CalendarObject {
     
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + ["", kACTION, kTRIGGER, kDURATION, kDESCRIPTION, kREPEAT, SerializationKeys.XPropertiesKey, SerializationKeys.IANAPropertiesKey]
+            return super.serializationKeys + ["", kACTION, kTRIGGER, kDURATION, kDESCRIPTION, kSUMMARY,
+                SerializationKeys.AttendeesKey, kREPEAT, SerializationKeys.XPropertiesKey,
+                SerializationKeys.IANAPropertiesKey]
         }
     }
 }
