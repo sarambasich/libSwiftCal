@@ -8,7 +8,7 @@ libSwiftCal is an implementation of [RFC 5545](https://tools.ietf.org/html/rfc55
 The goals of this framework are:
 
 - Modern: use a modern, type-safe language (Swift)
-- Dynamic: features a generic model (de)-serializer (not yet fully generic)
+- Dynamic: features a generic model (de)-serializer *([not yet](https://github.com/practicalswift/swift-compiler-crashes/blob/master/crashes/12266-generic-protocol-init.swift) fully generic)*
 - KISS: simple, low-overhead usage by client applications
 
 libSwiftCal's overall purpose is to make parsing and interacting with the iCalendar specification easy and native to your iOS or Mac applications.
@@ -43,10 +43,27 @@ The following need to be done - please contribute if you find this project benef
 ##Installation & Usage
 **PLEASE NOTE** This is a Cocoa Touch Framework. Although it can be built against iOS 7, it comes with [some caveats](https://developer.apple.com/library/ios/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html).
 
-- Link [PEGKit](https://github.com/itod/pegkit) as one of your project's dependencies (or install via CocoaPods)
+###Install
+####CocoaPods
+
+
+####Manual
+
+- Link [PEGKit](https://github.com/itod/pegkit) as one of your project's dependencies
 - Incorporate the the Xcode project into your project by combining the two in a workspace (the easiest way I've found to do this is drag the .xcodeproj on to the **top** of your project navigator above any existing files/projects)
 - Add libSwiftCal as a target dependency
+
+###Usage
 - Import the libSwiftCal framework using `import libSwiftCal`
+
+```swift
+    let d: [String : AnyObject] = ["VCALENDAR": ["VTODO": ["SUMMARY": "Pick up eggs."], ...], ...] 
+    let cal = Calendar(dictionary: d)
+    let r = cal.reminders.first
+
+    println(r.summary) // "Pick up eggs."
+
+```
 
 ##Docs
 
