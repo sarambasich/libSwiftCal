@@ -64,14 +64,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0D7A32E129345370C1884018 /* Pods-libSwiftCal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libSwiftCal.release.xcconfig"; path = "../../MyList/Pods/Target Support Files/Pods-libSwiftCal/Pods-libSwiftCal.release.xcconfig"; sourceTree = "<group>"; };
+		0D7A32E129345370C1884018 /* Pods-libSwiftCal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-libSwiftCal.release.xcconfig"; path = "../../MyList/Pods/Target Support Files/Pods-libSwiftCal/Pods-libSwiftCal.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		2114EB6811E79616AFBE19AC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		4AF91ED7FD33EB033ECFAB76 /* Pods-libSwiftCal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libSwiftCal.debug.xcconfig"; path = "../../MyList/Pods/Target Support Files/Pods-libSwiftCal/Pods-libSwiftCal.debug.xcconfig"; sourceTree = "<group>"; };
+		4AF91ED7FD33EB033ECFAB76 /* Pods-libSwiftCal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-libSwiftCal.debug.xcconfig"; path = "../../MyList/Pods/Target Support Files/Pods-libSwiftCal/Pods-libSwiftCal.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		64D008A3D155461280B0352B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8C57D38159AF3E5242B680 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BEF9F760557ACAEE56991AF4 /* libPods-libSwiftCal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-libSwiftCal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F82909B41A1C5ADA0091366E /* EasyInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = EasyInput.ics; sourceTree = "<group>"; };
-		F83ACB621A2AD66600423215 /* EasyInput.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EasyInput.json; sourceTree = "<group>"; };
+		F82909B41A1C5ADA0091366E /* EasyInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = EasyInput.ics; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = "<none>"; };
+		F83ACB621A2AD66600423215 /* EasyInput.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = EasyInput.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		F87865121A2252D300A99B97 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F87865181A22574E00A99B97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F89DE8B91A2105ED009BCFE1 /* iCalendarElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCalendarElements.h; sourceTree = "<group>"; };
@@ -85,28 +85,28 @@
 		F8F0C5851A2A8F910007732E /* ModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8EAF71A1C3EEE0046AF23 /* libSwiftCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libSwiftCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8F8ECC81A1C3F200046AF23 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
-		F8F8ECC91A1C3F200046AF23 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
-		F8F8ECCA1A1C3F200046AF23 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
-		F8F8ECCB1A1C3F200046AF23 /* CalendarObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarObject.swift; sourceTree = "<group>"; };
-		F8F8ECCC1A1C3F200046AF23 /* CalendarType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarType.swift; sourceTree = "<group>"; };
+		F8F8ECC81A1C3F200046AF23 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Alarm.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F8F8ECC91A1C3F200046AF23 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Attachment.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F8F8ECCA1A1C3F200046AF23 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Calendar.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F8F8ECCB1A1C3F200046AF23 /* CalendarObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarObject.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F8F8ECCC1A1C3F200046AF23 /* CalendarType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarType.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F8F8ECCD1A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8F8ECCF1A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8F8ECD51A1C3F200046AF23 /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		F8F8ECD61A1C3F200046AF23 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		F8F8ECD51A1C3F200046AF23 /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Observable.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F8F8ECD61A1C3F200046AF23 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Observer.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F8F8ECD91A1C3F200046AF23 /* CalParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalParser.h; sourceTree = "<group>"; };
 		F8F8ECDA1A1C3F200046AF23 /* CalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalParser.m; sourceTree = "<group>"; };
 		F8F8ECDB1A1C3F200046AF23 /* iCal.grammar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iCal.grammar; sourceTree = "<group>"; };
 		F8F8ECDC1A1C3F200046AF23 /* iCalParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCalParser.h; sourceTree = "<group>"; };
 		F8F8ECDD1A1C3F200046AF23 /* iCalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCalParser.m; sourceTree = "<group>"; };
 		F8F8ECDE1A1C3F200046AF23 /* icalparser.parsergen */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = icalparser.parsergen; sourceTree = "<group>"; };
-		F8F8ECDF1A1C3F200046AF23 /* Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
-		F8F8ECE01A1C3F200046AF23 /* RecurrenceDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecurrenceDate.swift; sourceTree = "<group>"; };
-		F8F8ECE11A1C3F200046AF23 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
-		F8F8ECE21A1C3F200046AF23 /* RequestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
-		F8F8ECE31A1C3F200046AF23 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
+		F8F8ECDF1A1C3F200046AF23 /* Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Properties.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F8F8ECE01A1C3F200046AF23 /* RecurrenceDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RecurrenceDate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F8F8ECE11A1C3F200046AF23 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Reminder.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F8F8ECE21A1C3F200046AF23 /* RequestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RequestStatus.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F8F8ECE31A1C3F200046AF23 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Serializable.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F8F8ECE51A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = libSwiftCalTests.swift; sourceTree = "<group>"; };
+		F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = libSwiftCalTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
