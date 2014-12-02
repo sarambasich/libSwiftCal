@@ -217,7 +217,6 @@ id toTypeFromString(NSString * str) {
     }
 }
 
-
 - (PropertyMatch *) matchProperty:(PKParser *) parser assembly:(PKAssembly *) assembly {
     PropertyMatch * result = [[PropertyMatch alloc] init];
     NSUInteger stackCursor = assembly.stack.count - 1 - 1,
