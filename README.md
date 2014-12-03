@@ -17,14 +17,14 @@ libSwiftCal's overall purpose is to make parsing and interacting with the iCalen
 A main component of libSwiftCal is the iCalendar parser, which leverages [PEGKit](https://github.com/itod/pegkit) to parse .ics files. The parser traverses the input asynchronously and performs relevant callbacks when a token in the grammar is matched. This library has abstracted this process for you, so parsing an .ics file is simple as:
 
 ```swift
-    let str: String = NSString(data: NSData(contentsOfFile: "AnInputFile.ics")!, encoding: NSUTF8StringEncoding)!
-    let completion = { (cal: Calendar) -> Void in println(cal.prodid.stringValue) }
-    let cal = Calendar(stringToParse: str, completion: completion) // The closure's parameter returns the parsed calendar
+let str: String = NSString(data: NSData(contentsOfFile: "AnInputFile.ics")!, encoding: NSUTF8StringEncoding)!
+let completion = { (cal: Calendar) -> Void in println(cal.prodid.stringValue) }
+let cal = Calendar(stringToParse: str, completion: completion) // The closure's parameter returns the parsed calendar
 
 ```
 
 ##Status
-**libSwiftCal is incomplete**. I built this framework with the intent to use it in a reminders app. Therefore, while the grammar will recognize any valid iCalendar file, there may not be a corresponding model in the framework yet because I've only implemented what's necessary for VTODO components.
+**libSwiftCal is incomplete**. I built this framework with the intent to use it in an app. Therefore, while the grammar will recognize any valid iCalendar file, there may not be a corresponding model in the framework yet because I've only implemented what's necessary for VTODO components.
 
 As of the current version, only the following portions are implemented:
 
@@ -45,11 +45,10 @@ The following need to be done - please contribute if you find this project benef
 
 ###Install
 ####CocoaPods
-
+Not yet able to support Cocoa Touch Frameworks.
 
 ####Manual
-
-- Link [PEGKit](https://github.com/itod/pegkit) as one of your project's dependencies
+- Link [PEGKit](https://github.com/itod/pegkit) as one of your project's dependencies (the project is pre-configured for CocoaPods)
 - Incorporate the the Xcode project into your project by combining the two in a workspace (the easiest way I've found to do this is drag the .xcodeproj on to the **top** of your project navigator above any existing files/projects)
 - Add libSwiftCal as a target dependency
 
@@ -57,16 +56,16 @@ The following need to be done - please contribute if you find this project benef
 - Import the libSwiftCal framework using `import libSwiftCal`
 
 ```swift
-    let d: [String : AnyObject] = ["VCALENDAR": ["VTODO": ["SUMMARY": "Pick up eggs."], ...], ...] 
-    let cal = Calendar(dictionary: d)
-    let r = cal.reminders.first
+let d: [String : AnyObject] = ["VCALENDAR": ["VTODO": ["SUMMARY": "Pick up eggs."], ...], ...] 
+let cal = Calendar(dictionary: d)
+let r = cal.reminders.first
 
-    println(r.summary) // "Pick up eggs."
+println(r.summary) // "Pick up eggs."
 
 ```
 
 ##Docs
-
+**TODO**: It's there, but Doxygen doesn't like it. Xcode will use it, though.
 
 ##License
 libSwiftCal is released under the [MIT License](http://opensource.org/licenses/MIT).
