@@ -40,23 +40,23 @@ public class Alarm: CalendarObject {
     public private(set) weak var reminder: Reminder?
     
     /// The action to perform upon the alarm's trigger
-    public private(set) var action: AlarmProperty! = AlarmProperty()
+    public var action: AlarmProperty! = AlarmProperty()
     /// The alarm's trigger either set as a duration from start or an absolute date time
-    public private(set) var trigger: Trigger! = Trigger()
+    public var trigger: Trigger! = Trigger()
     /// A duration of time in between repeated triggering of the alarm
-    public private(set) var duration: AlarmProperty! = AlarmProperty()
+    public var duration: AlarmProperty! = AlarmProperty()
     /// A description of the alarm
-    public private(set) var desc: AlarmProperty! = AlarmProperty()
+    public var desc: AlarmProperty! = AlarmProperty()
     /// Summary for use in email action
-    public private(set) var summary: AlarmProperty! = AlarmProperty()
+    public var summary: AlarmProperty! = AlarmProperty()
     /// Attendees for use in email action
-    public private(set) var attendees = [Attendee]()
+    public var attendees = [Attendee]()
     /// An integer representing the number of times to repeat the alarm after its initial trigger
-    public private(set) var repeat: AlarmProperty! = AlarmProperty()
+    public var repeat: AlarmProperty! = AlarmProperty()
     /// Non-standard "X-" properties
-    public private(set) var xProperties = [GenericProperty]()
+    public var xProperties = [GenericProperty]()
     /// IANA-registered property names
-    public private(set) var IANAProperties = [IANAProperty]()
+    public var IANAProperties = [IANAProperty]()
     
     public required init() {
         super.init()

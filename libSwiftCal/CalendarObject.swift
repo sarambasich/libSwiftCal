@@ -340,12 +340,12 @@ public func != (lhs: CalendarObject, rhs: CalendarObject) -> Bool {
 */
 public class CalendarObject: NSObject, CalendarType {
     /// A unique identifier of this object
-    public private(set) var id: String! = ""
+    public var id: String! = ""
     
     /// The time this object was constructed
-    public private(set) var created = NSDate()
+    public var created = NSDate()
     /// The time this object was last updated
-    public private(set) var updated = NSDate()
+    public var updated = NSDate()
     
     /// A list of other objects listening for changes to this object
     private var observers = [Observer]()

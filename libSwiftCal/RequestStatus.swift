@@ -58,7 +58,7 @@ public struct RequestStatus {
     }
     
     /// The status as an integer
-    public private(set) var status: Int!
+    public var status: Int!
     
     /// The status as a string
     public var statusStr: String? {

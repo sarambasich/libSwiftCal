@@ -56,87 +56,87 @@ public class Reminder: CalendarObject {
 ///    property specifies the date and time that the information
 ///    associated with the calendar component was last revised in the
 ///    calendar store.
-    public private(set) var dateTimestamp: ReminderProperty! = ReminderProperty()
+    public var dateTimestamp: ReminderProperty! = ReminderProperty()
     /// Unique identifier
-    public private(set) var uid: ReminderProperty! = ReminderProperty()
+    public var uid: ReminderProperty! = ReminderProperty()
     
     /// The access classification (or visibility) of the reminder
-    public private(set) var accessClass: ReminderProperty! = ReminderProperty()
+    public var accessClass: ReminderProperty! = ReminderProperty()
     /// The datetime the reminder was completed or nil if it isn't
-    public private(set) var completed: ReminderProperty! = ReminderProperty()
+    public var completed: ReminderProperty! = ReminderProperty()
     /// The datetime this object was created in the calendar store
-    public private(set) var createdTime: ReminderProperty! = ReminderProperty()
+    public var createdTime: ReminderProperty! = ReminderProperty()
     /// A description of this reminder (longer than its summary)
-    public private(set) var desc: ReminderProperty! = ReminderProperty()
+    public var desc: ReminderProperty! = ReminderProperty()
     /// The datetime this reminder should start
-    public private(set) var start: ReminderProperty! = ReminderProperty()
+    public var start: ReminderProperty! = ReminderProperty()
     /// The GPS coordinate of this location
-    public private(set) var geo: Geo! = Geo()
+    public var geo: Geo! = Geo()
     /// The datetime this reminder was last modified
-    public private(set) var lastModified: ReminderProperty! = ReminderProperty()
+    public var lastModified: ReminderProperty! = ReminderProperty()
     /// A description of the intended venue for this reminder
-    public private(set) var location: ReminderProperty! = ReminderProperty()
+    public var location: ReminderProperty! = ReminderProperty()
     /// The person who created this reminder
-    public private(set) var organizer: Organizer! = Organizer()
+    public var organizer: Organizer! = Organizer()
     
     /// This property is used by an assignee or delegatee of a
     /// to-do to convey the percent completion of a to-do to the
     /// "Organizer".
-    public private(set) var percentComplete: ReminderProperty! = ReminderProperty()
+    public var percentComplete: ReminderProperty! = ReminderProperty()
     /// Describes this reminder's relative priority as an integer
-    public private(set) var priority: ReminderProperty! = ReminderProperty()
+    public var priority: ReminderProperty! = ReminderProperty()
     /// used in conjunction with the "UID" and
     /// "SEQUENCE" properties to identify a specific instance of a
     /// recurring "VEVENT", "VTODO", or "VJOURNAL" calendar component.
     /// The property value is the original value of the "DTSTART" property
     /// of the recurrence instance.
-    public private(set) var recurrenceID: ReminderProperty! = ReminderProperty()
+    public var recurrenceID: ReminderProperty! = ReminderProperty()
     /// The current integer sequence of revisions of this item
-    public private(set) var sequence: ReminderProperty! = ReminderProperty()
+    public var sequence: ReminderProperty! = ReminderProperty()
     /// Overall status or progress for this reminder
-    public private(set) var status: ReminderProperty! = ReminderProperty()
+    public var status: ReminderProperty! = ReminderProperty()
     
     /// A short summary or description of this reminder
-    public private(set) var summary: ReminderProperty! = ReminderProperty()
+    public var summary: ReminderProperty! = ReminderProperty()
     /// A pointer to a URL representation of this object
-    public private(set) var URL: ReminderProperty! = ReminderProperty()
+    public var URL: ReminderProperty! = ReminderProperty()
     
     /// Defines a rule or repeating pattern for
     /// recurring events, to-dos, journal entries, or time zone
     /// definitions.
-    public private(set) var rrule: ReminderProperty! = ReminderProperty()
+    public var rrule: ReminderProperty! = ReminderProperty()
     
     /// Defines a datetime of when this reminder is due
-    public private(set) var due: ReminderProperty! = ReminderProperty()
+    public var due: ReminderProperty! = ReminderProperty()
     /// Defines a duration after the start time for which this reminder is valid
-    public private(set) var duration: ReminderProperty! = ReminderProperty()
+    public var duration: ReminderProperty! = ReminderProperty()
     
     /// Items attached to this reminder
-    public private(set) var attachments = [Attachment]()
+    public var attachments = [Attachment]()
     /// Attendees assigned to this reminder
-    public private(set) var attendees = [Attendee]()
+    public var attendees = [Attendee]()
     /// A list of categories (strings) that describe this reminder
-    public private(set) var categories = [ReminderProperty]()
+    public var categories = [ReminderProperty]()
     /// A list of comments (strings) about this reminder
-    public private(set) var comments = [ReminderProperty]()
+    public var comments = [ReminderProperty]()
     /// A list of contacts (strings) attached to this reminder
-    public private(set) var contacts = [ReminderProperty]()
+    public var contacts = [ReminderProperty]()
     
     /// Exceptions to recurring datetimes
-    public private(set) var exceptions = [ReminderProperty]()
+    public var exceptions = [ReminderProperty]()
     /// Whether the request was successful or otherwise impacted
-    public private(set) var requestStatus = [RequestStatus]()
+    public var requestStatus = [RequestStatus]()
     /// Associated calendar objects
-    public private(set) var related = [CalendarObject]() // TODO: weak ref
+    public var related = [CalendarObject]() // TODO: weak ref
     /// A list of resources (string) required for this reminder
-    public private(set) var resources = [ReminderProperty]()
+    public var resources = [ReminderProperty]()
     
     /// A list of recurrence dates for this reminder object
-    public private(set) var recurrenceDates = [RecurrenceDate]()
+    public var recurrenceDates = [RecurrenceDate]()
     /// Non-standard "X-" properties
-    public private(set) var xProperties = [GenericProperty]()
+    public var xProperties = [GenericProperty]()
     /// IANA-registered property names
-    public private(set) var IANAProperties = [IANAProperty]()
+    public var IANAProperties = [IANAProperty]()
     
     /// A list of alarm components associated with this reminder
     public internal(set) var alarms = [Alarm]()
