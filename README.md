@@ -2,13 +2,13 @@
 
 libSwiftCal is a Cocoa Touch Framework iCalendar parser and library written in Swift (and some Objective-C) for use in iOS and OS X projects. It was created by [Stefan Arambasich](mailto:ArtisOracle@gmail.com) and is released under the [MIT License](http://opensource.org/licenses/MIT).
 
-libSwiftCal is an implementation of [RFC 5545](https://tools.ietf.org/html/rfc5545#section-3.8.6.2).
+libSwiftCal is an implementation of [RFC 5545](https://tools.ietf.org/html/rfc5545).
 
 ##Overview
 The goals of this framework are:
 
 - Modern: use a modern, type-safe language (Swift)
-- Dynamic: features a generic model (de)-serializer *([not yet](https://github.com/practicalswift/swift-compiler-crashes/blob/master/crashes/12266-generic-protocol-init.swift) fully generic)*
+- Dynamic: features a generic model (de)-serializer *([not yet](https://github.com/practicalswift/swift-compiler-crashes/blob/master/crashes/21266-generic-protocol-init.swift) fully generic)*
 - KISS: simple, low-overhead usage by client applications
 
 libSwiftCal's overall purpose is to make parsing and interacting with the iCalendar specification easy and native to your iOS or Mac applications.
@@ -24,7 +24,7 @@ let cal = Calendar(stringToParse: str, completion: completion) // The closure's 
 ```
 
 ##Status
-**libSwiftCal is incomplete**. I built this framework with the intent to use it in an app. Therefore, while the grammar will recognize any valid iCalendar file, there may not be a corresponding model in the framework yet because I've only implemented what's necessary for VTODO components.
+**libSwiftCal is incomplete**. I built this framework with the intent to use it in a reminders app. Therefore, while the grammar will recognize any valid iCalendar file, there may not be a corresponding model in the framework yet because I've only implemented what's necessary for VTODO components.
 
 As of the current version, only the following portions are implemented:
 
