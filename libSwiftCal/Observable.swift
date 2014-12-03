@@ -44,7 +44,6 @@ public protocol Observable: NSObjectProtocol {
     */
     func addObserver(o: Observer)
     
-    
     /**
         Removes an observer from this object. The observer object will no longer
         receive updates when this model is modified.

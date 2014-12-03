@@ -25,15 +25,6 @@
 //  THE SOFTWARE.
 
 import Foundation
-import EventKit
-
-public func == (lhs: Alarm, rhs: Alarm) -> Bool {
-    return lhs === rhs || lhs.id == rhs.id
-}
-
-public func != (lhs: Alarm, rhs: Alarm) -> Bool {
-    return !(lhs == rhs)
-}
 
 /**
     Defines a VALARM calendar component.
@@ -72,14 +63,6 @@ public class Alarm: CalendarObject {
     }
     
     
-    // MARK: - Hashable
-    public override var hashValue: Int {
-        get {
-            return (31 &* action.hash) &+ trigger.hash
-        }
-    }
-    
-    
     // MARK: - CalendarType
     public override func serializeToiCal() -> String {
         var result = String()
@@ -93,6 +76,13 @@ public class Alarm: CalendarObject {
         return result
     }
     
+    
+    // MARK: - Hashable
+    public override var hashValue: Int {
+        get {
+            return (31 &* action.hash) &+ trigger.hash
+        }
+    }
     
     
     // MARK: - NSCoding

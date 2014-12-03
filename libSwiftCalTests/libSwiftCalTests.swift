@@ -41,6 +41,9 @@ class libSwiftCalTests: XCTestCase {
         super.tearDown()
     }
     
+    /**
+        Attempts to parse a valid iCalendar object from the given input.
+    */
     func test1ParseFromFile() {
         // This is an example of a functional test case.
         self.measureBlock { () -> Void in

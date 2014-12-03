@@ -25,15 +25,6 @@
 //  THE SOFTWARE.
 
 import Foundation
-
-public typealias Duration = NSTimeInterval
-
-public typealias IANAPropertyValue = String
-public typealias GenericPropertyValue = String
-
-public typealias CalAddress = NSURL
-
-import Foundation
 import CoreLocation
 
 // MARK: - Override to support adding dictionaries
@@ -41,7 +32,7 @@ import CoreLocation
     Operator overloads for appending dictionaries. Warning, if key collisons in A and B,
     the method will prefer B's value.
 */
-func +=(a: [String : AnyObject], b: [String : AnyObject]?) -> [String : AnyObject] {
+func += (a: [String : AnyObject], b: [String : AnyObject]?) -> [String : AnyObject] {
     if b == nil {
         return a
     }

@@ -26,6 +26,10 @@
 
 import Foundation
 
+/**
+    A calendar type is a calendar object that conforms to all
+    of the required protocols.
+*/
 protocol CalendarType: NSObjectProtocol, NSCopying, NSCoding, Hashable, Equatable, Observable, Serializable {
     func serializeToiCal() -> String
 }

@@ -26,40 +26,8 @@
 
 import Foundation
 
-//func model__addListener<T: CalendarType>(l: CalendarObjectListener, model m: T) {
-//    var found = false
-//    for i in 0 ..< m.listeners!.count {
-//        let listener = m.listeners![i]
-//        if l.hash == listener.hash {
-//            found = true
-//            break
-//        }
-//    }
-//    
-//    if !found {
-//        var ls = m.listeners
-//        ls!.append(l)
-//    }
-//}
-//
-//func model__removeListener<T: CalendarType>(l: CalendarObjectListener, model m: T) {
-//    var idx: Int?
-//    for i in 0 ..< m.listeners!.count {
-//        let listener = m.listeners![i]
-//        if l.hash == listener.hash {
-//            idx = i
-//            break
-//        }
-//    }
-//    
-//    if idx != nil {
-//        var ls = m.listeners
-//        ls!.removeAtIndex(idx!)
-//    }
-//}
-
 /**
-    A set of serialization keys used on models in the app.
+    A set of serialization keys used on models in the framework.
 */
 public struct SerializationKeys {
     static let XPropertiesKey = "x-prop"
@@ -74,6 +42,17 @@ public struct SerializationKeys {
     static let AttendeesKey = "attendees"
 }
 
+/// MARK: - Type aliases
+/// A positive duration of time, measured in seconds.
+public typealias Duration = NSTimeInterval
+
+public typealias IANAPropertyValue = String
+public typealias GenericPropertyValue = String
+
+public typealias CalAddress = NSURL
+
+
+// MARK: - Global functions
 func model__defaultHash<T where T: Hashable, T: CalendarObject>(model m: T) -> Int {
     return (31 &* m.created.hash) &+ m.updated.hash
 }
@@ -207,7 +186,6 @@ func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, for
     }
 }
 
-
 //func model__update<T where T: CalendarType, T: NSObject>(currentCalendarObject cm: T, newCalendarObject nm: T) {
 //    let diffs = model__getDiffBetweenCalendarObjects(modelOne: reflect(cm), modelTwo: reflect(nm))
 //    var newVals = [NSObject]()
@@ -226,7 +204,7 @@ func nscoder__addToCoder<T: Serializable>(aCoder: NSCoder, mirror m: MirrorType,
             nscoder__addToCoder(aCoder, mirror: c, onObject: o)
         } else {
             let j = find(object__getVarNames(mirror: reflect(o)), p)
-            aCoder.setValue(c.value as? NSObject, forKey: o.serializationKeys[j!])
+            aCoder.setValue(c.value as NSObject, forKey: o.serializationKeys[j!])
         }
     }
 }
@@ -248,7 +226,7 @@ func nscopying__copyWithZone<T: NSObject where T: NSCopying>(fromMirror fm: Mirr
         if p == "super" {
             nscopying__copyWithZone(fromMirror: c, toObject: &toObj)
         } else {
-            toObj.setValue(c.value as? NSObject, forKey: p)
+            toObj.setValue(c.value as NSObject, forKey: p)
         }
     }
 }
@@ -301,8 +279,6 @@ func serializable__addToDict<T: Serializable>(inout dict: [String : AnyObject], 
         if p == "super" {
             serializable__addToDict(&dict, mirror: c, onObject: o)
         } else {
-            let ks = o.serializationKeys
-            let vs = object__getVarNames(mirror: reflect(o))
             let j = find(object__getVarNames(mirror: reflect(o)), p)
             let k = o.serializationKeys[j!]
             if !k.isEmpty {
@@ -374,10 +350,14 @@ public class CalendarObject: NSObject, CalendarType {
     /// A list of other objects listening for changes to this object
     private var observers = [Observer]()
     
-    
-    // MARK: - Init
     public override required init() {
         
+    }
+    
+    
+    // MARK: - CalendarType
+    public func serializeToiCal() -> String {
+        fatalError("serializaToiCal has not been implemented")
     }
     
     
@@ -386,22 +366,6 @@ public class CalendarObject: NSObject, CalendarType {
         get {
             return (31 &* created.hash) &+ updated.hash
         }
-    }
-    
-    
-    // MARK: - ModelType
-    public func serializeToiCal() -> String {
-        fatalError("serializaToiCal has not been implemented")
-    }
-    
-    
-    // MARK: - NSCopying
-    public func copyWithZone(zone: NSZone) -> AnyObject {
-        var c = CalendarObject()
-        
-        nscopying__copyWithZone(fromMirror: reflect(self), toObject: &c)
-        
-        return c
     }
     
     
@@ -414,6 +378,16 @@ public class CalendarObject: NSObject, CalendarType {
     
     public func encodeWithCoder(aCoder: NSCoder) {
         nscoder__addToCoder(aCoder, mirror: reflect(self), onObject: self)
+    }
+    
+    
+    // MARK: - NSCopying
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        var c = CalendarObject()
+        
+        nscopying__copyWithZone(fromMirror: reflect(self), toObject: &c)
+        
+        return c
     }
     
     
@@ -451,10 +425,6 @@ public class CalendarObject: NSObject, CalendarType {
         
         serializable__dictInit(dictionary, model: self)
     }
-    
-//    public func initFromDict(dictionary: [String : AnyObject]) {
-//        serializable__dictInit(dictionary, model: self)
-//    }
     
     public func toDictionary() -> [String : AnyObject] {
         var result = [String: AnyObject]()

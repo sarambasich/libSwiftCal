@@ -159,8 +159,6 @@ public class Reminder: CalendarObject {
         }
     }
     
-    
-    // MARK: - Init
     public required init() {
         super.init()
     }
