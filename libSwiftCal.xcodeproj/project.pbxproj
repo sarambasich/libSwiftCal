@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		256B00A313F91DF87590D625 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D008A3D155461280B0352B /* libPods.a */; };
-		A9AA345213E26B53BDD85F35 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D008A3D155461280B0352B /* libPods.a */; };
 		F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82909B41A1C5ADA0091366E /* EasyInput.ics */; };
-		F83195AE1A2EAD2E00377846 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F83195AD1A2EAD2E00377846 /* LICENSE */; };
 		F83195D01A2EAE1A00377846 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195B01A2EAE1A00377846 /* Alarm.swift */; };
 		F83195D11A2EAE1A00377846 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F83195B21A2EAE1A00377846 /* Localizable.strings */; };
 		F83195D21A2EAE1A00377846 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195B41A2EAE1A00377846 /* Attachment.swift */; };
@@ -25,7 +22,6 @@
 		F83195DB1A2EAE1A00377846 /* iCalendarElements.m in Sources */ = {isa = PBXBuildFile; fileRef = F83195BD1A2EAE1A00377846 /* iCalendarElements.m */; };
 		F83195DC1A2EAE1A00377846 /* iCalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195BE1A2EAE1A00377846 /* iCalParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F83195DD1A2EAE1A00377846 /* iCalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F83195BF1A2EAE1A00377846 /* iCalParser.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		F83195DE1A2EAE1A00377846 /* icalparser.parsergen in Resources */ = {isa = PBXBuildFile; fileRef = F83195C01A2EAE1A00377846 /* icalparser.parsergen */; };
 		F83195E01A2EAE1A00377846 /* libSwiftCal.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195C51A2EAE1A00377846 /* libSwiftCal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F83195E11A2EAE1A00377846 /* NSString+CalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195C61A2EAE1A00377846 /* NSString+CalParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F83195E21A2EAE1A00377846 /* NSString+CalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F83195C71A2EAE1A00377846 /* NSString+CalParser.m */; };
@@ -38,6 +34,8 @@
 		F83195E91A2EAE1A00377846 /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CE1A2EAE1A00377846 /* RequestStatus.swift */; };
 		F83195EA1A2EAE1A00377846 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CF1A2EAE1A00377846 /* Serializable.swift */; };
 		F83ACB631A2AD66600423215 /* EasyInput.json in Resources */ = {isa = PBXBuildFile; fileRef = F83ACB621A2AD66600423215 /* EasyInput.json */; };
+		F8858D421A30250200D705F6 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8858D411A30250200D705F6 /* PEGKit.framework */; };
+		F8858D431A30250800D705F6 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8858D411A30250200D705F6 /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
 		F8F8EED51A1C4CF30046AF23 /* libSwiftCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */; };
 /* End PBXBuildFile section */
@@ -59,20 +57,14 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F8858D431A30250800D705F6 /* PEGKit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0D7A32E129345370C1884018 /* Pods-libSwiftCal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-libSwiftCal.release.xcconfig"; path = "../../MyList/Pods/Target Support Files/Pods-libSwiftCal/Pods-libSwiftCal.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
-		2114EB6811E79616AFBE19AC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		4AF91ED7FD33EB033ECFAB76 /* Pods-libSwiftCal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-libSwiftCal.debug.xcconfig"; path = "../../MyList/Pods/Target Support Files/Pods-libSwiftCal/Pods-libSwiftCal.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
-		64D008A3D155461280B0352B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA8C57D38159AF3E5242B680 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		BEF9F760557ACAEE56991AF4 /* libPods-libSwiftCal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-libSwiftCal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F82909B41A1C5ADA0091366E /* EasyInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = EasyInput.ics; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = "<none>"; };
-		F83195AD1A2EAD2E00377846 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F83195B01A2EAE1A00377846 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		F83195B31A2EAE1A00377846 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F83195B41A2EAE1A00377846 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
@@ -103,6 +95,7 @@
 		F83195CE1A2EAE1A00377846 /* RequestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
 		F83195CF1A2EAE1A00377846 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		F83ACB621A2AD66600423215 /* EasyInput.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = EasyInput.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
+		F8858D411A30250200D705F6 /* PEGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PEGKit.framework; path = "../../../../../../../Library/Developer/Xcode/DerivedData/libSwiftCal-dzrnvwywqsmnqublpegvokdvledb/Build/Products/Debug/PEGKit.framework"; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8EAF71A1C3EEE0046AF23 /* libSwiftCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libSwiftCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8ECE51A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -114,7 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				256B00A313F91DF87590D625 /* libPods.a in Frameworks */,
+				F8858D421A30250200D705F6 /* PEGKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,41 +116,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */,
-				A9AA345213E26B53BDD85F35 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		541DB1B874EB69E6DCC53865 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				64D008A3D155461280B0352B /* libPods.a */,
-				BEF9F760557ACAEE56991AF4 /* libPods-libSwiftCal.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C120CEE49F59C3EA297770ED /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				BA8C57D38159AF3E5242B680 /* Pods.debug.xcconfig */,
-				2114EB6811E79616AFBE19AC /* Pods.release.xcconfig */,
-				4AF91ED7FD33EB033ECFAB76 /* Pods-libSwiftCal.debug.xcconfig */,
-				0D7A32E129345370C1884018 /* Pods-libSwiftCal.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		F83195AC1A2EAD2E00377846 /* PEGKit */ = {
-			isa = PBXGroup;
-			children = (
-				F83195AD1A2EAD2E00377846 /* LICENSE */,
-			);
-			path = PEGKit;
-			sourceTree = "<group>";
-		};
 		F83195AF1A2EAE1A00377846 /* libSwiftCal */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,12 +177,11 @@
 		F8F8EAE21A1C3EEE0046AF23 = {
 			isa = PBXGroup;
 			children = (
+				F8858D411A30250200D705F6 /* PEGKit.framework */,
 				F8F8EB081A1C3F1F0046AF23 /* libs */,
 				F83195AF1A2EAE1A00377846 /* libSwiftCal */,
 				F8F8ECE41A1C3F200046AF23 /* libSwiftCalTests */,
 				F8F8EAED1A1C3EEE0046AF23 /* Products */,
-				C120CEE49F59C3EA297770ED /* Pods */,
-				541DB1B874EB69E6DCC53865 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -234,7 +197,6 @@
 		F8F8EB081A1C3F1F0046AF23 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				F83195AC1A2EAD2E00377846 /* PEGKit */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -272,13 +234,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F8F8EB021A1C3EEE0046AF23 /* Build configuration list for PBXNativeTarget "libSwiftCal" */;
 			buildPhases = (
-				19B19DCE847D26094C7910DD /* Check Pods Manifest.lock */,
 				F8F8EAE71A1C3EEE0046AF23 /* Sources */,
 				F8F8EAE81A1C3EEE0046AF23 /* Frameworks */,
 				F8F8EAE91A1C3EEE0046AF23 /* Headers */,
 				F8F8EAEA1A1C3EEE0046AF23 /* Resources */,
 				F8F8EED61A1C4DD90046AF23 /* CopyFiles */,
-				6BAC57BE09D9DC4991724EB1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -293,11 +253,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F8F8EB051A1C3EEE0046AF23 /* Build configuration list for PBXNativeTarget "libSwiftCalTests" */;
 			buildPhases = (
-				F1D421C314E849A2B4B79BC4 /* Check Pods Manifest.lock */,
 				F8F8EAF31A1C3EEE0046AF23 /* Sources */,
 				F8F8EAF41A1C3EEE0046AF23 /* Frameworks */,
 				F8F8EAF51A1C3EEE0046AF23 /* Resources */,
-				50744D60C291CF53BD18DEBF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -349,10 +307,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F83195AE1A2EAD2E00377846 /* LICENSE in Resources */,
 				F83195D11A2EAE1A00377846 /* Localizable.strings in Resources */,
 				F83195D91A2EAE1A00377846 /* iCal.grammar in Resources */,
-				F83195DE1A2EAE1A00377846 /* icalparser.parsergen in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,69 +322,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		19B19DCE847D26094C7910DD /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		50744D60C291CF53BD18DEBF /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6BAC57BE09D9DC4991724EB1 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F1D421C314E849A2B4B79BC4 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F8F8EAE71A1C3EEE0046AF23 /* Sources */ = {
@@ -488,7 +381,6 @@
 /* Begin XCBuildConfiguration section */
 		F8F8EB001A1C3EEE0046AF23 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA8C57D38159AF3E5242B680 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -535,7 +427,6 @@
 		};
 		F8F8EB011A1C3EEE0046AF23 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2114EB6811E79616AFBE19AC /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -575,7 +466,6 @@
 		};
 		F8F8EB031A1C3EEE0046AF23 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA8C57D38159AF3E5242B680 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -584,6 +474,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/**",
+					"$(PROJECT_DIR)/libs/PEGKit/pegkit/lib/OCMock",
+					"$(PROJECT_DIR)/libs/PEGKit/pegkit/build/Debug",
+					"$(PROJECT_DIR)/libs/pegkit/build/Debug",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/libSwiftCal-dzrnvwywqsmnqublpegvokdvledb/Build/Products/Debug",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -598,13 +492,12 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
+				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = Debug;
 		};
 		F8F8EB041A1C3EEE0046AF23 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2114EB6811E79616AFBE19AC /* Pods.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -613,6 +506,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/**",
+					"$(PROJECT_DIR)/libs/PEGKit/pegkit/lib/OCMock",
+					"$(PROJECT_DIR)/libs/PEGKit/pegkit/build/Debug",
+					"$(PROJECT_DIR)/libs/pegkit/build/Debug",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/libSwiftCal-dzrnvwywqsmnqublpegvokdvledb/Build/Products/Debug",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -627,13 +524,12 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
+				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = Release;
 		};
 		F8F8EB061A1C3EEE0046AF23 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA8C57D38159AF3E5242B680 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -651,7 +547,6 @@
 		};
 		F8F8EB071A1C3EEE0046AF23 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2114EB6811E79616AFBE19AC /* Pods.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
