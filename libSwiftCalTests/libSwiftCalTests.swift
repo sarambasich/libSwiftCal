@@ -48,7 +48,8 @@ class libSwiftCalTests: XCTestCase {
         // This is an example of a functional test case.
         self.measureBlock { () -> Void in
             let exp = self.expectationWithDescription("parse")
-            let str: String = NSString(data: NSData(contentsOfFile: "/Users/Stefan/Documents/Applications/iOS/Frameworks/libSwiftCal/libSwiftCalTests/EasyInput.ics")!, encoding: NSUTF8StringEncoding)!
+            let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "ics", inDirectory: nil)
+            let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
             
             let c = { (cal: Calendar) -> Void in
                 calendar = cal
@@ -101,7 +102,8 @@ class libSwiftCalTests: XCTestCase {
             let json = NSJSONSerialization.dataWithJSONObject(d, options: nil, error: &err)
             if err == nil {
                 let str = NSString(data: json!, encoding: NSUTF8StringEncoding)!
-                let correctStr = NSString(data: NSData(contentsOfFile: "/Users/Stefan/Documents/Applications/iOS/Frameworks/libSwiftCal/libSwiftCalTests/EasyInput.json")!, encoding: NSUTF8StringEncoding)
+                let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "json", inDirectory: nil)
+                let correctStr = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)
                 XCTAssert(str.length == correctStr!.length, "Unexpected dictionary values")
             }
         }
@@ -110,7 +112,8 @@ class libSwiftCalTests: XCTestCase {
     func test3ParseFromJSON() {
         self.measureBlock { () -> Void in
             var err: NSError?
-            let data = NSData(contentsOfFile: "/Users/Stefan/Documents/Applications/iOS/Frameworks/libSwiftCal/libSwiftCalTests/EasyInput.json")!
+            let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "json", inDirectory: nil)
+            let data = NSData(contentsOfFile: path!)!
             let json: [String : AnyObject] = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &err)! as [String : AnyObject]
             let cal = Calendar(dictionary: json)
             
@@ -148,7 +151,8 @@ class libSwiftCalTests: XCTestCase {
     func test4SerializeToICal() {
         self.measureBlock { () -> Void in
             let result = calendar!.serializeToiCal()
-            let ical: String = NSString(data: NSData(contentsOfFile: "/Users/Stefan/Documents/Applications/iOS/Frameworks/libSwiftCal/libSwiftCalTests/EasyInput.ics")!, encoding: NSUTF8StringEncoding)!
+            let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "ics", inDirectory: nil)
+            let ical: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
             
             XCTAssert(result.len == ical.len, "Unexpected iCal serialized result")
         }
