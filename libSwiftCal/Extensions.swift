@@ -81,7 +81,7 @@ public class Weak<T: AnyObject> {
 
 
 // MARK: - NSDate extension
-let DateFormats = ["YYYYMMDD'T'HHmmssZ", "YYYYMMDD'T'HHmmss", "YYYYMMDD", "YYYYMMDD'T'HHmmss'Z'"]
+let DateFormats = ["yyyyLLdd'T'HHmmssZ", "yyyyLLdd'T'HHmmss", "yyyyLLdd", "yyyyLLdd'T'HHmmss'Z'"]
 public extension NSDate {
     public class func parseDate(string: String, format: String? = nil) -> NSDate? {
         let formatter = NSDateFormatter()

@@ -599,7 +599,7 @@ statdesc   = text;
 
 extdata    = text;
 
-seq = 'SEQUENCE' seqparam* ':' digit+ crlf;
+seq = 'SEQUENCE' seqparam* ':' (digit | Number) crlf;
 
 seqparam   = (';' otherparam);
 

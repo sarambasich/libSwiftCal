@@ -57,7 +57,7 @@ id toTypeFromString(NSString * str) {
     NSScanner * scanner = [NSScanner scannerWithString:str];
     if ([str rangeOfCharacterFromSet:[dateCharSet invertedSet]].location == NSNotFound &&
         str.length >= 8) {
-        NSArray * dateFormats = @[@"YYYYMMDD'T'HHmmssZ", @"YYYYMMDD'T'HHmmss", @"YYYYMMDD"];
+        NSArray * dateFormats = @[@"yyyyLLdd'T'HHmmssZ", @"yyyyLLdd'T'HHmmss", @"yyyyLLdd", @"yyyyLLdd'T'HHmmss'Z'"];
         
         for (NSString * fmt in dateFormats) {
             NSError * err;

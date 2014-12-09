@@ -6,24 +6,23 @@ import Foundation
 var str = "Hello, playground"
 
 //let dtStr = "20140417T235000"
-let dtStr = "20140418T035000Z"
+//let dtStr = "20140418T035000Z"
+let dtStr = "20140417T175530Z"
 
-let formatter = NSDateFormatter()
-
-let fmts = ["YYYYMMDD'T'HHmmssZ", "YYYYMMDD'T'HHmmss", "YYYYMMDD"]
+let fmts = ["yyyyLLdd'T'HHmmssZ", "yyyyLLdd'T'HHmmss", "yyyyLLdd", "yyyyLLdd'T'HHmmss'Z'"]
 var result: NSDate!
 
 for fmt in fmts {
-    var errStr: String?
-    var err: NSError?
     var date: AnyObject?
+    var formatter = NSDateFormatter()
+    formatter.dateStyle = NSDateFormatterStyle.FullStyle
     formatter.dateFormat = fmt;
-    if formatter.getObjectValue(&date, forString: dtStr, range: nil, error: &err) {
+    formatter.locale = NSLocale.currentLocale()
+    if let date = formatter.dateFromString(dtStr) {
         result = date as NSDate;
         break;
     }
 }
 
-let x: NSDate = result as NSDate
-let n = x.timeIntervalSinceReferenceDate
-let d = NSDate(timeIntervalSinceReferenceDate: 411695400.0)
+let n = result.timeIntervalSinceReferenceDate
+let d = NSDate(timeIntervalSinceReferenceDate: 419450130.0)

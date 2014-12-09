@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F81A89141A36AA10000F5A34 /* SimpleInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F81A89131A36AA10000F5A34 /* SimpleInput.ics */; };
 		F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82909B41A1C5ADA0091366E /* EasyInput.ics */; };
 		F83195D01A2EAE1A00377846 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195B01A2EAE1A00377846 /* Alarm.swift */; };
 		F83195D11A2EAE1A00377846 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F83195B21A2EAE1A00377846 /* Localizable.strings */; };
@@ -34,8 +35,8 @@
 		F83195E91A2EAE1A00377846 /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CE1A2EAE1A00377846 /* RequestStatus.swift */; };
 		F83195EA1A2EAE1A00377846 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CF1A2EAE1A00377846 /* Serializable.swift */; };
 		F83ACB631A2AD66600423215 /* EasyInput.json in Resources */ = {isa = PBXBuildFile; fileRef = F83ACB621A2AD66600423215 /* EasyInput.json */; };
-		F8A9AE981A369DA7006787D5 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A9AE961A369D97006787D5 /* PEGKit.framework */; };
-		F8A9AE991A369DAA006787D5 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8A9AE961A369D97006787D5 /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F85E9F2A1A36B7D800B3ACB8 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F85E9F271A36B7C500B3ACB8 /* PEGKit.framework */; };
+		F85E9F2B1A36B7DD00B3ACB8 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F85E9F271A36B7C500B3ACB8 /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
 		F8F8EED51A1C4CF30046AF23 /* libSwiftCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */; };
 /* End PBXBuildFile section */
@@ -57,13 +58,14 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F8A9AE991A369DAA006787D5 /* PEGKit.framework in CopyFiles */,
+				F85E9F2B1A36B7DD00B3ACB8 /* PEGKit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F81A89131A36AA10000F5A34 /* SimpleInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleInput.ics; sourceTree = "<group>"; };
 		F82909B41A1C5ADA0091366E /* EasyInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = EasyInput.ics; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = "<none>"; };
 		F83195B01A2EAE1A00377846 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		F83195B31A2EAE1A00377846 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -95,7 +97,7 @@
 		F83195CE1A2EAE1A00377846 /* RequestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
 		F83195CF1A2EAE1A00377846 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		F83ACB621A2AD66600423215 /* EasyInput.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = EasyInput.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
-		F8A9AE961A369D97006787D5 /* PEGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PEGKit.framework; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/libSwiftCal-ddgudkqgicbyqydpzunjitshbjxb/Build/Products/Debug/PEGKit.framework"; sourceTree = "<group>"; };
+		F85E9F271A36B7C500B3ACB8 /* PEGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PEGKit.framework; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/libSwiftCal-ddgudkqgicbyqydpzunjitshbjxb/Build/Products/Debug-iphoneos/PEGKit.framework"; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8EAF71A1C3EEE0046AF23 /* libSwiftCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libSwiftCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8ECE51A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,7 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8A9AE981A369DA7006787D5 /* PEGKit.framework in Frameworks */,
+				F85E9F2A1A36B7D800B3ACB8 /* PEGKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,7 +198,7 @@
 		F8F8EB081A1C3F1F0046AF23 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				F8A9AE961A369D97006787D5 /* PEGKit.framework */,
+				F85E9F271A36B7C500B3ACB8 /* PEGKit.framework */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -208,6 +210,7 @@
 				F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */,
 				F82909B41A1C5ADA0091366E /* EasyInput.ics */,
 				F83ACB621A2AD66600423215 /* EasyInput.json */,
+				F81A89131A36AA10000F5A34 /* SimpleInput.ics */,
 			);
 			path = libSwiftCalTests;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F83ACB631A2AD66600423215 /* EasyInput.json in Resources */,
+				F81A89141A36AA10000F5A34 /* SimpleInput.ics in Resources */,
 				F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
