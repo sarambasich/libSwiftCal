@@ -2161,7 +2161,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos8.1;
 			};
 			name = Debug;
 		};
@@ -2172,7 +2172,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos8.1;
 			};
 			name = Release;
 		};
@@ -2284,6 +2284,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.10;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2316,6 +2317,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.10;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2462,10 +2464,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath/";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/lib/OCMock",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
@@ -2476,7 +2474,6 @@
 				INFOPLIST_FILE = "res/PEGKit-Info.plist";
 				LLVM_LTO = NO;
 				PRODUCT_NAME = PEGKit;
-				SDKROOT = iphoneos8.1;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2490,10 +2487,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath/";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/lib/OCMock",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2506,7 +2499,6 @@
 				INFOPLIST_FILE = "res/PEGKit-Info.plist";
 				LLVM_LTO = NO;
 				PRODUCT_NAME = PEGKit;
-				SDKROOT = iphoneos8.1;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
