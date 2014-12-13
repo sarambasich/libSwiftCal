@@ -26,6 +26,9 @@
 
 #import "iCalendarElements.h"
 
+const NSUInteger kPriorityLow = 9;
+const NSUInteger kPriorityNormal = 5;
+const NSUInteger kPriorityHigh = 1;
 
 NSString * const kBEGIN = @"BEGIN";
 NSString * const kEND = @"END";

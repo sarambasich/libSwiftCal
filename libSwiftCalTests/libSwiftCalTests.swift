@@ -60,16 +60,16 @@ class libSwiftCalTests: XCTestCase {
                 
                 XCTAssert(cal.reminders.count == 1, "Unexpected reminders count")
                 let firstRem = cal.reminders.first!
-                XCTAssert(firstRem.due.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 411695400.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
+                XCTAssert(firstRem.due.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419471400.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
                 XCTAssert(firstRem.due.parameters.count == 3, "Unexpected parameters count")
                 XCTAssert(firstRem.uid.stringValue == "44C7728A-C070-4FD7-9C14-685BD9398F3E", "Unexpected uid")
                 XCTAssert(firstRem.percentComplete.intValue == 100, "Unexpected percentComplete")
                 XCTAssert(firstRem.reminderStatus == .Completed, "Unexpected reminderStatus")
                 XCTAssert(firstRem.sequence.intValue == 0, "Unexpected sequence")
-                XCTAssert(firstRem.completed.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 411674730.0)) == NSComparisonResult.OrderedSame, "Unexpected completed")
+                XCTAssert(firstRem.completed.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419450730.0)) == NSComparisonResult.OrderedSame, "Unexpected completed")
                 XCTAssert(firstRem.summary.stringValue == "Reminders are cool", "Unexpected summary")
-                XCTAssert(firstRem.start.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 410494430.0)) == NSComparisonResult.OrderedSame, "Unexpected start")
-                XCTAssert(firstRem.createdTime.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 410494430.0)) == NSComparisonResult.OrderedSame, "Unexpected createdTime")
+                XCTAssert(firstRem.start.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 413172830.0)) == NSComparisonResult.OrderedSame, "Unexpected start")
+                XCTAssert(firstRem.createdTime.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 413172830.0)) == NSComparisonResult.OrderedSame, "Unexpected createdTime")
                 XCTAssert(firstRem.alarms.count == 1, "Unexpected alarms count")
                 
                 let firstAlarm = firstRem.alarms.first!
@@ -79,7 +79,9 @@ class libSwiftCalTests: XCTestCase {
                 XCTAssert(firstXprop.key == "X-UID", "Unexpected key")
                 XCTAssert(firstXprop.stringValue == "C3489EE2-3F65-416F-B487-377F5C80F389", "Unexpected firstXprop")
                 XCTAssert(firstAlarm.trigger.parameters.count == 1, "Unexpected parameters count")
-                XCTAssert(firstAlarm.trigger.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 411709800.0)) == NSComparisonResult.OrderedSame, "Unexpected trigger")
+                let d1 = firstAlarm.trigger.dateValue!
+                let d2 = NSDate(timeIntervalSinceReferenceDate: 419485800.0)
+                XCTAssert(firstAlarm.trigger.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419485800.0)) == NSComparisonResult.OrderedSame, "Unexpected trigger")
                 XCTAssert(firstAlarm.action.stringValue == "DISPLAY", "Unexpected action")
                 XCTAssert(firstAlarm.desc.stringValue == "This is an alarm x1", "Unexpected desc")
                 
@@ -123,16 +125,18 @@ class libSwiftCalTests: XCTestCase {
             
             XCTAssert(cal.reminders.count == 1, "Unexpected reminders count")
             let firstRem = cal.reminders.first!
-            XCTAssert(firstRem.due.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 411695400.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
+            let d1 = firstRem.due.dateValue!
+            let d2 = NSDate(timeIntervalSinceReferenceDate: 411695400.0)
+            XCTAssert(firstRem.due.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419471400.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
             XCTAssert(firstRem.due.parameters.count == 3, "Unexpected parameters count")
             XCTAssert(firstRem.uid.stringValue == "44C7728A-C070-4FD7-9C14-685BD9398F3E", "Unexpected uid")
             XCTAssert(firstRem.percentComplete.intValue == 100, "Unexpected percentComplete")
             XCTAssert(firstRem.reminderStatus == .Completed, "Unexpected reminderStatus")
             XCTAssert(firstRem.sequence.intValue == 0, "Unexpected sequence")
-            XCTAssert(firstRem.completed.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 411674730.0)) == NSComparisonResult.OrderedSame, "Unexpected completed")
+            XCTAssert(firstRem.completed.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419450730.0)) == NSComparisonResult.OrderedSame, "Unexpected completed")
             XCTAssert(firstRem.summary.stringValue == "Reminders are cool", "Unexpected summary")
-            XCTAssert(firstRem.start.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 410494430.0)) == NSComparisonResult.OrderedSame, "Unexpected start")
-            XCTAssert(firstRem.createdTime.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 410494430.0)) == NSComparisonResult.OrderedSame, "Unexpected createdTime")
+            XCTAssert(firstRem.start.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 413172830.0)) == NSComparisonResult.OrderedSame, "Unexpected start")
+            XCTAssert(firstRem.createdTime.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 413172830.0)) == NSComparisonResult.OrderedSame, "Unexpected createdTime")
             XCTAssert(firstRem.alarms.count == 1, "Unexpected alarms count")
             
             let firstAlarm = firstRem.alarms.first!
@@ -142,7 +146,7 @@ class libSwiftCalTests: XCTestCase {
             XCTAssert(firstXprop.key == "X-UID", "Unexpected key")
             XCTAssert(firstXprop.stringValue == "C3489EE2-3F65-416F-B487-377F5C80F389", "Unexpected firstXprop")
             XCTAssert(firstAlarm.trigger.parameters.count == 1, "Unexpected parameters count")
-            XCTAssert(firstAlarm.trigger.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 411709800.0)) == NSComparisonResult.OrderedSame, "Unexpected trigger")
+            XCTAssert(firstAlarm.trigger.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419485800.0)) == NSComparisonResult.OrderedSame, "Unexpected trigger")
             XCTAssert(firstAlarm.action.stringValue == "DISPLAY", "Unexpected action")
             XCTAssert(firstAlarm.desc.stringValue == "This is an alarm x1", "Unexpected desc")
         }
@@ -159,7 +163,6 @@ class libSwiftCalTests: XCTestCase {
     }
     
     func test5ParseSimpleInput() {
-        
         self.measureBlock { () -> Void in
             let exp = self.expectationWithDescription("parse")
             let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("SimpleInput", ofType: "ics", inDirectory: nil)
@@ -168,35 +171,17 @@ class libSwiftCalTests: XCTestCase {
             let c = { (cal: Calendar) -> Void in
                 calendar = cal
                 
-                XCTAssert(cal.prodID.stringValue! == "-//Stefan Arambasich/MyListApp", "Unexpected prodID")
+                XCTAssert(cal.prodID.stringValue! == "-//Stefan Arambasich/libSwiftCal", "Unexpected prodID")
                 XCTAssert(cal.version.stringValue! == "2.0", "Unexpected version")
                 XCTAssert(cal.calscale.stringValue! == "GREGORIAN", "Unexpected calscale")
                 
                 XCTAssert(cal.reminders.count == 1, "Unexpected reminders count")
                 let firstRem = cal.reminders.first!
-                XCTAssert(firstRem.due.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 411695400.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
-                XCTAssert(firstRem.due.parameters.count == 3, "Unexpected parameters count")
-                XCTAssert(firstRem.uid.stringValue == "44C7728A-C070-4FD7-9C14-685BD9398F3E", "Unexpected uid")
-                XCTAssert(firstRem.percentComplete.intValue == 100, "Unexpected percentComplete")
-                XCTAssert(firstRem.reminderStatus == .Completed, "Unexpected reminderStatus")
-                XCTAssert(firstRem.sequence.intValue == 0, "Unexpected sequence")
-                XCTAssert(firstRem.completed.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 411674730.0)) == NSComparisonResult.OrderedSame, "Unexpected completed")
-                XCTAssert(firstRem.summary.stringValue == "Reminders are cool", "Unexpected summary")
-                XCTAssert(firstRem.start.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 410494430.0)) == NSComparisonResult.OrderedSame, "Unexpected start")
-                XCTAssert(firstRem.createdTime.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 410494430.0)) == NSComparisonResult.OrderedSame, "Unexpected createdTime")
-                XCTAssert(firstRem.alarms.count == 1, "Unexpected alarms count")
-                
-                let firstAlarm = firstRem.alarms.first!
-                let xpros = firstAlarm.xProperties
-                XCTAssert(firstAlarm.xProperties.count == 1, "Unexpected xProperties count")
-                let firstXprop = firstAlarm.xProperties.first!
-                XCTAssert(firstXprop.key == "X-UID", "Unexpected key")
-                XCTAssert(firstXprop.stringValue == "C3489EE2-3F65-416F-B487-377F5C80F389", "Unexpected firstXprop")
-                XCTAssert(firstAlarm.trigger.parameters.count == 1, "Unexpected parameters count")
-                XCTAssert(firstAlarm.trigger.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 411709800.0)) == NSComparisonResult.OrderedSame, "Unexpected trigger")
-                XCTAssert(firstAlarm.action.stringValue == "DISPLAY", "Unexpected action")
-                XCTAssert(firstAlarm.desc.stringValue == "This is an alarm x1", "Unexpected desc")
-                
+                XCTAssert(firstRem.dateTimestamp.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 438172245.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
+                XCTAssert(firstRem.sequence.intValue == 10, "Unexpected sequence")
+                XCTAssert(firstRem.summary.stringValue == "eat a hot dog", "Unexpected summary")
+                XCTAssert(firstRem.createdTime.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 436939065.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
+                XCTAssert(firstRem.uid.stringValue == "C2E8D82D-46FA-4AFE-BCAC-099B18A76254", "Unexpected uid")
                 exp.fulfill()
             }
             
