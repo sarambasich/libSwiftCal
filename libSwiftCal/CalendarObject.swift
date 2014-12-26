@@ -113,7 +113,7 @@ func model__serializeiCalChildren(model: CalendarObject) -> String {
     return result
 }
 
-func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, forSerializationKey key: String, model m: T) {
+public func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, forSerializationKey key: String, model m: T) {
     let varNames = object__getVarNames(mirror: reflect(m))
     if let i = find(m.serializationKeys, key) {
         let mrs = object__getAllMirrorValues(mirror: reflect(m))
@@ -263,7 +263,7 @@ func object__getAllMirrorValues(mirror m: MirrorType) -> [(String, MirrorType)] 
     return result
 }
 
-func serializable__dictInit<T where T: NSObject, T: Serializable>(dictionary: [String: AnyObject], model m: T) {
+public func serializable__dictInit<T where T: NSObject, T: Serializable>(dictionary: [String: AnyObject], model m: T) {
     for (key, value) in dictionary {
         if let i = find(m.serializationKeys, key) {
             model__setValue(value as NSObject, forSerializationKey: key, model: m)
@@ -271,7 +271,7 @@ func serializable__dictInit<T where T: NSObject, T: Serializable>(dictionary: [S
     }
 }
 
-func serializable__addToDict<T: Serializable>(inout dict: [String : AnyObject], mirror m: MirrorType, onObject o: T) {
+public func serializable__addToDict<T: Serializable>(inout dict: [String : AnyObject], mirror m: MirrorType, onObject o: T) {
     for i in 0 ..< m.count {
         let p = m[i].0
         let c = m[i].1
