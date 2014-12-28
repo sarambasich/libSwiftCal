@@ -35,6 +35,7 @@
 		F83195E91A2EAE1A00377846 /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CE1A2EAE1A00377846 /* RequestStatus.swift */; };
 		F83195EA1A2EAE1A00377846 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CF1A2EAE1A00377846 /* Serializable.swift */; };
 		F83ACB631A2AD66600423215 /* EasyInput.json in Resources */ = {isa = PBXBuildFile; fileRef = F83ACB621A2AD66600423215 /* EasyInput.json */; };
+		F858377B1A509A47003F7CCF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858377A1A509A47003F7CCF /* Constants.swift */; };
 		F86D9ADD1A45264C00428C68 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F88C9C651A3E294B00541E31 /* PEGKit.framework */; };
 		F86D9ADE1A45264E00428C68 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F88C9C651A3E294B00541E31 /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F89877881A3BE8A5002F9322 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89877871A3BE8A5002F9322 /* JSON.swift */; };
@@ -98,6 +99,7 @@
 		F83195CE1A2EAE1A00377846 /* RequestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
 		F83195CF1A2EAE1A00377846 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		F83ACB621A2AD66600423215 /* EasyInput.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = EasyInput.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
+		F858377A1A509A47003F7CCF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F88C9C651A3E294B00541E31 /* PEGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PEGKit.framework; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/MyList-glazucatajuedydloqocpkmuotup/Build/Products/Debug-iphoneos/PEGKit.framework"; sourceTree = "<group>"; };
 		F89877871A3BE8A5002F9322 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +140,7 @@
 				F83195B71A2EAE1A00377846 /* CalendarType.swift */,
 				F83195B81A2EAE1A00377846 /* CalParser.h */,
 				F83195B91A2EAE1A00377846 /* CalParser.m */,
+				F858377A1A509A47003F7CCF /* Constants.swift */,
 				F83195BA1A2EAE1A00377846 /* Extensions.swift */,
 				F83195BB1A2EAE1A00377846 /* iCal.grammar */,
 				F83195BC1A2EAE1A00377846 /* iCalendarElements.h */,
@@ -350,6 +353,7 @@
 				F83195D51A2EAE1A00377846 /* CalendarType.swift in Sources */,
 				F83195EA1A2EAE1A00377846 /* Serializable.swift in Sources */,
 				F83195DB1A2EAE1A00377846 /* iCalendarElements.m in Sources */,
+				F858377B1A509A47003F7CCF /* Constants.swift in Sources */,
 				F83195D81A2EAE1A00377846 /* Extensions.swift in Sources */,
 				F83195E21A2EAE1A00377846 /* NSString+CalParser.m in Sources */,
 				F83195E91A2EAE1A00377846 /* RequestStatus.swift in Sources */,
