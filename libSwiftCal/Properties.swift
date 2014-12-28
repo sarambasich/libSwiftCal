@@ -5,7 +5,7 @@
 //  Created by Stefan Arambasich on 9/19/14.
 //  
 //  Copyright (c) 2014 Stefan Arambasich. All rights reserved.
-//  
+//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -26,6 +26,30 @@
 
 import Foundation
 import EventKit
+
+/**
+    Generic function. Returns a friendly name for the given input.
+
+    :param: status The status level to get a friendly name for.
+
+    :return: A string description of the status or nil if invalid.
+*/
+public func priority__toString(status: UInt) -> String? {
+    var result: String?
+    
+    switch status {
+    case kPriorityHigh:
+        result = NSLocalizedString("High", comment: "")
+    case kPriorityNormal:
+        result = NSLocalizedString("Normal", comment: "")
+    case kPriorityLow:
+        result = NSLocalizedString("Low", comment: "")
+    default:
+        break
+    }
+    
+    return result
+}
 
 /**
     A `TypedValue` type has only a generic representation of an object

@@ -101,9 +101,9 @@ public extension NSDate {
         return cal.dateFromComponents(comps)!
     }
     
-    public func toString(format: String? = nil) -> String {
+    public func toString(format: String? = nil, timezone: NSTimeZone? = NSTimeZone.localTimeZone()) -> String {
         let df = NSDateFormatter()
-        df.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        df.timeZone = timezone
         df.dateFormat = format ?? DateFormats.last
         return df.stringFromDate(self)
     }
