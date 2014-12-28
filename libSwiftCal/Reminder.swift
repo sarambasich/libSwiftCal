@@ -107,7 +107,7 @@ public class Reminder: CalendarObject {
     public var rrule: ReminderProperty! = ReminderProperty()
     
     /// Defines a datetime of when this reminder is due
-    public var due: ReminderProperty! = ReminderProperty(dictionary: [kDUE: NSDate().stripTime().dateByAddingTimeInterval()])
+    public var due: ReminderProperty! = ReminderProperty(dictionary: [kDUE: NSDate().stripTime().dateByAddingTimeInterval(Conversions.Time.SecondsInADay)])
     /// Defines a duration after the start time for which this reminder is valid
     public var duration: ReminderProperty! = ReminderProperty()
     
