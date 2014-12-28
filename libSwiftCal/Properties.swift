@@ -60,6 +60,8 @@ public func priority__toString(status: UInt) -> String? {
 public protocol TypedValue {
     /// The value's `Int` representation
     var intValue: Int? { get set }
+    /// The value's `UInt` representation
+    var uintValue: UInt? { get set }
     /// The value's `Bool` representation
     var boolValue: Bool? { get set }
     /// The value's `Double` representation
@@ -156,6 +158,14 @@ public class Property: CalendarObject, TypedValue {
             return propertyValue as? Int
         } set {
             self.propertyValue = newValue as Int!
+        }
+    }
+    
+    public var uintValue: UInt? {
+        get {
+            return propertyValue as? UInt
+        } set {
+            self.propertyValue = newValue as UInt!
         }
     }
     
