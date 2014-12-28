@@ -104,10 +104,6 @@ func model__serializeiCalChildren(model: CalendarObject) -> String {
                 result += c.serializeToiCal()
             }
         }
-        
-        let p = m.0
-        let c = child as? NSArray
-        let y = 10
     }
     
     return result

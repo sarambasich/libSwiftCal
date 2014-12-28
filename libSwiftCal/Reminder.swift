@@ -49,14 +49,14 @@ public class Reminder: CalendarObject {
         static let private_ = "PRIVATE"
         static let confidential = "CONFIDENTIAL"
     }
-///    In the case of an iCalendar object that specifies a
-///    "METHOD" property, this property specifies the date and time that
-///    the instance of the iCalendar object was created.  In the case of
-///    an iCalendar object that doesn't specify a "METHOD" property, this
-///    property specifies the date and time that the information
-///    associated with the calendar component was last revised in the
-///    calendar store.
-    public var dateTimestamp: ReminderProperty! = ReminderProperty()
+    ///    In the case of an iCalendar object that specifies a
+    ///    "METHOD" property, this property specifies the date and time that
+    ///    the instance of the iCalendar object was created.  In the case of
+    ///    an iCalendar object that doesn't specify a "METHOD" property, this
+    ///    property specifies the date and time that the information
+    ///    associated with the calendar component was last revised in the
+    ///    calendar store.
+    public var dateTimestamp: ReminderProperty! = ReminderProperty(dictionary: [kDATE_TIME: NSDate()])
     /// Unique identifier
     public var uid: ReminderProperty! = ReminderProperty()
     
@@ -65,7 +65,7 @@ public class Reminder: CalendarObject {
     /// The datetime the reminder was completed or nil if it isn't
     public var completed: ReminderProperty! = ReminderProperty()
     /// The datetime this object was created in the calendar store
-    public var createdTime: ReminderProperty! = ReminderProperty()
+    public var createdTime: ReminderProperty! = ReminderProperty(dictionary: [kDATE_TIME: NSDate()])
     /// A description of this reminder (longer than its summary)
     public var desc: ReminderProperty! = ReminderProperty()
     /// The datetime this reminder should start
@@ -82,9 +82,9 @@ public class Reminder: CalendarObject {
     /// This property is used by an assignee or delegatee of a
     /// to-do to convey the percent completion of a to-do to the
     /// "Organizer".
-    public var percentComplete: ReminderProperty! = ReminderProperty()
+    public var percentComplete: ReminderProperty! = ReminderProperty(dictionary: [kPERCENT_COMPLETE: 0])
     /// Describes this reminder's relative priority as an integer
-    public var priority: ReminderProperty! = ReminderProperty()
+    public var priority: ReminderProperty! = ReminderProperty(dictionary: [kPRIORITY: kPriorityNormal])
     /// used in conjunction with the "UID" and
     /// "SEQUENCE" properties to identify a specific instance of a
     /// recurring "VEVENT", "VTODO", or "VJOURNAL" calendar component.
@@ -92,9 +92,9 @@ public class Reminder: CalendarObject {
     /// of the recurrence instance.
     public var recurrenceID: ReminderProperty! = ReminderProperty()
     /// The current integer sequence of revisions of this item
-    public var sequence: ReminderProperty! = ReminderProperty()
+    public var sequence: ReminderProperty! = ReminderProperty(dictionary: [kSEQUENCE: 0])
     /// Overall status or progress for this reminder
-    public var status: ReminderProperty! = ReminderProperty()
+    public var status: ReminderProperty! = ReminderProperty(dictionary: [kSTATUS: kNEEDS_ACTION])
     
     /// A short summary or description of this reminder
     public var summary: ReminderProperty! = ReminderProperty()
