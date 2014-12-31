@@ -54,7 +54,7 @@ class libSwiftCalTests: XCTestCase {
             let c = { (cal: Calendar) -> Void in
                 calendar = cal
                 
-                XCTAssert(cal.prodID.stringValue! == "-/libSwiftCal/0.1a/EN", "Unexpected prodID")
+                XCTAssert(cal.prodID.stringValue! == Constants.libSwiftCalProdID, "Unexpected prodID")
                 XCTAssert(cal.version.stringValue! == "2.0", "Unexpected version")
                 XCTAssert(cal.calscale.stringValue! == "GREGORIAN", "Unexpected calscale")
                 
@@ -119,14 +119,14 @@ class libSwiftCalTests: XCTestCase {
             let json: [String : AnyObject] = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &err)! as [String : AnyObject]
             let cal = Calendar(dictionary: json)
             
-            XCTAssert(cal.prodID.stringValue! == "-/libSwiftCal/0.1a/EN", "Unexpected prodID")
+            XCTAssert(cal.prodID.stringValue! == Constants.libSwiftCalProdID, "Unexpected prodID")
             XCTAssert(cal.version.stringValue! == "2.0", "Unexpected version")
             XCTAssert(cal.calscale.stringValue! == "GREGORIAN", "Unexpected calscale")
             
             XCTAssert(cal.reminders.count == 1, "Unexpected reminders count")
             let firstRem = cal.reminders.first!
             let d1 = firstRem.due.dateValue!
-            let d2 = NSDate(timeIntervalSinceReferenceDate: 411695400.0)
+            let d2 = NSDate(timeIntervalSinceReferenceDate: 419471400.0)
             XCTAssert(firstRem.due.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419471400.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
             XCTAssert(firstRem.due.parameters.count == 3, "Unexpected parameters count")
             XCTAssert(firstRem.uid.stringValue == "44C7728A-C070-4FD7-9C14-685BD9398F3E", "Unexpected uid")
@@ -171,7 +171,7 @@ class libSwiftCalTests: XCTestCase {
             let c = { (cal: Calendar) -> Void in
                 calendar = cal
                 
-                XCTAssert(cal.prodID.stringValue! == "-//Stefan Arambasich/libSwiftCal", "Unexpected prodID")
+                XCTAssert(cal.prodID.stringValue! == Constants.libSwiftCalProdID, "Unexpected prodID")
                 XCTAssert(cal.version.stringValue! == "2.0", "Unexpected version")
                 XCTAssert(cal.calscale.stringValue! == "GREGORIAN", "Unexpected calscale")
                 

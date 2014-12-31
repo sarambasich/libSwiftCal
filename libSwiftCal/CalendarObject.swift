@@ -312,7 +312,7 @@ func JSONify(o: AnyObject) -> AnyObject? {
     } else if o is Bool {
         return o as Bool
     } else if o is NSDate {
-        return (o as NSDate).toString()
+        return (o as NSDate).toString(timezone: NSTimeZone(forSecondsFromGMT: 0))
     }
     
     return nil

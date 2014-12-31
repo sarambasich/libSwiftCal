@@ -91,8 +91,17 @@ public class Property: CalendarObject, TypedValue {
     
     // MARK: - CalendarType
     public override func serializeToiCal() -> String {
+        // No key? Don't serialize.
         if key.isEmpty {
             return ""
+        }
+        
+        // Empty string? Let's keep it clean. Don't serialize it.
+        let valStr: String? = JSONify(self.propertyValue) as? String
+        if valStr != nil {
+            if valStr!.isEmpty {
+                return ""
+            }
         }
         
         var result = String()
@@ -108,7 +117,7 @@ public class Property: CalendarObject, TypedValue {
         
         result += kCOLON
         
-        if let s = self.propertyValue as? String {
+        if let s = valStr {
             result += s
         } else if let v: AnyObject = JSONify(self.propertyValue) {
             result += "\(v)"
@@ -133,8 +142,8 @@ public class Property: CalendarObject, TypedValue {
     
     public override func toDictionary() -> [String : AnyObject] {
         if let k = self.key {
-            if let p: AnyObject = propertyValue {
-                if let j: AnyObject = JSONify(propertyValue) {
+            if let p: AnyObject = self.propertyValue {
+                if let j: AnyObject = JSONify(self.propertyValue) {
                     var dict = [String : AnyObject]()
                     serializable__addToDict(&dict, mirror: reflect(self), onObject: self)
                     return dict

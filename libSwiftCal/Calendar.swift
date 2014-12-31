@@ -40,10 +40,10 @@ import EventKit
 */
 public class Calendar: CalendarObject, ParserObserver {
     /// Non-standard unique identifier for the calendar
-    private var calendarIdentifier: String!
+    public internal(set) var calendarIdentifier: String!
     
     /// Only supports the "GREGORIAN" calendar
-    public internal(set) var calscale = CalendarProperty()
+    public internal(set) var calscale = CalendarProperty(dictionary: [SerializationKeys.PropertyKeyKey: kCALSCALE, SerializationKeys.PropertyValKey: Constants.CalScaleGregorian])
     /// Defines the iCalendar object method associated with the calendar object
     public internal(set) var method = CalendarProperty()
     /// Specifies the identifier for the product that created the iCalendar object.
@@ -52,7 +52,7 @@ public class Calendar: CalendarObject, ParserObserver {
     public internal(set) var version = CalendarProperty()
     
     /// List of VTODO components belonging to this calendar
-    public internal(set) var reminders = [Reminder]()
+    public var reminders = [Reminder]()
     
     /// UID
     public var uid: String {

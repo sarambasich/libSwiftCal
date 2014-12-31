@@ -50,14 +50,15 @@ id toTypeFromString(NSString * str) {
     
     NSDate * date;
     NSDateFormatter * formatter = [NSDateFormatter new];
-    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
-    NSMutableCharacterSet * dateCharSet = [[NSMutableCharacterSet alloc] init];
+    NSMutableCharacterSet * dateCharSet = [NSMutableCharacterSet new];
     [dateCharSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"1234567890TZ"]];
     
     NSScanner * scanner = [NSScanner scannerWithString:str];
     if ([str rangeOfCharacterFromSet:[dateCharSet invertedSet]].location == NSNotFound &&
         str.length >= 8) {
         NSArray * dateFormats = @[@"yyyyLLdd'T'HHmmssZ", @"yyyyLLdd'T'HHmmss", @"yyyyLLdd", @"yyyyLLdd'T'HHmmss'Z'"];
+        
+        formatter.timeZone = [str containsString:@""] ? [NSTimeZone timeZoneForSecondsFromGMT:0] : [NSTimeZone systemTimeZone];
         
         for (NSString * fmt in dateFormats) {
             NSError * err;

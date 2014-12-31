@@ -56,7 +56,7 @@ public class Reminder: CalendarObject {
     ///    property specifies the date and time that the information
     ///    associated with the calendar component was last revised in the
     ///    calendar store.
-    public var dateTimestamp: ReminderProperty! = ReminderProperty(dictionary: [kDATE_TIME: NSDate()])
+    public var dateTimestamp: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDATE_TIME, SerializationKeys.PropertyValKey: NSDate()])
     /// Unique identifier
     public var uid: ReminderProperty! = ReminderProperty()
     
@@ -65,9 +65,9 @@ public class Reminder: CalendarObject {
     /// The datetime the reminder was completed or nil if it isn't
     public var completed: ReminderProperty! = ReminderProperty()
     /// The datetime this object was created in the calendar store
-    public var createdTime: ReminderProperty! = ReminderProperty(dictionary: [kDATE_TIME: NSDate()])
+    public var createdTime: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDATE_TIME, SerializationKeys.PropertyValKey: NSDate()])
     /// A description of this reminder (longer than its summary)
-    public var desc: ReminderProperty! = ReminderProperty()
+    public var desc: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDESCRIPTION, SerializationKeys.PropertyValKey: ""])
     /// The datetime this reminder should start
     public var start: ReminderProperty! = ReminderProperty()
     /// The GPS coordinate of this location
@@ -82,9 +82,9 @@ public class Reminder: CalendarObject {
     /// This property is used by an assignee or delegatee of a
     /// to-do to convey the percent completion of a to-do to the
     /// "Organizer".
-    public var percentComplete: ReminderProperty! = ReminderProperty(dictionary: [kPERCENT_COMPLETE: 0])
+    public var percentComplete: ReminderProperty! = ReminderProperty()
     /// Describes this reminder's relative priority as an integer
-    public var priority: ReminderProperty! = ReminderProperty(dictionary: [kPRIORITY: kPriorityNormal])
+    public var priority: ReminderProperty! = ReminderProperty()
     /// used in conjunction with the "UID" and
     /// "SEQUENCE" properties to identify a specific instance of a
     /// recurring "VEVENT", "VTODO", or "VJOURNAL" calendar component.
@@ -92,12 +92,12 @@ public class Reminder: CalendarObject {
     /// of the recurrence instance.
     public var recurrenceID: ReminderProperty! = ReminderProperty()
     /// The current integer sequence of revisions of this item
-    public var sequence: ReminderProperty! = ReminderProperty(dictionary: [kSEQUENCE: 0])
+    public var sequence: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kSEQUENCE, SerializationKeys.PropertyValKey: 0])
     /// Overall status or progress for this reminder
-    public var status: ReminderProperty! = ReminderProperty(dictionary: [kSTATUS: kNEEDS_ACTION])
+    public var status: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kSTATUS, SerializationKeys.PropertyValKey: kNEEDS_ACTION])
     
     /// A short summary or description of this reminder
-    public var summary: ReminderProperty! = ReminderProperty()
+    public var summary: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kSUMMARY, SerializationKeys.PropertyValKey: ""])
     /// A pointer to a URL representation of this object
     public var URL: ReminderProperty! = ReminderProperty()
     
@@ -107,7 +107,7 @@ public class Reminder: CalendarObject {
     public var rrule: ReminderProperty! = ReminderProperty()
     
     /// Defines a datetime of when this reminder is due
-    public var due: ReminderProperty! = ReminderProperty(dictionary: [kDUE: NSDate().stripTime().dateByAddingTimeInterval(Conversions.Time.SecondsInADay)])
+    public var due: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDUE, SerializationKeys.PropertyValKey: NSDate().dateByAddingTimeInterval(Conversions.Time.SecondsInADay)])
     /// Defines a duration after the start time for which this reminder is valid
     public var duration: ReminderProperty! = ReminderProperty()
     

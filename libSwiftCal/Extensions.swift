@@ -81,11 +81,11 @@ public class Weak<T: AnyObject> {
 
 
 // MARK: - NSDate extension
-let DateFormats = ["yyyyLLdd'T'HHmmssZ", "yyyyLLdd'T'HHmmss", "yyyyLLdd", "yyyyLLdd'T'HHmmss'Z'"]
+let DateTimeFormats = ["yyyyLLdd'T'HHmmssZ", "yyyyLLdd'T'HHmmss", "yyyyLLdd", "yyyyLLdd'T'HHmmss'Z'"]
 public extension NSDate {
-    public class func parseDate(string: String, format: String? = nil) -> NSDate? {
+    public class func parseDate(string: String, format: String? = DateTimeFormats.first) -> NSDate? {
         let formatter = NSDateFormatter()
-        formatter.dateFormat = DateFormats.first
+        formatter.dateFormat = format
         
         formatter.locale = NSLocale.currentLocale()
         
@@ -94,17 +94,25 @@ public extension NSDate {
     }
     
     public func stripTime() -> NSDate {
-        let cal = NSCalendar()
+        let cal = NSCalendar.currentCalendar()
         let flags: NSCalendarUnit = .YearCalendarUnit | .MonthCalendarUnit | .DayCalendarUnit
         let comps = cal.components(flags, fromDate: self)
         
         return cal.dateFromComponents(comps)!
     }
     
-    public func toString(format: String? = nil, timezone: NSTimeZone? = NSTimeZone.localTimeZone()) -> String {
+    public func toString(dateFormat: String? = DateTimeFormats.last, dateStyle: NSDateFormatterStyle? = nil, timezone: NSTimeZone? = NSTimeZone.localTimeZone()) -> String {
         let df = NSDateFormatter()
+        
+        df.locale = NSLocale.currentLocale()
         df.timeZone = timezone
-        df.dateFormat = format ?? DateFormats.last
+        df.dateFormat = dateFormat
+        
+        if let ds = dateStyle {
+            df.dateStyle = ds
+            df.timeStyle = ds
+        }
+        
         return df.stringFromDate(self)
     }
 }
