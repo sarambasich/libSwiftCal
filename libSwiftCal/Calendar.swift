@@ -47,9 +47,9 @@ public class Calendar: CalendarObject, ParserObserver {
     /// Defines the iCalendar object method associated with the calendar object
     public internal(set) var method = CalendarProperty()
     /// Specifies the identifier for the product that created the iCalendar object.
-    public internal(set) var prodID = CalendarProperty()
+    public internal(set) var prodID = CalendarProperty(dictionary: [SerializationKeys.PropertyKeyKey: kPRODID, SerializationKeys.PropertyValKey: Constants.libSwiftCalProdID])
     /// The calendar's required version
-    public internal(set) var version = CalendarProperty()
+    public internal(set) var version = CalendarProperty(dictionary: [SerializationKeys.PropertyKeyKey: kVERSION, SerializationKeys.PropertyValKey: Constants.iCalendarVersion])
     
     /// List of VTODO components belonging to this calendar
     public var reminders = [Reminder]()

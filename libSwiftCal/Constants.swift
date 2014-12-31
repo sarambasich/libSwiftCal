@@ -14,6 +14,8 @@ import Foundation
 public struct Constants {
     /// The gregorian calendar identifier as an upper case string.
     public static let CalScaleGregorian = "GREGORIAN"
+    /// The version of iCalendar this framework is compatible with.
+    public static let iCalendarVersion = "2.0"
     /// The unique identifier for libSwiftCal's `prodID` value.
     public static let libSwiftCalProdID = "-//com//sarambasich//libSwiftCal//0.1a//EN"
 }
