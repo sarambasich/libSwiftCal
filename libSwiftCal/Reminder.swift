@@ -65,7 +65,7 @@ public class Reminder: CalendarObject {
     /// The datetime the reminder was completed or nil if it isn't
     public var completed: ReminderProperty! = ReminderProperty()
     /// The datetime this object was created in the calendar store
-    public var createdTime: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDATE_TIME, SerializationKeys.PropertyValKey: NSDate()])
+    public var createdTime: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kCREATED, SerializationKeys.PropertyValKey: NSDate()])
     /// A description of this reminder (longer than its summary)
     public var desc: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDESCRIPTION, SerializationKeys.PropertyValKey: ""])
     /// The datetime this reminder should start
