@@ -276,6 +276,10 @@
 		D35F4A8B11643662003811F3 /* PKEmailState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKEmailState.h; path = include/PEGKit/PKEmailState.h; sourceTree = SOURCE_ROOT; };
 		D35F4A8C11643662003811F3 /* PKURLState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKURLState.h; path = include/PEGKit/PKURLState.h; sourceTree = SOURCE_ROOT; };
 		D3633A2D170A6E9700C0966D /* nspredicate2.grammar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = nspredicate2.grammar; path = res/nspredicate2.grammar; sourceTree = "<group>"; };
+		D366C1AA1A5310F200D69669 /* PGNegationNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PGNegationNode.h; path = ParserGenApp/nodes/PGNegationNode.h; sourceTree = "<group>"; };
+		D366C1AB1A5310F200D69669 /* PGNegationNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PGNegationNode.m; path = ParserGenApp/nodes/PGNegationNode.m; sourceTree = "<group>"; };
+		D366C1AE1A5311F700D69669 /* PGRepetitionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PGRepetitionNode.h; path = ParserGenApp/nodes/PGRepetitionNode.h; sourceTree = "<group>"; };
+		D366C1AF1A5311F700D69669 /* PGRepetitionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PGRepetitionNode.m; path = ParserGenApp/nodes/PGRepetitionNode.m; sourceTree = "<group>"; };
 		D366C55418D1F29D00AF3EFB /* libPEGKitOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPEGKitOSX.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D366C56718D1F29D00AF3EFB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D36C560B0FD363D500141CB7 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = /usr/lib/libicucore.dylib; sourceTree = "<absolute>"; };
@@ -470,6 +474,14 @@
 		D3C221E10FFE8C4E004514FE /* PKCommentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKCommentState.h; path = include/PEGKit/PKCommentState.h; sourceTree = SOURCE_ROOT; };
 		D3C221E40FFE8C56004514FE /* PKSingleLineCommentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKSingleLineCommentState.h; path = include/PEGKit/PKSingleLineCommentState.h; sourceTree = SOURCE_ROOT; };
 		D3C221E70FFE8C60004514FE /* PKMultiLineCommentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKMultiLineCommentState.h; path = include/PEGKit/PKMultiLineCommentState.h; sourceTree = SOURCE_ROOT; };
+		D3C3AD5A1A5307EB00695EB7 /* negation2.grammar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = negation2.grammar; path = res/negation2.grammar; sourceTree = "<group>"; };
+		D3C3AD5C1A5308A400695EB7 /* Negation2ParserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Negation2ParserTest.m; path = test/Negation2ParserTest.m; sourceTree = "<group>"; };
+		D3C3AD5E1A53091300695EB7 /* Negation2Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Negation2Parser.h; path = test/Negation2Parser.h; sourceTree = "<group>"; };
+		D3C3AD5F1A53091300695EB7 /* Negation2Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Negation2Parser.m; path = test/Negation2Parser.m; sourceTree = "<group>"; };
+		D3C3AD611A530AD000695EB7 /* negation3.grammar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = negation3.grammar; path = res/negation3.grammar; sourceTree = "<group>"; };
+		D3C3AD631A530AFC00695EB7 /* Negation3ParserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Negation3ParserTest.m; path = test/Negation3ParserTest.m; sourceTree = "<group>"; };
+		D3C3AD651A530BAC00695EB7 /* Negation3Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Negation3Parser.h; path = test/Negation3Parser.h; sourceTree = "<group>"; };
+		D3C3AD661A530BAC00695EB7 /* Negation3Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Negation3Parser.m; path = test/Negation3Parser.m; sourceTree = "<group>"; };
 		D3C7982519005C2B00EC8CB2 /* deterministic_palindromes.grammar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = deterministic_palindromes.grammar; path = res/deterministic_palindromes.grammar; sourceTree = "<group>"; };
 		D3C7982719005C8A00EC8CB2 /* DeterministicPalindromeParserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeterministicPalindromeParserTest.m; path = test/DeterministicPalindromeParserTest.m; sourceTree = "<group>"; };
 		D3C7982919005CBC00EC8CB2 /* DeterministicPalindromeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeterministicPalindromeParser.h; path = test/DeterministicPalindromeParser.h; sourceTree = "<group>"; };
@@ -602,6 +614,8 @@
 		D31BBCC618E4F1A50003FFA3 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D3C3AD631A530AFC00695EB7 /* Negation3ParserTest.m */,
+				D3C3AD5C1A5308A400695EB7 /* Negation2ParserTest.m */,
 				D3CC1EE4199284790096B1AF /* Lines2ParserTest.m */,
 				D34795D419423DB000181E56 /* LinesParserTest.m */,
 				D31FE9C8191016EC0039886B /* INIParserTest.m */,
@@ -731,6 +745,10 @@
 				D376F6B818D0B3990064C888 /* PGMultipleNode.m */,
 				D376F6B918D0B3990064C888 /* PGOptionalNode.h */,
 				D376F6BA18D0B3990064C888 /* PGOptionalNode.m */,
+				D366C1AE1A5311F700D69669 /* PGRepetitionNode.h */,
+				D366C1AF1A5311F700D69669 /* PGRepetitionNode.m */,
+				D366C1AA1A5310F200D69669 /* PGNegationNode.h */,
+				D366C1AB1A5310F200D69669 /* PGNegationNode.m */,
 				D376F6BB18D0B3990064C888 /* PGPatternNode.h */,
 				D376F6BC18D0B3990064C888 /* PGPatternNode.m */,
 				D376F6BD18D0B3990064C888 /* PGReferenceNode.h */,
@@ -943,6 +961,10 @@
 		D3B22A581703D07000446945 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				D3C3AD651A530BAC00695EB7 /* Negation3Parser.h */,
+				D3C3AD661A530BAC00695EB7 /* Negation3Parser.m */,
+				D3C3AD5E1A53091300695EB7 /* Negation2Parser.h */,
+				D3C3AD5F1A53091300695EB7 /* Negation2Parser.m */,
 				D3CC1EE6199284A80096B1AF /* Lines2Parser.h */,
 				D3CC1EE7199284A80096B1AF /* Lines2Parser.m */,
 				D34795D619423DC300181E56 /* LinesParser.h */,
@@ -1044,6 +1066,8 @@
 		D3B22A5A1703D09C00446945 /* Grammars */ = {
 			isa = PBXGroup;
 			children = (
+				D3C3AD611A530AD000695EB7 /* negation3.grammar */,
+				D3C3AD5A1A5307EB00695EB7 /* negation2.grammar */,
 				D3CC1EE11992842F0096B1AF /* lines2.grammar */,
 				D34795D219423D9E00181E56 /* lines.grammar */,
 				D31FE9CD191017DE0039886B /* ini.grammar */,
@@ -1222,7 +1246,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0600;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "PEGKit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1435,12 +1459,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos8.1;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -1448,11 +1471,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				SDKROOT = iphoneos8.1;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -1612,6 +1634,7 @@
 				INFOPLIST_FILE = "res/PEGKit-Info.plist";
 				LLVM_LTO = NO;
 				PRODUCT_NAME = PEGKit;
+				SDKROOT = iphoneos8.1;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -1637,6 +1660,7 @@
 				INFOPLIST_FILE = "res/PEGKit-Info.plist";
 				LLVM_LTO = NO;
 				PRODUCT_NAME = PEGKit;
+				SDKROOT = iphoneos8.1;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};

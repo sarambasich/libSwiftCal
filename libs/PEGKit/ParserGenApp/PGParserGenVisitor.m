@@ -63,6 +63,7 @@
 #define OPT_BODY @"optBody"
 #define DISCARD @"discard"
 #define NEEDS_BACKTRACK @"needsBacktrack"
+#define IS_NEGATION @"isNegation"
 #define CHILD_STRING @"childString"
 #define TERMINAL_CALL_STRING @"terminalCallString"
 #define IF_TEST @"ifTest"
@@ -208,6 +209,12 @@
         case PGNodeTypeAlternation: {
             for (PGBaseNode *child in node.children) {
                 [set unionSet:[self lookaheadSetForNode:child]];
+            }
+        } break;
+        case PGNodeTypeNegation: {
+            for (PGBaseNode *child in node.children) {
+                [set unionSet:[self lookaheadSetForNode:child]];
+                break; // single look ahead. to implement full LL(*), this would need to be enhanced here.
             }
         } break;
 //        case PGNodeTypeDefinition:
@@ -371,7 +378,7 @@
     BOOL isTerminal = 1 == [node.children count] && [[self concreteNodeForNode:node.children[0]] isTerminal];
     NSString *templateName = isPre ? @"PGPreCallbackTemplate" : @"PGPostCallbackTemplate";
     
-    PGParserFactoryDelegateCallbacksOn flag = isPre ? _delegatePreMatchCallbacksOn : _delegatePostMatchCallbacksOn;
+    BOOL flag = isPre ? _delegatePreMatchCallbacksOn : _delegatePostMatchCallbacksOn;
 
     switch (flag) {
         case PGParserFactoryDelegateCallbacksOnNone:
@@ -492,26 +499,8 @@
 }
 
 
-- (void)visitComposite:(PGCompositeNode *)node {
-    //NSLog(@"%s %@", __PRETTY_FUNCTION__, node);
-    
-    NSAssert(1 == [node.token.stringValue length], @"");
-    PKUniChar c = [node.token.stringValue characterAtIndex:0];
-    switch (c) {
-        case '*':
-            [self visitRepetition:node];
-            break;
-        case '~':
-            [self visitNegation:node];
-            break;
-        default:
-            NSAssert2(0, @"%s must be implemented in %@", __PRETTY_FUNCTION__, [self class]);
-            break;
-    }
-}
-
-
 - (void)visitNegation:(PGCompositeNode *)node {
+    //NSLog(@"%s %@", __PRETTY_FUNCTION__, node);
     
     // recurse
     NSAssert(1 == [node.children count], @"");
@@ -564,7 +553,7 @@
 }
 
 
-- (void)visitRepetition:(PGCompositeNode *)node {
+- (void)visitRepetition:(PGRepetitionNode *)node {
     // setup vars
     id vars = [NSMutableDictionary dictionary];
     vars[DEPTH] = @(_depth);
@@ -778,6 +767,7 @@
         vars[LAST] = @([set count] - 1);
         vars[DEPTH] = @(_depth);
         vars[NEEDS_BACKTRACK] = @(_needsBacktracking);
+        vars[IS_NEGATION] = @(PGNodeTypeNegation == child.type);
 
         NSString *templateName = nil;
         if (isEmpty) {

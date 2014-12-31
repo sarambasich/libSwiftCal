@@ -32,8 +32,6 @@
 
 #import "NSString+CalParser.h"
 
-#import <libSwiftCal-Swift.h>
-
 /**
     Takes an input string and converts it to a more concrete type,
     such as an NSString, an NSDate, a double, or an int. If no

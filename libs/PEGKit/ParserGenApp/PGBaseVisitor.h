@@ -37,6 +37,8 @@
 #import "PGOptionalNode.h"
 #import "PGMultipleNode.h"
 #import "PGActionNode.h"
+#import "PGRepetitionNode.h"
+#import "PGNegationNode.h"
 
 @interface PGBaseVisitor : NSObject <PGNodeVisitor>
 

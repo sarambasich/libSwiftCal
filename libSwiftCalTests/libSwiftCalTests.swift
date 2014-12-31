@@ -194,6 +194,21 @@ class libSwiftCalTests: XCTestCase {
         })
     }
     
+    func testParseBlankInput() {
+        let exp = expectationWithDescription("blank parse")
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("BlankInput", ofType: "ics", inDirectory: nil)
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        calendar = Calendar(stringToParse: str, completion: { (cal) -> Void in
+            calendar = cal
+            XCTAssert(calendar!.prodID.stringValue! == Constants.libSwiftCalProdID, "Unexpected prodID")
+            exp.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(20.0, handler: { (e) -> Void in
+            println(e)
+        })
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {
