@@ -56,7 +56,7 @@ public class Reminder: CalendarObject {
     ///    property specifies the date and time that the information
     ///    associated with the calendar component was last revised in the
     ///    calendar store.
-    public var dateTimestamp: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDATE_TIME, SerializationKeys.PropertyValKey: NSDate()])
+    public var dateTimestamp: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDTSTAMP, SerializationKeys.PropertyValKey: NSDate()])
     /// Unique identifier
     public var uid: ReminderProperty! = ReminderProperty()
     

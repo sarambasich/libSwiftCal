@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F81A89141A36AA10000F5A34 /* SimpleInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F81A89131A36AA10000F5A34 /* SimpleInput.ics */; };
 		F82161E61A54A91800886131 /* BlankInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82161E51A54A91800886131 /* BlankInput.ics */; };
+		F82161E81A54C2C900886131 /* MoreInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82161E71A54C2C900886131 /* MoreInput.ics */; };
 		F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82909B41A1C5ADA0091366E /* EasyInput.ics */; };
 		F83195D01A2EAE1A00377846 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195B01A2EAE1A00377846 /* Alarm.swift */; };
 		F83195D11A2EAE1A00377846 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F83195B21A2EAE1A00377846 /* Localizable.strings */; };
@@ -36,6 +37,7 @@
 		F83195E91A2EAE1A00377846 /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CE1A2EAE1A00377846 /* RequestStatus.swift */; };
 		F83195EA1A2EAE1A00377846 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CF1A2EAE1A00377846 /* Serializable.swift */; };
 		F83ACB631A2AD66600423215 /* EasyInput.json in Resources */ = {isa = PBXBuildFile; fileRef = F83ACB621A2AD66600423215 /* EasyInput.json */; };
+		F8497B041A55A87C00AD592B /* AnotherInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8497B031A55A87C00AD592B /* AnotherInput.ics */; };
 		F858377B1A509A47003F7CCF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858377A1A509A47003F7CCF /* Constants.swift */; };
 		F86D9ADD1A45264C00428C68 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F88C9C651A3E294B00541E31 /* PEGKit.framework */; };
 		F86D9ADE1A45264E00428C68 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F88C9C651A3E294B00541E31 /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -70,6 +72,7 @@
 /* Begin PBXFileReference section */
 		F81A89131A36AA10000F5A34 /* SimpleInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleInput.ics; sourceTree = "<group>"; };
 		F82161E51A54A91800886131 /* BlankInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlankInput.ics; sourceTree = "<group>"; };
+		F82161E71A54C2C900886131 /* MoreInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MoreInput.ics; sourceTree = "<group>"; };
 		F82909B41A1C5ADA0091366E /* EasyInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = EasyInput.ics; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = "<none>"; };
 		F83195B01A2EAE1A00377846 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		F83195B31A2EAE1A00377846 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 		F83195CE1A2EAE1A00377846 /* RequestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
 		F83195CF1A2EAE1A00377846 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		F83ACB621A2AD66600423215 /* EasyInput.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = EasyInput.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
+		F8497B031A55A87C00AD592B /* AnotherInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AnotherInput.ics; sourceTree = "<group>"; };
 		F858377A1A509A47003F7CCF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F88C9C651A3E294B00541E31 /* PEGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PEGKit.framework; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/MyList-glazucatajuedydloqocpkmuotup/Build/Products/Debug-iphoneos/PEGKit.framework"; sourceTree = "<group>"; };
 		F89877871A3BE8A5002F9322 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -220,6 +224,8 @@
 				F83ACB621A2AD66600423215 /* EasyInput.json */,
 				F81A89131A36AA10000F5A34 /* SimpleInput.ics */,
 				F82161E51A54A91800886131 /* BlankInput.ics */,
+				F82161E71A54C2C900886131 /* MoreInput.ics */,
+				F8497B031A55A87C00AD592B /* AnotherInput.ics */,
 			);
 			path = libSwiftCalTests;
 			sourceTree = "<group>";
@@ -328,9 +334,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8497B041A55A87C00AD592B /* AnotherInput.ics in Resources */,
 				F83ACB631A2AD66600423215 /* EasyInput.json in Resources */,
 				F81A89141A36AA10000F5A34 /* SimpleInput.ics in Resources */,
 				F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */,
+				F82161E81A54C2C900886131 /* MoreInput.ics in Resources */,
 				F82161E61A54A91800886131 /* BlankInput.ics in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

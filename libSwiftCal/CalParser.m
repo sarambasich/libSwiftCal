@@ -156,7 +156,8 @@ id toTypeFromString(NSString * str) {
 }
 
 - (id) parseString:(NSString *)input error:(NSError **)outErr {
-    return [self.parser parseString:input error:outErr];
+    id res = [self.parser parseString:input error:outErr];
+    return res;
 }
 
 - (void) parser:(PKParser *)parser willMatchIcalobject:(PKAssembly *)assembly {

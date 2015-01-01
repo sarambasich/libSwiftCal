@@ -61,7 +61,7 @@ public class Calendar: CalendarObject, ParserObserver {
         }
     }
     
-    private var closure: ((cal: Calendar) -> Void)!
+    private var closure: ((Calendar?, e: NSError?) -> Void)!
     /**
         Returns a new representation of a VCALENDAR object and beings parsing the inputted
         string value.
@@ -69,12 +69,15 @@ public class Calendar: CalendarObject, ParserObserver {
         :param: s The string to parse from iCalendar into libSwiftCal.
         :completion: A completion block called upon the parsing's completion.
     */
-    public init(stringToParse s: String, completion: (cal: Calendar) -> Void) {
+    public init(stringToParse s: String, completion: (Calendar?, e: NSError?) -> Void) {
         super.init()
         self.closure = completion
         self.parser = CalParser(delegate: self)
         var err: NSError?
-        self.parser!.parseString(s, error: &err)
+        self.parser.parseString(s, error: &err)
+        if err != nil {
+            self.closure(nil, e: err)
+        }
     }
     
     public required init() {
@@ -170,7 +173,7 @@ public class Calendar: CalendarObject, ParserObserver {
     }
     
     public func parser(key: String!, didMatchIcalobject value: String!) {
-        self.closure!(cal: self)
+        self.closure(self, e: nil)
         self.closure = nil
     }
 }
