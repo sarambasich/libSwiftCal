@@ -40,7 +40,17 @@ import EventKit
 */
 public class Calendar: CalendarObject, ParserObserver {
     /// Non-standard unique identifier for the calendar
-    public internal(set) var calendarIdentifier: String!
+    private var _calendarIdentifier: String!
+    
+    public var calendarIdentifier: String! {
+        get {
+            return self._calendarIdentifier
+        } set {
+            if newValue != nil {
+                self._calendarIdentifier = newValue!
+            }
+        }
+    }
     
     /// Only supports the "GREGORIAN" calendar
     public internal(set) var calscale = CalendarProperty(dictionary: [SerializationKeys.PropertyKeyKey: kCALSCALE, SerializationKeys.PropertyValKey: Constants.CalScaleGregorian])
