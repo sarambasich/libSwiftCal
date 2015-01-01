@@ -30,6 +30,9 @@ FOUNDATION_EXPORT const NSUInteger kPriorityLow;
 FOUNDATION_EXPORT const NSUInteger kPriorityNormal;
 FOUNDATION_EXPORT const NSUInteger kPriorityHigh;
 
+FOUNDATION_EXPORT NSString * const kX_WR_CALNAME;
+FOUNDATION_EXPORT NSString * const kX_WR_CALDESC;
+
 FOUNDATION_EXPORT NSString * const kBEGIN;
 FOUNDATION_EXPORT NSString * const kEND;
 

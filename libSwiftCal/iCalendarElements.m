@@ -30,6 +30,9 @@ const NSUInteger kPriorityLow = 9;
 const NSUInteger kPriorityNormal = 5;
 const NSUInteger kPriorityHigh = 1;
 
+NSString * const kX_WR_CALNAME = @"X-WR-CALNAME";
+NSString * const kX_WR_CALDESC = @"X-WR-CALDESC";
+
 NSString * const kBEGIN = @"BEGIN";
 NSString * const kEND = @"END";
 
