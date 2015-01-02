@@ -40,7 +40,7 @@ import EventKit
 */
 public class Calendar: CalendarObject, ParserObserver {
     /// Non-standard unique identifier for the calendar
-    private var _calendarIdentifier: String! = ""
+    var _calendarIdentifier: String! = ""
     
     public var calendarIdentifier: String! {
         get {
