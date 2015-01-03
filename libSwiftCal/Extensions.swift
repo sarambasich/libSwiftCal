@@ -32,7 +32,7 @@ import CoreLocation
     Operator overloads for appending dictionaries. Warning, if key collisons in A and B,
     the method will prefer B's value.
 */
-func += (a: [String : AnyObject], b: [String : AnyObject]?) -> [String : AnyObject] {
+public func += (a: [String : AnyObject], b: [String : AnyObject]?) -> [String : AnyObject] {
     if b == nil {
         return a
     }
@@ -40,7 +40,7 @@ func += (a: [String : AnyObject], b: [String : AnyObject]?) -> [String : AnyObje
     return combineDicts(a, b!)
 }
 
-func + (a: [String : AnyObject], b: [String : AnyObject]?) -> [String : AnyObject] {
+public func + (a: [String : AnyObject], b: [String : AnyObject]?) -> [String : AnyObject] {
     if b == nil {
         return a
     }
