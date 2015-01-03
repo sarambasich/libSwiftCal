@@ -47,55 +47,45 @@ class libSwiftCalTests: XCTestCase {
     func test1ParseFromFile() {
         // This is an example of a functional test case.
         self.measureBlock { () -> Void in
-            let exp = self.expectationWithDescription("parse")
             let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "ics", inDirectory: nil)
             let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+            var err: NSError?
+            calendar = Calendar(stringToParse: str, error: &err)
             
-            Calendar(stringToParse: str, completion: { (parsedCal: Calendar?, e: NSError?) -> Void in
-                calendar = parsedCal
+            XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
+            if err == nil {
+                XCTAssert(calendar!.prodID.stringValue! == Constants.libSwiftCalProdID, "Unexpected prodID")
+                XCTAssert(calendar!.version.stringValue! == "2.0", "Unexpected version")
+                XCTAssert(calendar!.calscale.stringValue! == "GREGORIAN", "Unexpected calscale")
                 
-                XCTAssert(e == nil, "ERROR: \(e?.debugDescription)")
-                if e == nil {
-                    XCTAssert(calendar!.prodID.stringValue! == Constants.libSwiftCalProdID, "Unexpected prodID")
-                    XCTAssert(calendar!.version.stringValue! == "2.0", "Unexpected version")
-                    XCTAssert(calendar!.calscale.stringValue! == "GREGORIAN", "Unexpected calscale")
-                    
-                    XCTAssert(calendar!.reminders.count == 1, "Unexpected reminders count")
-                    let firstRem = calendar!.reminders.first!
-                    XCTAssert(firstRem.due.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419471400.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
-                    XCTAssert(firstRem.due.parameters.count == 3, "Unexpected parameters count")
-                    XCTAssert(firstRem.uid.stringValue == "44C7728A-C070-4FD7-9C14-685BD9398F3E", "Unexpected uid")
-                    XCTAssert(firstRem.percentComplete.intValue == 100, "Unexpected percentComplete")
-                    XCTAssert(firstRem.reminderStatus == .Completed, "Unexpected reminderStatus")
-                    XCTAssert(firstRem.sequence.intValue == 0, "Unexpected sequence")
-                    XCTAssert(firstRem.completed.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419450730.0)) == NSComparisonResult.OrderedSame, "Unexpected completed")
-                    XCTAssert(firstRem.summary.stringValue == "Reminders are cool", "Unexpected summary")
-                    XCTAssert(firstRem.start.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 413172830.0)) == NSComparisonResult.OrderedSame, "Unexpected start")
-                    XCTAssert(firstRem.createdTime.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 413172830.0)) == NSComparisonResult.OrderedSame, "Unexpected createdTime")
-                    XCTAssert(firstRem.alarms.count == 1, "Unexpected alarms count")
-                    
-                    let firstAlarm = firstRem.alarms.first!
-                    let xpros = firstAlarm.xProperties
-                    XCTAssert(firstAlarm.xProperties.count == 1, "Unexpected xProperties count")
-                    let firstXprop = firstAlarm.xProperties.first!
-                    XCTAssert(firstXprop.key == "X-UID", "Unexpected key")
-                    XCTAssert(firstXprop.stringValue == "C3489EE2-3F65-416F-B487-377F5C80F389", "Unexpected firstXprop")
-                    XCTAssert(firstAlarm.trigger.parameters.count == 1, "Unexpected parameters count")
-                    let d1 = firstAlarm.trigger.dateValue!
-                    let d2 = NSDate(timeIntervalSinceReferenceDate: 419485800.0)
-                    XCTAssert(firstAlarm.trigger.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419485800.0)) == NSComparisonResult.OrderedSame, "Unexpected trigger")
-                    XCTAssert(firstAlarm.action.stringValue == "DISPLAY", "Unexpected action")
-                    XCTAssert(firstAlarm.desc.stringValue == "This is an alarm x1", "Unexpected desc")
-                }
-
-                exp.fulfill()
-            })
+                XCTAssert(calendar!.reminders.count == 1, "Unexpected reminders count")
+                let firstRem = calendar!.reminders.first!
+                XCTAssert(firstRem.due.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419471400.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
+                XCTAssert(firstRem.due.parameters.count == 3, "Unexpected parameters count")
+                XCTAssert(firstRem.uid.stringValue == "44C7728A-C070-4FD7-9C14-685BD9398F3E", "Unexpected uid")
+                XCTAssert(firstRem.percentComplete.intValue == 100, "Unexpected percentComplete")
+                XCTAssert(firstRem.reminderStatus == .Completed, "Unexpected reminderStatus")
+                XCTAssert(firstRem.sequence.intValue == 0, "Unexpected sequence")
+                XCTAssert(firstRem.completed.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419450730.0)) == NSComparisonResult.OrderedSame, "Unexpected completed")
+                XCTAssert(firstRem.summary.stringValue == "Reminders are cool", "Unexpected summary")
+                XCTAssert(firstRem.start.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 413172830.0)) == NSComparisonResult.OrderedSame, "Unexpected start")
+                XCTAssert(firstRem.createdTime.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 413172830.0)) == NSComparisonResult.OrderedSame, "Unexpected createdTime")
+                XCTAssert(firstRem.alarms.count == 1, "Unexpected alarms count")
+                
+                let firstAlarm = firstRem.alarms.first!
+                let xpros = firstAlarm.xProperties
+                XCTAssert(firstAlarm.xProperties.count == 1, "Unexpected xProperties count")
+                let firstXprop = firstAlarm.xProperties.first!
+                XCTAssert(firstXprop.key == "X-UID", "Unexpected key")
+                XCTAssert(firstXprop.stringValue == "C3489EE2-3F65-416F-B487-377F5C80F389", "Unexpected firstXprop")
+                XCTAssert(firstAlarm.trigger.parameters.count == 1, "Unexpected parameters count")
+                let d1 = firstAlarm.trigger.dateValue!
+                let d2 = NSDate(timeIntervalSinceReferenceDate: 419485800.0)
+                XCTAssert(firstAlarm.trigger.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 419485800.0)) == NSComparisonResult.OrderedSame, "Unexpected trigger")
+                XCTAssert(firstAlarm.action.stringValue == "DISPLAY", "Unexpected action")
+                XCTAssert(firstAlarm.desc.stringValue == "This is an alarm x1", "Unexpected desc")
+            }
         }
-        
-        
-        waitForExpectationsWithTimeout(20.0, handler: { (e) -> Void in
-            println(e)
-        })
     }
     
     func test2Dict() {
@@ -107,6 +97,8 @@ class libSwiftCalTests: XCTestCase {
                 let str = NSString(data: json!, encoding: NSUTF8StringEncoding)!
                 let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "json", inDirectory: nil)
                 let correctStr = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)
+                let len1 = str.length
+                let len2 = correctStr!.length
                 XCTAssert(str.length == correctStr!.length, "Unexpected dictionary values")
             }
         }
@@ -165,79 +157,59 @@ class libSwiftCalTests: XCTestCase {
     
     func test5ParseSimpleInput() {
         self.measureBlock { () -> Void in
-            let exp = self.expectationWithDescription("parse")
             let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("SimpleInput", ofType: "ics", inDirectory: nil)
             let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
-            
-            var c = Calendar(stringToParse: str, completion: { (cal, e) -> Void in
-                XCTAssert(e == nil, "ERROR: \(e?.debugDescription)")
-                
-                if e == nil {
-                    calendar = cal!
-                    
-                    XCTAssert(calendar!.prodID.stringValue! == Constants.libSwiftCalProdID, "Unexpected prodID")
-                    XCTAssert(calendar!.version.stringValue! == "2.0", "Unexpected version")
-                    XCTAssert(calendar!.calscale.stringValue! == "GREGORIAN", "Unexpected calscale")
-                    
-                    XCTAssert(calendar!.reminders.count == 1, "Unexpected reminders count")
-                    let firstRem = calendar!.reminders.first!
-                    XCTAssert(firstRem.dateTimestamp.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 438172245.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
-                    XCTAssert(firstRem.sequence.intValue == 10, "Unexpected sequence")
-                    XCTAssert(firstRem.summary.stringValue == "eat a hot dog", "Unexpected summary")
-                    XCTAssert(firstRem.createdTime.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 436939065.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
-                    XCTAssert(firstRem.uid.stringValue == "C2E8D82D-46FA-4AFE-BCAC-099B18A76254", "Unexpected uid")
-                }
-                
-                exp.fulfill()
-            })
+            var err: NSError?
+
+            calendar = Calendar(stringToParse: str, error: &err)
+            XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
+            if err == nil {
+                XCTAssert(calendar!.prodID.stringValue! == Constants.libSwiftCalProdID, "Unexpected prodID")
+                XCTAssert(calendar!.version.stringValue! == "2.0", "Unexpected version")
+                XCTAssert(calendar!.calscale.stringValue! == "GREGORIAN", "Unexpected calscale")
+
+                XCTAssert(calendar!.reminders.count == 1, "Unexpected reminders count")
+                let firstRem = calendar!.reminders.first!
+                XCTAssert(firstRem.dateTimestamp.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 438172245.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
+                XCTAssert(firstRem.sequence.intValue == 10, "Unexpected sequence")
+                XCTAssert(firstRem.summary.stringValue == "eat a hot dog", "Unexpected summary")
+                XCTAssert(firstRem.createdTime.dateValue!.compare(NSDate(timeIntervalSinceReferenceDate: 436939065.0)) == NSComparisonResult.OrderedSame, "Unexpected dateValue")
+                XCTAssert(firstRem.uid.stringValue == "C2E8D82D-46FA-4AFE-BCAC-099B18A76254", "Unexpected uid")
+            }
         }
-        
-        
-        waitForExpectationsWithTimeout(20.0, handler: { (e) -> Void in
-            println(e)
-        })
     }
     
 //    func testParseBlankInput() {
-//        let exp = expectationWithDescription("blank parse")
 //        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("BlankInput", ofType: "ics", inDirectory: nil)
 //        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
 //        calendar = Calendar(stringToParse: str, completion: { (cal, e) -> Void in
 //            XCTAssert(e != nil, "ERROR IS NIL")
 //            exp.fulfill()
 //        })
-//        
-//        waitForExpectationsWithTimeout(20.0, handler: { (e) -> Void in
-//            println(e)
-//        })
 //    }
     
     func testMoreInput() {
-        let exp = expectationWithDescription("more parse")
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("MoreInput", ofType: "ics", inDirectory: nil)
         let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
-        calendar = Calendar(stringToParse: str, completion: { (cal, e) -> Void in
-            XCTAssert(e != nil, "ERROR NOT NIL: \(e?.debugDescription)")
-            exp.fulfill()
-        })
+        var err: NSError?
         
-        waitForExpectationsWithTimeout(20.0, handler: { (e) -> Void in
-            println(e)
-        })
+        calendar = Calendar(stringToParse: str, error: &err)
+        XCTAssert(err != nil, "ERROR NOT NIL: \(err?.debugDescription)")
     }
     
     func testAnotherInput() {
-        let exp = expectationWithDescription("more parse")
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("AnotherInput", ofType: "ics", inDirectory: nil)
         let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
-        calendar = Calendar(stringToParse: str, completion: { (cal, e) -> Void in
-            XCTAssert(e != nil, "ERROR NOT NIL: \(e?.debugDescription)")
-            exp.fulfill()
-        })
-        
-        waitForExpectationsWithTimeout(20.0, handler: { (e) -> Void in
-            println(e)
-        })
+        var err: NSError?
+        calendar = Calendar(stringToParse: str, error: &err)
+        XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
+        let firstRem = calendar?.reminders.first?
+        let summ = firstRem?.summary.stringValue
+        let summ2 = summ?.stringByReplacingOccurrencesOfString("\\\\", withString: "\\", options: nil)
+        let y = 10
+        if err == nil {
+            XCTAssert(calendar!.reminders.count == 1, "Unexepected reminders count")
+        }
     }
     
     func testPerformanceExample() {
@@ -246,5 +218,4 @@ class libSwiftCalTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-    
 }

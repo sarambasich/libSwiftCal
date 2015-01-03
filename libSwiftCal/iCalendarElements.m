@@ -26,6 +26,15 @@
 
 #import "iCalendarElements.h"
 
+const char controlChars[] = {'\x00', '\x01', '\x02', '\x03', '\x04', '\x05',
+    '\x06', '\x07', '\x08', '\x0a', '\x0b', '\x0c',
+    '\x0d', '\x0e', '\x0f', '\x10', '\x11', '\x12',
+    '\x13', '\x14', '\x15', '\x16', '\x17', '\x18',
+    '\x19', '\x1a', '\x1b', '\x1c', '\x1d', '\x1e',
+    '\x1f', '\x7f'};
+
+const char escapedChars[] = {'\\', ';', ',', 'N', 'n'};
+
 const NSUInteger kPriorityLow = 9;
 const NSUInteger kPriorityNormal = 5;
 const NSUInteger kPriorityHigh = 1;
@@ -36,6 +45,8 @@ NSString * const kX_WR_CALDESC = @"X-WR-CALDESC";
 NSString * const kBEGIN = @"BEGIN";
 NSString * const kEND = @"END";
 
+NSString * const kCR = @"\r";
+NSString * const kLF = @"\n";
 NSString * const kCRLF = @"\r\n";
 NSString * const kDOUBLE_QUOTE = @"\"";
 NSString * const kSEMICOLON = @";";

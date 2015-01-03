@@ -42,8 +42,8 @@ public class Parameter: CalendarObject {
     
     /// The key of the parameter
     public internal(set) var key: String! = ""
-    /// The parameter's value
-    public internal(set) var value = NSObject()
+    /// The parameter's values
+    public internal(set) var values = [String]()
     
     public required init() {
         super.init()
@@ -54,10 +54,18 @@ public class Parameter: CalendarObject {
     public override func serializeToiCal() -> String {
         var result = String()
         
-        if let s = value as? String {
-            result += self.key + kEQUALS + s
-        } else if let v: AnyObject = JSONify(value) {
-            result += "\(v)"
+        result += self.key + kEQUALS
+        
+        for v in self.values {
+            if v != self.values.first {
+                result += kCOMMA
+            }
+           
+            if let val: AnyObject = JSONify(v) {
+                result += "\(val)"
+            } else {
+                result += v
+            }
         }
         
         return result
@@ -73,6 +81,14 @@ public class Parameter: CalendarObject {
     // MARK: - Serializable
     public required init(dictionary: [String : AnyObject]) {
         super.init(dictionary: dictionary)
+    }
+    
+    public override func toDictionary() -> [String : AnyObject] {
+        var result = super.toDictionary()
+        
+        result[SerializationKeys.ParamValueKey] = values
+        
+        return result
     }
     
     public override var serializationKeys: [String] {

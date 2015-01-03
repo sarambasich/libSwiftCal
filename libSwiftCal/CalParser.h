@@ -55,15 +55,15 @@ id toTypeFromString(NSString * str);
 
 /**
     Representation of a parameter match found by the iCalendar parser.
-    Contains a key/value pair describing the parameter.
+    Contains a key/values pair describing the parameter.
  */
 
 @interface ParameterMatch : NSObject
 
 /** The parameter's key */
 @property (strong, readwrite) NSString * key;
-/** The parameter's value */
-@property (strong, readwrite) id value;
+/** The parameter's values */
+@property (strong, readwrite) NSMutableArray * values;
 
 
 /**
@@ -124,7 +124,5 @@ id toTypeFromString(NSString * str);
 - (void) parser:(PKParser *) parser didMatchAlarmc:(PKAssembly *) assembly;
 
 - (void) parser:(PKParser *) parser didMatchTodoc:(PKAssembly *) assembly;
-
-- (void) parser:(PKParser *) parser didMatchIcalobject:(PKAssembly *) assembly;
 
 @end

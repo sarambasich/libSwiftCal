@@ -26,6 +26,9 @@
 
 #import <Foundation/Foundation.h>
 
+FOUNDATION_EXPORT const char controlChars[];
+FOUNDATION_EXPORT const char escapedChars[];
+
 FOUNDATION_EXPORT const NSUInteger kPriorityLow;
 FOUNDATION_EXPORT const NSUInteger kPriorityNormal;
 FOUNDATION_EXPORT const NSUInteger kPriorityHigh;
@@ -36,6 +39,8 @@ FOUNDATION_EXPORT NSString * const kX_WR_CALDESC;
 FOUNDATION_EXPORT NSString * const kBEGIN;
 FOUNDATION_EXPORT NSString * const kEND;
 
+FOUNDATION_EXPORT NSString * const kCR;
+FOUNDATION_EXPORT NSString * const kLF;
 FOUNDATION_EXPORT NSString * const kCRLF;
 FOUNDATION_EXPORT NSString * const kDOUBLE_QUOTE;
 FOUNDATION_EXPORT NSString * const kSEMICOLON;

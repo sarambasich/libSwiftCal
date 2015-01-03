@@ -2,7 +2,7 @@
 
 import Foundation
 
-var str = "Hello, playground"
+//var str = "Hello, playground"
 
 //let dtStr = "20141120T103045Z"
 //let dtStr = "20140418T035000Z"

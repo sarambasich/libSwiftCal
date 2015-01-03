@@ -118,15 +118,25 @@ id toTypeFromString(NSString * str) {
 @implementation ParameterMatch
 
 @synthesize key;
-@synthesize value;
+@synthesize values;
+
+- (id) init {
+    self = [super init];
+    
+    if (self) {
+        values = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
+}
 
 - (NSString *) debugDescription {
-    return [NSString stringWithFormat:@"<Param(%@): %@>", key, value];
+    return [NSString stringWithFormat:@"<Param(%@): %@>", key, values];
 }
 
 - (NSDictionary *) toDictionary {
     return @{@"param_key": key,
-             @"param_value": value,
+             @"param_value": values,
              };
 }
 
@@ -135,6 +145,8 @@ id toTypeFromString(NSString * str) {
 @interface CalParser ()
 
 - (PropertyMatch *) matchProperty:(PKParser *) parser assembly:(PKAssembly *) assembly;
+
+- (BOOL) isControlCharacter:(char) c;
 
 @property (atomic, strong, readwrite) iCalParser * parser;
 
@@ -219,56 +231,115 @@ id toTypeFromString(NSString * str) {
 
 - (PropertyMatch *) matchProperty:(PKParser *) parser assembly:(PKAssembly *) assembly {
     PropertyMatch * result = [[PropertyMatch alloc] init];
-    NSUInteger stackCursor = assembly.stack.count - 1 - 1,
-        propStartPos, propEndPos, paramStartPos, paramEndPos;
+    NSUInteger stackCursor = assembly.stack.count - 1;
     
-    // 1.) Find beginning of PROPERTY's value in stack
-    PKToken * endTok = assembly.stack[stackCursor];
-    
-    // 2.) Mark where the end of the PROPERTY's value is
-    propEndPos = endTok.offset;
-    
-    // 3.) Traverse the parse stack top down to find the beginning of the value
-    PKToken * valTok = assembly.stack[stackCursor - 1];
-    while (![[assembly.stack[stackCursor] stringValue] isEqualToString:@":"]) {
-        valTok = assembly.stack[stackCursor--];
+    // 1.) Find PROPERTY in stack - go back first, then progress forward
+    BOOL isPropName = NO;
+    BOOL previousLF = NO;
+    BOOL previousCR = NO;
+    while (!(isPropName && previousLF && previousCR)) {
+        stackCursor--;
+        isPropName = [[assembly.stack[stackCursor] stringValue] isPropertyName];
+        previousLF = [assembly.stack[stackCursor - 1] tokenKind] == ICALPARSER_TOKEN_KIND__X0A;
+        previousCR = [assembly.stack[stackCursor - 2] tokenKind] == ICALPARSER_TOKEN_KIND__X0D;
     }
     
-    // 4.) Mark where beginning is found to be
-    propStartPos = valTok.offset;
+    // 2.) So now we're where the PROPERTY starts. Let's get the property name.
+    PKToken * tok = assembly.stack[stackCursor];
+    result.key = [tok stringValue];
     
-    // 5.) Make substring from beginning to end of value
-    NSString * subStr = [self.parser.tokenizer.string substringWithRange:NSMakeRange(propStartPos, propEndPos - propStartPos)];
-    result.value = toTypeFromString(subStr);
+    tok = assembly.stack[++stackCursor];
     
-    // 6.) Handle for possible property parameters using same methodology above
-    stackCursor--;
-    paramEndPos = valTok.offset - 1;
-    PKToken * paramTok = assembly.stack[stackCursor];
-    if (![[assembly.stack[stackCursor] stringValue] isPropertyName]) {
-        while (!([[assembly.stack[stackCursor] stringValue] isEqualToString:@";"] && [[assembly.stack[stackCursor - 1] stringValue] isPropertyName])) {
-            while (![[assembly.stack[stackCursor] stringValue] isPropertyParameterName])  {
-                paramTok = assembly.stack[stackCursor];
-                stackCursor--;
+    BOOL isColon = [[tok stringValue] isEqualToString:kCOLON];
+    while (!isColon) {
+        BOOL isSemiColon = [[tok stringValue] isEqualToString:kSEMICOLON];
+        if (isSemiColon) {
+            // 3.) If there are any parameters, match those
+            ParameterMatch * pm = [ParameterMatch new];
+            NSUInteger pNameStartPos = [assembly.stack[stackCursor + 1] offset];
+            
+            // Advance to get parameter name
+            BOOL isEquals = [[tok stringValue] isEqualToString:kEQUALS];
+            while (!isEquals) {
+                stackCursor++;
+                tok = assembly.stack[stackCursor];
+                isEquals = [[tok stringValue] isEqualToString:kEQUALS];
             }
             
-            paramStartPos = paramTok.offset + 1;
+            NSString * paramNameStr = [self.parser.tokenizer.string substringWithRange:NSMakeRange(pNameStartPos, tok.offset - pNameStartPos)];
+            pm.key = paramNameStr;
             
-            ParameterMatch * pm = [ParameterMatch new];
-            pm.key = [assembly.stack[stackCursor] stringValue];
-            pm.value = toTypeFromString([self.parser.tokenizer.string substringWithRange:NSMakeRange(paramStartPos, paramEndPos - paramStartPos)]);
+            stackCursor++;
+            
+            NSUInteger paramValStartPos = [assembly.stack[stackCursor] offset];
+            
+            // Advance to get parameter value(s)
+            BOOL isColon = NO;
+            BOOL isSemiColon = NO;
+            while (!(isColon || isSemiColon)) {
+                if ([[tok stringValue] isEqualToString:kCOMMA]) {
+                    NSString * paramValStr = [self.parser.tokenizer.string substringWithRange:NSMakeRange(paramValStartPos, tok.offset - paramValStartPos)];
+                    id paramVal = toTypeFromString(paramValStr);
+                    [pm.values addObject:paramVal];
+                    
+                    paramValStartPos = [assembly.stack[++stackCursor] offset];
+                }
+                
+                stackCursor++;
+                tok = assembly.stack[stackCursor];
+                isColon = [[tok stringValue] isEqualToString:kCOLON];
+                isSemiColon = [[tok stringValue] isEqualToString:kSEMICOLON];
+            }
+            
+            NSString * paramValStr = [self.parser.tokenizer.string substringWithRange:NSMakeRange(paramValStartPos, tok.offset - paramValStartPos)];
+            id paramVal = toTypeFromString(paramValStr);
+            [pm.values addObject:paramVal];
             
             [result.params addObject:pm];
-            stackCursor--;
-            paramTok = assembly.stack[stackCursor];
-            paramEndPos = paramTok.offset;
         }
         
-        stackCursor--;
+        tok = assembly.stack[stackCursor];
+        isColon = [[tok stringValue] isEqualToString:kCOLON];
     }
     
-    // 7.) Get the property's name
-    result.key = [assembly.stack[stackCursor] stringValue];
+    // 4.) Get property's value now
+    NSUInteger propertyValStartPos = [assembly.stack[++stackCursor] offset];
+    
+    BOOL escapedChar = NO;
+    BOOL controlChar = NO;
+    BOOL crlf = NO;
+    // Advance to get prop value
+    while (!(escapedChar || controlChar || crlf)) {
+        stackCursor++;
+        PKToken * tok = assembly.stack[stackCursor];
+        
+        escapedChar = [[tok stringValue] isEqualToString:kBACKSLASH] && [self isEscapedCharacter:[[assembly.stack[stackCursor + 1] stringValue] characterAtIndex:0]];
+        controlChar = [self isControlCharacter:[[tok stringValue] characterAtIndex:0]];
+        crlf = [[tok stringValue] isEqualToString:kCR] && [[assembly.stack[stackCursor + 1] stringValue] isEqualToString:kLF];
+    }
+    
+    NSString * propValStr = [self.parser.tokenizer.string substringWithRange:NSMakeRange(propertyValStartPos, [assembly.stack[stackCursor] offset] - propertyValStartPos)];
+    result.value = toTypeFromString(propValStr);
+    
+    return result;
+}
+
+- (BOOL) isEscapedCharacter:(char) c {
+    BOOL result = NO;
+    for (int i = 0; i < 5; i++) {
+        char ch = escapedChars[i];
+        result = ch == c;
+    }
+    
+    return result;
+}
+
+- (BOOL) isControlCharacter:(char) c {
+    BOOL result = NO;
+    for (int i = 0; i < 32; i++) {
+        char ch = controlChars[i];
+        result = ch == c;
+    }
     
     return result;
 }

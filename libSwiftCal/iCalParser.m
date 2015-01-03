@@ -1402,7 +1402,7 @@
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_CLASS, 0]) {
         [self class_]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_COMPLETED, 0]) {
-        [self completed_]; 
+        [self completed_];
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_CREATED, 0]) {
         [self created_]; 
     } else if ([self predicts:ICALPARSER_TOKEN_KIND_DESCRIPTION, 0]) {

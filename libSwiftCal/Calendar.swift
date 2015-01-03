@@ -40,7 +40,7 @@ import EventKit
 */
 public class Calendar: CalendarObject, ParserObserver {
     /// Non-standard unique identifier for the calendar
-    var _calendarIdentifier: String! = ""
+    var _calendarIdentifier: String!
     
     public var calendarIdentifier: String! {
         get {
@@ -70,23 +70,26 @@ public class Calendar: CalendarObject, ParserObserver {
             return self.calendarIdentifier
         }
     }
-    
-    private var closure: ((Calendar?, e: NSError?) -> Void)!
     /**
         Returns a new representation of a VCALENDAR object and beings parsing the inputted
         string value.
     
+        If the number of items in the calendar becomes large, this method will take a 
+        while to run, so perhaps a best practice is to run this on a background thread 
+        and call back to main when the parsing finishes (this method returns).
+    
+        Upon failure, returns nil as well as an `NSError` pointer to the caller describing the
+        issue. Most likely, there is something wrong in your calendar file such that it
+        doesn't quite fit the parsing grammar.
+    
         :param: s The string to parse from iCalendar into libSwiftCal.
-        :completion: A completion block called upon the parsing's completion.
     */
-    public init(stringToParse s: String, completion: (Calendar?, e: NSError?) -> Void) {
+    public init?(stringToParse s: String, inout error: NSError?) {
         super.init()
-        self.closure = completion
         self.parser = CalParser(delegate: self)
-        var err: NSError?
-        self.parser.parseString(s, error: &err)
-        if err != nil {
-            self.closure(nil, e: err)
+        self.parser.parseString(s, error: &error)
+        if error != nil {
+            return nil
         }
     }
     
@@ -122,9 +125,10 @@ public class Calendar: CalendarObject, ParserObserver {
     
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + [kUID, kCALSCALE, kMETHOD, kPRODID, kVERSION, SerializationKeys.RemindersKey, "", "", "", "", "", ""]
+            return super.serializationKeys + [kUID, kCALSCALE, kMETHOD, kPRODID, kVERSION, SerializationKeys.RemindersKey, "", "", "", "", ""]
         }
     }
+    
     
     // Parsing
     private var parser: CalParser! = CalParser()
@@ -134,10 +138,6 @@ public class Calendar: CalendarObject, ParserObserver {
     private var currentAlarms: [[String : AnyObject]] = [[String : AnyObject]]()
     
     // MARK: - ParserObserver
-    public func parser(key: String!, willMatchIcalobject value: String!) {
-        
-    }
-    
     public func parser(key: String!, didMatchCalprops value: PropertyMatch!) {
         model__setValue(value.toDictionary(), forSerializationKey: key, model: self)
     }
@@ -180,10 +180,5 @@ public class Calendar: CalendarObject, ParserObserver {
         self.reminders.append(newTodoc)
         self.currentAlarms.removeAll()
         self.currentAlarmXProps.removeAll()
-    }
-    
-    public func parser(key: String!, didMatchIcalobject value: String!) {
-        self.closure(self, e: nil)
-        self.closure = nil
     }
 }

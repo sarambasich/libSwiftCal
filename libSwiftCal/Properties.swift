@@ -89,7 +89,6 @@ public class Property: CalendarObject, TypedValue {
     }
     
     
-    // MARK: - CalendarType
     public override func serializeToiCal() -> String {
         // No key? Don't serialize.
         if key.isEmpty {
