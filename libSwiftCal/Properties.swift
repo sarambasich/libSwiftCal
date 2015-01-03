@@ -28,24 +28,26 @@ import Foundation
 import EventKit
 
 /**
-    Generic function. Returns a friendly name for the given input.
+    Generic function. Returns a localized friendly name for the given input.
 
     :param: status The status level to get a friendly name for.
 
     :return: A string description of the status or nil if invalid.
 */
-public func priority__toString(status: UInt) -> String? {
+public func priority__toString(status: UInt?) -> String? {
     var result: String?
     
-    switch status {
-    case kPriorityHigh:
-        result = NSLocalizedString("High", comment: "")
-    case kPriorityNormal:
-        result = NSLocalizedString("Normal", comment: "")
-    case kPriorityLow:
-        result = NSLocalizedString("Low", comment: "")
-    default:
-        break
+    if let s = status {
+        switch s {
+        case kPriorityHigh:
+            result = NSLocalizedString("High", comment: "")
+        case kPriorityNormal:
+            result = NSLocalizedString("Normal", comment: "")
+        case kPriorityLow:
+            result = NSLocalizedString("Low", comment: "")
+        default:
+            break
+        }
     }
     
     return result
