@@ -150,8 +150,26 @@ public extension String {
         }
     }
     
-    internal func URLEncode() -> String? {
+    public func URLEncode() -> String? {
         let charSet = NSCharacterSet.URLQueryAllowedCharacterSet()
         return self.stringByAddingPercentEncodingWithAllowedCharacters(charSet)?
+    }
+    
+    public func replace(source: String, replacement: String) -> String {
+        return self.stringByReplacingOccurrencesOfString(source, withString: replacement)
+    }
+    
+    public func escapeForiCalendar() -> String {
+        var result = self.replace("\\", replacement: "\\\\")
+        result = result.replace(",", replacement: "\\,")
+        result = result.replace(";", replacement: "\\;")
+        return result
+    }
+    
+    public func removeiCalendarEscapes() -> String {
+        var result = self.replace("\\\\", replacement: "\\")
+        result = result.replace("\\,", replacement: ",")
+        result = result.replace("\\;", replacement: ";")
+        return result
     }
 }

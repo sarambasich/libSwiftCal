@@ -117,9 +117,9 @@ public class Property: CalendarObject, TypedValue {
         result += kCOLON
         
         if let s = valStr {
-            result += s
+            result += s.escapeForiCalendar()
         } else if let v: AnyObject = JSONify(self.propertyValue) {
-            result += "\(v)"
+            result += "\(v)".escapeForiCalendar()
         }
         
         result += kCRLF
@@ -137,6 +137,10 @@ public class Property: CalendarObject, TypedValue {
     // MARK: - Serializable
     public required init(dictionary: [String : AnyObject]) {
         super.init(dictionary: dictionary)
+        
+        if let s = self.stringValue? {
+            self.stringValue = self.stringValue!.removeiCalendarEscapes()
+        }
     }
     
     public override func toDictionary() -> [String : AnyObject] {

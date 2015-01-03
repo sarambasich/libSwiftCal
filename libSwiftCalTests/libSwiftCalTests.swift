@@ -203,12 +203,14 @@ class libSwiftCalTests: XCTestCase {
         var err: NSError?
         calendar = Calendar(stringToParse: str, error: &err)
         XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
-        let firstRem = calendar?.reminders.first?
-        let summ = firstRem?.summary.stringValue
-        let summ2 = summ?.stringByReplacingOccurrencesOfString("\\\\", withString: "\\", options: nil)
-        let y = 10
         if err == nil {
-            XCTAssert(calendar!.reminders.count == 1, "Unexepected reminders count")
+            XCTAssert(calendar!.reminders.count == 1, "Unexpected reminders count")
+            let firstRem = calendar?.reminders.first?
+            XCTAssert(firstRem!.summary.stringValue! == "\\, \\ backslash", "Unexpected summary")
+            
+            // Serialize it back
+            let ser = calendar!.serializeToiCal()
+            XCTAssert(ser == str, "Unexpected iCalendar serialization")
         }
     }
     
