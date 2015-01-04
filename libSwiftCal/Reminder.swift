@@ -38,7 +38,7 @@ import EventKit
 */
 public class Reminder: CalendarObject {
     public enum Status: String {
-        case NeedsAcction = "NEEDS-ACTION"
+        case NeedsAction = "NEEDS-ACTION"
         case Completed = "COMPLETED"
         case InProcess = "IN-PROCESS"
         case Canceled = "CANCELLED"
@@ -155,7 +155,7 @@ public class Reminder: CalendarObject {
             
             return nil
         } set {
-            self.status.stringValue = newValue?.rawValue
+            self.status.stringValue = newValue!.rawValue
         }
     }
     

@@ -30,16 +30,16 @@ import Foundation
     A set of serialization keys used on models in the framework.
 */
 public struct SerializationKeys {
-    static let XPropertiesKey = "x-prop"
-    static let IANAPropertiesKey = "iana-prop"
-    static let RemindersKey = "reminders"
-    static let PropertyKeyKey = "prop_key"
-    static let PropertyValKey = "prop_value"
-    static let ParametersKey = "parameters"
-    static let ParameterKeyKey = "param_key"
-    static let ParamValueKey = "param_value"
-    static let AlarmsKey = "alarms"
-    static let AttendeesKey = "attendees"
+    public static let XPropertiesKey = "x-prop"
+    public static let IANAPropertiesKey = "iana-prop"
+    public static let RemindersKey = "reminders"
+    public static let PropertyKeyKey = "prop_key"
+    public static let PropertyValKey = "prop_value"
+    public static let ParametersKey = "parameters"
+    public static let ParameterKeyKey = "param_key"
+    public static let ParamValueKey = "param_value"
+    public static let AlarmsKey = "alarms"
+    public static let AttendeesKey = "attendees"
 }
 
 /// MARK: - Type aliases
