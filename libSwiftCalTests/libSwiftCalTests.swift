@@ -179,15 +179,6 @@ class libSwiftCalTests: XCTestCase {
         }
     }
     
-//    func testParseBlankInput() {
-//        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("BlankInput", ofType: "ics", inDirectory: nil)
-//        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
-//        calendar = Calendar(stringToParse: str, completion: { (cal, e) -> Void in
-//            XCTAssert(e != nil, "ERROR IS NIL")
-//            exp.fulfill()
-//        })
-//    }
-    
     func testMoreInput() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("MoreInput", ofType: "ics", inDirectory: nil)
         let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
@@ -211,6 +202,29 @@ class libSwiftCalTests: XCTestCase {
             // Serialize it back
             let ser = calendar!.serializeToiCal()
             XCTAssert(ser == str, "Unexpected iCalendar serialization")
+        }
+    }
+    
+    func testLongInput() {
+        let correctSumm = "This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, yay"
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("LongInput", ofType: "ics", inDirectory: nil)
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        var err: NSError?
+        
+        calendar = Calendar(stringToParse: str, error: &err)
+        XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
+        if err == nil {
+            let firstRem = calendar!.reminders.first!
+            XCTAssert(firstRem.summary.stringValue! == correctSumm, "Unexpected summary")
+            let iCalValue = calendar!.serializeToiCal()
+            var err2: NSError?
+            let cal2 = Calendar(stringToParse: iCalValue, error: &err2)
+            XCTAssert(err2 == nil, "ERROR: \(err2?.debugDescription)")
+            if err2 == nil {
+                let firRem = cal2!.reminders.first!
+                let s = firRem.summary.stringValue
+                XCTAssert(firRem.summary.stringValue! == correctSumm, "Unexpected summary")
+            }
         }
     }
     

@@ -87,7 +87,8 @@ public class Calendar: CalendarObject, ParserObserver {
     public init?(stringToParse s: String, inout error: NSError?) {
         super.init()
         self.parser = CalParser(delegate: self)
-        self.parser.parseString(s, error: &error)
+        let str = s.unfoldiCalendarString()
+        self.parser.parseString(str, error: &error)
         if error != nil {
             return nil
         }

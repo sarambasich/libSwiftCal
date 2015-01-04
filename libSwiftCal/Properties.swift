@@ -124,6 +124,10 @@ public class Property: CalendarObject, TypedValue {
             result += "\(v)".escapeForiCalendar()
         }
         
+        if result.len > 73 {
+            result = result.insertString(kCRLF + " ", everyXCharacters: 73)
+        }
+        
         result += kCRLF
         
         return result

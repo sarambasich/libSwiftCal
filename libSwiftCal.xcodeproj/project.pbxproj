@@ -44,6 +44,7 @@
 		F89877881A3BE8A5002F9322 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89877871A3BE8A5002F9322 /* JSON.swift */; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
 		F8F8EED51A1C4CF30046AF23 /* libSwiftCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */; };
+		F8FC991E1A59A130005B4036 /* LongInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8FC991D1A59A130005B4036 /* LongInput.ics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		F8F8EAF71A1C3EEE0046AF23 /* libSwiftCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libSwiftCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8ECE51A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = libSwiftCalTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F8FC991D1A59A130005B4036 /* LongInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LongInput.ics; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +228,7 @@
 				F82161E51A54A91800886131 /* BlankInput.ics */,
 				F82161E71A54C2C900886131 /* MoreInput.ics */,
 				F8497B031A55A87C00AD592B /* AnotherInput.ics */,
+				F8FC991D1A59A130005B4036 /* LongInput.ics */,
 			);
 			path = libSwiftCalTests;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				F8497B041A55A87C00AD592B /* AnotherInput.ics in Resources */,
 				F83ACB631A2AD66600423215 /* EasyInput.json in Resources */,
 				F81A89141A36AA10000F5A34 /* SimpleInput.ics in Resources */,
+				F8FC991E1A59A130005B4036 /* LongInput.ics in Resources */,
 				F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */,
 				F82161E81A54C2C900886131 /* MoreInput.ics in Resources */,
 				F82161E61A54A91800886131 /* BlankInput.ics in Resources */,

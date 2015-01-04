@@ -159,6 +159,67 @@ public extension String {
         return self.stringByReplacingOccurrencesOfString(source, withString: replacement)
     }
     
+    /**
+        Inserts a given string into the receiver every `n` characters. For example,
+        on the string `Mississippi`, calling this function with `;`, `3`, and `true` yields:
+    
+        `;Mis;sis;sip;pi`
+    
+        :param: char The character to
+    */
+    public func insertString(str: String, everyXCharacters n: Int, indexZero: Bool = false) -> String {
+        var result = self
+        
+        var curIdx = 0
+        
+        var strIdx = 0
+        if !indexZero {
+            strIdx++
+            curIdx++
+        }
+        
+        while strIdx < self.len {
+            if strIdx % n == 0 {
+                result = result.insertString(str, atIndex: curIdx)
+                curIdx += str.len;
+            }
+            
+            strIdx++
+            curIdx++
+            
+        }
+        
+        return result
+    }
+    
+    public func insertString(str: String, atIndex index: Int) -> String {
+        let sub1 = self.substringToIndex(advance(self.startIndex, index))
+        let sub2 = self.substringFromIndex(advance(self.startIndex, index))
+        
+        return sub1 + str + sub2
+    }
+    
+    public func unfoldiCalendarString() -> String {
+        var result = self
+        
+        var i: Int = 0
+        while i < result.len - 1 {
+            let c = result[advance(result.startIndex, i)]
+            if c == "\r\n" {
+                let c1 = result[advance(result.startIndex, i + 1)]
+                
+                if c1 == " " || c1 == "\t" {
+                    result = result.replace("\(c)\(c1)", replacement: "")
+                    i = i - 3
+                }
+            }
+            
+            i++
+        }
+        
+        return result
+    }
+    
     public func escapeForiCalendar() -> String {
         var result = self.replace("\\", replacement: "\\\\")
         result = result.replace(",", replacement: "\\,")
