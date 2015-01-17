@@ -445,7 +445,7 @@ priority   = 'PRIORITY' prioparam* ':' priovalue crlf;
 
 prioparam  = (';' otherparam);
 
-priovalue   = Number;
+priovalue   = (digit | Number);
 
 prodid     = 'PRODID' pidparam* ':' pidvalue crlf;
 

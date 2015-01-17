@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F81A89141A36AA10000F5A34 /* SimpleInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F81A89131A36AA10000F5A34 /* SimpleInput.ics */; };
+		F821037B1A6AF3D10097BBFA /* LargeInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F821037A1A6AF3D10097BBFA /* LargeInput.ics */; };
 		F82161E61A54A91800886131 /* BlankInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82161E51A54A91800886131 /* BlankInput.ics */; };
 		F82161E81A54C2C900886131 /* MoreInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82161E71A54C2C900886131 /* MoreInput.ics */; };
 		F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82909B41A1C5ADA0091366E /* EasyInput.ics */; };
@@ -72,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		F81A89131A36AA10000F5A34 /* SimpleInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleInput.ics; sourceTree = "<group>"; };
+		F821037A1A6AF3D10097BBFA /* LargeInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LargeInput.ics; sourceTree = "<group>"; };
 		F82161E51A54A91800886131 /* BlankInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlankInput.ics; sourceTree = "<group>"; };
 		F82161E71A54C2C900886131 /* MoreInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MoreInput.ics; sourceTree = "<group>"; };
 		F82909B41A1C5ADA0091366E /* EasyInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = EasyInput.ics; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = "<none>"; };
@@ -229,6 +231,7 @@
 				F82161E71A54C2C900886131 /* MoreInput.ics */,
 				F8497B031A55A87C00AD592B /* AnotherInput.ics */,
 				F8FC991D1A59A130005B4036 /* LongInput.ics */,
+				F821037A1A6AF3D10097BBFA /* LargeInput.ics */,
 			);
 			path = libSwiftCalTests;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				F8FC991E1A59A130005B4036 /* LongInput.ics in Resources */,
 				F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */,
 				F82161E81A54C2C900886131 /* MoreInput.ics in Resources */,
+				F821037B1A6AF3D10097BBFA /* LargeInput.ics in Resources */,
 				F82161E61A54A91800886131 /* BlankInput.ics in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
