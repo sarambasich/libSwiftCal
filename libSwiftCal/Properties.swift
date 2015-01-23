@@ -430,6 +430,20 @@ public class GenericProperty: Property {
     public required init() {
         super.init()
     }
+    
+    public struct Common {
+        public static let X_EPOCAGENDAENTRYTYPE = "X-EPOCAGENDAENTRYTYPE" // defines the client calendar type
+        public static let X_FUNAMBOL_AALARMOPTIONS = "X-FUNAMBOL-AALARMOPTIONS"
+        public static let X_FUNAMBOL_ALLDAY = "X-FUNAMBOL-ALLDAY" // all day event flag
+        public static let X_MICROSOFT_CDO_ALLDAYEVENT = "X-MICROSOFT-CDO-ALLDAYEVENT" // Outlook all day event flag
+        public static let X_MICROSOFT_CDO_BUSYSTATUS = "X-MICROSOFT-CDO-BUSYSTATUS" // Outlook status info
+        public static let X_WR_CALNAME = "X-WR-CALNAME"
+        public static let X_WR_CALDESC = "X-WR-CALDESC"
+        public static let X_WR_RELCALID = "X-WR-RELCALID"
+        public static let X_WR_TIMEZONE = "X-WR-TIMEZONE"
+        public static let X_PUBLISHED_TTL = "X-PUBLISHED-TTL"
+        public static let X_WR_ALARMUID = "X-WR-ALARMUID"
+    }
 }
 
 

@@ -210,7 +210,7 @@ public extension String {
                 
                 if c1 == " " || c1 == "\t" {
                     result = result.replace("\(c)\(c1)", replacement: "")
-                    i = i - 3
+                    i = i - 2
                 }
             }
             
