@@ -42,6 +42,7 @@
 		F858377B1A509A47003F7CCF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858377A1A509A47003F7CCF /* Constants.swift */; };
 		F86D9ADD1A45264C00428C68 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F88C9C651A3E294B00541E31 /* PEGKit.framework */; };
 		F86D9ADE1A45264E00428C68 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F88C9C651A3E294B00541E31 /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F8857CD51A70A0DB000EC9A2 /* RecurInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8857CD41A70A0DB000EC9A2 /* RecurInput.ics */; };
 		F89877881A3BE8A5002F9322 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89877871A3BE8A5002F9322 /* JSON.swift */; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
 		F8F8EED51A1C4CF30046AF23 /* libSwiftCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */; };
@@ -109,6 +110,7 @@
 		F83ACB621A2AD66600423215 /* EasyInput.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = EasyInput.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		F8497B031A55A87C00AD592B /* AnotherInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AnotherInput.ics; sourceTree = "<group>"; };
 		F858377A1A509A47003F7CCF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F8857CD41A70A0DB000EC9A2 /* RecurInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RecurInput.ics; sourceTree = "<group>"; };
 		F88C9C651A3E294B00541E31 /* PEGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PEGKit.framework; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/MyList-glazucatajuedydloqocpkmuotup/Build/Products/Debug-iphoneos/PEGKit.framework"; sourceTree = "<group>"; };
 		F89877871A3BE8A5002F9322 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,6 +234,7 @@
 				F8497B031A55A87C00AD592B /* AnotherInput.ics */,
 				F8FC991D1A59A130005B4036 /* LongInput.ics */,
 				F821037A1A6AF3D10097BBFA /* LargeInput.ics */,
+				F8857CD41A70A0DB000EC9A2 /* RecurInput.ics */,
 			);
 			path = libSwiftCalTests;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				F83ACB631A2AD66600423215 /* EasyInput.json in Resources */,
 				F81A89141A36AA10000F5A34 /* SimpleInput.ics in Resources */,
 				F8FC991E1A59A130005B4036 /* LongInput.ics in Resources */,
+				F8857CD51A70A0DB000EC9A2 /* RecurInput.ics in Resources */,
 				F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */,
 				F82161E81A54C2C900886131 /* MoreInput.ics in Resources */,
 				F821037B1A6AF3D10097BBFA /* LargeInput.ics in Resources */,

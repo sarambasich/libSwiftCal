@@ -44,10 +44,10 @@ public class Reminder: CalendarObject {
         case Canceled = "CANCELLED"
     }
     
-    struct AccessClass {
-        static let public_ = "PUBLIC"
-        static let private_ = "PRIVATE"
-        static let confidential = "CONFIDENTIAL"
+    public struct AccessClass {
+        public static let Public = "PUBLIC"
+        public static let Private = "PRIVATE"
+        public static let Confidential = "CONFIDENTIAL"
     }
     ///    In the case of an iCalendar object that specifies a
     ///    "METHOD" property, this property specifies the date and time that

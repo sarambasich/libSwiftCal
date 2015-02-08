@@ -264,11 +264,35 @@ public class Organizer: Property {
     :URL: https://tools.ietf.org/html/rfc5545#section-3.8.1.6
 */
 public class Geo: Property {
-    public var lat: CLLocationDegrees = 0.0
-    public var lon: CLLocationDegrees = 0.0
+    public private(set)var lat: CLLocationDegrees = 0.0
+    public private(set)var lon: CLLocationDegrees = 0.0
     
     public required init() {
         super.init()
+    }
+    
+    public init(latitude lat: CLLocationDegrees, longitude lon: CLLocationDegrees) {
+        super.init(dictionary: [SerializationKeys.PropertyKeyKey: kGEO, SerializationKeys.PropertyValKey: "\(lat);\(lon)"])
+        
+        self.lat = lat
+        self.lon = lon
+    }
+    
+    public init(coordinate: CLLocationCoordinate2D) {
+        super.init(dictionary: [SerializationKeys.PropertyKeyKey: kGEO, SerializationKeys.PropertyValKey: "\(coordinate.latitude);\(coordinate.longitude)"])
+        
+        self.lat = coordinate.latitude
+        self.lon = coordinate.longitude
+    }
+    
+    public var coordinate: CLLocationCoordinate2D? {
+        get {
+            if self.lat != 0.0 && self.lon != 0.0 {
+                return CLLocationCoordinate2DMake(self.lat, self.lon)
+            }
+            
+            return nil
+        }
     }
     
     // MARK: - NSCoding
@@ -278,7 +302,22 @@ public class Geo: Property {
 
     // MARK: - Serializable
     public required init(dictionary: [String : AnyObject]) {
-        fatalError("init(dictionary:) has not been implemented")
+        super.init(dictionary: dictionary)
+        
+        if let val: AnyObject = dictionary[SerializationKeys.PropertyValKey] {
+            if let v = val as? String {
+                let comps = v.componentsSeparatedByString(";")
+                if comps.count == 2 {
+                    let lat = (comps[0] as NSString).doubleValue
+                    let lon = (comps[1] as NSString).doubleValue
+                    
+                    if lat != 0.0 && lon != 0.0 {
+                        self.lat = lat
+                        self.lon = lon
+                    }
+                }
+            }
+        }
     }
     
     override public var serializationKeys: [String] {

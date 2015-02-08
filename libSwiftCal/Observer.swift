@@ -41,5 +41,5 @@ import Foundation
         :param: e An NSError object describing an error if one has occurred.
             Defaults to nil.
     */
-    optional func didRefresh(model: CalendarObject, error e: NSError?)
+    optional func didRefresh(model: AnyObject, error e: NSError?)
 }

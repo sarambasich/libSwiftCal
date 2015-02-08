@@ -1635,7 +1635,7 @@
 				LLVM_LTO = NO;
 				PRODUCT_NAME = PEGKit;
 				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -1661,7 +1661,7 @@
 				LLVM_LTO = NO;
 				PRODUCT_NAME = PEGKit;
 				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;

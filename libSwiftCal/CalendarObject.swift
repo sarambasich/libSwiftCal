@@ -96,6 +96,7 @@ func model__serializeiCalChildren(model: CalendarObject) -> String {
     
     let mirrors = object__getAllMirrorValues(mirror: reflect(model))
     for m in mirrors {
+        let p = m.0
         let child = m.1.value
         if let calObj = child as? CalendarObject {
             result += calObj.serializeToiCal()
@@ -336,7 +337,7 @@ public func != (lhs: CalendarObject, rhs: CalendarObject) -> Bool {
 */
 public class CalendarObject: NSObject, CalendarType {
     /// A unique identifier of this object
-    public var id: String! = ""
+    public internal(set) var id: String! = ""
     
     /// The time this object was constructed
     public var created = NSDate()
@@ -346,8 +347,28 @@ public class CalendarObject: NSObject, CalendarType {
     /// A list of other objects listening for changes to this object
     private var observers = [Observer]()
     
-    public override required init() {
+    public override required init() { }
+    
+    /**
+        Generates a UUID (an `id`) for this object if one does not yet exist.
+    
+        :param: format Optional - a string for the formatting of the UUID.
+    
+        :return: A `Bool` indicating success of generating the UUID. May fail
+                 if one exists or no suitable one could be generated.
+    */
+    public func generateUUID(format: String? = nil) -> Bool {
+        if self.id!.isEmpty {
+            if let f = format {
+                self.id = NSUUID(UUIDString: f)?.UUIDString
+            } else {
+                self.id = NSUUID().UUIDString
+            }
+            
+            return self.id != nil && !self.id!.isEmpty
+        }
         
+        return false
     }
     
     

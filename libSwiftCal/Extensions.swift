@@ -101,7 +101,7 @@ public extension NSDate {
         return cal.dateFromComponents(comps)!
     }
     
-    public func toString(dateFormat: String? = DateTimeFormats.last, dateStyle: NSDateFormatterStyle? = nil, timezone: NSTimeZone? = NSTimeZone.localTimeZone()) -> String {
+    public func toString(dateFormat: String = DateTimeFormats.last!, dateStyle: NSDateFormatterStyle? = nil, timezone: NSTimeZone = NSTimeZone.localTimeZone()) -> String {
         let df = NSDateFormatter()
         
         df.locale = NSLocale.currentLocale()
@@ -200,22 +200,12 @@ public extension String {
     }
     
     public func unfoldiCalendarString() -> String {
-        var result = self
+        var result = NSMutableString(string: self)
         
-        var i: Int = 0
-        while i < result.len - 1 {
-            let c = result[advance(result.startIndex, i)]
-            if c == "\r\n" {
-                let c1 = result[advance(result.startIndex, i + 1)]
-                
-                if c1 == " " || c1 == "\t" {
-                    result = result.replace("\(c)\(c1)", replacement: "")
-                    i = i - 2
-                }
-            }
-            
-            i++
-        }
+        var err: NSError?
+        let regex = NSRegularExpression(pattern: "\\r\\n\\s", options: nil, error: &err)
+        let rg = NSMakeRange(0, result.length)
+        regex?.replaceMatchesInString(result, options: nil, range: rg, withTemplate: "")
         
         return result
     }

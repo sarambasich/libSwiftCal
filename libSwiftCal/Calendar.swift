@@ -24,7 +24,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-import EventKit
+public let DefaultCalendarDictionary = Calendar(dictionary: [kUID: NSLocalizedString("Default", comment: "")])
 
 /**
     Defines a VCALENDAR calendar component.
@@ -39,15 +39,13 @@ import EventKit
     :URL: https://tools.ietf.org/html/rfc5545#section-3.4
 */
 public class Calendar: CalendarObject, ParserObserver {
-    /// Non-standard unique identifier for the calendar
-    var _calendarIdentifier: String!
-    
+    /// Non-standard unique identifier for the calendar (alias for `CalendarObject.id`)
     public var calendarIdentifier: String! {
         get {
-            return self._calendarIdentifier
+            return self.id
         } set {
             if newValue != nil {
-                self._calendarIdentifier = newValue!
+                self.id = newValue!
             }
         }
     }
@@ -55,7 +53,7 @@ public class Calendar: CalendarObject, ParserObserver {
     /// Only supports the "GREGORIAN" calendar
     public internal(set) var calscale = CalendarProperty(dictionary: [SerializationKeys.PropertyKeyKey: kCALSCALE, SerializationKeys.PropertyValKey: Constants.CalScaleGregorian])
     /// Defines the iCalendar object method associated with the calendar object
-    public internal(set) var method = CalendarProperty()
+    public internal(set) var method: CalendarProperty = CalendarProperty()
     /// Specifies the identifier for the product that created the iCalendar object.
     public internal(set) var prodID = CalendarProperty(dictionary: [SerializationKeys.PropertyKeyKey: kPRODID, SerializationKeys.PropertyValKey: Constants.libSwiftCalProdID])
     /// The calendar's required version
@@ -64,7 +62,7 @@ public class Calendar: CalendarObject, ParserObserver {
     /// List of VTODO components belonging to this calendar
     public var reminders = [Reminder]()
     
-    /// UID
+    /// UID (alias for `calendarIdentifier`
     public var uid: String {
         get {
             return self.calendarIdentifier
@@ -126,7 +124,7 @@ public class Calendar: CalendarObject, ParserObserver {
     
     public override var serializationKeys: [String] {
         get {
-            return super.serializationKeys + [kUID, kCALSCALE, kMETHOD, kPRODID, kVERSION, SerializationKeys.RemindersKey, "", "", "", "", ""]
+            return super.serializationKeys + [kCALSCALE, kMETHOD, kPRODID, kVERSION, SerializationKeys.RemindersKey, "", "", "", "", ""]
         }
     }
     

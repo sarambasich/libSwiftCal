@@ -10,6 +10,8 @@
 	<string>libSwiftCal</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>24762CDE443AB8684F6DFE1160627F4A2828E54C</key>
+		<string>github-ArtisOracle:ArtisOracle/mylist-app.git</string>
 		<key>5560F4D5EC1644A826CDEDCDB80F8A6A73F8F753</key>
 		<string>https://github.com/ArtisOracle/libSwiftCal.git</string>
 		<key>59BCCFF68011542A051983972F0A0E4EA5C0D708</key>
@@ -23,6 +25,8 @@
 	<string>libSwiftCal.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>24762CDE443AB8684F6DFE1160627F4A2828E54C</key>
+		<string>../..</string>
 		<key>5560F4D5EC1644A826CDEDCDB80F8A6A73F8F753</key>
 		<string>..</string>
 		<key>59BCCFF68011542A051983972F0A0E4EA5C0D708</key>
@@ -31,6 +35,11 @@
 		<string>../..</string>
 		<key>948C6829607794C9C905880E4DE9DD942A04092A</key>
 		<string>..libs/pegkit/lib/TDTemplateEngine</string>
+	</dict>
+	<key>IDESourceControlProjectRequiredConfigurationsDictionary</key>
+	<dict>
+		<key>59BCCFF68011542A051983972F0A0E4EA5C0D708</key>
+		<true/>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/ArtisOracle/libSwiftCal.git</string>
@@ -45,6 +54,14 @@
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>62A49EEB93B7AE725FFEF50A5C3A5D336428C2B9</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>24762CDE443AB8684F6DFE1160627F4A2828E54C</string>
 			<key>IDESourceControlWCCName</key>
 			<string></string>
 		</dict>

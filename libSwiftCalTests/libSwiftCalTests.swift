@@ -147,11 +147,14 @@ class libSwiftCalTests: XCTestCase {
     
     func test4SerializeToICal() {
         self.measureBlock { () -> Void in
-            let result = calendar!.serializeToiCal()
-            let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "ics", inDirectory: nil)
-            let ical: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
-            
-            XCTAssert(result.len == ical.len, "Unexpected iCal serialized result")
+            if let result = calendar?.serializeToiCal() {
+                let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "ics", inDirectory: nil)
+                let ical: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+                
+                XCTAssert(result.len == ical.len, "Unexpected iCal serialized result")
+            } else {
+                XCTFail("ERROR: Calendar is nil")
+            }
         }
     }
     
@@ -198,10 +201,11 @@ class libSwiftCalTests: XCTestCase {
             XCTAssert(calendar!.reminders.count == 1, "Unexpected reminders count")
             let firstRem = calendar?.reminders.first?
             XCTAssert(firstRem!.summary.stringValue! == "\\, \\ backslash", "Unexpected summary")
+            XCTAssert(firstRem!.priority.uintValue == kPriorityLow, "Unexpected priority")
             
             // Serialize it back
             let ser = calendar!.serializeToiCal()
-            XCTAssert(ser == str, "Unexpected iCalendar serialization")
+            XCTAssert(ser.len == str.len, "Unexpected iCalendar serialization")
         }
     }
     
@@ -226,6 +230,36 @@ class libSwiftCalTests: XCTestCase {
                 XCTAssert(firRem.summary.stringValue! == correctSumm, "Unexpected summary")
             }
         }
+    }
+    
+    func testLargeInput() {
+//        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("LargeInput", ofType: "ics", inDirectory: nil)
+//        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+//        var err: NSError?
+//        
+//        let exp = expectationWithDescription("parse exp")
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+//            calendar = Calendar(stringToParse: str, error: &err)
+//            let x = 10
+//            let y = 20
+//            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
+//                exp.fulfill()
+//            })
+//        })
+//        
+//        waitForExpectationsWithTimeout(60*15, handler: { (e) -> Void in
+//            println(e)
+//        })
+    }
+    
+    func testRecurring() {
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RecurInput", ofType: "ics", inDirectory: nil)
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        var err: NSError?
+        
+        calendar = Calendar(stringToParse: str, error: &err)
+        XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
     }
     
     func testPerformanceExample() {

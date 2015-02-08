@@ -310,7 +310,7 @@ ianaprop = ianatoken (';' icalparameter)* ':' value crlf;
 
 name          = ianatoken | xname;
 
-ianatoken    = (alpha | digit | '-')+;
+ianatoken    = Word+;//(alpha | digit | '-')+;
 
 param         = paramname '=' paramvalue (',' paramvalue)*;
 
@@ -715,14 +715,18 @@ xparam     = xname '=' paramvalue (',' paramvalue)*;
 
 xname        = { [LS(1) hasPrefix:@"X-"] }? Word;
 
-xprop = xname (';' icalparameter)* ':' value crlf;
+xprop        = (
+                    (xwrcalname) |
+                    (xwrcalsec) |
+                    (xname (';' icalparameter)* ':' value crlf)
+                );
 
 xwrcalname   = 'X-WR-CALNAME' xwrcalnamep* ':' text crlf;
 
-xwrcalnamep  = (';' otherparam);
+xwrcalnamep  = (';' icalparameter);
 
 xwrcalsec    = 'X-WR-CALDESC' xwrcalsecp* ':' text crlf;
 
-xwrcalsecp   = (';' otherparam);
+xwrcalsecp   = (';' icalparameter);
 
 crlf         =  ('\x0d'? '\x0a') | '\0d';
