@@ -143,6 +143,17 @@ public class Reminder: CalendarObject {
     
     // ***
     
+    public override func generateUUID(format: String? = nil) -> Bool {
+        var result = super.generateUUID(format: format)
+        
+        if result {
+            self.uid.key = kUID
+            self.uid.stringValue = self.id
+        }
+        
+        return result
+    }
+    
     /// Returns the reminder status as a value of `Reminder.Status`
     public var reminderStatus: Status? {
         get {

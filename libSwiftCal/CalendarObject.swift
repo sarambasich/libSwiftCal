@@ -337,7 +337,7 @@ public func != (lhs: CalendarObject, rhs: CalendarObject) -> Bool {
 */
 public class CalendarObject: NSObject, CalendarType {
     /// A unique identifier of this object
-    public internal(set) var id: String! = ""
+    public internal(set) var id = ""
     
     /// The time this object was constructed
     public var created = NSDate()
@@ -354,21 +354,16 @@ public class CalendarObject: NSObject, CalendarType {
     
         :param: format Optional - a string for the formatting of the UUID.
     
-        :return: A `Bool` indicating success of generating the UUID. May fail
-                 if one exists or no suitable one could be generated.
+        :note: May fail to generate a UUUID if one exists or no suitable one could be generated.
     */
-    public func generateUUID(format: String? = nil) -> Bool {
-        if self.id!.isEmpty {
+    public func generateUUID(format: String? = nil) {
+        if self.id.isEmpty {
             if let f = format {
-                self.id = NSUUID(UUIDString: f)?.UUIDString
+                self.id = NSUUID(UUIDString: f)!.UUIDString
             } else {
                 self.id = NSUUID().UUIDString
             }
-            
-            return self.id != nil && !self.id!.isEmpty
         }
-        
-        return false
     }
     
     

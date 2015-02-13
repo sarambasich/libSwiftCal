@@ -24,7 +24,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-public let DefaultCalendarDictionary = Calendar(dictionary: [kUID: NSLocalizedString("Default", comment: "")])
+public let DefaultCalendar = Calendar(dictionary: [kUID: NSLocalizedString("Default", comment: "")])
 
 /**
     Defines a VCALENDAR calendar component.
@@ -40,13 +40,11 @@ public let DefaultCalendarDictionary = Calendar(dictionary: [kUID: NSLocalizedSt
 */
 public class Calendar: CalendarObject, ParserObserver {
     /// Non-standard unique identifier for the calendar (alias for `CalendarObject.id`)
-    public var calendarIdentifier: String! {
+    public var calendarIdentifier: String {
         get {
             return self.id
         } set {
-            if newValue != nil {
-                self.id = newValue!
-            }
+            self.id = newValue
         }
     }
     
