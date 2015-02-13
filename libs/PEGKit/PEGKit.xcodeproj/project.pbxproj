@@ -567,14 +567,14 @@
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
 		};
-		089C1665FE841158C02AAC07 /* Resources */ = {
+		089C1665FE841158C02AAC07 /* Resources_ */ = {
 			isa = PBXGroup;
 			children = (
 				D3503E1C18D0B89C002F3F5B /* PEGKit_Prefix.pch */,
 				D3F8A4921758187300056188 /* PEGKit-Info.plist */,
 				D3BD3A74172DC75600FC6549 /* InfoPlist.strings */,
 			);
-			name = Resources;
+			name = Resources_;
 			sourceTree = "<group>";
 		};
 		08FB77AEFE84172EC02AAC07 /* PEGKit */ = {
@@ -592,7 +592,7 @@
 				D324B77E16F8C8F9005FE823 /* tokenize */,
 				D324B77D16F8C892005FE823 /* ast */,
 				D3A1492B16F8C7D600770DEE /* Foundation categories */,
-				089C1665FE841158C02AAC07 /* Resources */,
+				089C1665FE841158C02AAC07 /* Resources_ */,
 			);
 			name = PEGKit;
 			sourceTree = "<group>";
