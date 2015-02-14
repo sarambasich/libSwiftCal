@@ -420,7 +420,7 @@ public class CalendarObject: NSObject, CalendarType {
     
     public func notifyObservers(e: NSError?) {
         for o in self.observers {
-            o.didRefresh?(self, error: e)
+            o.notify?(self, error: e)
         }
     }
     
@@ -428,7 +428,7 @@ public class CalendarObject: NSObject, CalendarType {
     // MARK: - Serializable
     public var serializationKeys: [String] {
         get {
-            return ["", "", "", ""]
+            return ["id", "created", "updated", ""]
         }
     }
     

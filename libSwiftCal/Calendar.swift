@@ -64,6 +64,8 @@ public class Calendar: CalendarObject, ParserObserver {
     public var uid: String {
         get {
             return self.calendarIdentifier
+        } set {
+            self.calendarIdentifier = newValue
         }
     }
     /**
@@ -118,6 +120,10 @@ public class Calendar: CalendarObject, ParserObserver {
     // MARK: - Serializable
     public required init(dictionary: [String : AnyObject]) {
         super.init(dictionary: dictionary)
+        
+        if let uid = dictionary[kUID] as? String {
+            self.uid = uid
+        }
     }
     
     public override var serializationKeys: [String] {
