@@ -35,11 +35,11 @@ import Foundation
 */
 @objc public protocol Observer: NSObjectProtocol {
     /**
-        A callback function invoked when the observed model has been refreshed.
+        A callback function invoked when the observed model has been changed.
         
-        :param: model The model that has been refreshed.
-        :param: e An NSError object describing an error if one has occurred.
-            Defaults to nil.
+        :param: model The model that has been changed.
+        :param: e An `NSError` object describing an error if one has occurred or 
+                    nil if nothing went wrong.
     */
-    optional func didRefresh(model: AnyObject, error e: NSError?)
+    optional func notify(model: AnyObject, error e: NSError?)
 }
