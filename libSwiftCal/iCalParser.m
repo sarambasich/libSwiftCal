@@ -1,24 +1,3 @@
-//
-//  Copyright (c) 2014 Stefan Arambasich. All rights reserved.
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE.
-
 #import "iCalParser.h"
 #import <PEGKit/PEGKit.h>
 
@@ -3376,25 +3355,16 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchDurvalue:)];
 
-    if ([self predicts:ICALPARSER_TOKEN_KIND_PLUS, 0]) {
-        while ([self predicts:ICALPARSER_TOKEN_KIND_PLUS, 0]) {
+    if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, ICALPARSER_TOKEN_KIND_PLUS, 0]) {
+        if ([self predicts:ICALPARSER_TOKEN_KIND_PLUS, 0]) {
             [self match:ICALPARSER_TOKEN_KIND_PLUS discard:NO]; 
+        } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, 0]) {
+            [self match:ICALPARSER_TOKEN_KIND_MINUS discard:NO]; 
+        } else {
+            [self raise:@"No viable alternative found in rule 'durvalue'."];
         }
-    } else if ([self predicts:ICALPARSER_TOKEN_KIND_MINUS, 0]) {
-        [self match:ICALPARSER_TOKEN_KIND_MINUS discard:NO]; 
-    } else {
-        [self raise:@"No viable alternative found in rule 'durvalue'."];
     }
-    [self match:ICALPARSER_TOKEN_KIND_P discard:NO]; 
-    if ([self speculate:^{ [self durdate_]; }]) {
-        [self durdate_]; 
-    } else if ([self speculate:^{ [self durtime_]; }]) {
-        [self durtime_]; 
-    } else if ([self speculate:^{ [self durweek_]; }]) {
-        [self durweek_]; 
-    } else {
-        [self raise:@"No viable alternative found in rule 'durvalue'."];
-    }
+    [self matchWord:NO]; 
 
     [self fireDelegateSelector:@selector(parser:didMatchDurvalue:)];
 }
@@ -4861,12 +4831,12 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchRdtval:)];
 
-    if ([self speculate:^{ [self datetime_]; }]) {
+    if ([self speculate:^{ [self period_]; }]) {
+        [self period_]; 
+    } else if ([self speculate:^{ [self datetime_]; }]) {
         [self datetime_]; 
     } else if ([self speculate:^{ [self date_]; }]) {
         [self date_]; 
-    } else if ([self speculate:^{ [self period_]; }]) {
-        [self period_]; 
     } else {
         [self raise:@"No viable alternative found in rule 'rdtval'."];
     }

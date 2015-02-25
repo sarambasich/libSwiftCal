@@ -253,7 +253,7 @@ dueparam   = (
 
 dueval     = datetime | date;
 
-durvalue  = (('+')* | '-') 'P' (durdate | durtime | durweek);
+durvalue  = ('+' | '-')? Word;//(('+')* | '-') 'P' (durdate | durtime | durweek);
 
 durdate   = durday (durtime)*;
 durtime   = 'T' (durhour | durminute | dursecond);
@@ -463,7 +463,7 @@ rdtparam   = (
                 (';' otherparam)
             )*;
 
-rdtval     = datetime | date | period;
+rdtval     = period | datetime | date;
 
 related    = 'RELATED-TO' relparam ':' text crlf;
 

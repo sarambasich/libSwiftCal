@@ -26,9 +26,42 @@
 
 import Foundation
 
+/**
+    DATE-TIME values for recurring events, to-dos, journal entries, or time zone
+    definitions.
+*/
 public class RecurrenceDate: Property {
-    var date: NSDate!
-    var dateTime: NSDate!
-    var timePeriod: NSTimeInterval!
-    var timeZone: NSTimeZone!
+    /// The recurrence date
+    public private(set) var date: NSDate!
+    /// The recurrence date time
+    public private(set) var dateTime: NSDate!
+    /// The recurrence time period
+    public private(set) var timePeriod: TimePeriod!
+    
+    public required init() {
+        super.init()
+    }
+    
+    
+    // MARK: - NSCoding
+    public required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    // MARK: - Serializable
+    public required init(dictionary: [String : AnyObject]) {
+        super.init(dictionary: dictionary)
+        
+        if let perDict = dictionary[kPERIOD] as? [String : AnyObject] {
+            let timePer = TimePeriod(dictionary: perDict)
+            self.timePeriod = timePer
+        }
+    }
+    
+    public override var serializationKeys: [String] {
+        get {
+            return super.serializationKeys + [kDATE, kDATE_TIME, kPERIOD]
+        }
+    }
 }

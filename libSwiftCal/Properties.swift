@@ -34,7 +34,7 @@ import EventKit
 
     :return: A string description of the status or nil if invalid.
 */
-public func priority__toString(status: UInt?) -> String? {
+public func priority__toString(status: Int?) -> String? {
     var result: String?
     
     if let s = status {
@@ -151,6 +151,12 @@ public class Property: CalendarObject, TypedValue {
     
     public override func toDictionary() -> [String : AnyObject] {
         if let k = self.key {
+            if let str = self.stringValue {
+                if str.isEmpty {
+                    return [:]
+                }
+            }
+            
             if let p: AnyObject = self.propertyValue {
                 if let j: AnyObject = JSONify(self.propertyValue) {
                     var dict = [String : AnyObject]()
@@ -392,7 +398,7 @@ public class AlarmProperty: Property {
     :URL: https://tools.ietf.org/html/rfc5545#section-3.8.6.3
 */
 public class Trigger: AlarmProperty {
-    public var offsetTrigger: NSTimeInterval? {
+    public var offsetTrigger: Duration? {
         get {
             return self.propertyValue as? Duration
         }

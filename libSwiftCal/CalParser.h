@@ -88,6 +88,14 @@ id toTypeFromString(NSString * str);
 
 - (void) parser:(NSString *) key didMatchTodoprop:(PropertyMatch *) value;
 
+- (void) parser:(NSString *) key didMatchRrule:(PropertyMatch *) value;
+
+- (void) parser:(NSString *) key willMatchRdate:(NSString *) value;
+
+- (void) parser:(NSString *) key didMatchDurvalue:(PropertyMatch *) value;
+
+- (void) parser:(NSString *) key didMatchRdate:(PropertyMatch *) value;
+
 - (void) parser:(NSString *) key willMatchAlarmc:(NSString *) value;
 
 - (void) parser:(NSString *) key didMatchAlarmprop:(PropertyMatch *) value;

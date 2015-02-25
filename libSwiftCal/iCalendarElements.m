@@ -35,9 +35,24 @@ const char controlChars[] = {'\x00', '\x01', '\x02', '\x03', '\x04', '\x05',
 
 const char escapedChars[] = {'\\', ';', ',', 'N', 'n'};
 
-const NSUInteger kPriorityLow = 9;
-const NSUInteger kPriorityNormal = 5;
-const NSUInteger kPriorityHigh = 1;
+NSString * const kFREQ = @"FREQ";
+NSString * const kUNTIL = @"UNTIL";
+NSString * const kCOUNT = @"COUNT";
+NSString * const kINTERVAL = @"INTERVAL";
+NSString * const kBYSECOND = @"BYSECOND";
+NSString * const kBYMINUTE = @"BYMINUTE";
+NSString * const kBYHOUR = @"BYHOUR";
+NSString * const kBYDAY = @"BYDAY";
+NSString * const kBYMONTHDAY = @"BYMONTHDAY";
+NSString * const kBYYEARDAY  = @"BYYEARDAY" ;
+NSString * const kBYWEEKNO = @"BYWEEKNO";
+NSString * const kBYMONTH = @"BYMONTH";
+NSString * const kBYSETPOS = @"BYSETPOS";
+NSString * const kWKST = @"WKST";
+
+const NSInteger kPriorityLow = 9;
+const NSInteger kPriorityNormal = 5;
+const NSInteger kPriorityHigh = 1;
 
 NSString * const kX_WR_CALNAME = @"X-WR-CALNAME";
 NSString * const kX_WR_CALDESC = @"X-WR-CALDESC";

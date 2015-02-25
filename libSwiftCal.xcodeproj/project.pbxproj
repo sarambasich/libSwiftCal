@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F80B21BE1A995ED100BF217C /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B21BD1A995ED100BF217C /* Duration.swift */; };
+		F80B21C21A996D0300BF217C /* RperiodExplicit.ics in Resources */ = {isa = PBXBuildFile; fileRef = F80B21C11A996D0300BF217C /* RperiodExplicit.ics */; };
+		F80B21C41A996D1100BF217C /* RperiodDuration.ics in Resources */ = {isa = PBXBuildFile; fileRef = F80B21C31A996D1100BF217C /* RperiodDuration.ics */; };
 		F81A89141A36AA10000F5A34 /* SimpleInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F81A89131A36AA10000F5A34 /* SimpleInput.ics */; };
 		F821037B1A6AF3D10097BBFA /* LargeInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F821037A1A6AF3D10097BBFA /* LargeInput.ics */; };
 		F82161E61A54A91800886131 /* BlankInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82161E51A54A91800886131 /* BlankInput.ics */; };
@@ -37,13 +40,16 @@
 		F83195E81A2EAE1A00377846 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CD1A2EAE1A00377846 /* Reminder.swift */; };
 		F83195E91A2EAE1A00377846 /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CE1A2EAE1A00377846 /* RequestStatus.swift */; };
 		F83195EA1A2EAE1A00377846 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CF1A2EAE1A00377846 /* Serializable.swift */; };
+		F834F4E01A998844001560C0 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F867CF2A1A9986730020919E /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F834F4E11A998847001560C0 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F867CF2A1A9986730020919E /* PEGKit.framework */; };
 		F83ACB631A2AD66600423215 /* EasyInput.json in Resources */ = {isa = PBXBuildFile; fileRef = F83ACB621A2AD66600423215 /* EasyInput.json */; };
 		F8497B041A55A87C00AD592B /* AnotherInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8497B031A55A87C00AD592B /* AnotherInput.ics */; };
 		F858377B1A509A47003F7CCF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858377A1A509A47003F7CCF /* Constants.swift */; };
-		F86D9ADD1A45264C00428C68 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F88C9C651A3E294B00541E31 /* PEGKit.framework */; };
-		F86D9ADE1A45264E00428C68 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F88C9C651A3E294B00541E31 /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F8857CD51A70A0DB000EC9A2 /* RecurInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8857CD41A70A0DB000EC9A2 /* RecurInput.ics */; };
+		F8761D541A99212100F8D9A7 /* RdateInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8761D531A99212100F8D9A7 /* RdateInput.ics */; };
+		F8761D561A9924CA00F8D9A7 /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8761D551A9924CA00F8D9A7 /* TimePeriod.swift */; };
+		F8857CD51A70A0DB000EC9A2 /* RruleInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8857CD41A70A0DB000EC9A2 /* RruleInput.ics */; };
 		F89877881A3BE8A5002F9322 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89877871A3BE8A5002F9322 /* JSON.swift */; };
+		F8B8729D1A98EC5100BF033E /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
 		F8F8EED51A1C4CF30046AF23 /* libSwiftCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */; };
 		F8FC991E1A59A130005B4036 /* LongInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8FC991D1A59A130005B4036 /* LongInput.ics */; };
@@ -66,13 +72,16 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F86D9ADE1A45264E00428C68 /* PEGKit.framework in CopyFiles */,
+				F834F4E01A998844001560C0 /* PEGKit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F80B21BD1A995ED100BF217C /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
+		F80B21C11A996D0300BF217C /* RperiodExplicit.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RperiodExplicit.ics; sourceTree = "<group>"; };
+		F80B21C31A996D1100BF217C /* RperiodDuration.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RperiodDuration.ics; sourceTree = "<group>"; };
 		F81A89131A36AA10000F5A34 /* SimpleInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleInput.ics; sourceTree = "<group>"; };
 		F821037A1A6AF3D10097BBFA /* LargeInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LargeInput.ics; sourceTree = "<group>"; };
 		F82161E51A54A91800886131 /* BlankInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlankInput.ics; sourceTree = "<group>"; };
@@ -110,9 +119,12 @@
 		F83ACB621A2AD66600423215 /* EasyInput.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = EasyInput.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		F8497B031A55A87C00AD592B /* AnotherInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AnotherInput.ics; sourceTree = "<group>"; };
 		F858377A1A509A47003F7CCF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		F8857CD41A70A0DB000EC9A2 /* RecurInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RecurInput.ics; sourceTree = "<group>"; };
-		F88C9C651A3E294B00541E31 /* PEGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PEGKit.framework; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/MyList-glazucatajuedydloqocpkmuotup/Build/Products/Debug-iphoneos/PEGKit.framework"; sourceTree = "<group>"; };
+		F867CF2A1A9986730020919E /* PEGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PEGKit.framework; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/libSwiftCal-ddgudkqgicbyqydpzunjitshbjxb/Build/Products/Debug-iphoneos/PEGKit.framework"; sourceTree = "<group>"; };
+		F8761D531A99212100F8D9A7 /* RdateInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RdateInput.ics; sourceTree = "<group>"; };
+		F8761D551A9924CA00F8D9A7 /* TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriod.swift; sourceTree = "<group>"; };
+		F8857CD41A70A0DB000EC9A2 /* RruleInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RruleInput.ics; sourceTree = "<group>"; };
 		F89877871A3BE8A5002F9322 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8EAF71A1C3EEE0046AF23 /* libSwiftCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libSwiftCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8ECE51A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,7 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F86D9ADD1A45264C00428C68 /* PEGKit.framework in Frameworks */,
+				F834F4E11A998847001560C0 /* PEGKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,9 +180,12 @@
 				F83195CA1A2EAE1A00377846 /* Parameter.swift */,
 				F83195CB1A2EAE1A00377846 /* Properties.swift */,
 				F83195CC1A2EAE1A00377846 /* RecurrenceDate.swift */,
+				F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */,
 				F83195CD1A2EAE1A00377846 /* Reminder.swift */,
 				F83195CE1A2EAE1A00377846 /* RequestStatus.swift */,
 				F83195CF1A2EAE1A00377846 /* Serializable.swift */,
+				F8761D551A9924CA00F8D9A7 /* TimePeriod.swift */,
+				F80B21BD1A995ED100BF217C /* Duration.swift */,
 			);
 			path = libSwiftCal;
 			sourceTree = "<group>";
@@ -216,7 +231,7 @@
 		F8F8EB081A1C3F1F0046AF23 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				F88C9C651A3E294B00541E31 /* PEGKit.framework */,
+				F867CF2A1A9986730020919E /* PEGKit.framework */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -234,7 +249,10 @@
 				F8497B031A55A87C00AD592B /* AnotherInput.ics */,
 				F8FC991D1A59A130005B4036 /* LongInput.ics */,
 				F821037A1A6AF3D10097BBFA /* LargeInput.ics */,
-				F8857CD41A70A0DB000EC9A2 /* RecurInput.ics */,
+				F8857CD41A70A0DB000EC9A2 /* RruleInput.ics */,
+				F8761D531A99212100F8D9A7 /* RdateInput.ics */,
+				F80B21C11A996D0300BF217C /* RperiodExplicit.ics */,
+				F80B21C31A996D1100BF217C /* RperiodDuration.ics */,
 			);
 			path = libSwiftCalTests;
 			sourceTree = "<group>";
@@ -305,6 +323,7 @@
 				TargetAttributes = {
 					F8F8EAEB1A1C3EEE0046AF23 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 9MU89722E9;
 					};
 					F8F8EAF61A1C3EEE0046AF23 = {
 						CreatedOnToolsVersion = 6.1;
@@ -347,11 +366,14 @@
 				F83ACB631A2AD66600423215 /* EasyInput.json in Resources */,
 				F81A89141A36AA10000F5A34 /* SimpleInput.ics in Resources */,
 				F8FC991E1A59A130005B4036 /* LongInput.ics in Resources */,
-				F8857CD51A70A0DB000EC9A2 /* RecurInput.ics in Resources */,
+				F8857CD51A70A0DB000EC9A2 /* RruleInput.ics in Resources */,
 				F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */,
 				F82161E81A54C2C900886131 /* MoreInput.ics in Resources */,
 				F821037B1A6AF3D10097BBFA /* LargeInput.ics in Resources */,
+				F80B21C21A996D0300BF217C /* RperiodExplicit.ics in Resources */,
 				F82161E61A54A91800886131 /* BlankInput.ics in Resources */,
+				F8761D541A99212100F8D9A7 /* RdateInput.ics in Resources */,
+				F80B21C41A996D1100BF217C /* RperiodDuration.ics in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,13 +385,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F83195E31A2EAE1A00377846 /* Observable.swift in Sources */,
+				F8761D561A9924CA00F8D9A7 /* TimePeriod.swift in Sources */,
 				F83195E41A2EAE1A00377846 /* Observer.swift in Sources */,
 				F83195D41A2EAE1A00377846 /* CalendarObject.swift in Sources */,
+				F8B8729D1A98EC5100BF033E /* RecurrenceRule.swift in Sources */,
 				F83195D71A2EAE1A00377846 /* CalParser.m in Sources */,
 				F83195D21A2EAE1A00377846 /* Attachment.swift in Sources */,
 				F83195E71A2EAE1A00377846 /* RecurrenceDate.swift in Sources */,
 				F83195DD1A2EAE1A00377846 /* iCalParser.m in Sources */,
 				F83195E61A2EAE1A00377846 /* Properties.swift in Sources */,
+				F80B21BE1A995ED100BF217C /* Duration.swift in Sources */,
 				F89877881A3BE8A5002F9322 /* JSON.swift in Sources */,
 				F83195E51A2EAE1A00377846 /* Parameter.swift in Sources */,
 				F83195D31A2EAE1A00377846 /* Calendar.swift in Sources */,
@@ -514,7 +539,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(DERIVED_FILE_DIR)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/libSwiftCal-ddgudkqgicbyqydpzunjitshbjxb/Build/Products/Debug-iphoneos",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -525,6 +550,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
@@ -536,7 +562,8 @@
 		F8F8EB041A1C3EEE0046AF23 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -545,7 +572,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(DERIVED_FILE_DIR)/Build/Products/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/libSwiftCal-ddgudkqgicbyqydpzunjitshbjxb/Build/Products/Debug-iphoneos",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -556,6 +583,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
@@ -567,6 +595,7 @@
 		F8F8EB061A1C3EEE0046AF23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -584,6 +613,7 @@
 		F8F8EB071A1C3EEE0046AF23 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

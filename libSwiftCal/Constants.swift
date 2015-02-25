@@ -49,9 +49,9 @@ public struct Conversions {
     */
     public struct Time {
         public static let SecondsInAMinute: NSTimeInterval = 60.0
-        public static let SecondsInAnHour: NSTimeInterval = 3600.0
-        public static let SecondsInADay: NSTimeInterval = 86400.0
-        public static let SecondsInAWeek: NSTimeInterval = (SecondsInADay * 7)
-        public static let SecondsInAMonth: NSTimeInterval = (SecondsInADay * 30) // 1 month == 30 days
+        public static let SecondsInAnHour: NSTimeInterval = 60 * SecondsInAMinute
+        public static let SecondsInADay: NSTimeInterval = 24 * SecondsInAnHour
+        public static let SecondsInAWeek: NSTimeInterval = 7 * SecondsInADay
+        public static let SecondsInAMonth: NSTimeInterval = 30 * SecondsInADay // 1 month == 30 days
     }
 }

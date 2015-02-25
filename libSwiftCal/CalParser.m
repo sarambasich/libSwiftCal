@@ -198,6 +198,34 @@ id toTypeFromString(NSString * str) {
     }
 }
 
+- (void) parser:(PKParser *) parser didMatchRrule:(PKAssembly *) assembly {
+    PropertyMatch * m = [self matchProperty:parser assembly:assembly];
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchRrule:)]) {
+        [self.delegate parser:m.key didMatchRrule:m];
+    }
+}
+
+- (void) parser:(PKParser *)parser willMatchRdate:(PKAssembly *) assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:willMatchRdate:)]) {
+        [self.delegate parser:parser.debugDescription willMatchRdate:[assembly debugDescription]];
+    }
+}
+
+- (void) parser:(PKParser *)parser didMatchDurvalue:(PKAssembly *) assembly {
+    PropertyMatch * m = [self matchProperty:parser assembly:assembly];
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchDurvalue:)]) {
+        [self.delegate parser:m.key didMatchDurvalue:m];
+    }
+}
+
+
+- (void) parser:(PKParser *) parser didMatchRdate:(PKAssembly *) assembly {
+    PropertyMatch * m = [self matchProperty:parser assembly:assembly];
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchRdate:)]) {
+        [self.delegate parser:m.key didMatchRdate:m];
+    }
+}
+
 - (void) parser:(PKParser *) parser willMatchAlarmc:(PKAssembly *) assembly {
     if ([self.delegate respondsToSelector:@selector(parser:willMatchAlarmc:)]) {
         [self.delegate parser:parser.debugDescription willMatchAlarmc:[assembly debugDescription]];
@@ -309,7 +337,7 @@ id toTypeFromString(NSString * str) {
     BOOL controlChar = NO;
     BOOL crlf = NO;
     // Advance to get prop value
-    while (!(escapedChar || controlChar || crlf)) {
+    while (!(escapedChar || controlChar || crlf) && stackCursor < assembly.stack.count - 1) {
         stackCursor++;
         PKToken * tok = assembly.stack[stackCursor];
         

@@ -81,9 +81,15 @@ public class Weak<T: AnyObject> {
 
 
 // MARK: - NSDate extension
-let DateTimeFormats = ["yyyyLLdd'T'HHmmssZ", "yyyyLLdd'T'HHmmss", "yyyyLLdd", "yyyyLLdd'T'HHmmss'Z'"]
+public struct DateFormats {
+    public static let ISO8601Full = "yyyyLLdd'T'HHmmssZ"
+    public static let ISO8601UTC = "yyyyLLdd'T'HHmmss'Z'"
+    public static let ISO8601FullNoZ = "yyyyLLdd'T'HHmmss"
+    public static let ISO8601Date = "yyyyLLdd"
+}
+
 public extension NSDate {
-    public class func parseDate(string: String, format: String? = DateTimeFormats.first) -> NSDate? {
+    public class func parseDate(string: String, format: String = DateFormats.ISO8601Full) -> NSDate? {
         let formatter = NSDateFormatter()
         formatter.dateFormat = format
         
@@ -101,7 +107,7 @@ public extension NSDate {
         return cal.dateFromComponents(comps)!
     }
     
-    public func toString(dateFormat: String = DateTimeFormats.last!, dateStyle: NSDateFormatterStyle? = nil, timezone: NSTimeZone = NSTimeZone.localTimeZone()) -> String {
+    public func toString(dateFormat: String = DateFormats.ISO8601UTC, dateStyle: NSDateFormatterStyle? = nil, timezone: NSTimeZone = NSTimeZone.localTimeZone()) -> String {
         let df = NSDateFormatter()
         
         df.locale = NSLocale.currentLocale()
@@ -157,6 +163,10 @@ public extension String {
     
     public func replace(source: String, replacement: String) -> String {
         return self.stringByReplacingOccurrencesOfString(source, withString: replacement)
+    }
+    
+    public func contains(otherString: String, options: NSStringCompareOptions = nil) -> Bool {
+        return self.rangeOfString(otherString, options: options) != nil
     }
     
     /**

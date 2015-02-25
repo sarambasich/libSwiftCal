@@ -104,12 +104,12 @@ public class Reminder: CalendarObject {
     /// Defines a rule or repeating pattern for
     /// recurring events, to-dos, journal entries, or time zone
     /// definitions.
-    public var rrule: ReminderProperty! = ReminderProperty()
+    public var rrule: RecurrenceRule! = RecurrenceRule()
     
     /// Defines a datetime of when this reminder is due
     public var due: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDUE, SerializationKeys.PropertyValKey: NSDate().dateByAddingTimeInterval(Conversions.Time.SecondsInADay)])
     /// Defines a duration after the start time for which this reminder is valid
-    public var duration: ReminderProperty! = ReminderProperty()
+    public var duration: Duration!
     
     /// Items attached to this reminder
     public var attachments = [Attachment]()
@@ -208,13 +208,23 @@ public class Reminder: CalendarObject {
                 kDTSTART, kGEO, kLAST_MODIFIED, kLOCATION, kORGANIZER, kPERCENT_COMPLETE, kPRIORITY,
                 kRECURRENCE_ID, kSEQUENCE, kSTATUS, kSUMMARY, kURL, kRRULE, kDUE, kDURATION, kATTACH,
                 kATTENDEE, kCATEGORIES, kCOMMENT, kCONTACT, kEXDATE, kREQUEST_STATUS, kRELATED,
-                kRESOURCES, kRDATE, SerializationKeys.XPropertiesKey, SerializationKeys.IANAPropertiesKey,
-                SerializationKeys.AlarmsKey]
+                kRESOURCES, SerializationKeys.RecurrenceDatesKey, SerializationKeys.XPropertiesKey,
+                SerializationKeys.IANAPropertiesKey, SerializationKeys.AlarmsKey]
         }
     }
     
     public required init(dictionary: [String : AnyObject]) {
         super.init(dictionary: dictionary)
+        
+        if let rDateArr = dictionary[SerializationKeys.RecurrenceDatesKey] as? [[String : AnyObject]] {
+            var inRDates = [RecurrenceDate]()
+            for dict in rDateArr {
+                let r = RecurrenceDate(dictionary: dict)
+                inRDates.append(r)
+            }
+            
+            self.recurrenceDates = inRDates
+        }
     }
     
     public override func toDictionary() -> [String : AnyObject] {

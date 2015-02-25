@@ -26,12 +26,29 @@
 
 #import <Foundation/Foundation.h>
 
+
+
 FOUNDATION_EXPORT const char controlChars[];
 FOUNDATION_EXPORT const char escapedChars[];
 
-FOUNDATION_EXPORT const NSUInteger kPriorityLow;
-FOUNDATION_EXPORT const NSUInteger kPriorityNormal;
-FOUNDATION_EXPORT const NSUInteger kPriorityHigh;
+FOUNDATION_EXPORT NSString * const kFREQ;
+FOUNDATION_EXPORT NSString * const kUNTIL;
+FOUNDATION_EXPORT NSString * const kCOUNT;
+FOUNDATION_EXPORT NSString * const kINTERVAL;
+FOUNDATION_EXPORT NSString * const kBYSECOND;
+FOUNDATION_EXPORT NSString * const kBYMINUTE;
+FOUNDATION_EXPORT NSString * const kBYHOUR;
+FOUNDATION_EXPORT NSString * const kBYDAY;
+FOUNDATION_EXPORT NSString * const kBYMONTHDAY;
+FOUNDATION_EXPORT NSString * const kBYYEARDAY ;
+FOUNDATION_EXPORT NSString * const kBYWEEKNO;
+FOUNDATION_EXPORT NSString * const kBYMONTH;
+FOUNDATION_EXPORT NSString * const kBYSETPOS;
+FOUNDATION_EXPORT NSString * const kWKST;
+
+FOUNDATION_EXPORT const NSInteger kPriorityLow;
+FOUNDATION_EXPORT const NSInteger kPriorityNormal;
+FOUNDATION_EXPORT const NSInteger kPriorityHigh;
 
 FOUNDATION_EXPORT NSString * const kX_WR_CALNAME;
 FOUNDATION_EXPORT NSString * const kX_WR_CALDESC;

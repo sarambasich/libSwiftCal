@@ -394,8 +394,17 @@ NSString * const PEGKitRecognitionPredicateFailed = @"Predicate failed";
 - (void)fireDelegateSelector:(SEL)sel {
     if (self.isSpeculating) return;
     
-    if (_delegate && [_delegate respondsToSelector:sel]) {
-        [_delegate performSelector:sel withObject:self withObject:_assembly];
+    @try {
+        if (_delegate && [_delegate respondsToSelector:sel]) {
+            [_delegate performSelector:sel withObject:self withObject:_assembly];
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"What the fuck balls: %@", exception.callStackSymbols.debugDescription);
+    }
+    @finally {
+        BOOL fuckYou = YES;
+        fuckYou = NO;
     }
 }
 

@@ -201,7 +201,7 @@ class libSwiftCalTests: XCTestCase {
             XCTAssert(calendar!.reminders.count == 1, "Unexpected reminders count")
             let firstRem = calendar?.reminders.first?
             XCTAssert(firstRem!.summary.stringValue! == "\\, \\ backslash", "Unexpected summary")
-            XCTAssert(firstRem!.priority.uintValue == kPriorityLow, "Unexpected priority")
+            XCTAssert(firstRem!.priority.intValue == kPriorityLow, "Unexpected priority")
             
             // Serialize it back
             let ser = calendar!.serializeToiCal()
@@ -232,7 +232,7 @@ class libSwiftCalTests: XCTestCase {
         }
     }
     
-    func testLargeInput() {
+//    func testLargeInput() {
 //        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("LargeInput", ofType: "ics", inDirectory: nil)
 //        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
 //        var err: NSError?
@@ -251,14 +251,75 @@ class libSwiftCalTests: XCTestCase {
 //        waitForExpectationsWithTimeout(60*15, handler: { (e) -> Void in
 //            println(e)
 //        })
-    }
+//    }
     
-    func testRecurring() {
-        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RecurInput", ofType: "ics", inDirectory: nil)
+    func testRruleRecurring() {
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RruleInput", ofType: "ics", inDirectory: nil)
         let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
         var err: NSError?
         
         calendar = Calendar(stringToParse: str, error: &err)
+        if let rem = calendar?.reminders.first {
+            let rrule = rem.rrule
+            XCTAssert(rem.rrule != nil, "Unexpected rrule")
+            if rrule != nil {
+                XCTAssert(rrule.frequency == .Monthly, "Unexpected frequency")
+                XCTAssert(rrule.byDay.count == 5, "Unexpected byDay count")
+                XCTAssert(rrule.bySetPosition.count == 1, "Unexpected bySetPosition count")
+                let setPos = rrule.bySetPosition.first!
+                XCTAssert(setPos == -1, "Unexpected setPos")
+            }
+        }
+        
+        XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
+    }
+    
+    func testRdateRecurring() {
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RdateInput", ofType: "ics", inDirectory: nil)
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        var err: NSError?
+        
+        calendar = Calendar(stringToParse: str, error: &err)
+        if let rem = calendar?.reminders.first {
+            let rdates = rem.recurrenceDates
+            XCTAssert(rdates.count == 3, "Unexpected rdates count")
+            println(rem.recurrenceDates.debugDescription)
+        }
+        
+        XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
+    }
+    
+    func testRdateExplicit() {
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RperiodExplicit", ofType: "ics", inDirectory: nil)
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        var err: NSError?
+        
+        calendar = Calendar(stringToParse: str, error: &err)
+        if let rem = calendar?.reminders.first {
+            let rdates = rem.recurrenceDates
+        }
+        
+        XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
+    }
+    
+    func testRdateDuration() {
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RperiodDuration", ofType: "ics", inDirectory: nil)
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        var err: NSError?
+        
+        if let cal = Calendar(stringToParse: str, error: &err) {
+            calendar = cal
+            if let rem = calendar!.reminders.first {
+                let rdates = rem.recurrenceDates
+                XCTAssert(rdates.count == 1, "Unexpected rdates count")
+                let rdate = rdates.first! // 20150221T120000Z
+                XCTAssert(rdate.timePeriod.start == NSDate(timeIntervalSinceReferenceDate: 446212800.0), "Unexpected dateTime")
+//                RDATE:2015 02 21 T 12 00 00 Z/+PW12D6T12H37M
+                let destinationDate = NSDate.parseDate("20150523T003700Z")!
+                XCTAssert(rdate.timePeriod.duration == destinationDate.timeIntervalSinceDate(rdate.timePeriod.start), "Unexpected duration")
+            }
+        }
+        
         XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
     }
     

@@ -73,3 +73,6 @@ extension String {
 var myStr = "hello hello hello hello hello hello hello hello"
 //var myStr = "hello hello hello hello hello hello hello hello"
 let s2 = myStr.insertString("OMG", everyXCharacters: 4, indexZero: true)
+
+var myString = "W12D6T12H37M"
+var comps = myString.componentsSeparatedByString("T")

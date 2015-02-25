@@ -40,12 +40,11 @@ public struct SerializationKeys {
     public static let ParamValueKey = "param_value"
     public static let AlarmsKey = "alarms"
     public static let AttendeesKey = "attendees"
+    public static let RecurrenceDatesKey = "recurrence_dates"
+    public static let ExceptionDatesKey = "exception_dates"
 }
 
-/// MARK: - Type aliases
-/// A positive duration of time, measured in seconds.
-public typealias Duration = NSTimeInterval
-
+// MARK: - Type aliases
 public typealias IANAPropertyValue = String
 public typealias GenericPropertyValue = String
 
@@ -102,7 +101,9 @@ func model__serializeiCalChildren(model: CalendarObject) -> String {
             result += calObj.serializeToiCal()
         } else if let calObjects = child as? NSArray {
             for c in calObjects {
-                result += c.serializeToiCal()
+                if c.respondsToSelector("serializeToiCal") {
+                    result += c.serializeToiCal()
+                }
             }
         }
     }
@@ -119,7 +120,7 @@ public func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObje
         // This allows us to have nested dictionary representations
         // of Serializable constructs and have them init properly TODO: not generic :(
         if let dict = value as? [String : AnyObject] {
-            let v = mr.1.value
+            let __v = mr.1.value
             if let t1 = mr.1.value as? NSObject {
                 if let t2 = t1 as? CalendarObject {
                     let finalObj = t2.dynamicType(dictionary: dict)
@@ -133,9 +134,6 @@ public func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObje
             var rems = [Reminder]()
             var alarms = [Alarm]()
             var xProps = [GenericProperty]()
-            
-            let v = varNames
-            let s = m.serializationKeys
             
             for dict in arr {
                 if let t1 = mr.1.value as? [Parameter] {
@@ -277,25 +275,34 @@ public func serializable__addToDict<T: Serializable>(inout dict: [String : AnyOb
             serializable__addToDict(&dict, mirror: c, onObject: o)
         } else {
             let j = find(object__getVarNames(mirror: reflect(o)), p)
-            let k = o.serializationKeys[j!]
-            if !k.isEmpty {
-                if let val = c.value as? NSObject {
-                    if let cal = val as? CalendarObject {
-                        let d = cal.toDictionary()
-                        if d.count > 0 {
-                            dict[k] = d
+            let ks = o.serializationKeys
+            if j < o.serializationKeys.count {
+                let k = o.serializationKeys[j!]
+                if !k.isEmpty {
+                    if let val = c.value as? String {
+                        if val.isEmpty {
+                            continue
                         }
-                    } else if let vals = val as? [CalendarObject] {
-                        var arr = [[String : AnyObject]]()
-                        for v in vals {
-                            arr.append(v.toDictionary())
+                    }
+                    
+                    if let val = c.value as? NSObject {
+                        if let cal = val as? CalendarObject {
+                            let d = cal.toDictionary()
+                            if d.count > 0 {
+                                dict[k] = d
+                            }
+                        } else if let vals = val as? [CalendarObject] {
+                            var arr = [[String : AnyObject]]()
+                            for v in vals {
+                                arr.append(v.toDictionary())
+                            }
+                            
+                            if arr.count > 0 {
+                                dict[k] = arr
+                            }
+                        } else if let safeVal: AnyObject = JSONify(val) {
+                            dict[k] = safeVal
                         }
-                        
-                        if arr.count > 0 {
-                            dict[k] = arr
-                        }
-                    } else if let safeVal: AnyObject = JSONify(val) {
-                        dict[k] = safeVal
                     }
                 }
             }
