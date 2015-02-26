@@ -49,6 +49,7 @@
 		F8761D561A9924CA00F8D9A7 /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8761D551A9924CA00F8D9A7 /* TimePeriod.swift */; };
 		F8857CD51A70A0DB000EC9A2 /* RruleInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8857CD41A70A0DB000EC9A2 /* RruleInput.ics */; };
 		F89877881A3BE8A5002F9322 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89877871A3BE8A5002F9322 /* JSON.swift */; };
+		F8B4D17C1A9ECF3C00B3F5B8 /* ExceptionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4D17B1A9ECF3C00B3F5B8 /* ExceptionDate.swift */; };
 		F8B8729D1A98EC5100BF033E /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
 		F8F8EED51A1C4CF30046AF23 /* libSwiftCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */; };
@@ -124,6 +125,7 @@
 		F8761D551A9924CA00F8D9A7 /* TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriod.swift; sourceTree = "<group>"; };
 		F8857CD41A70A0DB000EC9A2 /* RruleInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RruleInput.ics; sourceTree = "<group>"; };
 		F89877871A3BE8A5002F9322 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		F8B4D17B1A9ECF3C00B3F5B8 /* ExceptionDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionDate.swift; sourceTree = "<group>"; };
 		F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8EAF71A1C3EEE0046AF23 /* libSwiftCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libSwiftCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +188,7 @@
 				F83195CF1A2EAE1A00377846 /* Serializable.swift */,
 				F8761D551A9924CA00F8D9A7 /* TimePeriod.swift */,
 				F80B21BD1A995ED100BF217C /* Duration.swift */,
+				F8B4D17B1A9ECF3C00B3F5B8 /* ExceptionDate.swift */,
 			);
 			path = libSwiftCal;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				F83195DD1A2EAE1A00377846 /* iCalParser.m in Sources */,
 				F83195E61A2EAE1A00377846 /* Properties.swift in Sources */,
 				F80B21BE1A995ED100BF217C /* Duration.swift in Sources */,
+				F8B4D17C1A9ECF3C00B3F5B8 /* ExceptionDate.swift in Sources */,
 				F89877881A3BE8A5002F9322 /* JSON.swift in Sources */,
 				F83195E51A2EAE1A00377846 /* Parameter.swift in Sources */,
 				F83195D31A2EAE1A00377846 /* Calendar.swift in Sources */,

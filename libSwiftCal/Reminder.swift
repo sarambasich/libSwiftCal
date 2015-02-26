@@ -123,7 +123,7 @@ public class Reminder: CalendarObject {
     public var contacts = [ReminderProperty]()
     
     /// Exceptions to recurring datetimes
-    public var exceptions = [ReminderProperty]()
+    public var exceptions = [ExceptionDate]()
     /// Whether the request was successful or otherwise impacted
     public var requestStatus = [RequestStatus]()
     /// Associated calendar objects
@@ -224,6 +224,16 @@ public class Reminder: CalendarObject {
             }
             
             self.recurrenceDates = inRDates
+        }
+        
+        if let exDateArr = dictionary[SerializationKeys.ExceptionDatesKey] as? [[String : AnyObject]] {
+            var inExDates = [ExceptionDate]()
+            for dict in exDateArr {
+                let r = ExceptionDate(dictionary: dict)
+                inExDates.append(r)
+            }
+            
+            self.exceptions = inExDates
         }
     }
     

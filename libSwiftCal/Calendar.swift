@@ -144,6 +144,7 @@ public class Calendar: CalendarObject, ParserObserver {
     private var currentAlarmXProps: [[String : AnyObject]]!
     private var currentAlarms: [[String : AnyObject]]!
     private var currentRdates: [[String : AnyObject]]!
+    private var currentExdates: [[String : AnyObject]]!
 }
 
 extension Calendar {
@@ -158,6 +159,8 @@ extension Calendar {
         currentAlarms = nil
         currentRdates.removeAll()
         currentRdates = nil
+        currentExdates.removeAll()
+        currentExdates = nil
     }
     
     // MARK: - ParserObserver
@@ -170,11 +173,11 @@ extension Calendar {
     }
     
     public func parser(key: String!, didMatchTodoprop value: PropertyMatch!) {
-        if key == kRRULE || key == kRDATE {
+        if key == kRRULE || key == kRDATE || key == kEXDATE {
             return
         }
         
-        let val: [NSObject : AnyObject] = value.toDictionary()
+        let val = value.toDictionary()
         currentTodoDict[key] = val
     }
     
@@ -211,33 +214,34 @@ extension Calendar {
     }
     
     public func parser(key: String!, didMatchRdate value: PropertyMatch!) {
-        var dict = value.toDictionary() as [String : AnyObject]
+        let finalRdateDict = value.toDictionary() as [String : AnyObject]
         let strVal = value.value as String
         // RDATE;VALUE=PERIOD:19960403T020000Z/19960403T040000Z,19960404T010000Z/PT3H
         // RDATE:19970714T123000Z
         // RDATE;VALUE=DATE:19970101,19970120,19970217
         
-        let vals = strVal.componentsSeparatedByString(kCOMMA)
+        let rDateComponents = strVal.componentsSeparatedByString(kCOMMA)
         var rdates = [[String : AnyObject]]()
-        for v in vals {
-            if !v.contains("/") {
-                var rDateDict = dict
-                if let dt = NSDate.parseDate(v) {
-                    rDateDict[kDATE_TIME] = dt
-                } else if let d = NSDate.parseDate(v, format: DateFormats.ISO8601Date) {
-                    rDateDict[kDATE] = d
+        for rDateComp in rDateComponents {
+            if !rDateComp.contains("/") {
+                var currentRDateDict = finalRdateDict
+                if let dt = NSDate.parseDate(rDateComp) {
+                    currentRDateDict[kDATE_TIME] = dt
+                } else if let d = NSDate.parseDate(rDateComp, format: DateFormats.ISO8601Date) {
+                    currentRDateDict[kDATE] = d
                 }
                 
-                rdates.append(rDateDict)
+                rdates.append(currentRDateDict)
             } else {
-                var timePerDict = dict
-                let split = v.componentsSeparatedByString("/")
+                var timePerRdateDict = finalRdateDict
+                var timePeriodDict = [String : AnyObject]()
+                let split = rDateComp.componentsSeparatedByString("/")
                 if let sd = NSDate.parseDate(split.first!) {
-                    timePerDict[TimePeriod.SerializationKeys.Start] = sd
+                    timePeriodDict[TimePeriod.SerializationKeys.Start] = sd
                 }
                 
                 if let ed = NSDate.parseDate(split.last!) {
-                    timePerDict[TimePeriod.SerializationKeys.End] = ed
+                    timePeriodDict[TimePeriod.SerializationKeys.End] = ed
                 } else {
                     let timePeriodStr = split.last!
                     
@@ -270,7 +274,7 @@ extension Calendar {
                             var int: Int = -1
                             if scanner.scanInteger(&int) {
                                 if int != -1 {
-                                    timePerDict[String(char)] = int
+                                    timePeriodDict[String(char)] = negative ? -int : int
                                 }
                             }
                             
@@ -294,7 +298,7 @@ extension Calendar {
                                 var int: Int = -1
                                 if scanner.scanInteger(&int) {
                                     if int != -1 {
-                                        timePerDict[String(char)] = int
+                                        timePeriodDict[String(char)] = negative ? -int : int
                                     }
                                 }
                                 
@@ -308,7 +312,8 @@ extension Calendar {
                         }
                     }
                     
-                    dict[kPERIOD] = timePerDict
+                    timePerRdateDict[kPERIOD] = timePeriodDict
+                    rdates.append(timePerRdateDict)
                 }
             }
         }
@@ -316,6 +321,31 @@ extension Calendar {
         if rdates.count > 0 {
             currentRdates.extend(rdates)
         }
+    }
+    
+    public func parser(key: String!, willMatchExdate value: String!) {
+        currentExdates = [[String : AnyObject]]()
+    }
+    
+    public func parser(key: String!, didMatchExdate value: PropertyMatch!) {
+        var exdatesArr = [[String : AnyObject]]()
+        
+        let exDateValue = value.value as String
+        let dateStrs = exDateValue.componentsSeparatedByString(",")
+        
+        for dateStr in dateStrs {
+            if let dt = NSDate.parseDate(dateStr) {
+                var newExdate = value.toDictionary() as [String : AnyObject]
+                newExdate[kDATE_TIME] = dt
+                exdatesArr.append(newExdate)
+            } else if let d = NSDate.parseDate(dateStr, format: DateFormats.ISO8601Date) {
+                var newExdate = value.toDictionary() as [String : AnyObject]
+                newExdate[kDATE] = d
+                exdatesArr.append(newExdate)
+            }
+        }
+        
+        currentExdates.extend(exdatesArr)
     }
     
     public func parser(key: String!, willMatchAlarmc value: String!) {
@@ -348,6 +378,7 @@ extension Calendar {
     public func parser(key: String!, didMatchTodoc value: String!) {
         currentTodoDict[SerializationKeys.AlarmsKey] = currentAlarms
         currentTodoDict[SerializationKeys.RecurrenceDatesKey] = currentRdates
+        currentTodoDict[SerializationKeys.ExceptionDatesKey] = currentExdates
         let newTodoc = Reminder(dictionary: self.currentTodoDict!)
         self.reminders.append(newTodoc)
     }

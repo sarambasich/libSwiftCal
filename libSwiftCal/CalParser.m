@@ -226,6 +226,19 @@ id toTypeFromString(NSString * str) {
     }
 }
 
+- (void) parser:(PKParser *)parser willMatchExdate:(PKAssembly *)assembly {
+    if ([self.delegate respondsToSelector:@selector(parser:willMatchExdate:)]) {
+        [self.delegate parser:parser.debugDescription willMatchExdate:assembly.debugDescription];
+    }
+}
+
+- (void) parser:(PKParser *)parser didMatchExdate:(PKAssembly *)assembly {
+    PropertyMatch * m = [self matchProperty:parser assembly:assembly];
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchExdate:)]) {
+        [self.delegate parser:m.key didMatchExdate:m];
+    }
+}
+
 - (void) parser:(PKParser *) parser willMatchAlarmc:(PKAssembly *) assembly {
     if ([self.delegate respondsToSelector:@selector(parser:willMatchAlarmc:)]) {
         [self.delegate parser:parser.debugDescription willMatchAlarmc:[assembly debugDescription]];
