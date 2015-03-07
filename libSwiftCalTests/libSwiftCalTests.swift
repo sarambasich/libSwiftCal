@@ -317,6 +317,16 @@ class libSwiftCalTests: XCTestCase {
 //                RDATE:2015 02 21 T 12 00 00 Z/+PW12D6T12H37M
                 let destinationDate = NSDate.parseDate("20150523T003700Z")!
                 XCTAssert(rdate.timePeriod.duration == destinationDate.timeIntervalSinceDate(rdate.timePeriod.start), "Unexpected duration")
+                
+                let exDates = rem.exceptions
+                XCTAssert(exDates.count == 2, "Unexpected exdates count")
+                if exDates.count == 2 {
+                    let firstExDate = exDates.first!
+                    XCTAssert(firstExDate.value == NSDate(timeIntervalSinceReferenceDate: 447422400.0), "Unexpected value")
+                    
+                    let secondExDate = exDates.last!
+                    XCTAssert(secondExDate.value == NSDate(timeIntervalSinceReferenceDate: 447483600.0), "Unexpected value")
+                }
             }
         }
         

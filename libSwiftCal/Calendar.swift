@@ -24,7 +24,13 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-public let DefaultCalendar = Calendar(dictionary: [kUID: NSLocalizedString("Default", comment: "")])
+public var DefaultCalendar: Calendar {
+    get {
+        let kDefault = NSLocalizedString("Default", comment: "")
+        let cal = Calendar(dictionary: [kUID: kDefault, kX_WR_CALNAME: kDefault])
+        return cal
+    }
+}
 
 /**
     Defines a VCALENDAR calendar component.
