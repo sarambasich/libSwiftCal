@@ -5,6 +5,23 @@
 //  Created by Stefan Arambasich on 2/21/15.
 //  Copyright (c) 2015 Stefan Arambasich. All rights reserved.
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 
 /// The seconds unit of time (0 - 59 / 0 - 60)
 public typealias Second = Int
@@ -75,27 +92,33 @@ public enum Frequency: String {
 */
 public class RecurrenceRule: ReminderProperty {
     /// identifies the type of recurrence rule
-    public private(set) var frequency: Frequency!
+    public var frequency: Frequency!
     /// Defines a date-time value which bounds the recurrence rule in an inclusive 
     /// manner. If the value specified by UNTIL is synchronized with the specified
     /// recurrence, this date or date-time becomes the last instance of the recurrence.
-    public private(set) var until: NSDate!
+    public var until: NSDate!
     /// Defines the number of occurrences at which to range-bound the recurrence
-    public private(set) var count: Int = 0
+    public var count: Int = 0
     
-    ///
-    public private(set) var interval: Int = 0
-    public private(set) var bySecond = [Second]()
-    public private(set) var byMinute = [Minute]()
-    public private(set) var byHour = [Hour]()
-    public private(set) var byDay = [DayOfTheWeek]()
-    public private(set) var byMonthDay = [DayOfMonth]()
-    public private(set) var byYearDay = [DayOfYear]()
-    public private(set) var byWeekNumber = [WeekOfYear]()
-    public private(set) var byMonthNumber = [MonthOfYear]()
+    /// The INTERVAL rule part contains a positive integer representing at
+    /// which intervals the recurrence rule repeats.  The default value is
+    /// "1", meaning every second for a SECONDLY rule, every minute for a
+    /// MINUTELY rule, every hour for an HOURLY rule, every day for a
+    /// DAILY rule, every week for a WEEKLY rule, every month for a
+    /// MONTHLY rule, and every year for a YEARLY rule.  For example,
+    /// within a DAILY rule, a value of "8" means every eight days.
+    public var interval: Int = 0
+    public var bySecond = [Second]()
+    public var byMinute = [Minute]()
+    public var byHour = [Hour]()
+    public var byDay = [DayOfTheWeek]()
+    public var byMonthDay = [DayOfMonth]()
+    public var byYearDay = [DayOfYear]()
+    public var byWeekNumber = [WeekOfYear]()
+    public var byMonthNumber = [MonthOfYear]()
     
-    public private(set) var bySetPosition = [Int]()
-    public private(set) var weekStart: DayOfWeek = .Monday
+    public var bySetPosition = [Int]()
+    public var weekStart: DayOfWeek = .Monday
     
     public required init() {
         super.init()

@@ -24,11 +24,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-import Foundation
-import EventKit
+import CoreLocation
 
 /**
-    Generic function. Returns a localized friendly name for the given input.
+    Returns a localized friendly status name for the given input.
 
     :param: status The status level to get a friendly name for.
 
