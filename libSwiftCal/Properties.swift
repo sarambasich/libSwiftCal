@@ -92,7 +92,7 @@ public class Property: CalendarObject, TypedValue {
     
     public override func serializeToiCal() -> String {
         // No key? Don't serialize.
-        if key.isEmpty {
+        if self.key.isEmpty {
             return ""
         }
         
@@ -106,14 +106,9 @@ public class Property: CalendarObject, TypedValue {
         
         var result = String()
         
-        result += key
+        result += self.key
         
-        if self.parameters.count > 0 {
-            for p in self.parameters {
-                result += kSEMICOLON
-                result += p.serializeToiCal()
-            }
-        }
+        result += self.serializeParameters()
         
         result += kCOLON
         
@@ -128,6 +123,19 @@ public class Property: CalendarObject, TypedValue {
         }
         
         result += kCRLF
+        
+        return result
+    }
+    
+    func serializeParameters() -> String {
+        var result = String()
+        
+        if self.parameters.count > 0 {
+            for p in self.parameters {
+                result += kSEMICOLON
+                result += p.serializeToiCal()
+            }
+        }
         
         return result
     }

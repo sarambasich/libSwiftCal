@@ -27,9 +27,31 @@
 import Foundation
 
 /**
+    Describes a type that can serializate its representation to a literal iCalendar
+    string representation.
+*/
+@objc public protocol iCalendarSerializable: NSObjectProtocol {
+    /**
+        Serializes the receiver into its iCalendar format suitable for saving in 
+        .ics files.
+    
+        :return: The string representation of the receiver.
+    */
+    func serializeToiCal() -> String
+    /**
+        Serializes the receiver into its iCalendar format suitable for saving in
+        .ics files.
+    
+        :param: key When provided, adds this item as a value of a key separated by
+                an equals "=" sign.
+        
+        :return: The key-value pair string representation of the receiver.
+    */
+    optional func serializeToiCalForKey(key: String) -> String
+}
+
+/**
     A calendar type is a calendar object that conforms to all
     of the required protocols.
 */
-protocol CalendarType: NSObjectProtocol, NSCopying, NSCoding, Hashable, Equatable, Observable, Serializable {
-    func serializeToiCal() -> String
-}
+protocol CalendarType: NSObjectProtocol, NSCopying, NSCoding, Hashable, Equatable, iCalendarSerializable, Observable, Serializable { }

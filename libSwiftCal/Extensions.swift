@@ -234,3 +234,27 @@ public extension String {
         return result
     }
 }
+
+
+extension NSDate: iCalendarSerializable {
+    public func serializeToiCal() -> String {
+        return self.toString()
+    }
+    
+    public func serializeToiCalForKey(key: String) -> String {
+        return key + kEQUALS + self.serializeToiCal()
+    }
+}
+
+
+extension Int { //: iCalendarKeySerializable
+    public func serializeToiCal() -> String {
+        return "\(self)"
+    }
+    
+    public func serializeToiCalForKey(key: String) -> String {
+        return key + kEQUALS + self.serializeToiCal()
+    }
+}
+
+

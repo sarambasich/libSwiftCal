@@ -94,14 +94,17 @@ func model__serializeiCalChildren(model: CalendarObject) -> String {
     var result = String()
     
     let mirrors = object__getAllMirrorValues(mirror: reflect(model))
-    for m in mirrors {
+    for i in 0 ..< mirrors.count {
+        let m = mirrors[i]
         let p = m.0
         let child = m.1.value
         if let calObj = child as? CalendarObject {
             result += calObj.serializeToiCal()
         } else if let calObjects = child as? NSArray {
             for c in calObjects {
-                if c.respondsToSelector("serializeToiCal") {
+                if c.respondsToSelector("serializeToiCalForKey:") {
+                    result += c.serializeToiCalForKey!(c.serializationKeys[i])
+                } else if c.respondsToSelector("serializeToiCal") {
                     result += c.serializeToiCal()
                 }
             }

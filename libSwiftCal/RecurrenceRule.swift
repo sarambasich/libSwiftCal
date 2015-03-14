@@ -51,21 +51,45 @@ public enum DayOfWeek: String {
     case Thursday = "TH"
     case Friday = "FR"
     case Saturday = "SA"
+    
+    public func serializeToiCal() -> String {
+        return self.rawValue
+    }
+    
+    public func serializeToiCalForKey(key: String) -> String {
+        return key + kEQUALS + self.serializeToiCal()
+    }
 }
 
 /**
-    Structure representing a day of the week along with information about which
+    Object representing a day of the week along with information about which
     day of the week and which one in a given set.
 
     An occurrence of `0` indicates no specified value.
 */
-public struct DayOfTheWeek {
+public class DayOfTheWeek: NSObject {
     public var dayOfWeek: DayOfWeek
     public var occurrence: Int?
     
     public init(dayOfWeek: DayOfWeek, occurrence: Int? = nil) {
         self.dayOfWeek = dayOfWeek
         self.occurrence = occurrence
+    }
+    
+    public func serializeToiCal() -> String {
+        var result = String()
+        
+        if let o = self.occurrence {
+            result += "\(o)"
+        }
+        
+        result += "\(self.dayOfWeek.rawValue)"
+        
+        return result
+    }
+    
+    public func serializeToiCalForKey(key: String) -> String {
+        return key + kEQUALS + self.serializeToiCal()
     }
 }
 
@@ -83,6 +107,10 @@ public enum Frequency: String {
     case Weekly = "WEEKLY"
     case Monthly = "MONTHLY"
     case Yearly = "YEARLY"
+    
+    func serializeToiCal() -> String {
+        return kFREQ + kEQUALS + self.rawValue
+    }
 }
 
 /**
@@ -122,6 +150,173 @@ public class RecurrenceRule: ReminderProperty {
     
     public required init() {
         super.init()
+    }
+    
+    
+    // MARK: iCalendarSerialiable
+    public override func serializeToiCal() -> String {
+        var result = String()
+        
+        result += kRRULE
+        
+        result += self.serializeParameters()
+        
+        result += kCOLON
+        
+        result += self.frequency.serializeToiCal()
+        
+        if let u = self.until {
+            result += kSEMICOLON
+            result += u.serializeToiCalForKey(kUNTIL)
+        }
+        
+        if self.count > 0 {
+            result += kSEMICOLON
+            result += self.count.serializeToiCalForKey(kCOUNT)
+        }
+        
+        if self.interval > 0 {
+            result += kSEMICOLON
+            result += self.interval.serializeToiCalForKey(kINTERVAL)
+        }
+        
+        if self.bySecond.count > 0 {
+            result += kSEMICOLON + kBYSECOND + kEQUALS
+            var first = true
+            for b in self.bySecond {
+                if !first {
+                    result += kCOMMA
+                }
+                
+                first = false
+                result += b.serializeToiCal()
+            }
+        }
+
+        if self.bySecond.count > 0 {
+            result += kSEMICOLON + kBYSECOND + kEQUALS
+            var first = true
+            for b in self.bySecond {
+                if !first {
+                    result += kCOMMA
+                }
+                
+                first = false
+                result += b.serializeToiCal()
+            }
+        }
+        
+        if self.byMinute.count > 0 {
+            result += kSEMICOLON + kBYMINUTE + kEQUALS
+            var first = true
+            for m in self.byMinute {
+                if !first {
+                    result += kCOMMA
+                }
+                
+                first = false
+                result += m.serializeToiCal()
+            }
+        }
+        
+        if self.byHour.count > 0 {
+            result += kSEMICOLON + kBYHOUR + kEQUALS
+            var first = true
+            for h in self.byHour {
+                if !first {
+                    result += kCOMMA
+                }
+                
+                first = false
+                result += h.serializeToiCal()
+            }
+        }
+        
+        if self.byDay.count > 0 {
+            result += kSEMICOLON + kBYDAY + kEQUALS
+            var first = true
+            for b in self.byDay {
+                if !first {
+                    result += kCOMMA
+                }
+                
+                first = false
+                result += b.serializeToiCal()
+            }
+        }
+        
+        if self.byMonthDay.count > 0 {
+            result += kSEMICOLON + kBYMONTHDAY + kEQUALS
+            var first = true
+            for d in self.byMonthDay {
+                if !first {
+                    result += kCOMMA
+                }
+                
+                first = false
+                result += d.serializeToiCal()
+            }
+        }
+        
+        if self.byYearDay.count > 0 {
+            result += kSEMICOLON + kBYDAY + kEQUALS
+            var first = true
+            for d in self.byYearDay {
+                if !first {
+                    result += kCOMMA
+                }
+                
+                first = false
+                result += d.serializeToiCal()
+            }
+        }
+        
+        if self.byWeekNumber.count > 0 {
+            result += kSEMICOLON + kBYWEEKNO + kEQUALS
+            var first = true
+            for n in self.byWeekNumber {
+                if !first {
+                    result += kCOMMA
+                }
+                
+                first = false
+                result += n.serializeToiCal()
+            }
+        }
+        
+        if self.byMonthNumber.count > 0 {
+            result += kSEMICOLON + kBYMONTH + kEQUALS
+            var first = true
+            for b in self.byMonthNumber {
+                if !first {
+                    result += kCOMMA
+                }
+                
+                first = false
+                result += b.serializeToiCal()
+            }
+        }
+        
+        if self.bySetPosition.count > 0 {
+            result += kSEMICOLON + kBYSETPOS + kEQUALS
+            var first = true
+            for b in self.bySetPosition {
+                if !first {
+                    result += kCOMMA
+                }
+                
+                first = false
+                result += b.serializeToiCal()
+            }
+        }
+        
+        if self.weekStart != .Monday {
+            result += kSEMICOLON + kWKST + kEQUALS + self.weekStart.rawValue
+        }
+        
+        result += kCRLF
+        
+        return result
     }
     
     

@@ -271,6 +271,8 @@ class libSwiftCalTests: XCTestCase {
             }
         }
         
+        let serStr = calendar?.serializeToiCal()
+        
         XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
     }
     
