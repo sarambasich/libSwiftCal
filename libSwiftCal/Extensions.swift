@@ -107,17 +107,24 @@ public extension NSDate {
         return cal.dateFromComponents(comps)!
     }
     
-    public func toString(dateFormat: String = DateFormats.ISO8601UTC, dateStyle: NSDateFormatterStyle? = nil, timezone: NSTimeZone = NSTimeZone.localTimeZone()) -> String {
+    public func toString(dateFormat: String = DateFormats.ISO8601UTC, timezone: NSTimeZone = NSTimeZone.localTimeZone()) -> String {
         let df = NSDateFormatter()
         
         df.locale = NSLocale.currentLocale()
         df.timeZone = timezone
         df.dateFormat = dateFormat
         
-        if let ds = dateStyle {
-            df.dateStyle = ds
-            df.timeStyle = ds
-        }
+        return df.stringFromDate(self)
+    }
+    
+    public func toString(dateStyle: NSDateFormatterStyle, dateOnly: Bool = false, timeOnly: Bool = false) -> String {
+        assert(!(dateOnly && timeOnly), "Can't have it both ways jack. Pick date or time.")
+        
+        let df = NSDateFormatter()
+        
+        df.locale = NSLocale.currentLocale()
+        if !timeOnly { df.dateStyle = dateStyle }
+        if !dateOnly { df.timeStyle = dateStyle }
         
         return df.stringFromDate(self)
     }

@@ -157,6 +157,10 @@ public class RecurrenceRule: ReminderProperty {
     public override func serializeToiCal() -> String {
         var result = String()
         
+        if self.key.isEmpty {
+            return result
+        }
+        
         result += kRRULE
         
         result += self.serializeParameters()
@@ -313,6 +317,8 @@ public class RecurrenceRule: ReminderProperty {
         if self.weekStart != .Monday {
             result += kSEMICOLON + kWKST + kEQUALS + self.weekStart.rawValue
         }
+        
+        self.stringValue = result
         
         result += kCRLF
         
