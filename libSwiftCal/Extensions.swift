@@ -128,6 +128,10 @@ public extension NSDate {
         
         return df.stringFromDate(self)
     }
+    
+    public func valueForCalendarComponentUnit(unit: NSCalendarUnit) -> Int {
+        return NSCalendar.currentCalendar().component(unit, fromDate: self)
+    }
 }
 
 
@@ -149,6 +153,11 @@ extension NSData {
 
 // MARK: - String extension
 public extension String {
+    /// The empty string. Has no characters and length 0.
+    public static var Empty: String {
+        return ""
+    }
+    
     internal func substring(startIndex: Int, endIndex: Int) -> String {
         return self.substringWithRange(Range(start: advance(self.startIndex, startIndex), end: advance(self.startIndex, endIndex)))
     }
@@ -223,6 +232,15 @@ public extension String {
         let regex = NSRegularExpression(pattern: "\\r\\n\\s", options: nil, error: &err)
         let rg = NSMakeRange(0, result.length)
         regex?.replaceMatchesInString(result, options: nil, range: rg, withTemplate: "")
+        
+        return result
+    }
+    
+    public func foldiCalendarString() -> String {
+        var result = self
+        if result.len > 73 {
+            result = result.insertString(kCRLF + " ", everyXCharacters: 73)
+        }
         
         return result
     }

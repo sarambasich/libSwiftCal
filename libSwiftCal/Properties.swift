@@ -117,10 +117,11 @@ public class Property: CalendarObject, TypedValue {
         } else if let v: AnyObject = JSONify(self.propertyValue) {
             result += "\(v)".escapeForiCalendar()
         }
-        
-        if result.len > 73 {
-            result = result.insertString(kCRLF + " ", everyXCharacters: 73)
-        }
+
+        result = result.foldiCalendarString()
+//        if result.len > 73 {
+//            result = result.insertString(kCRLF + " ", everyXCharacters: 73)
+//        }
         
         result += kCRLF
         

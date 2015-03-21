@@ -103,7 +103,7 @@ func model__serializeiCalChildren(model: CalendarObject) -> String {
         } else if let calObjects = child as? NSArray {
             for c in calObjects {
                 if c.respondsToSelector("serializeToiCalForKey:") {
-                    result += c.serializeToiCalForKey!(c.serializationKeys[i])
+                    result += c.serializeToiCalForKey!(model.serializationKeys[i])
                 } else if c.respondsToSelector("serializeToiCal") {
                     result += c.serializeToiCal()
                 }

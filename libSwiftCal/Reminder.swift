@@ -132,7 +132,14 @@ public class Reminder: CalendarObject {
     public var resources = [ReminderProperty]()
     
     /// A list of recurrence dates for this reminder object
-    public var recurrenceDates = [RecurrenceDate]()
+    private var _recurrenceDates = [RecurrenceDate]()
+    public var recurrenceDates: [RecurrenceDate] {
+        get {
+            return _recurrenceDates
+        } set {
+            _recurrenceDates = newValue
+        }
+    }
     /// Non-standard "X-" properties
     public var xProperties = [GenericProperty]()
     /// IANA-registered property names

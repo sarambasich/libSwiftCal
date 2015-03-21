@@ -24,9 +24,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-import UIKit
 import XCTest
+
 import libSwiftCal
+
 
 var calendar: Calendar?
 
@@ -284,8 +285,10 @@ class libSwiftCalTests: XCTestCase {
         calendar = Calendar(stringToParse: str, error: &err)
         if let rem = calendar?.reminders.first {
             let rdates = rem.recurrenceDates
-            XCTAssert(rdates.count == 3, "Unexpected rdates count")
-            println(rem.recurrenceDates.debugDescription)
+            XCTAssert(rdates.count == 1, "Unexpected rdates count")
+            if let rdate = rdates.first {
+                XCTAssert(rdate.dateTime.count == 3, "Unexpected rdate.dateTime count")
+            }
         }
         
         XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
@@ -315,10 +318,11 @@ class libSwiftCalTests: XCTestCase {
                 let rdates = rem.recurrenceDates
                 XCTAssert(rdates.count == 1, "Unexpected rdates count")
                 let rdate = rdates.first! // 20150221T120000Z
-                XCTAssert(rdate.timePeriod.start == NSDate(timeIntervalSinceReferenceDate: 446212800.0), "Unexpected dateTime")
+                XCTAssert(rdate.timePeriod.count == 1, "Unexpected timePeriod count")
+                XCTAssert(rdate.timePeriod.first!.start == NSDate(timeIntervalSinceReferenceDate: 446212800.0), "Unexpected dateTime")
 //                RDATE:2015 02 21 T 12 00 00 Z/+PW12D6T12H37M
                 let destinationDate = NSDate.parseDate("20150523T003700Z")!
-                XCTAssert(rdate.timePeriod.duration == destinationDate.timeIntervalSinceDate(rdate.timePeriod.start), "Unexpected duration")
+                XCTAssert(rdate.timePeriod.first!.duration == destinationDate.timeIntervalSinceDate(rdate.timePeriod.first!.start), "Unexpected duration")
                 
                 let exDates = rem.exceptions
                 XCTAssert(exDates.count == 2, "Unexpected exdates count")
