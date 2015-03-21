@@ -325,13 +325,13 @@ class libSwiftCalTests: XCTestCase {
                 XCTAssert(rdate.timePeriod.first!.duration == destinationDate.timeIntervalSinceDate(rdate.timePeriod.first!.start), "Unexpected duration")
                 
                 let exDates = rem.exceptions
-                XCTAssert(exDates.count == 2, "Unexpected exdates count")
-                if exDates.count == 2 {
-                    let firstExDate = exDates.first!
-                    XCTAssert(firstExDate.value == NSDate(timeIntervalSinceReferenceDate: 447422400.0), "Unexpected value")
+                XCTAssert(exDates.count == 1, "Unexpected exdates count")
+                if exDates.count == 1 {
+                    let firstExDate = exDates.first!.value.first!
+                    XCTAssert(firstExDate == NSDate(timeIntervalSinceReferenceDate: 447422400.0), "Unexpected value")
                     
-                    let secondExDate = exDates.last!
-                    XCTAssert(secondExDate.value == NSDate(timeIntervalSinceReferenceDate: 447483600.0), "Unexpected value")
+                    let secondExDate = exDates.first!.value.last!
+                    XCTAssert(secondExDate == NSDate(timeIntervalSinceReferenceDate: 447535800.0), "Unexpected value")
                 }
             }
         }

@@ -216,7 +216,7 @@ extension Calendar {
     }
     
     public func parser(key: String!, willMatchRdate value: String!) {
-        currentRdates = [[String : AnyObject]]()
+        if currentRdates == nil { currentRdates = [[String : AnyObject]]() }
     }
     
     public func parser(key: String!, didMatchRdate value: PropertyMatch!) {
@@ -349,28 +349,34 @@ extension Calendar {
     }
     
     public func parser(key: String!, willMatchExdate value: String!) {
-        currentExdates = [[String : AnyObject]]()
+        if currentExdates == nil { currentExdates = [[String : AnyObject]]() }
     }
     
     public func parser(key: String!, didMatchExdate value: PropertyMatch!) {
-        var exdatesArr = [[String : AnyObject]]()
+        var exdate = [String : AnyObject]()
         
         let exDateValue = value.value as String
+        var dateTimes = [NSDate]()
+        var dates = [NSDate]()
         let dateStrs = exDateValue.componentsSeparatedByString(",")
         
         for dateStr in dateStrs {
             if let dt = NSDate.parseDate(dateStr) {
                 var newExdate = value.toDictionary() as [String : AnyObject]
-                newExdate[kDATE_TIME] = dt
-                exdatesArr.append(newExdate)
+                dateTimes.append(dt)
             } else if let d = NSDate.parseDate(dateStr, format: DateFormats.ISO8601Date) {
                 var newExdate = value.toDictionary() as [String : AnyObject]
-                newExdate[kDATE] = d
-                exdatesArr.append(newExdate)
+                dates.append(d)
             }
         }
         
-        currentExdates.extend(exdatesArr)
+        if dates.count > 0 {
+            exdate[kDATE] = dates
+        } else if dateTimes.count > 0 {
+            exdate[kDATE_TIME] = dateTimes
+        }
+        
+        currentExdates.append(exdate)
     }
     
     public func parser(key: String!, willMatchAlarmc value: String!) {

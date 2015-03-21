@@ -29,14 +29,18 @@
 */
 public class ExceptionDate: ReminderProperty {
     /// The value of the date to exclude
-    var date: NSDate!
+    var date = [NSDate]()
     /// The value of the datetime to exclude
-    var dateTime: NSDate!
+    var dateTime = [NSDate]()
     
-    /// Returns the date value of the exception date. Time component is optional.
-    public var value: NSDate {
+    /// The preferred means of accessing the date array elements
+    public var value: [NSDate] {
         get {
-            return self.date ?? self.dateTime
+            if self.date.count > 0 {
+                return self.date
+            }
+            
+            return self.dateTime
         }
     }
     
