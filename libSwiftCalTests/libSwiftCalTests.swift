@@ -287,7 +287,7 @@ class libSwiftCalTests: XCTestCase {
             let rdates = rem.recurrenceDates
             XCTAssert(rdates.count == 1, "Unexpected rdates count")
             if let rdate = rdates.first {
-                XCTAssert(rdate.dateTime.count == 3, "Unexpected rdate.dateTime count")
+                XCTAssert(rdate.value!.count == 3, "Unexpected rdate.dateTime count")
             }
         }
         
@@ -337,6 +337,56 @@ class libSwiftCalTests: XCTestCase {
         }
         
         XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
+    }
+    
+    func testMultipleRdateComponents() {
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RdateInput2", ofType: "ics", inDirectory: nil)
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        var err: NSError?
+        
+        if let cal = Calendar(stringToParse: str, error: &err) {
+            calendar = cal
+            let rem = cal.reminders.first!
+            XCTAssert(rem.recurrenceDates.count > 0, "Unexpected recurrenceDates count")
+            let rdates = rem.recurrenceDates
+            
+            for r in rdates {
+                XCTAssert(r.value?.count == 1, "Unexpected value count")
+                let d = r.value!.first!
+                let minDate = NSDate.parseDate("20150221T115900Z")!
+                let maxDate = NSDate.parseDate("20150223T20100Z")!
+                let isAfter = d.compare(minDate) == NSComparisonResult.OrderedDescending
+                let isBefore = d.compare(maxDate) == NSComparisonResult.OrderedAscending
+                XCTAssert(isAfter && isBefore, "Unexpected value")
+            }
+            
+            let string = calendar?.serializeToiCal()
+        }
+    }
+    
+    func testMultipleExdateComponents() {
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("ExdateInput", ofType: "ics", inDirectory: nil)
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        var err: NSError?
+        
+        if let cal = Calendar(stringToParse: str, error: &err) {
+            calendar = cal
+            let rem = cal.reminders.first!
+            XCTAssert(rem.exceptions.count > 0, "Unexpected recurrenceDates count")
+            let exDates = rem.exceptions
+            
+            for r in exDates {
+                XCTAssert(r.value.count == 1, "Unexpected value count")
+                let d = r.value.first!
+                let minDate = NSDate.parseDate("20150221T115900Z")!
+                let maxDate = NSDate.parseDate("20150223T20100Z")!
+                let isAfter = d.compare(minDate) == NSComparisonResult.OrderedDescending
+                let isBefore = d.compare(maxDate) == NSComparisonResult.OrderedAscending
+                XCTAssert(isAfter && isBefore, "Unexpected value")
+            }
+            
+            let string = calendar?.serializeToiCal()
+        }
     }
     
     func testPerformanceExample() {

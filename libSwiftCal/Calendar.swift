@@ -354,19 +354,26 @@ extension Calendar {
     
     public func parser(key: String!, didMatchExdate value: PropertyMatch!) {
         var exdate = [String : AnyObject]()
-        
-        let exDateValue = value.value as String
         var dateTimes = [NSDate]()
         var dates = [NSDate]()
-        let dateStrs = exDateValue.componentsSeparatedByString(",")
         
-        for dateStr in dateStrs {
-            if let dt = NSDate.parseDate(dateStr) {
-                var newExdate = value.toDictionary() as [String : AnyObject]
-                dateTimes.append(dt)
-            } else if let d = NSDate.parseDate(dateStr, format: DateFormats.ISO8601Date) {
-                var newExdate = value.toDictionary() as [String : AnyObject]
+        if let exDateValueStr = value.value as? String {
+            let dateStrs = exDateValueStr.componentsSeparatedByString(",")
+            
+            for dateStr in dateStrs {
+                if let dt = NSDate.parseDate(dateStr) {
+                    var newExdate = value.toDictionary() as [String : AnyObject]
+                    dateTimes.append(dt)
+                } else if let d = NSDate.parseDate(dateStr, format: DateFormats.ISO8601Date) {
+                    var newExdate = value.toDictionary() as [String : AnyObject]
+                    dates.append(d)
+                }
+            }
+        } else if let d = value.value as? NSDate {
+            if !d.hasTimeComponent() {
                 dates.append(d)
+            } else {
+                dateTimes.append(d)
             }
         }
         
@@ -374,6 +381,10 @@ extension Calendar {
             exdate[kDATE] = dates
         } else if dateTimes.count > 0 {
             exdate[kDATE_TIME] = dateTimes
+        }
+        
+        if currentTodoDict[kEXDATE] == nil {
+            currentTodoDict[kEXDATE] = [[String : AnyObject]]()
         }
         
         currentExdates.append(exdate)

@@ -132,6 +132,14 @@ public extension NSDate {
     public func valueForCalendarComponentUnit(unit: NSCalendarUnit) -> Int {
         return NSCalendar.currentCalendar().component(unit, fromDate: self)
     }
+    
+    public func hasTimeComponent() -> Bool {
+        let seconds = self.valueForCalendarComponentUnit(NSCalendarUnit.SecondCalendarUnit) != 0
+        let minutes = self.valueForCalendarComponentUnit(NSCalendarUnit.MinuteCalendarUnit) != 0
+        let hours = self.valueForCalendarComponentUnit(NSCalendarUnit.HourCalendarUnit) != 0
+        
+        return seconds || minutes || hours
+    }
 }
 
 

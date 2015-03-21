@@ -41,11 +41,50 @@ public class ExceptionDate: ReminderProperty {
             }
             
             return self.dateTime
+        } set {
+            if self.date.count > 0 {
+                self.date = newValue
+            } else {
+                self.dateTime = newValue
+            }
         }
     }
     
     public required init() {
         super.init()
+    }
+    
+    
+    // MARK: - iCalendarSerializable
+    public override func serializeToiCal() -> String {
+        var result = String(kEXDATE)
+        
+        if self.parameters.count > 0 {
+            result += kSEMICOLON
+            result += self.serializeParameters()
+        }
+        
+        result += kCOLON
+        
+        if self.date.count > 0 {
+            for d in self.date {
+                if d !== self.date.first { result += kCOMMA }
+                
+                result += d.toString(dateFormat: DateFormats.ISO8601Date)
+            }
+        } else if self.dateTime.count > 0 {
+            for d in self.dateTime {
+                if d !== self.dateTime.first { result += kCOMMA }
+                
+                result += d.toString(timezone: NSTimeZone(forSecondsFromGMT: 0))
+            }
+        }
+        
+        result.foldiCalendarString()
+        
+        result += kCRLF
+        
+        return result
     }
     
     

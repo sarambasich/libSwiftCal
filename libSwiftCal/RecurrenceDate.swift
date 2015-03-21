@@ -73,9 +73,27 @@
 */
 public class RecurrenceDate: Property {
     /// The recurrence date
-    public private(set) var date = [NSDate]()
+    var date = [NSDate]()
     /// The recurrence date time
-    public private(set) var dateTime = [NSDate]()
+    var dateTime = [NSDate]()
+    /// The date values of the receiver, if applicable
+    public var value: [NSDate]? {
+        get {
+            if self.date.count > 0 {
+                return self.date
+            } else if self.dateTime.count > 0 {
+                return self.dateTime
+            }
+            
+            return nil
+        } set {
+            if self.date.count > 0 {
+                self.date = newValue!
+            } else {
+                self.dateTime = newValue!
+            }
+        }
+    }
     /// The recurrence time period
     public private(set) var timePeriod = [TimePeriod]()
     
