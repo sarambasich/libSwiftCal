@@ -528,12 +528,12 @@ recurrulepart     = ( ( 'FREQ' '=' freq )
                     | ( 'BYMONTH' '=' bymolist )
                     | ( 'BYSETPOS' '=' bysplist )
                     | ( 'WKST' '=' weekday )
-                    )*;
+                    );
 
 freq        = 'SECONDLY' | 'MINUTELY' | 'HOURLY' | 'DAILY'
             | 'WEEKLY' | 'MONTHLY' | 'YEARLY';
 
-enddate     = date | datetime;
+enddate     = datetime | date;
 
 byseclist   = ( seconds (',' seconds)* );
 

@@ -277,6 +277,28 @@ class libSwiftCalTests: XCTestCase {
         XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
     }
     
+    func testRruleUntil() {
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RruleUntil", ofType: "ics", inDirectory: nil)
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        var err: NSError?
+        
+        calendar = Calendar(stringToParse: str, error: &err)
+        if let rem = calendar?.reminders.first {
+            let rrule = rem.rrule
+            XCTAssert(rem.rrule != nil, "Unexpected rrule")
+            if rrule != nil {
+                XCTAssert(rrule.frequency == .Daily, "Unexpected frequency")
+                let ad = rrule.until
+                let ed = NSDate(timeIntervalSinceReferenceDate: 453494430.0)
+                XCTAssert(rrule.until == NSDate(timeIntervalSinceReferenceDate: 453494430.0), "Unexpected until")
+            }
+        }
+        
+        let serStr = calendar?.serializeToiCal()
+        
+        XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
+    }
+    
     func testRdateRecurring() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RdateInput", ofType: "ics", inDirectory: nil)
         let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!

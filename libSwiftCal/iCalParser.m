@@ -1379,7 +1379,7 @@
     while ([self speculate:^{ [self alarmc_]; }]) {
         [self alarmc_]; 
     }
-    [self match:ICALPARSER_TOKEN_KIND_END discard:NO]; 
+    [self match:ICALPARSER_TOKEN_KIND_END discard:NO];
     [self match:ICALPARSER_TOKEN_KIND_COLON discard:NO]; 
     [self match:ICALPARSER_TOKEN_KIND_VTODO discard:NO]; 
     [self crlf_]; 
@@ -5151,66 +5151,64 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchRecurrulepart:)];
 
-    while ([self speculate:^{ if ([self predicts:ICALPARSER_TOKEN_KIND_FREQ, 0]) {[self match:ICALPARSER_TOKEN_KIND_FREQ discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self freq_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_UNTIL, 0]) {[self match:ICALPARSER_TOKEN_KIND_UNTIL discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self enddate_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_COUNT, 0]) {[self match:ICALPARSER_TOKEN_KIND_COUNT discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self matchNumber:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_INTERVAL, 0]) {[self match:ICALPARSER_TOKEN_KIND_INTERVAL discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self matchNumber:NO]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYSECOND, 0]) {[self match:ICALPARSER_TOKEN_KIND_BYSECOND discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self byseclist_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYMINUTE, 0]) {[self match:ICALPARSER_TOKEN_KIND_BYMINUTE discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self byminlist_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYHOUR, 0]) {[self match:ICALPARSER_TOKEN_KIND_BYHOUR discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self byhrlist_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYDAY, 0]) {[self match:ICALPARSER_TOKEN_KIND_BYDAY discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self bywdaylist_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYMONTHDAY, 0]) {[self match:ICALPARSER_TOKEN_KIND_BYMONTHDAY discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self bymodaylist_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYYEARDAY, 0]) {[self match:ICALPARSER_TOKEN_KIND_BYYEARDAY discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self byyrdaylist_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYWEEKNO, 0]) {[self match:ICALPARSER_TOKEN_KIND_BYWEEKNO discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self bywknolist_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYMONTH, 0]) {[self match:ICALPARSER_TOKEN_KIND_BYMONTH discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self bymolist_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYSETPOS, 0]) {[self match:ICALPARSER_TOKEN_KIND_BYSETPOS discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self bysplist_]; } else if ([self predicts:ICALPARSER_TOKEN_KIND_WKST, 0]) {[self match:ICALPARSER_TOKEN_KIND_WKST discard:NO]; [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; [self weekday_]; } else {[self raise:@"No viable alternative found in rule 'recurrulepart'."];}}]) {
-        if ([self predicts:ICALPARSER_TOKEN_KIND_FREQ, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_FREQ discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self freq_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_UNTIL, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_UNTIL discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self enddate_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_COUNT, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_COUNT discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self matchNumber:NO]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_INTERVAL, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_INTERVAL discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self matchNumber:NO]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYSECOND, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_BYSECOND discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self byseclist_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYMINUTE, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_BYMINUTE discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self byminlist_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYHOUR, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_BYHOUR discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self byhrlist_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYDAY, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_BYDAY discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self bywdaylist_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYMONTHDAY, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_BYMONTHDAY discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self bymodaylist_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYYEARDAY, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_BYYEARDAY discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self byyrdaylist_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYWEEKNO, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_BYWEEKNO discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self bywknolist_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYMONTH, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_BYMONTH discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self bymolist_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYSETPOS, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_BYSETPOS discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self bysplist_]; 
-        } else if ([self predicts:ICALPARSER_TOKEN_KIND_WKST, 0]) {
-            [self match:ICALPARSER_TOKEN_KIND_WKST discard:NO]; 
-            [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
-            [self weekday_]; 
-        } else {
-            [self raise:@"No viable alternative found in rule 'recurrulepart'."];
-        }
+    if ([self predicts:ICALPARSER_TOKEN_KIND_FREQ, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_FREQ discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self freq_]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_UNTIL, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_UNTIL discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self enddate_]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_COUNT, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_COUNT discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self matchNumber:NO]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_INTERVAL, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_INTERVAL discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self matchNumber:NO]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYSECOND, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_BYSECOND discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self byseclist_]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYMINUTE, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_BYMINUTE discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self byminlist_]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYHOUR, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_BYHOUR discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self byhrlist_]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYDAY, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_BYDAY discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self bywdaylist_]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYMONTHDAY, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_BYMONTHDAY discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self bymodaylist_]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYYEARDAY, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_BYYEARDAY discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self byyrdaylist_]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYWEEKNO, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_BYWEEKNO discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self bywknolist_]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYMONTH, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_BYMONTH discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self bymolist_]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_BYSETPOS, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_BYSETPOS discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self bysplist_]; 
+    } else if ([self predicts:ICALPARSER_TOKEN_KIND_WKST, 0]) {
+        [self match:ICALPARSER_TOKEN_KIND_WKST discard:NO]; 
+        [self match:ICALPARSER_TOKEN_KIND_EQUALS discard:NO]; 
+        [self weekday_]; 
+    } else {
+        [self raise:@"No viable alternative found in rule 'recurrulepart'."];
     }
 
     [self fireDelegateSelector:@selector(parser:didMatchRecurrulepart:)];
@@ -5253,10 +5251,10 @@
     
     [self fireDelegateSelector:@selector(parser:willMatchEnddate:)];
 
-    if ([self speculate:^{ [self date_]; }]) {
-        [self date_]; 
-    } else if ([self speculate:^{ [self datetime_]; }]) {
+    if ([self speculate:^{ [self datetime_]; }]) {
         [self datetime_]; 
+    } else if ([self speculate:^{ [self date_]; }]) {
+        [self date_]; 
     } else {
         [self raise:@"No viable alternative found in rule 'enddate'."];
     }

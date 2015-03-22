@@ -214,9 +214,10 @@ public class Reminder: CalendarObject {
             return super.serializationKeys + [kDTSTAMP, kUID, kCLASS, kCOMPLETED, kCREATED, kDESCRIPTION,
                 kDTSTART, kGEO, kLAST_MODIFIED, kLOCATION, kORGANIZER, kPERCENT_COMPLETE, kPRIORITY,
                 kRECURRENCE_ID, kSEQUENCE, kSTATUS, kSUMMARY, kURL, kRRULE, kDUE, kDURATION, kATTACH,
-                kATTENDEE, kCATEGORIES, kCOMMENT, kCONTACT, kEXDATE, kREQUEST_STATUS, kRELATED,
-                kRESOURCES, SerializationKeys.RecurrenceDatesKey, SerializationKeys.XPropertiesKey,
-                SerializationKeys.IANAPropertiesKey, SerializationKeys.AlarmsKey]
+                kATTENDEE, kCATEGORIES, kCOMMENT, kCONTACT, SerializationKeys.ExceptionDatesKey,
+                kREQUEST_STATUS, kRELATED, kRESOURCES, SerializationKeys.RecurrenceDatesKey,
+                SerializationKeys.XPropertiesKey, SerializationKeys.IANAPropertiesKey,
+                SerializationKeys.AlarmsKey]
         }
     }
     

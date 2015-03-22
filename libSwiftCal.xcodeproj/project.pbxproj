@@ -53,6 +53,7 @@
 		F8B8729D1A98EC5100BF033E /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */; };
 		F8D26F461ABDD4550050373E /* RdateInput2.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8D26F451ABDD4550050373E /* RdateInput2.ics */; };
 		F8D26F561ABDF35A0050373E /* ExdateInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8D26F551ABDF35A0050373E /* ExdateInput.ics */; };
+		F8D26F611ABE2E7B0050373E /* RruleUntil.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8D26F601ABE2E7B0050373E /* RruleUntil.ics */; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
 		F8F8EED51A1C4CF30046AF23 /* libSwiftCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */; };
 		F8FC991E1A59A130005B4036 /* LongInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8FC991D1A59A130005B4036 /* LongInput.ics */; };
@@ -131,6 +132,7 @@
 		F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
 		F8D26F451ABDD4550050373E /* RdateInput2.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = RdateInput2.ics; sourceTree = "<group>"; };
 		F8D26F551ABDF35A0050373E /* ExdateInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExdateInput.ics; sourceTree = "<group>"; };
+		F8D26F601ABE2E7B0050373E /* RruleUntil.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RruleUntil.ics; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8EAF71A1C3EEE0046AF23 /* libSwiftCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libSwiftCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8ECE51A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				F8FC991D1A59A130005B4036 /* LongInput.ics */,
 				F821037A1A6AF3D10097BBFA /* LargeInput.ics */,
 				F8857CD41A70A0DB000EC9A2 /* RruleInput.ics */,
+				F8D26F601ABE2E7B0050373E /* RruleUntil.ics */,
 				F8761D531A99212100F8D9A7 /* RdateInput.ics */,
 				F8D26F451ABDD4550050373E /* RdateInput2.ics */,
 				F8D26F551ABDF35A0050373E /* ExdateInput.ics */,
@@ -375,6 +378,7 @@
 				F83ACB631A2AD66600423215 /* EasyInput.json in Resources */,
 				F81A89141A36AA10000F5A34 /* SimpleInput.ics in Resources */,
 				F8FC991E1A59A130005B4036 /* LongInput.ics in Resources */,
+				F8D26F611ABE2E7B0050373E /* RruleUntil.ics in Resources */,
 				F8857CD51A70A0DB000EC9A2 /* RruleInput.ics in Resources */,
 				F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */,
 				F82161E81A54C2C900886131 /* MoreInput.ics in Resources */,
