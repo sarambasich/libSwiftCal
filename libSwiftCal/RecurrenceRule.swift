@@ -135,7 +135,7 @@ public class RecurrenceRule: ReminderProperty {
     /// DAILY rule, every week for a WEEKLY rule, every month for a
     /// MONTHLY rule, and every year for a YEARLY rule.  For example,
     /// within a DAILY rule, a value of "8" means every eight days.
-    public var interval: Int = 0
+    public var interval: Int = 1
     public var bySecond = [Second]()
     public var byMinute = [Minute]()
     public var byHour = [Hour]()
@@ -179,7 +179,7 @@ public class RecurrenceRule: ReminderProperty {
             result += self.count.serializeToiCalForKey(kCOUNT)
         }
         
-        if self.interval > 0 {
+        if self.interval > 1 {
             result += kSEMICOLON
             result += self.interval.serializeToiCalForKey(kINTERVAL)
         }

@@ -69,7 +69,7 @@ public class Reminder: CalendarObject {
     /// A description of this reminder (longer than its summary)
     public var desc: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDESCRIPTION, SerializationKeys.PropertyValKey: ""])
     /// The datetime this reminder should start
-    public var start: ReminderProperty! = ReminderProperty()
+    public var start: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDTSTART, SerializationKeys.PropertyValKey: NSDate().dateByAddingTimeInterval(Conversions.Time.SecondsInADay)])
     /// The GPS coordinate of this location
     public var geo: Geo! = Geo()
     /// The datetime this reminder was last modified
