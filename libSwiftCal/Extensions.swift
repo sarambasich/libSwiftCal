@@ -134,11 +134,11 @@ public extension NSDate {
     }
     
     public func hasTimeComponent() -> Bool {
-        let seconds = self.valueForCalendarComponentUnit(NSCalendarUnit.SecondCalendarUnit) != 0
-        let minutes = self.valueForCalendarComponentUnit(NSCalendarUnit.MinuteCalendarUnit) != 0
-        let hours = self.valueForCalendarComponentUnit(NSCalendarUnit.HourCalendarUnit) != 0
+        let seconds = self.valueForCalendarComponentUnit(NSCalendarUnit.SecondCalendarUnit) == 0
+        let minutes = self.valueForCalendarComponentUnit(NSCalendarUnit.MinuteCalendarUnit) == 0
+        let hours = self.valueForCalendarComponentUnit(NSCalendarUnit.HourCalendarUnit) == 0
         
-        return seconds || minutes || hours
+        return seconds && minutes && hours
     }
 }
 
@@ -161,7 +161,7 @@ extension NSData {
 
 // MARK: - String extension
 public extension String {
-    /// The empty string. Has no characters and length 0.
+    /// The empty string. Has no characters and is length 0.
     public static var Empty: String {
         return ""
     }
