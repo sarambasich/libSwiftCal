@@ -179,7 +179,7 @@ extension Calendar {
     }
     
     public func parser(key: String!, didMatchTodoprop value: PropertyMatch!) {
-        if key == kRRULE || key == kRDATE || key == kEXDATE {
+        if key == kRRULE || key == kRDATE || key == kEXDATE || key == kGEO {
             return
         }
         
@@ -213,6 +213,19 @@ extension Calendar {
         }
         
         currentTodoDict[key] = dict
+    }
+    
+    public func parser(key: String!, didMatchGeo value: PropertyMatch!) {
+        let g = Geo()
+        let comps = (value.value as String).componentsSeparatedByString(";")
+        if comps.count == 2 {
+            let lat = (comps[0] as NSString).doubleValue
+            let lon = (comps[1] as NSString).doubleValue
+            
+            if lat != 0.0 && lon != 0.0 {
+                currentTodoDict[kGEO] = [SerializationKeys.PropertyKeyKey: kGEO, SerializationKeys.PropertyValKey: value.value as String]
+            }
+        }
     }
     
     public func parser(key: String!, willMatchRdate value: String!) {

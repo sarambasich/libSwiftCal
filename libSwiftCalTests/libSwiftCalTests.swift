@@ -411,6 +411,23 @@ class libSwiftCalTests: XCTestCase {
         }
     }
     
+    func testLocGeo() {
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("LocationInput", ofType: "ics", inDirectory: nil)
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        var err: NSError?
+        
+        if let cal = Calendar(stringToParse: str, error: &err) {
+            calendar = cal
+            let rem = cal.reminders.first!
+            XCTAssert(rem.geo.key == kGEO, "Geo param has no key")
+            XCTAssert(rem.geo.lat == 42.3175801034349, "Unexepected lat")
+            XCTAssert(rem.geo.lon == -83.231212245454, "Unexepected lon")
+            XCTAssert(rem.location.stringValue == "4901 Evergreen Rd Dearborn, MI 48128", "Unexpected location")
+            
+            let string = calendar?.serializeToiCal()
+        }
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {

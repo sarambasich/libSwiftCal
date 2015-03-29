@@ -309,6 +309,26 @@ public class Geo: Property {
         }
     }
     
+    
+    // MARK: - iCalSerializable
+    public override func serializeToiCal() -> String {
+        if self.key.isEmpty || self.coordinate == nil { return String.Empty }
+        var result = String(kGEO)
+        
+        if self.parameters.count > 0 {
+            result += self.serializeParameters()
+        }
+        
+        result += kCOLON
+        
+        result += "\(self.lat);\(self.lon)"
+        
+        result += kCRLF
+        
+        return result
+    }
+    
+    
     // MARK: - NSCoding
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

@@ -44,6 +44,7 @@
 		F834F4E11A998847001560C0 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F867CF2A1A9986730020919E /* PEGKit.framework */; };
 		F83ACB631A2AD66600423215 /* EasyInput.json in Resources */ = {isa = PBXBuildFile; fileRef = F83ACB621A2AD66600423215 /* EasyInput.json */; };
 		F8497B041A55A87C00AD592B /* AnotherInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8497B031A55A87C00AD592B /* AnotherInput.ics */; };
+		F850BB421AC7AA5100116C45 /* LocationInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F850BB411AC7AA5100116C45 /* LocationInput.ics */; };
 		F858377B1A509A47003F7CCF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858377A1A509A47003F7CCF /* Constants.swift */; };
 		F8761D541A99212100F8D9A7 /* RdateInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8761D531A99212100F8D9A7 /* RdateInput.ics */; };
 		F8761D561A9924CA00F8D9A7 /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8761D551A9924CA00F8D9A7 /* TimePeriod.swift */; };
@@ -122,6 +123,7 @@
 		F83195CF1A2EAE1A00377846 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		F83ACB621A2AD66600423215 /* EasyInput.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = EasyInput.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		F8497B031A55A87C00AD592B /* AnotherInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AnotherInput.ics; sourceTree = "<group>"; };
+		F850BB411AC7AA5100116C45 /* LocationInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LocationInput.ics; sourceTree = "<group>"; };
 		F858377A1A509A47003F7CCF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F867CF2A1A9986730020919E /* PEGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PEGKit.framework; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/libSwiftCal-ddgudkqgicbyqydpzunjitshbjxb/Build/Products/Debug-iphoneos/PEGKit.framework"; sourceTree = "<group>"; };
 		F8761D531A99212100F8D9A7 /* RdateInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RdateInput.ics; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				F8D26F551ABDF35A0050373E /* ExdateInput.ics */,
 				F80B21C11A996D0300BF217C /* RperiodExplicit.ics */,
 				F80B21C31A996D1100BF217C /* RperiodDuration.ics */,
+				F850BB411AC7AA5100116C45 /* LocationInput.ics */,
 			);
 			path = libSwiftCalTests;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				F8D26F611ABE2E7B0050373E /* RruleUntil.ics in Resources */,
 				F8857CD51A70A0DB000EC9A2 /* RruleInput.ics in Resources */,
 				F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */,
+				F850BB421AC7AA5100116C45 /* LocationInput.ics in Resources */,
 				F82161E81A54C2C900886131 /* MoreInput.ics in Resources */,
 				F821037B1A6AF3D10097BBFA /* LargeInput.ics in Resources */,
 				F80B21C21A996D0300BF217C /* RperiodExplicit.ics in Resources */,

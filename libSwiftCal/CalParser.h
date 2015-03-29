@@ -100,6 +100,8 @@ id toTypeFromString(NSString * str);
 
 - (void) parser:(NSString *) key didMatchExdate:(PropertyMatch *) value;
 
+- (void) parser:(NSString *) key didMatchGeo:(PropertyMatch *) value;
+
 - (void) parser:(NSString *) key willMatchAlarmc:(NSString *) value;
 
 - (void) parser:(NSString *) key didMatchAlarmprop:(PropertyMatch *) value;

@@ -239,6 +239,13 @@ id toTypeFromString(NSString * str) {
     }
 }
 
+- (void) parser:(PKParser *)parser didMatchGeo:(PKAssembly *)assembly {
+    PropertyMatch * m = [self matchProperty:parser assembly:assembly];
+    if ([self.delegate respondsToSelector:@selector(parser:didMatchGeo:)]) {
+        [self.delegate parser:m.key didMatchGeo:m];
+    }
+}
+
 - (void) parser:(PKParser *) parser willMatchAlarmc:(PKAssembly *) assembly {
     if ([self.delegate respondsToSelector:@selector(parser:willMatchAlarmc:)]) {
         [self.delegate parser:parser.debugDescription willMatchAlarmc:[assembly debugDescription]];
