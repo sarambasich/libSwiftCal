@@ -94,11 +94,15 @@ public class RecurrenceDate: Property {
             }
         }
     }
-    /// The recurrence time period
+    /// The recurrence time period (if this exists, value will exist and have only ONE value)
     public private(set) var timePeriod = [TimePeriod]()
     
     public required init() {
         super.init()
+    }
+    
+    public func isEmpty() -> Bool {
+        return self.value == nil || self.key == nil
     }
     
     
@@ -127,6 +131,8 @@ public class RecurrenceDate: Property {
     }
     
     public override func serializeToiCal() -> String {
+        if self.isEmpty() { return String.Empty }
+        
         var result = String(kRDATE)
         
         if self.parameters.count > 0 {

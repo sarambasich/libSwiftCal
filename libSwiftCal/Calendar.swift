@@ -147,6 +147,7 @@ public class Calendar: CalendarObject, ParserObserver {
     private var parser: CalParser! = CalParser()
     private var currentTodoDict: [String : AnyObject]!
     private var currentAlarmDict: [String : AnyObject]!
+    private var currentTodoXProps: [[String : AnyObject]]!
     private var currentAlarmXProps: [[String : AnyObject]]!
     private var currentAlarms: [[String : AnyObject]]!
     private var currentRdates: [[String : AnyObject]]!
@@ -157,6 +158,8 @@ extension Calendar {
     private func emptyParserFields() {
         currentTodoDict.removeAll()
         currentTodoDict = nil
+        currentTodoXProps.removeAll()
+        currentTodoXProps = nil
         currentAlarmDict.removeAll()
         currentAlarmDict = nil
         currentAlarmXProps.removeAll()
@@ -183,8 +186,16 @@ extension Calendar {
             return
         }
         
-        let val = value.toDictionary()
-        currentTodoDict[key] = val
+        let k = key as NSString
+        if k.isXValue() {
+            if currentTodoXProps == nil {
+                currentTodoXProps = [[String : AnyObject]]()
+            }
+            
+            currentTodoXProps.append(value.toDictionary() as [String : AnyObject])
+        } else {
+            currentTodoDict[key] = value.toDictionary()
+        }
     }
     
     public func parser(key: String!, didMatchRrule value: PropertyMatch!) {
@@ -434,6 +445,7 @@ extension Calendar {
         currentTodoDict[SerializationKeys.AlarmsKey] = currentAlarms
         currentTodoDict[SerializationKeys.RecurrenceDatesKey] = currentRdates
         currentTodoDict[SerializationKeys.ExceptionDatesKey] = currentExdates
+        currentTodoDict[SerializationKeys.XPropertiesKey] = currentTodoXProps
         let newTodoc = Reminder(dictionary: self.currentTodoDict!)
         self.reminders.append(newTodoc)
     }
