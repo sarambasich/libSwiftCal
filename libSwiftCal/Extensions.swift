@@ -52,14 +52,14 @@ private func combineDicts(a: [String : AnyObject], b: [String : AnyObject]) -> [
     var result = [String : AnyObject]()
     for i in 0 ..< a.count {
         let ak = a.keys.array[i]
-        let av = a.values.array[i] as NSObject
+        let av = a.values.array[i] as! NSObject
         
         result[ak] = av
     }
     
     for i in 0 ..< b.count {
         let bk = b.keys.array[i]
-        let bv = b.values.array[i] as NSObject
+        let bv = b.values.array[i] as! NSObject
         
         result[bk] = bv
     }
@@ -70,7 +70,7 @@ private func combineDicts(a: [String : AnyObject], b: [String : AnyObject]) -> [
 
 // MARK: - Override for the Python % operator (but I don't think this works :( )
 func %(format: String, args: [CVarArgType]) -> String {
-    return NSString(format: format, arguments: getVaList(args))
+    return NSString(format: format, arguments: getVaList(args)) as String
 }
 
 
@@ -86,22 +86,39 @@ public struct DateFormats {
     public static let ISO8601UTC = "yyyyLLdd'T'HHmmss'Z'"
     public static let ISO8601FullNoZ = "yyyyLLdd'T'HHmmss"
     public static let ISO8601Date = "yyyyLLdd"
+    
+    public static var all: [String] {
+        return [ISO8601Date, ISO8601FullNoZ, ISO8601Full, ISO8601UTC]
+    }
 }
 
 public extension NSDate {
-    public class func parseDate(string: String, format: String = DateFormats.ISO8601Full) -> NSDate? {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = format
+    public class func parseDate(string: String, format: String? = nil) -> NSDate? {
+        var date: NSDate?
         
+        let formatter = NSDateFormatter()
         formatter.locale = NSLocale.currentLocale()
         
-        let date = formatter.dateFromString(string)
-        return date?
+        var formats: [String]
+        if let fmt = format {
+            formats = [fmt]
+        } else {
+            formats = DateFormats.all
+        }
+        
+        for f in formats {
+            if let d = formatter.dateFromString(string) {
+                date = d
+                break
+            }
+        }
+        
+        return date
     }
     
     public func stripTime() -> NSDate {
         let cal = NSCalendar.currentCalendar()
-        let flags: NSCalendarUnit = .YearCalendarUnit | .MonthCalendarUnit | .DayCalendarUnit
+        let flags: NSCalendarUnit = .CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay
         let comps = cal.components(flags, fromDate: self)
         
         return cal.dateFromComponents(comps)!
@@ -134,9 +151,9 @@ public extension NSDate {
     }
     
     public func hasTimeComponent() -> Bool {
-        let seconds = self.valueForCalendarComponentUnit(NSCalendarUnit.SecondCalendarUnit) == 0
-        let minutes = self.valueForCalendarComponentUnit(NSCalendarUnit.MinuteCalendarUnit) == 0
-        let hours = self.valueForCalendarComponentUnit(NSCalendarUnit.HourCalendarUnit) == 0
+        let seconds = self.valueForCalendarComponentUnit(.CalendarUnitSecond) == 0
+        let minutes = self.valueForCalendarComponentUnit(.CalendarUnitMinute) == 0
+        let hours = self.valueForCalendarComponentUnit(.CalendarUnitHour) == 0
         
         return seconds && minutes && hours
     }
@@ -176,13 +193,13 @@ public extension String {
     
     public var len: Int {
         get {
-            return countElements(self) as Int
+            return count(self) as Int
         }
     }
     
     public func URLEncode() -> String? {
         let charSet = NSCharacterSet.URLQueryAllowedCharacterSet()
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(charSet)?
+        return self.stringByAddingPercentEncodingWithAllowedCharacters(charSet)
     }
     
     public func replace(source: String, replacement: String) -> String {
@@ -241,7 +258,7 @@ public extension String {
         let rg = NSMakeRange(0, result.length)
         regex?.replaceMatchesInString(result, options: nil, range: rg, withTemplate: "")
         
-        return result
+        return result as String
     }
     
     public func foldiCalendarString() -> String {

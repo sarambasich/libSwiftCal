@@ -27,7 +27,7 @@
 		F83195D91A2EAE1A00377846 /* iCal.grammar in Resources */ = {isa = PBXBuildFile; fileRef = F83195BB1A2EAE1A00377846 /* iCal.grammar */; };
 		F83195DA1A2EAE1A00377846 /* iCalendarElements.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195BC1A2EAE1A00377846 /* iCalendarElements.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F83195DB1A2EAE1A00377846 /* iCalendarElements.m in Sources */ = {isa = PBXBuildFile; fileRef = F83195BD1A2EAE1A00377846 /* iCalendarElements.m */; };
-		F83195DC1A2EAE1A00377846 /* iCalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195BE1A2EAE1A00377846 /* iCalParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F83195DC1A2EAE1A00377846 /* iCalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195BE1A2EAE1A00377846 /* iCalParser.h */; };
 		F83195DD1A2EAE1A00377846 /* iCalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F83195BF1A2EAE1A00377846 /* iCalParser.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		F83195E01A2EAE1A00377846 /* libSwiftCal.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195C51A2EAE1A00377846 /* libSwiftCal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F83195E11A2EAE1A00377846 /* NSString+CalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195C61A2EAE1A00377846 /* NSString+CalParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -92,20 +92,20 @@
 		F82161E51A54A91800886131 /* BlankInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlankInput.ics; sourceTree = "<group>"; };
 		F82161E71A54C2C900886131 /* MoreInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MoreInput.ics; sourceTree = "<group>"; };
 		F82909B41A1C5ADA0091366E /* EasyInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = EasyInput.ics; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = "<none>"; };
-		F83195B01A2EAE1A00377846 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		F83195B01A2EAE1A00377846 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Alarm.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F83195B31A2EAE1A00377846 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F83195B41A2EAE1A00377846 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
-		F83195B51A2EAE1A00377846 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
-		F83195B61A2EAE1A00377846 /* CalendarObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarObject.swift; sourceTree = "<group>"; };
+		F83195B51A2EAE1A00377846 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Calendar.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F83195B61A2EAE1A00377846 /* CalendarObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarObject.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F83195B71A2EAE1A00377846 /* CalendarType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarType.swift; sourceTree = "<group>"; };
 		F83195B81A2EAE1A00377846 /* CalParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalParser.h; sourceTree = "<group>"; };
-		F83195B91A2EAE1A00377846 /* CalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalParser.m; sourceTree = "<group>"; };
-		F83195BA1A2EAE1A00377846 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F83195B91A2EAE1A00377846 /* CalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CalParser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		F83195BA1A2EAE1A00377846 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Extensions.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F83195BB1A2EAE1A00377846 /* iCal.grammar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iCal.grammar; sourceTree = "<group>"; };
 		F83195BC1A2EAE1A00377846 /* iCalendarElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCalendarElements.h; sourceTree = "<group>"; };
-		F83195BD1A2EAE1A00377846 /* iCalendarElements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCalendarElements.m; sourceTree = "<group>"; };
+		F83195BD1A2EAE1A00377846 /* iCalendarElements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = iCalendarElements.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F83195BE1A2EAE1A00377846 /* iCalParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCalParser.h; sourceTree = "<group>"; };
-		F83195BF1A2EAE1A00377846 /* iCalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCalParser.m; sourceTree = "<group>"; };
+		F83195BF1A2EAE1A00377846 /* iCalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = iCalParser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F83195C01A2EAE1A00377846 /* icalparser.parsergen */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = icalparser.parsergen; sourceTree = "<group>"; };
 		F83195C21A2EAE1A00377846 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F83195C31A2EAE1A00377846 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
@@ -115,11 +115,11 @@
 		F83195C71A2EAE1A00377846 /* NSString+CalParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CalParser.m"; sourceTree = "<group>"; };
 		F83195C81A2EAE1A00377846 /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		F83195C91A2EAE1A00377846 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
-		F83195CA1A2EAE1A00377846 /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
-		F83195CB1A2EAE1A00377846 /* Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
-		F83195CC1A2EAE1A00377846 /* RecurrenceDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecurrenceDate.swift; sourceTree = "<group>"; };
-		F83195CD1A2EAE1A00377846 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
-		F83195CE1A2EAE1A00377846 /* RequestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
+		F83195CA1A2EAE1A00377846 /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Parameter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F83195CB1A2EAE1A00377846 /* Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Properties.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F83195CC1A2EAE1A00377846 /* RecurrenceDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RecurrenceDate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F83195CD1A2EAE1A00377846 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Reminder.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F83195CE1A2EAE1A00377846 /* RequestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RequestStatus.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F83195CF1A2EAE1A00377846 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		F83ACB621A2AD66600423215 /* EasyInput.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = EasyInput.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		F8497B031A55A87C00AD592B /* AnotherInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AnotherInput.ics; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 		F8857CD41A70A0DB000EC9A2 /* RruleInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RruleInput.ics; sourceTree = "<group>"; };
 		F89877871A3BE8A5002F9322 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		F8B4D17B1A9ECF3C00B3F5B8 /* ExceptionDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionDate.swift; sourceTree = "<group>"; };
-		F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
+		F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RecurrenceRule.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F8D26F451ABDD4550050373E /* RdateInput2.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = RdateInput2.ics; sourceTree = "<group>"; };
 		F8D26F551ABDF35A0050373E /* ExdateInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExdateInput.ics; sourceTree = "<group>"; };
 		F8D26F601ABE2E7B0050373E /* RruleUntil.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RruleUntil.ics; sourceTree = "<group>"; };
@@ -281,9 +281,9 @@
 			files = (
 				F83195D61A2EAE1A00377846 /* CalParser.h in Headers */,
 				F83195DA1A2EAE1A00377846 /* iCalendarElements.h in Headers */,
-				F83195DC1A2EAE1A00377846 /* iCalParser.h in Headers */,
 				F83195E01A2EAE1A00377846 /* libSwiftCal.h in Headers */,
 				F83195E11A2EAE1A00377846 /* NSString+CalParser.h in Headers */,
+				F83195DC1A2EAE1A00377846 /* iCalParser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

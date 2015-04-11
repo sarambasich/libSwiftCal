@@ -192,7 +192,7 @@ extension Calendar {
                 currentTodoXProps = [[String : AnyObject]]()
             }
             
-            currentTodoXProps.append(value.toDictionary() as [String : AnyObject])
+            currentTodoXProps.append(value.toDictionary() as! [String : AnyObject])
         } else {
             currentTodoDict[key] = value.toDictionary()
         }
@@ -200,7 +200,7 @@ extension Calendar {
     
     public func parser(key: String!, didMatchRrule value: PropertyMatch!) {
         var dict = value.toDictionary()
-        var strVal = value.value as String
+        var strVal = value.value as! String
         let rules = strVal.componentsSeparatedByString(kSEMICOLON)
         for r in rules {
             let split = r.componentsSeparatedByString(kEQUALS)
@@ -209,7 +209,7 @@ extension Calendar {
             var vals: [AnyObject] = val.componentsSeparatedByString(kCOMMA)
             if vals.count > 1 {
                 for i in 0 ..< vals.count {
-                    let v: AnyObject = toTypeFromString(vals[i] as String)
+                    let v: AnyObject = toTypeFromString(vals[i] as! String)
                     vals[i] = v
                 }
                 
@@ -228,13 +228,13 @@ extension Calendar {
     
     public func parser(key: String!, didMatchGeo value: PropertyMatch!) {
         let g = Geo()
-        let comps = (value.value as String).componentsSeparatedByString(";")
+        let comps = (value.value as! String).componentsSeparatedByString(";")
         if comps.count == 2 {
             let lat = (comps[0] as NSString).doubleValue
             let lon = (comps[1] as NSString).doubleValue
             
             if lat != 0.0 && lon != 0.0 {
-                currentTodoDict[kGEO] = [SerializationKeys.PropertyKeyKey: kGEO, SerializationKeys.PropertyValKey: value.value as String]
+                currentTodoDict[kGEO] = [SerializationKeys.PropertyKeyKey: kGEO, SerializationKeys.PropertyValKey: value.value as! String]
             }
         }
     }
@@ -248,7 +248,7 @@ extension Calendar {
         var dateTimes = [NSDate]()
         var timePers = [[String : AnyObject]]()
         
-        var finalRdateDict = value.toDictionary() as [String : AnyObject]
+        var finalRdateDict = value.toDictionary() as! [String : AnyObject]
         if let strVal = value.value as? String {
             // RDATE;VALUE=PERIOD:19960403T020000Z/19960403T040000Z,19960404T010000Z/PT3H
             // RDATE:19970714T123000Z
@@ -346,9 +346,9 @@ extension Calendar {
                 }
             }
         } else if let d = value.value as? NSDate {
-            let s = d.valueForCalendarComponentUnit(NSCalendarUnit.SecondCalendarUnit)
-            let m = d.valueForCalendarComponentUnit(NSCalendarUnit.MinuteCalendarUnit)
-            let h = d.valueForCalendarComponentUnit(NSCalendarUnit.HourCalendarUnit)
+            let s = d.valueForCalendarComponentUnit(NSCalendarUnit.CalendarUnitSecond)
+            let m = d.valueForCalendarComponentUnit(NSCalendarUnit.CalendarUnitMinute)
+            let h = d.valueForCalendarComponentUnit(NSCalendarUnit.CalendarUnitHour)
             
             if s == 0 && m == 0 && h == 0 { // I.e. we have no time info
                 dates.append(d)
@@ -386,10 +386,10 @@ extension Calendar {
             
             for dateStr in dateStrs {
                 if let dt = NSDate.parseDate(dateStr) {
-                    var newExdate = value.toDictionary() as [String : AnyObject]
+                    var newExdate = value.toDictionary() as! [String : AnyObject]
                     dateTimes.append(dt)
                 } else if let d = NSDate.parseDate(dateStr, format: DateFormats.ISO8601Date) {
-                    var newExdate = value.toDictionary() as [String : AnyObject]
+                    var newExdate = value.toDictionary() as! [String : AnyObject]
                     dates.append(d)
                 }
             }
@@ -429,7 +429,7 @@ extension Calendar {
                 currentAlarmXProps = [[String : AnyObject]]()
             }
             
-            currentAlarmXProps.append(value.toDictionary() as [String : AnyObject])
+            currentAlarmXProps.append(value.toDictionary() as! [String : AnyObject])
         } else {
             currentAlarmDict[key] = value.toDictionary()
         }

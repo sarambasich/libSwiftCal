@@ -152,7 +152,7 @@ public class Property: CalendarObject, TypedValue {
     public required init(dictionary: [String : AnyObject]) {
         super.init(dictionary: dictionary)
         
-        if let s = self.stringValue? {
+        if let s = self.stringValue {
             self.stringValue = self.stringValue!.removeiCalendarEscapes()
         }
     }

@@ -202,7 +202,7 @@ func nscoder__addToCoder<T: Serializable>(aCoder: NSCoder, mirror m: MirrorType,
             nscoder__addToCoder(aCoder, mirror: c, onObject: o)
         } else {
             let j = find(object__getVarNames(mirror: reflect(o)), p)
-            aCoder.setValue(c.value as NSObject, forKey: o.serializationKeys[j!])
+            aCoder.setValue(c.value as! NSObject, forKey: o.serializationKeys[j!])
         }
     }
 }
@@ -224,7 +224,7 @@ func nscopying__copyWithZone<T: NSObject where T: NSCopying>(fromMirror fm: Mirr
         if p == "super" {
             nscopying__copyWithZone(fromMirror: c, toObject: &toObj)
         } else {
-            toObj.setValue(c.value as NSObject, forKey: p)
+            toObj.setValue(c.value as! NSObject, forKey: p)
         }
     }
 }
@@ -264,7 +264,7 @@ func object__getAllMirrorValues(mirror m: MirrorType) -> [(String, MirrorType)] 
 public func serializable__dictInit<T where T: NSObject, T: Serializable>(dictionary: [String: AnyObject], model m: T) {
     for (key, value) in dictionary {
         if let i = find(m.serializationKeys, key) {
-            model__setValue(value as NSObject, forSerializationKey: key, model: m)
+            model__setValue(value as! NSObject, forSerializationKey: key, model: m)
         }
     }
 }
@@ -315,15 +315,15 @@ public func serializable__addToDict<T: Serializable>(inout dict: [String : AnyOb
 
 func JSONify(o: AnyObject) -> AnyObject? {
     if o is String {
-        return o as String
+        return o as! String
     } else if o is Int {
-        return o as Int
+        return o as! Int
     } else if o is Double {
-        return o as Double
+        return o as! Double
     } else if o is Bool {
-        return o as Bool
+        return o as! Bool
     } else if o is NSDate {
-        return (o as NSDate).toString(timezone: NSTimeZone(forSecondsFromGMT: 0))
+        return (o as! NSDate).toString(timezone: NSTimeZone(forSecondsFromGMT: 0))
     }
     
     return nil

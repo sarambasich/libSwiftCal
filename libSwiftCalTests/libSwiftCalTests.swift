@@ -49,7 +49,7 @@ class libSwiftCalTests: XCTestCase {
         // This is an example of a functional test case.
         self.measureBlock { () -> Void in
             let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "ics", inDirectory: nil)
-            let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+            let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
             var err: NSError?
             calendar = Calendar(stringToParse: str, error: &err)
             
@@ -110,7 +110,7 @@ class libSwiftCalTests: XCTestCase {
             var err: NSError?
             let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "json", inDirectory: nil)
             let data = NSData(contentsOfFile: path!)!
-            let json: [String : AnyObject] = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &err)! as [String : AnyObject]
+            let json: [String : AnyObject] = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &err)! as! [String : AnyObject]
             let cal = Calendar(dictionary: json)
             
             XCTAssert(cal.prodID.stringValue! == Constants.libSwiftCalProdID, "Unexpected prodID")
@@ -150,7 +150,7 @@ class libSwiftCalTests: XCTestCase {
         self.measureBlock { () -> Void in
             if let result = calendar?.serializeToiCal() {
                 let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "ics", inDirectory: nil)
-                let ical: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+                let ical: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
                 
                 XCTAssert(result.len == ical.len, "Unexpected iCal serialized result")
             } else {
@@ -162,7 +162,7 @@ class libSwiftCalTests: XCTestCase {
     func test5ParseSimpleInput() {
         self.measureBlock { () -> Void in
             let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("SimpleInput", ofType: "ics", inDirectory: nil)
-            let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+            let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
             var err: NSError?
 
             calendar = Calendar(stringToParse: str, error: &err)
@@ -185,7 +185,7 @@ class libSwiftCalTests: XCTestCase {
     
     func testMoreInput() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("MoreInput", ofType: "ics", inDirectory: nil)
-        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
         var err: NSError?
         
         calendar = Calendar(stringToParse: str, error: &err)
@@ -194,13 +194,13 @@ class libSwiftCalTests: XCTestCase {
     
     func testAnotherInput() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("AnotherInput", ofType: "ics", inDirectory: nil)
-        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
         var err: NSError?
         calendar = Calendar(stringToParse: str, error: &err)
         XCTAssert(err == nil, "ERROR: \(err?.debugDescription)")
         if err == nil {
             XCTAssert(calendar!.reminders.count == 1, "Unexpected reminders count")
-            let firstRem = calendar?.reminders.first?
+            let firstRem = calendar?.reminders.first
             XCTAssert(firstRem!.summary.stringValue! == "\\, \\ backslash", "Unexpected summary")
             XCTAssert(firstRem!.priority.intValue == kPriorityLow, "Unexpected priority")
             
@@ -213,7 +213,7 @@ class libSwiftCalTests: XCTestCase {
     func testLongInput() {
         let correctSumm = "This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, This is the reminder title that never ends, yay"
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("LongInput", ofType: "ics", inDirectory: nil)
-        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
         var err: NSError?
         
         calendar = Calendar(stringToParse: str, error: &err)
@@ -256,7 +256,7 @@ class libSwiftCalTests: XCTestCase {
     
     func testRruleRecurring() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RruleInput", ofType: "ics", inDirectory: nil)
-        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
         var err: NSError?
         
         calendar = Calendar(stringToParse: str, error: &err)
@@ -279,7 +279,7 @@ class libSwiftCalTests: XCTestCase {
     
     func testRruleUntil() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RruleUntil", ofType: "ics", inDirectory: nil)
-        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
         var err: NSError?
         
         calendar = Calendar(stringToParse: str, error: &err)
@@ -301,7 +301,7 @@ class libSwiftCalTests: XCTestCase {
     
     func testRdateRecurring() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RdateInput", ofType: "ics", inDirectory: nil)
-        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
         var err: NSError?
         
         calendar = Calendar(stringToParse: str, error: &err)
@@ -318,7 +318,7 @@ class libSwiftCalTests: XCTestCase {
     
     func testRdateExplicit() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RperiodExplicit", ofType: "ics", inDirectory: nil)
-        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
         var err: NSError?
         
         calendar = Calendar(stringToParse: str, error: &err)
@@ -331,7 +331,7 @@ class libSwiftCalTests: XCTestCase {
     
     func testRdateDuration() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RperiodDuration", ofType: "ics", inDirectory: nil)
-        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
         var err: NSError?
         
         if let cal = Calendar(stringToParse: str, error: &err) {
@@ -363,7 +363,7 @@ class libSwiftCalTests: XCTestCase {
     
     func testMultipleRdateComponents() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("RdateInput2", ofType: "ics", inDirectory: nil)
-        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
         var err: NSError?
         
         if let cal = Calendar(stringToParse: str, error: &err) {
@@ -388,7 +388,7 @@ class libSwiftCalTests: XCTestCase {
     
     func testMultipleExdateComponents() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("ExdateInput", ofType: "ics", inDirectory: nil)
-        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
         var err: NSError?
         
         if let cal = Calendar(stringToParse: str, error: &err) {
@@ -413,7 +413,7 @@ class libSwiftCalTests: XCTestCase {
     
     func testLocGeo() {
         let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("LocationInput", ofType: "ics", inDirectory: nil)
-        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)!
+        let str: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
         var err: NSError?
         
         if let cal = Calendar(stringToParse: str, error: &err) {

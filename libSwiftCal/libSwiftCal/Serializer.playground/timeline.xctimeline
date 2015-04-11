@@ -3,7 +3,9 @@
    version = "3.0">
    <TimelineItems>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "file:///Users/Stefan/Documents/Applications/iOS/Frameworks/libSwiftCal/libSwiftCal/libSwiftCal/Serializer.playground#CharacterRangeLen=0&amp;CharacterRangeLoc=0&amp;EndingLineNumber=0&amp;StartingLineNumber=0&amp;Timestamp=446239612.471625">
+         documentLocation = "file:///Users/Stefan/Documents/Applications/iOS/Frameworks/libSwiftCal/libSwiftCal/libSwiftCal/Serializer.playground#CharacterRangeLen=0&amp;CharacterRangeLoc=0&amp;EndingLineNumber=0&amp;StartingLineNumber=0&amp;Timestamp=446239612.471625"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>
    </TimelineItems>
 </Timeline>
