@@ -27,28 +27,101 @@
 /**
     Represents a duration in time.
 */
-public class Duration: CalendarObject, FloatLiteralConvertible {
-    var weeks = 0
-    var days = 0
+public class Duration: CalendarObject, FloatLiteralConvertible, Printable {
+    public static let keyLetters: [Character] = ["W", "D", "H", "M", "S"]
+    public static let otherCharacters: [Character] = ["P", "T", "+", "-"]
     
-    var hours: Hour = 0
-    var minutes: Minute = 0
-    var seconds: Second = 0
+    public private(set) var weeks = 0
+    public private(set) var days = 0
+    
+    public private(set) var hours: Hour = 0
+    public private(set) var minutes: Minute = 0
+    public private(set) var seconds: Second = 0
+    
+    public var negative: Bool {
+        return weeks < 0 || days < 0 || hours < 0 || minutes < 0 || seconds < 0
+    }
 
     public var timeInterval: NSTimeInterval {
-        get {
-            var sumArr = [NSTimeInterval]()
-            sumArr.append(Conversions.Time.SecondsInAWeek * NSTimeInterval(self.weeks))
-            sumArr.append(Conversions.Time.SecondsInADay * NSTimeInterval(self.days))
-            sumArr.append(Conversions.Time.SecondsInAnHour * NSTimeInterval(self.hours))
-            sumArr.append(Conversions.Time.SecondsInAMinute * NSTimeInterval(self.minutes))
-            sumArr.append(NSTimeInterval(self.seconds))
-            return sumArr.reduce(0.0, combine: { $0 + $1 })
-        }
+        var sumArr = [NSTimeInterval]()
+        sumArr.append(Conversions.Time.SecondsInAWeek * NSTimeInterval(self.weeks))
+        sumArr.append(Conversions.Time.SecondsInADay * NSTimeInterval(self.days))
+        sumArr.append(Conversions.Time.SecondsInAnHour * NSTimeInterval(self.hours))
+        sumArr.append(Conversions.Time.SecondsInAMinute * NSTimeInterval(self.minutes))
+        sumArr.append(NSTimeInterval(self.seconds))
+        return sumArr.reduce(0.0, combine: { $0 + $1 })
     }
     
     public required init() {
         super.init()
+    }
+    
+    public convenience init(string: String) {
+        var dictionary = [String : AnyObject]()
+        
+        var period = string.uppercaseString
+        var negative = period.contains("-", options: .CaseInsensitiveSearch)
+        
+        period = period.stringByReplacingOccurrencesOfString(String("+"), withString: "")
+        period = period.stringByReplacingOccurrencesOfString(String("-"), withString: "")
+        period = period.stringByReplacingOccurrencesOfString(String("P"), withString: "")
+        
+        var periods = period.componentsSeparatedByString("T")
+        var date = periods.first!
+        var time: String?
+        if periods.count == 2 {
+            time = periods.last!
+        }
+        
+        var curDateStartIdx = date.endIndex
+        var curDateEndIdx = date.endIndex
+        
+        for var i = date.len - 1; i >= 0; i-- {
+            var char = date[advance(date.startIndex, i)]
+            if contains(Duration.keyLetters, char) {
+                let intStr = date.substringWithRange(Range(start: curDateStartIdx, end: curDateEndIdx))
+                let scanner = NSScanner(string: intStr)
+                var int = Int.max
+                if scanner.scanInteger(&int) {
+                    if int != Int.max {
+                        dictionary[String(char)] = negative ? -int : int
+                    }
+                }
+                
+                curDateStartIdx = advance(curDateStartIdx, -1)
+                curDateEndIdx = curDateStartIdx
+            } else {
+                curDateStartIdx = advance(curDateStartIdx, -1)
+            }
+        }
+        
+        if let time = time {
+            var curTimeStartIdx = time.startIndex
+            var curTimeEndIdx = curTimeStartIdx
+            
+            for i in 0 ..< time.len {
+                var char = time[advance(time.startIndex, i)]
+                if contains(Duration.keyLetters, char) {
+                    let intStr = time.substringWithRange(Range(start: curTimeStartIdx, end: curTimeEndIdx))
+                    let scanner = NSScanner(string: intStr)
+                    var int: Int = -1
+                    if scanner.scanInteger(&int) {
+                        if int != -1 {
+                            dictionary[String(char)] = negative ? -int : int
+                        }
+                    }
+                    
+                    if i < time.len {
+                        curTimeStartIdx = advance(time.startIndex, i + 1)
+                        curTimeEndIdx = curTimeStartIdx
+                    }
+                } else {
+                    curTimeEndIdx = advance(curTimeEndIdx, 1)
+                }
+            }
+        }
+        
+        self.init(dictionary: dictionary)
     }
     
     
@@ -56,25 +129,74 @@ public class Duration: CalendarObject, FloatLiteralConvertible {
     public required init(floatLiteral value: FloatLiteralType) {
         super.init()
         
-        var value = value
-        let weekVal = Int(value / NSTimeInterval(Conversions.Time.SecondsInAWeek))
+        var curValue = abs(value)
+        let weekVal = Int(curValue / NSTimeInterval(Conversions.Time.SecondsInAWeek))
         self.weeks = weekVal
-        value -= Conversions.Time.SecondsInAWeek * NSTimeInterval(weekVal)
-        let dayVal = Int(value / NSTimeInterval(Conversions.Time.SecondsInADay))
+        curValue -= Conversions.Time.SecondsInAWeek * NSTimeInterval(weekVal)
+        let dayVal = Int(curValue / NSTimeInterval(Conversions.Time.SecondsInADay))
         self.days = dayVal
-        value -= Conversions.Time.SecondsInADay * NSTimeInterval(dayVal)
-        let hourVal = Int(value / NSTimeInterval(Conversions.Time.SecondsInAnHour))
+        curValue -= Conversions.Time.SecondsInADay * NSTimeInterval(dayVal)
+        let hourVal = Int(curValue / NSTimeInterval(Conversions.Time.SecondsInAnHour))
         self.hours = hourVal
-        value -= Conversions.Time.SecondsInAnHour * NSTimeInterval(hourVal)
-        let minVal = Int(value / NSTimeInterval(Conversions.Time.SecondsInAMinute))
+        curValue -= Conversions.Time.SecondsInAnHour * NSTimeInterval(hourVal)
+        let minVal = Int(curValue / NSTimeInterval(Conversions.Time.SecondsInAMinute))
         self.minutes = minVal
-        value -= Conversions.Time.SecondsInAMinute * NSTimeInterval(minVal)
-        self.seconds = Int(value)
+        curValue -= Conversions.Time.SecondsInAMinute * NSTimeInterval(minVal)
+        self.seconds = Int(curValue)
     }
+    
     
     // MARK: - NSCoding
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    
+    // MARK: - Printable
+    public override var description: String {
+        var durationString = (self.negative ? "-" : "") + "P"
+        
+        var currentDuration = self.timeInterval
+        let weeks = currentDuration / Conversions.Time.SecondsInAWeek
+        if weeks > 0 {
+            durationString += "\(weeks)W"
+            currentDuration -= weeks
+        }
+        
+        let days = currentDuration / Conversions.Time.SecondsInADay
+        if days > 0 {
+            durationString += "\(days)D"
+            currentDuration -= days
+        }
+        
+        var hasTime = false
+        let addTime = { () -> Void in
+            if !hasTime {
+                hasTime = true
+                durationString += "T"
+            }
+        }
+        
+        let hours = currentDuration / Conversions.Time.SecondsInAnHour
+        if hours > 0 {
+            addTime()
+            durationString += "\(hours)H"
+            currentDuration -= hours
+        }
+        
+        let minutes = currentDuration / Conversions.Time.SecondsInAMinute
+        if minutes > 0 {
+            addTime()
+            durationString += "\(minutes)M"
+            currentDuration -= minutes
+        }
+        
+        if currentDuration > 0 {
+            addTime()
+            durationString += "\(currentDuration)S"
+        }
+
+        return durationString
     }
     
     
@@ -84,8 +206,6 @@ public class Duration: CalendarObject, FloatLiteralConvertible {
     }
     
     public override var serializationKeys: [String] {
-        get {
-            return super.serializationKeys + ["W", "D", "H", "M", "S"]
-        }
+        return super.serializationKeys + ["W", "D", "H", "M", "S"]
     }
 }

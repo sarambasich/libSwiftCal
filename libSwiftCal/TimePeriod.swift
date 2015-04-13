@@ -40,9 +40,15 @@ public class TimePeriod: CalendarObject {
             self.calculateTimePeriod()
         }
     }
-    /// A duration of time representin the size of the time period. Auto calculated if 
+    
+    var _duration = Duration()
+    
+    /// A duration of time representin the size of the time period. Auto calculated if
     /// start and end are populated
-    public private(set) var duration: NSTimeInterval = 0.0
+    public var duration: NSTimeInterval {
+        return _duration.timeInterval
+    }
+    
     
     public struct SerializationKeys {
         public static let Start = "start"
@@ -56,210 +62,27 @@ public class TimePeriod: CalendarObject {
         public static let Seconds = "S"
     }
     
-    public required init() {
-        super.init()
-    }
-    
     /**
         Calculates the duration between the start and end date, assigning the result to `self.duration`.
     */
     private func calculateTimePeriod() {
         if self.start != nil && self.end != nil {
-            self.duration = self.end.timeIntervalSinceDate(self.start)
+            _duration = Duration(floatLiteral: self.end.timeIntervalSinceDate(self.start))
         }
     }
     
     
     // MARK: - iCalendarSerializable
     public override func serializeToiCal() -> String {
-        var result = self.duration > 0 ? "P" : "-P"
-        
-        // Subtract out, starting with date
-        var durValue = self.duration
-        let weeks = Int(durValue / Conversions.Time.SecondsInAWeek)
-        if weeks > 0 {
-            result += "\(weeks)" + SerializationKeys.Weeks
-            durValue -= NSTimeInterval(weeks) * Conversions.Time.SecondsInAWeek
-        }
-        
-        let days = Int(durValue / Conversions.Time.SecondsInADay)
-        if days > 0 {
-            result += "\(days)" + SerializationKeys.Days
-            durValue -= NSTimeInterval(days) * Conversions.Time.SecondsInADay
-        }
-        
-        // Time
-        var appendedTime = false
-        func appendTime(inout string: String) {
-            if !appendedTime {
-                appendedTime = true
-                result += "T"
-            }
-        }
-        
-        let hours = Int(durValue / Conversions.Time.SecondsInAnHour)
-        if hours > 0 {
-            appendTime(&result)
-            
-            result += "\(hours)" + SerializationKeys.Hours
-            durValue -= NSTimeInterval(hours) * Conversions.Time.SecondsInAnHour
-        }
-        
-        let minutes = Int(durValue / Conversions.Time.SecondsInAMinute)
-        if minutes > 0 {
-            appendTime(&result)
-            
-            result += "\(minutes)" + SerializationKeys.Minutes
-            durValue -= NSTimeInterval(minutes) * Conversions.Time.SecondsInAMinute
-        }
-        
-        let seconds = durValue
-        if seconds > 0 {
-            appendTime(&result)
-            result += "\(seconds)" + SerializationKeys.Seconds
-        }
-        
-        return result
-    }
-    
-    
-    // MARK: - NSCoding
-    public required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        return _duration.description
     }
     
     
     // MARK: - Serializable
-    public required init(dictionary: [String : AnyObject]) {
-        super.init(dictionary: dictionary)
-        
-        var curInterval: NSTimeInterval = 0.0
-        let ks = SerializationKeys.self
-        if let weeks = dictionary[ks.Weeks] as? Int {
-            curInterval = curInterval + (NSTimeInterval(weeks) * Conversions.Time.SecondsInAWeek)
-        }
-        
-        if let days = dictionary[ks.Days] as? Int {
-            curInterval = curInterval + (NSTimeInterval(days) * Conversions.Time.SecondsInADay)
-        }
-        
-        if let hours = dictionary[ks.Hours] as? Int {
-            curInterval = curInterval + (NSTimeInterval(hours) * Conversions.Time.SecondsInAnHour)
-        }
-        
-        if let minutes = dictionary[ks.Minutes] as? Int {
-            curInterval = curInterval + (NSTimeInterval(minutes) * Conversions.Time.SecondsInAMinute)
-        }
-        
-        if let seconds = dictionary[ks.Seconds] as? Int {
-            curInterval = curInterval + NSTimeInterval(seconds)
-        }
-        
-        self.duration = curInterval
-    }
-    
     public override var serializationKeys: [String] {
         get {
             let ks = SerializationKeys.self
             return super.serializationKeys + [ks.Start, ks.End, ks.Duration]
-        }
-    }
-}
-
-public extension TimePeriod {
-    /// Returns the week unit of the receiver
-    public var weeks: Int {
-        get {
-            return Int(self.duration / Conversions.Time.SecondsInAWeek)
-        }
-    }
-    
-    /// Returns the day unit of the receiver
-    public var days: Int {
-        get {
-            // Subtract out, starting with date
-            var durValue = self.duration
-            let weeks = self.weeks
-            if weeks > 0 {
-                durValue -= NSTimeInterval(weeks) * Conversions.Time.SecondsInAWeek
-            }
-            
-            return Int(durValue / Conversions.Time.SecondsInADay)
-        }
-    }
-    
-    /// Returns the hour unit of the receiver
-    public var hours: Int {
-        get {
-            // Subtract out, starting with date
-            var durValue = self.duration
-            let weeks = self.weeks
-            if weeks > 0 {
-                durValue -= NSTimeInterval(weeks) * Conversions.Time.SecondsInAWeek
-            }
-            
-            let days = self.days
-            if days > 0 {
-                durValue -= NSTimeInterval(days) * Conversions.Time.SecondsInADay
-            }
-            
-            // Time
-            return Int(durValue / Conversions.Time.SecondsInAnHour)
-        }
-    }
-    
-    /// Returns the minute unit of the receiver
-    public var minutes: Int {
-        get {
-            // Subtract out, starting with date
-            var durValue = self.duration
-            let weeks = self.weeks
-            if weeks > 0 {
-                durValue -= NSTimeInterval(weeks) * Conversions.Time.SecondsInAWeek
-            }
-            
-            let days = self.days
-            if days > 0 {
-                durValue -= NSTimeInterval(days) * Conversions.Time.SecondsInADay
-            }
-            
-            // Time
-            let hours = self.hours
-            if hours > 0 {
-                durValue -= NSTimeInterval(hours) * Conversions.Time.SecondsInAnHour
-            }
-            
-            return Int(durValue / Conversions.Time.SecondsInAMinute)
-        }
-    }
-    
-    /// Returns the second unit of the receiver
-    public var seconds: Int {
-        get {
-            // Subtract out, starting with date
-            var durValue = self.duration
-            let weeks = self.weeks
-            if weeks > 0 {
-                durValue -= NSTimeInterval(weeks) * Conversions.Time.SecondsInAWeek
-            }
-            
-            let days = self.days
-            if days > 0 {
-                durValue -= NSTimeInterval(days) * Conversions.Time.SecondsInADay
-            }
-            
-            // Time
-            let hours = self.hours
-            if hours > 0 {
-                durValue -= NSTimeInterval(hours) * Conversions.Time.SecondsInAnHour
-            }
-            
-            let minutes = self.minutes
-            if minutes > 0 {
-                durValue -= NSTimeInterval(minutes) * Conversions.Time.SecondsInAMinute
-            }
-            
-            return Int(durValue)
         }
     }
 }

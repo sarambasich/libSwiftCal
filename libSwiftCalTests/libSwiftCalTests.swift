@@ -401,7 +401,7 @@ class libSwiftCalTests: XCTestCase {
                 XCTAssert(r.value.count == 1, "Unexpected value count")
                 let d = r.value.first!
                 let minDate = NSDate.parseDate("20150221T115900Z")!
-                let maxDate = NSDate.parseDate("20150223T20100Z")!
+                let maxDate = NSDate.parseDate("20150223T200100Z")!
                 let isAfter = d.compare(minDate) == NSComparisonResult.OrderedDescending
                 let isBefore = d.compare(maxDate) == NSComparisonResult.OrderedAscending
                 XCTAssert(isAfter && isBefore, "Unexpected value")

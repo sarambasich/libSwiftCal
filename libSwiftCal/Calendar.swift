@@ -264,7 +264,9 @@ extension Calendar {
                     }
                 } else {
                     var timePeriodDict = [String : AnyObject]()
+                    
                     let split = rDateComp.componentsSeparatedByString("/")
+                    
                     if let sd = NSDate.parseDate(split.first!) {
                         timePeriodDict[TimePeriod.SerializationKeys.Start] = sd
                     }
@@ -272,77 +274,12 @@ extension Calendar {
                     if let ed = NSDate.parseDate(split.last!) {
                         timePeriodDict[TimePeriod.SerializationKeys.End] = ed
                     } else {
-                        let timePeriodStr = split.last!
-                        
-                        let keyLetters: [Character] = ["W", "D", "H", "M", "S"]
-                        let otherCharacters: [Character] = ["P", "T", "+", "-"]
-                        
-                        var period = split.last!.uppercaseString
-                        
-                        var negative = period.contains("-", options: .CaseInsensitiveSearch)
-                        
-                        period = period.stringByReplacingOccurrencesOfString(String("+"), withString: "")
-                        period = period.stringByReplacingOccurrencesOfString(String("-"), withString: "")
-                        period = period.stringByReplacingOccurrencesOfString(String("P"), withString: "")
-                        
-                        var periods = period.componentsSeparatedByString("T")
-                        var date = periods.first!
-                        var time: String?
-                        if periods.count == 2 {
-                            time = periods.last!
-                        }
-                        
-                        var curDateStartIdx = date.endIndex
-                        var curDateEndIdx = date.endIndex
-                        
-                        for var i = date.len - 1; i >= 0; i-- {
-                            var char = date[advance(date.startIndex, i)]
-                            if contains(keyLetters, char) {
-                                let intStr = date.substringWithRange(Range(start: curDateStartIdx, end: curDateEndIdx))
-                                let scanner = NSScanner(string: intStr)
-                                var int: Int = -1
-                                if scanner.scanInteger(&int) {
-                                    if int != -1 {
-                                        timePeriodDict[String(char)] = negative ? -int : int
-                                    }
-                                }
-                                
-                                curDateStartIdx = advance(curDateStartIdx, -1)
-                                curDateEndIdx = curDateStartIdx
-                            } else {
-                                curDateStartIdx = advance(curDateStartIdx, -1)
-                            }
-                        }
-                        
-                        
-                        if let time = time {
-                            var curTimeStartIdx = time.startIndex
-                            var curTimeEndIdx = curTimeStartIdx
-                            
-                            for i in 0 ..< time.len {
-                                var char = time[advance(time.startIndex, i)]
-                                if contains(keyLetters, char) {
-                                    let intStr = time.substringWithRange(Range(start: curTimeStartIdx, end: curTimeEndIdx))
-                                    let scanner = NSScanner(string: intStr)
-                                    var int: Int = -1
-                                    if scanner.scanInteger(&int) {
-                                        if int != -1 {
-                                            timePeriodDict[String(char)] = negative ? -int : int
-                                        }
-                                    }
-                                    
-                                    if i < time.len {
-                                        curTimeStartIdx = advance(time.startIndex, i + 1)
-                                        curTimeEndIdx = curTimeStartIdx
-                                    }
-                                } else {
-                                    curTimeEndIdx = advance(curTimeEndIdx, 1)
-                                }
-                            }
-                        }
-                        
-                        timePers.append(timePeriodDict)
+                        let dur = Duration(string: split.last!)
+                        let dic = dur.toDictionary()
+                        timePeriodDict[TimePeriod.SerializationKeys.Duration] = dur.toDictionary()
                     }
+                    
+                    timePers.append(timePeriodDict)
                 }
             }
         } else if let d = value.value as? NSDate {

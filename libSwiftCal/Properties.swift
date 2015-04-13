@@ -300,13 +300,11 @@ public class Geo: Property {
     }
     
     public var coordinate: CLLocationCoordinate2D? {
-        get {
-            if self.lat != 0.0 && self.lon != 0.0 {
-                return CLLocationCoordinate2DMake(self.lat, self.lon)
-            }
-            
-            return nil
+        if self.lat != 0.0 && self.lon != 0.0 {
+            return CLLocationCoordinate2DMake(self.lat, self.lon)
         }
+        
+        return nil
     }
     
     
@@ -426,16 +424,20 @@ public class AlarmProperty: Property {
     :URL: https://tools.ietf.org/html/rfc5545#section-3.8.6.3
 */
 public class Trigger: AlarmProperty {
-    public var offsetTrigger: Duration? {
-        get {
-            return self.propertyValue as? Duration
+    public var offsetTrigger: Duration?
+    public var absoluteTrigger: NSDate?
+    
+    public struct SerializationKeys {
+        public static let OffsetTrigger = "trigrel"
+        public static let AbsoluteTrigger = "trigabs"
+        
+        public static var all: [String] {
+            return [OffsetTrigger, AbsoluteTrigger]
         }
     }
     
-    public var absoluteTrigger: NSDate? {
-        get {
-            return self.propertyValue as? NSDate
-        }
+    public override var serializationKeys: [String] {
+        return super.serializationKeys + SerializationKeys.all
     }
 }
 

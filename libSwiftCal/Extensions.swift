@@ -107,6 +107,8 @@ public extension NSDate {
         }
         
         for f in formats {
+            formatter.dateFormat = f
+            
             if let d = formatter.dateFromString(string) {
                 date = d
                 break

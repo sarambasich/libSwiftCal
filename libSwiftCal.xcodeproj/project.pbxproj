@@ -21,16 +21,16 @@
 		F83195D31A2EAE1A00377846 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195B51A2EAE1A00377846 /* Calendar.swift */; };
 		F83195D41A2EAE1A00377846 /* CalendarObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195B61A2EAE1A00377846 /* CalendarObject.swift */; };
 		F83195D51A2EAE1A00377846 /* CalendarType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195B71A2EAE1A00377846 /* CalendarType.swift */; };
-		F83195D61A2EAE1A00377846 /* CalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195B81A2EAE1A00377846 /* CalParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F83195D61A2EAE1A00377846 /* CalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195B81A2EAE1A00377846 /* CalParser.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F83195D71A2EAE1A00377846 /* CalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F83195B91A2EAE1A00377846 /* CalParser.m */; };
 		F83195D81A2EAE1A00377846 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195BA1A2EAE1A00377846 /* Extensions.swift */; };
 		F83195D91A2EAE1A00377846 /* iCal.grammar in Resources */ = {isa = PBXBuildFile; fileRef = F83195BB1A2EAE1A00377846 /* iCal.grammar */; };
-		F83195DA1A2EAE1A00377846 /* iCalendarElements.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195BC1A2EAE1A00377846 /* iCalendarElements.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F83195DA1A2EAE1A00377846 /* iCalendarElements.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195BC1A2EAE1A00377846 /* iCalendarElements.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F83195DB1A2EAE1A00377846 /* iCalendarElements.m in Sources */ = {isa = PBXBuildFile; fileRef = F83195BD1A2EAE1A00377846 /* iCalendarElements.m */; };
-		F83195DC1A2EAE1A00377846 /* iCalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195BE1A2EAE1A00377846 /* iCalParser.h */; };
+		F83195DC1A2EAE1A00377846 /* iCalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195BE1A2EAE1A00377846 /* iCalParser.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F83195DD1A2EAE1A00377846 /* iCalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F83195BF1A2EAE1A00377846 /* iCalParser.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		F83195E01A2EAE1A00377846 /* libSwiftCal.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195C51A2EAE1A00377846 /* libSwiftCal.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F83195E11A2EAE1A00377846 /* NSString+CalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195C61A2EAE1A00377846 /* NSString+CalParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F83195E01A2EAE1A00377846 /* libSwiftCal.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195C51A2EAE1A00377846 /* libSwiftCal.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		F83195E11A2EAE1A00377846 /* NSString+CalParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F83195C61A2EAE1A00377846 /* NSString+CalParser.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F83195E21A2EAE1A00377846 /* NSString+CalParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F83195C71A2EAE1A00377846 /* NSString+CalParser.m */; };
 		F83195E31A2EAE1A00377846 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195C81A2EAE1A00377846 /* Observable.swift */; };
 		F83195E41A2EAE1A00377846 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195C91A2EAE1A00377846 /* Observer.swift */; };
@@ -279,11 +279,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F83195D61A2EAE1A00377846 /* CalParser.h in Headers */,
 				F83195DA1A2EAE1A00377846 /* iCalendarElements.h in Headers */,
+				F83195DC1A2EAE1A00377846 /* iCalParser.h in Headers */,
 				F83195E01A2EAE1A00377846 /* libSwiftCal.h in Headers */,
 				F83195E11A2EAE1A00377846 /* NSString+CalParser.h in Headers */,
-				F83195DC1A2EAE1A00377846 /* iCalParser.h in Headers */,
+				F83195D61A2EAE1A00377846 /* CalParser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +561,8 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/libSwiftCal-ddgudkqgicbyqydpzunjitshbjxb/Build/Products/Debug-iphoneos",
 				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_WARN_PEDANTIC = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libSwiftCal",
@@ -594,6 +596,8 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/libSwiftCal-ddgudkqgicbyqydpzunjitshbjxb/Build/Products/Debug-iphoneos",
 				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_WARN_PEDANTIC = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libSwiftCal",
