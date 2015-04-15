@@ -146,7 +146,7 @@ public class Reminder: CalendarObject {
     public var IANAProperties = [IANAProperty]()
     
     /// A list of alarm components associated with this reminder
-    public internal(set) var alarms = [Alarm]()
+    public var alarms = [Alarm]()
     
     // ***
     

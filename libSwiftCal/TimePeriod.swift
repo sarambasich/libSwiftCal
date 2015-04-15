@@ -27,7 +27,7 @@
 /**
     Represents a period of time.
 */
-public class TimePeriod: CalendarObject {
+public class TimePeriod: CalendarObject, Printable {
     /// The beginning of the time period. If nil, means now and onward
     public private(set) var start: NSDate! {
         didSet {
@@ -74,6 +74,12 @@ public class TimePeriod: CalendarObject {
     
     // MARK: - iCalendarSerializable
     public override func serializeToiCal() -> String {
+        return _duration.description
+    }
+    
+    
+    // MARK: - Printable
+    public override var description: String {
         return _duration.description
     }
     

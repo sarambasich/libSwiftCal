@@ -441,6 +441,16 @@ public class Trigger: AlarmProperty {
     }
 }
 
+extension Trigger: iCalendarSerializable {
+    public override func serializeToiCal() -> String {
+        var result = String(kTRIGGER + kCOLON)
+        
+        result += model__serializeiCalChildren(self)
+        
+        return result
+    }
+}
+
 
 /**
     Specifies audio to play when an alarm triggers.
@@ -448,10 +458,19 @@ public class Trigger: AlarmProperty {
     :URL: https://tools.ietf.org/html/rfc5545#section-3.8.6.1
 */
 public class AudioAction: AlarmProperty {
-    public var attach: Attachment? {
-        get {
-            return self.propertyValue as? Attachment
-        }
+    public required init() {
+        super.init()
+        
+        self.key = kACTION
+        self.stringValue = "AUDIO"
+    }
+    
+    public required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    public required init(dictionary: [String : AnyObject]) {
+        super.init(dictionary: dictionary)
     }
 }
 

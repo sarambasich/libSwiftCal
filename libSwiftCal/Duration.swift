@@ -129,7 +129,8 @@ public class Duration: CalendarObject, FloatLiteralConvertible, Printable {
     public required init(floatLiteral value: FloatLiteralType) {
         super.init()
         
-        var curValue = abs(value)
+        var negative = value < 0
+        var curValue = value
         let weekVal = Int(curValue / NSTimeInterval(Conversions.Time.SecondsInAWeek))
         self.weeks = weekVal
         curValue -= Conversions.Time.SecondsInAWeek * NSTimeInterval(weekVal)
@@ -146,6 +147,12 @@ public class Duration: CalendarObject, FloatLiteralConvertible, Printable {
     }
     
     
+    // MARK: - iCalendarSerializable
+    public override func serializeToiCal() -> String {
+        return self.description
+    }
+    
+    
     // MARK: - NSCoding
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -156,17 +163,14 @@ public class Duration: CalendarObject, FloatLiteralConvertible, Printable {
     public override var description: String {
         var durationString = (self.negative ? "-" : "") + "P"
         
-        var currentDuration = self.timeInterval
-        let weeks = currentDuration / Conversions.Time.SecondsInAWeek
-        if weeks > 0 {
-            durationString += "\(weeks)W"
-            currentDuration -= weeks
+        let w = abs(self.weeks)
+        if w > 0 {
+            durationString += "\(w)W"
         }
         
-        let days = currentDuration / Conversions.Time.SecondsInADay
-        if days > 0 {
-            durationString += "\(days)D"
-            currentDuration -= days
+        let d = abs(self.days)
+        if d > 0 {
+            durationString += "\(d)D"
         }
         
         var hasTime = false
@@ -177,23 +181,22 @@ public class Duration: CalendarObject, FloatLiteralConvertible, Printable {
             }
         }
         
-        let hours = currentDuration / Conversions.Time.SecondsInAnHour
-        if hours > 0 {
+        let h = abs(self.hours)
+        if h > 0 {
             addTime()
-            durationString += "\(hours)H"
-            currentDuration -= hours
+            durationString += "\(h)H"
         }
         
-        let minutes = currentDuration / Conversions.Time.SecondsInAMinute
-        if minutes > 0 {
+        let m = abs(self.minutes)
+        if m > 0 {
             addTime()
-            durationString += "\(minutes)M"
-            currentDuration -= minutes
+            durationString += "\(m)M"
         }
         
-        if currentDuration > 0 {
+        let s = abs(self.seconds)
+        if s > 0 {
             addTime()
-            durationString += "\(currentDuration)S"
+            durationString += "\(s)S"
         }
 
         return durationString
