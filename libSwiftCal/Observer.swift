@@ -24,8 +24,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-import Foundation
-
 /**
     Protocol describing an observer type.
 
@@ -33,7 +31,7 @@ import Foundation
     a target model object. As soon as that object is modified, a callback
     is invoked on the observer.
 */
-@objc public protocol Observer: NSObjectProtocol {
+@objc public protocol Observer {
     /**
         A callback function invoked when the observed model has been changed.
         

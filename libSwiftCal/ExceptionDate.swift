@@ -54,9 +54,14 @@ public class ExceptionDate: ReminderProperty {
         super.init()
     }
     
+    private func isEmpty() -> Bool {
+        return self.key == nil || self.value.count == 0
+    }
+    
     
     // MARK: - iCalendarSerializable
     public override func serializeToiCal() -> String {
+        if self.isEmpty() { return String.Empty }
         var result = String(kEXDATE)
         
         if self.parameters.count > 0 {

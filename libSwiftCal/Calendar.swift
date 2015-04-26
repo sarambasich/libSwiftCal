@@ -145,30 +145,30 @@ public class Calendar: CalendarObject, ParserObserver {
     
     // Parsing
     private var parser: CalParser! = CalParser()
-    private var currentTodoDict: [String : AnyObject]!
-    private var currentAlarmDict: [String : AnyObject]!
-    private var currentTodoXProps: [[String : AnyObject]]!
-    private var currentAlarmXProps: [[String : AnyObject]]!
-    private var currentAlarms: [[String : AnyObject]]!
-    private var currentRdates: [[String : AnyObject]]!
-    private var currentExdates: [[String : AnyObject]]!
+    private var currentTodoDict: [String : AnyObject]?
+    private var currentAlarmDict: [String : AnyObject]?
+    private var currentTodoXProps: [[String : AnyObject]]?
+    private var currentAlarmXProps: [[String : AnyObject]]?
+    private var currentAlarms: [[String : AnyObject]]?
+    private var currentRdates: [[String : AnyObject]]?
+    private var currentExdates: [[String : AnyObject]]?
 }
 
 extension Calendar {
     private func emptyParserFields() {
-        currentTodoDict.removeAll()
+        currentTodoDict?.removeAll()
         currentTodoDict = nil
-        currentTodoXProps.removeAll()
+        currentTodoXProps?.removeAll()
         currentTodoXProps = nil
-        currentAlarmDict.removeAll()
+        currentAlarmDict?.removeAll()
         currentAlarmDict = nil
-        currentAlarmXProps.removeAll()
+        currentAlarmXProps?.removeAll()
         currentAlarmXProps = nil
-        currentAlarms.removeAll()
+        currentAlarms?.removeAll()
         currentAlarms = nil
-        currentRdates.removeAll()
+        currentRdates?.removeAll()
         currentRdates = nil
-        currentExdates.removeAll()
+        currentExdates?.removeAll()
         currentExdates = nil
     }
     
@@ -192,9 +192,9 @@ extension Calendar {
                 currentTodoXProps = [[String : AnyObject]]()
             }
             
-            currentTodoXProps.append(value.toDictionary() as! [String : AnyObject])
+            currentTodoXProps!.append(value.toDictionary() as! [String : AnyObject])
         } else {
-            currentTodoDict[key] = value.toDictionary()
+            currentTodoDict![key] = value.toDictionary()
         }
     }
     
@@ -223,7 +223,7 @@ extension Calendar {
             }
         }
         
-        currentTodoDict[key] = dict
+        currentTodoDict![key] = dict
     }
     
     public func parser(key: String!, didMatchGeo value: PropertyMatch!) {
@@ -234,7 +234,7 @@ extension Calendar {
             let lon = (comps[1] as NSString).doubleValue
             
             if lat != 0.0 && lon != 0.0 {
-                currentTodoDict[kGEO] = [SerializationKeys.PropertyKeyKey: kGEO, SerializationKeys.PropertyValKey: value.value as! String]
+                currentTodoDict![kGEO] = [SerializationKeys.PropertyKeyKey: kGEO, SerializationKeys.PropertyValKey: value.value as! String]
             }
         }
     }
@@ -302,11 +302,11 @@ extension Calendar {
             finalRdateDict[kPERIOD] = timePers
         }
         
-        if currentTodoDict[kRDATE] == nil {
-            currentTodoDict[kRDATE] = [[String : AnyObject]]()
+        if currentTodoDict![kRDATE] == nil {
+            currentTodoDict![kRDATE] = [[String : AnyObject]]()
         }
         
-        currentRdates.append(finalRdateDict)
+        currentRdates!.append(finalRdateDict)
     }
     
     public func parser(key: String!, willMatchExdate value: String!) {
@@ -344,11 +344,11 @@ extension Calendar {
             exdate[kDATE_TIME] = dateTimes
         }
         
-        if currentTodoDict[kEXDATE] == nil {
-            currentTodoDict[kEXDATE] = [[String : AnyObject]]()
+        if currentTodoDict![kEXDATE] == nil {
+            currentTodoDict![kEXDATE] = [[String : AnyObject]]()
         }
         
-        currentExdates.append(exdate)
+        currentExdates!.append(exdate)
     }
     
     public func parser(key: String!, willMatchAlarmc value: String!) {
@@ -366,24 +366,25 @@ extension Calendar {
                 currentAlarmXProps = [[String : AnyObject]]()
             }
             
-            currentAlarmXProps.append(value.toDictionary() as! [String : AnyObject])
+            currentAlarmXProps!.append(value.toDictionary() as! [String : AnyObject])
         } else {
-            currentAlarmDict[key] = value.toDictionary()
+            currentAlarmDict![key] = value.toDictionary()
         }
     }
     
     public func parser(key: String!, didMatchAlarmc value: String!) {
-        currentAlarmDict[SerializationKeys.XPropertiesKey] = currentAlarmXProps
-        currentAlarms.append(currentAlarmDict)
+        currentAlarmDict![SerializationKeys.XPropertiesKey] = currentAlarmXProps
+        currentAlarms!.append(currentAlarmDict!)
         currentAlarmDict = nil
     }
     
     public func parser(key: String!, didMatchTodoc value: String!) {
-        currentTodoDict[SerializationKeys.AlarmsKey] = currentAlarms
-        currentTodoDict[SerializationKeys.RecurrenceDatesKey] = currentRdates
-        currentTodoDict[SerializationKeys.ExceptionDatesKey] = currentExdates
-        currentTodoDict[SerializationKeys.XPropertiesKey] = currentTodoXProps
+        currentTodoDict![SerializationKeys.AlarmsKey] = currentAlarms
+        currentTodoDict![SerializationKeys.RecurrenceDatesKey] = currentRdates
+        currentTodoDict![SerializationKeys.ExceptionDatesKey] = currentExdates
+        currentTodoDict![SerializationKeys.XPropertiesKey] = currentTodoXProps
         let newTodoc = Reminder(dictionary: self.currentTodoDict!)
         self.reminders.append(newTodoc)
+        emptyParserFields()
     }
 }

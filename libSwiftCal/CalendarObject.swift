@@ -224,7 +224,11 @@ func nscopying__copyWithZone<T: NSObject where T: NSCopying>(fromMirror fm: Mirr
         if p == "super" {
             nscopying__copyWithZone(fromMirror: c, toObject: &toObj)
         } else {
-            toObj.setValue(c.value as! NSObject, forKey: p)
+            if let o = c.value as? NSObject {
+                toObj.setValue(o, forKey: p)
+            } else {
+                println("Couldn't copy value for variable \(p)")
+            }
         }
     }
 }
@@ -405,11 +409,12 @@ public class CalendarObject: NSObject, CalendarType {
     
     // MARK: - NSCopying
     public func copyWithZone(zone: NSZone) -> AnyObject {
-        var c = CalendarObject()
-        
-        nscopying__copyWithZone(fromMirror: reflect(self), toObject: &c)
-        
-        return c
+        return self.dynamicType(dictionary: toDictionary())
+//        var c = CalendarObject()
+//        
+//        nscopying__copyWithZone(fromMirror: reflect(self), toObject: &c)
+//        
+//        return c
     }
     
     

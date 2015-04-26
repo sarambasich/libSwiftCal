@@ -127,7 +127,7 @@ public class Reminder: CalendarObject {
     /// Whether the request was successful or otherwise impacted
     public var requestStatus = [RequestStatus]()
     /// Associated calendar objects
-    public var related = [CalendarObject]() // TODO: weak ref
+    public var related = [ReminderProperty]() // TODO: weak ref
     /// A list of resources (string) required for this reminder
     public var resources = [ReminderProperty]()
     

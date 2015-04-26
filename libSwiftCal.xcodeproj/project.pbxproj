@@ -40,8 +40,6 @@
 		F83195E81A2EAE1A00377846 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CD1A2EAE1A00377846 /* Reminder.swift */; };
 		F83195E91A2EAE1A00377846 /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CE1A2EAE1A00377846 /* RequestStatus.swift */; };
 		F83195EA1A2EAE1A00377846 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195CF1A2EAE1A00377846 /* Serializable.swift */; };
-		F834F4E01A998844001560C0 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F867CF2A1A9986730020919E /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F834F4E11A998847001560C0 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F867CF2A1A9986730020919E /* PEGKit.framework */; };
 		F83ACB631A2AD66600423215 /* EasyInput.json in Resources */ = {isa = PBXBuildFile; fileRef = F83ACB621A2AD66600423215 /* EasyInput.json */; };
 		F8497B041A55A87C00AD592B /* AnotherInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8497B031A55A87C00AD592B /* AnotherInput.ics */; };
 		F850BB421AC7AA5100116C45 /* LocationInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F850BB411AC7AA5100116C45 /* LocationInput.ics */; };
@@ -50,6 +48,8 @@
 		F8761D561A9924CA00F8D9A7 /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8761D551A9924CA00F8D9A7 /* TimePeriod.swift */; };
 		F8857CD51A70A0DB000EC9A2 /* RruleInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8857CD41A70A0DB000EC9A2 /* RruleInput.ics */; };
 		F89877881A3BE8A5002F9322 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89877871A3BE8A5002F9322 /* JSON.swift */; };
+		F8B31E221AEC112300A3C01C /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8B31E201AEC111600A3C01C /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F8B31E231AEC112600A3C01C /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B31E201AEC111600A3C01C /* PEGKit.framework */; };
 		F8B4D17C1A9ECF3C00B3F5B8 /* ExceptionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4D17B1A9ECF3C00B3F5B8 /* ExceptionDate.swift */; };
 		F8B8729D1A98EC5100BF033E /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */; };
 		F8D26F461ABDD4550050373E /* RdateInput2.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8D26F451ABDD4550050373E /* RdateInput2.ics */; };
@@ -77,7 +77,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F834F4E01A998844001560C0 /* PEGKit.framework in CopyFiles */,
+				F8B31E221AEC112300A3C01C /* PEGKit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,11 +125,11 @@
 		F8497B031A55A87C00AD592B /* AnotherInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AnotherInput.ics; sourceTree = "<group>"; };
 		F850BB411AC7AA5100116C45 /* LocationInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LocationInput.ics; sourceTree = "<group>"; };
 		F858377A1A509A47003F7CCF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		F867CF2A1A9986730020919E /* PEGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PEGKit.framework; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/libSwiftCal-ddgudkqgicbyqydpzunjitshbjxb/Build/Products/Debug-iphoneos/PEGKit.framework"; sourceTree = "<group>"; };
 		F8761D531A99212100F8D9A7 /* RdateInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RdateInput.ics; sourceTree = "<group>"; };
 		F8761D551A9924CA00F8D9A7 /* TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriod.swift; sourceTree = "<group>"; };
 		F8857CD41A70A0DB000EC9A2 /* RruleInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RruleInput.ics; sourceTree = "<group>"; };
 		F89877871A3BE8A5002F9322 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		F8B31E201AEC111600A3C01C /* PEGKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = PEGKit.framework; path = "/Users/Stefan/Documents/Applications/iOS/MyList/Build/Products/Debug-iphoneos/PEGKit.framework"; sourceTree = "<absolute>"; };
 		F8B4D17B1A9ECF3C00B3F5B8 /* ExceptionDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionDate.swift; sourceTree = "<group>"; };
 		F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RecurrenceRule.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F8D26F451ABDD4550050373E /* RdateInput2.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = RdateInput2.ics; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F834F4E11A998847001560C0 /* PEGKit.framework in Frameworks */,
+				F8B31E231AEC112600A3C01C /* PEGKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +242,7 @@
 		F8F8EB081A1C3F1F0046AF23 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				F867CF2A1A9986730020919E /* PEGKit.framework */,
+				F8B31E201AEC111600A3C01C /* PEGKit.framework */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -550,6 +550,7 @@
 		F8F8EB031A1C3EEE0046AF23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -559,7 +560,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/libSwiftCal-ddgudkqgicbyqydpzunjitshbjxb/Build/Products/Debug-iphoneos",
+					"/Users/Stefan/Documents/Applications/iOS/MyList/Build/Products/Debug-iphoneos",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_PEDANTIC = NO;
@@ -584,6 +585,7 @@
 		F8F8EB041A1C3EEE0046AF23 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
@@ -594,7 +596,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/libSwiftCal-ddgudkqgicbyqydpzunjitshbjxb/Build/Products/Debug-iphoneos",
+					"/Users/Stefan/Documents/Applications/iOS/MyList/Build/Products/Debug-iphoneos",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_PEDANTIC = NO;
