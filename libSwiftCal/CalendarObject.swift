@@ -335,7 +335,7 @@ func JSONify(o: AnyObject) -> AnyObject? {
 
 // MARK: - Equatable (CalendarObject class)
 public func == (lhs: CalendarObject, rhs: CalendarObject) -> Bool {
-    return lhs === rhs || lhs.id == rhs.id
+    return lhs === rhs || lhs.id == rhs.id && !(rhs.id == String.Empty || lhs.id == String.Empty)
 }
 
 public func != (lhs: CalendarObject, rhs: CalendarObject) -> Bool {

@@ -58,7 +58,13 @@ public class Reminder: CalendarObject {
     ///    calendar store.
     public var dateTimestamp: ReminderProperty! = ReminderProperty(dictionary: [SerializationKeys.PropertyKeyKey: kDTSTAMP, SerializationKeys.PropertyValKey: NSDate()])
     /// Unique identifier
-    public var uid: ReminderProperty! = ReminderProperty()
+    public var uid: ReminderProperty! = ReminderProperty() {
+        didSet {
+            if let newId = uid.stringValue {
+                id = newId
+            }
+        }
+    }
     
     /// The access classification (or visibility) of the reminder
     public var accessClass: ReminderProperty! = ReminderProperty()
