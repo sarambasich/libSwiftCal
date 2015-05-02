@@ -39,5 +39,5 @@
         :param: e An `NSError` object describing an error if one has occurred or 
                     nil if nothing went wrong.
     */
-    optional func notify(model: AnyObject, error e: NSError?)
+    func notify(model: AnyObject, error e: NSError?)
 }

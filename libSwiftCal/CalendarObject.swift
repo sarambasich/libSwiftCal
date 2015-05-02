@@ -435,7 +435,7 @@ public class CalendarObject: NSObject, CalendarType {
     
     public func notifyObservers(e: NSError?) {
         for o in self.observers {
-            o.notify?(self, error: e)
+            o.notify(self, error: e)
         }
     }
     

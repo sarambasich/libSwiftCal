@@ -48,13 +48,13 @@
 		F8761D561A9924CA00F8D9A7 /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8761D551A9924CA00F8D9A7 /* TimePeriod.swift */; };
 		F8857CD51A70A0DB000EC9A2 /* RruleInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8857CD41A70A0DB000EC9A2 /* RruleInput.ics */; };
 		F89877881A3BE8A5002F9322 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89877871A3BE8A5002F9322 /* JSON.swift */; };
-		F8B31E221AEC112300A3C01C /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8B31E201AEC111600A3C01C /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F8B31E231AEC112600A3C01C /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B31E201AEC111600A3C01C /* PEGKit.framework */; };
 		F8B4D17C1A9ECF3C00B3F5B8 /* ExceptionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4D17B1A9ECF3C00B3F5B8 /* ExceptionDate.swift */; };
 		F8B8729D1A98EC5100BF033E /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */; };
 		F8D26F461ABDD4550050373E /* RdateInput2.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8D26F451ABDD4550050373E /* RdateInput2.ics */; };
 		F8D26F561ABDF35A0050373E /* ExdateInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8D26F551ABDF35A0050373E /* ExdateInput.ics */; };
 		F8D26F611ABE2E7B0050373E /* RruleUntil.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8D26F601ABE2E7B0050373E /* RruleUntil.ics */; };
+		F8EFC69D1AF1D3CD00AFC932 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EFC69C1AF1D3CD00AFC932 /* PEGKit.framework */; };
+		F8EFC69E1AF1D3D500AFC932 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8EFC69C1AF1D3CD00AFC932 /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
 		F8F8EED51A1C4CF30046AF23 /* libSwiftCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */; };
 		F8FC991E1A59A130005B4036 /* LongInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8FC991D1A59A130005B4036 /* LongInput.ics */; };
@@ -77,7 +77,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F8B31E221AEC112300A3C01C /* PEGKit.framework in CopyFiles */,
+				F8EFC69E1AF1D3D500AFC932 /* PEGKit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,12 +129,12 @@
 		F8761D551A9924CA00F8D9A7 /* TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriod.swift; sourceTree = "<group>"; };
 		F8857CD41A70A0DB000EC9A2 /* RruleInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RruleInput.ics; sourceTree = "<group>"; };
 		F89877871A3BE8A5002F9322 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
-		F8B31E201AEC111600A3C01C /* PEGKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = PEGKit.framework; path = "/Users/Stefan/Documents/Applications/iOS/MyList/Build/Products/Debug-iphoneos/PEGKit.framework"; sourceTree = "<absolute>"; };
 		F8B4D17B1A9ECF3C00B3F5B8 /* ExceptionDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionDate.swift; sourceTree = "<group>"; };
 		F8B8729C1A98EC5100BF033E /* RecurrenceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RecurrenceRule.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F8D26F451ABDD4550050373E /* RdateInput2.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = RdateInput2.ics; sourceTree = "<group>"; };
 		F8D26F551ABDF35A0050373E /* ExdateInput.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExdateInput.ics; sourceTree = "<group>"; };
 		F8D26F601ABE2E7B0050373E /* RruleUntil.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RruleUntil.ics; sourceTree = "<group>"; };
+		F8EFC69C1AF1D3CD00AFC932 /* PEGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PEGKit.framework; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/MyList-glazucatajuedydloqocpkmuotup/Build/Products/Debug-iphoneos/PEGKit.framework"; sourceTree = "<group>"; };
 		F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSwiftCal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8EAF71A1C3EEE0046AF23 /* libSwiftCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libSwiftCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F8ECE51A1C3F200046AF23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8B31E231AEC112600A3C01C /* PEGKit.framework in Frameworks */,
+				F8EFC69D1AF1D3CD00AFC932 /* PEGKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +242,7 @@
 		F8F8EB081A1C3F1F0046AF23 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				F8B31E201AEC111600A3C01C /* PEGKit.framework */,
+				F8EFC69C1AF1D3CD00AFC932 /* PEGKit.framework */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -560,7 +560,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"/Users/Stefan/Documents/Applications/iOS/MyList/Build/Products/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MyList-glazucatajuedydloqocpkmuotup/Build/Products/Debug-iphoneos",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_PEDANTIC = NO;
@@ -596,7 +596,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"/Users/Stefan/Documents/Applications/iOS/MyList/Build/Products/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MyList-glazucatajuedydloqocpkmuotup/Build/Products/Debug-iphoneos",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_PEDANTIC = NO;
