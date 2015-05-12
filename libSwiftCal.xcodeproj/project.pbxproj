@@ -15,6 +15,7 @@
 		F82161E61A54A91800886131 /* BlankInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82161E51A54A91800886131 /* BlankInput.ics */; };
 		F82161E81A54C2C900886131 /* MoreInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82161E71A54C2C900886131 /* MoreInput.ics */; };
 		F82909B51A1C5ADA0091366E /* EasyInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F82909B41A1C5ADA0091366E /* EasyInput.ics */; };
+		F82E99521AF8690D00332AA5 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EFC69C1AF1D3CD00AFC932 /* PEGKit.framework */; };
 		F83195D01A2EAE1A00377846 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195B01A2EAE1A00377846 /* Alarm.swift */; };
 		F83195D11A2EAE1A00377846 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F83195B21A2EAE1A00377846 /* Localizable.strings */; };
 		F83195D21A2EAE1A00377846 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83195B41A2EAE1A00377846 /* Attachment.swift */; };
@@ -53,7 +54,6 @@
 		F8D26F461ABDD4550050373E /* RdateInput2.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8D26F451ABDD4550050373E /* RdateInput2.ics */; };
 		F8D26F561ABDF35A0050373E /* ExdateInput.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8D26F551ABDF35A0050373E /* ExdateInput.ics */; };
 		F8D26F611ABE2E7B0050373E /* RruleUntil.ics in Resources */ = {isa = PBXBuildFile; fileRef = F8D26F601ABE2E7B0050373E /* RruleUntil.ics */; };
-		F8EFC69D1AF1D3CD00AFC932 /* PEGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EFC69C1AF1D3CD00AFC932 /* PEGKit.framework */; };
 		F8EFC69E1AF1D3D500AFC932 /* PEGKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8EFC69C1AF1D3CD00AFC932 /* PEGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F8F8EAF81A1C3EEE0046AF23 /* libSwiftCal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8EAEC1A1C3EEE0046AF23 /* libSwiftCal.framework */; };
 		F8F8EED51A1C4CF30046AF23 /* libSwiftCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8ECE61A1C3F200046AF23 /* libSwiftCalTests.swift */; };
@@ -147,7 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8EFC69D1AF1D3CD00AFC932 /* PEGKit.framework in Frameworks */,
+				F82E99521AF8690D00332AA5 /* PEGKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +482,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -530,6 +531,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -562,6 +564,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MyList-glazucatajuedydloqocpkmuotup/Build/Products/Debug-iphoneos",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_PEDANTIC = NO;
 				HEADER_SEARCH_PATHS = (
@@ -578,6 +581,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = Debug;

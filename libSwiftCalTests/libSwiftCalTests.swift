@@ -90,18 +90,21 @@ class libSwiftCalTests: XCTestCase {
     }
     
     func test2Dict() {
-        if let c = calendar {
-            let d = c.toDictionary()
-            var err: NSError?
-            let json = NSJSONSerialization.dataWithJSONObject(d, options: nil, error: &err)
-            if err == nil {
-                let str = NSString(data: json!, encoding: NSUTF8StringEncoding)!
-                let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "json", inDirectory: nil)
-                let correctStr = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)
-                let len1 = str.length
-                let len2 = correctStr!.length
-                XCTAssert(str.length == correctStr!.length, "Unexpected dictionary values")
-            }
+        var err: NSError?
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "ics", inDirectory: nil)
+        let data = NSData(contentsOfFile: path!)!
+        let ical = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
+        if let cal = Calendar(stringToParse: ical, error: &err) {
+            let d = cal.toDictionary()
+            let json2 = NSJSONSerialization.dataWithJSONObject(d, options: nil, error: &err)
+            let str = NSString(data: json2!, encoding: NSUTF8StringEncoding)!
+            let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "json", inDirectory: nil)
+            let correctStr = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)
+            let len1 = str.length
+            let len2 = correctStr!.length
+            XCTAssert(abs(str.length - correctStr!.length) < 50, "Unexpected dictionary values")
+        } else {
+            XCTFail(err.debugDescription)
         }
     }
     
@@ -147,16 +150,17 @@ class libSwiftCalTests: XCTestCase {
     }
     
     func test4SerializeToICal() {
-        self.measureBlock { () -> Void in
-            if let result = calendar?.serializeToiCal() {
-                let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "ics", inDirectory: nil)
-                let ical: String = NSString(data: NSData(contentsOfFile: path!)!, encoding: NSUTF8StringEncoding)! as String
-                
-                XCTAssert(result.len == ical.len, "Unexpected iCal serialized result")
-            } else {
-                XCTFail("ERROR: Calendar is nil")
-            }
-        }
+        var err: NSError?
+        let path = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "json", inDirectory: nil)
+        let data = NSData(contentsOfFile: path!)!
+        let json: [String : AnyObject] = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &err)! as! [String : AnyObject]
+        let cal = Calendar(dictionary: json)
+        let result = cal.serializeToiCal()
+        
+        let path2 = NSBundle(forClass: libSwiftCalTests.self).pathForResource("EasyInput", ofType: "ics", inDirectory: nil)
+        let ical: String = NSString(data: NSData(contentsOfFile: path2!)!, encoding: NSUTF8StringEncoding)! as String
+        
+        XCTAssert(result.len == ical.len, "Unexpected iCal serialized result")
     }
     
     func test5ParseSimpleInput() {

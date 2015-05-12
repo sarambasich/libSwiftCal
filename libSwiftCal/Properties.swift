@@ -81,7 +81,7 @@ public protocol TypedValue {
     :URL: https://tools.ietf.org/html/rfc5545#section-3.5
 */
 public class Property: CalendarObject, TypedValue {
-    public internal(set) var key: String! = ""
+    public internal(set) var key: String! = String.Empty
     public internal(set) var propertyValue: AnyObject!
     public internal(set) var parameters = [Parameter]()
     
@@ -91,39 +91,47 @@ public class Property: CalendarObject, TypedValue {
     
     
     public override func serializeToiCal() -> String {
-        // No key? Don't serialize.
-        if self.key.isEmpty {
-            return ""
+        var result = String.Empty
+        
+        if shouldSerialize() {
+            result += key
+            result += serializeParameters()
+            result += kCOLON
+            
+            if let valStr = JSONify(propertyValue) as? String where !valStr.isEmpty {
+                result += valStr.escapeForiCalendar()
+            } else if let v: AnyObject = JSONify(propertyValue) {
+                result += "\(v)".escapeForiCalendar()
+            }
+            
+            result = result.foldiCalendarString()
+            result += kCRLF
         }
         
-        // Empty string? Let's keep it clean. Don't serialize it.
-        let valStr: String? = JSONify(self.propertyValue) as? String
-        if valStr != nil {
-            if valStr!.isEmpty {
-                return ""
+        return result
+    }
+    
+    /**
+        Determines whether the receiver should serialize itself.
+    */
+    func shouldSerialize() -> Bool {
+        var result = false
+        if let k = key where !k.isEmpty {
+            if let type: AnyObject = JSONify(propertyValue) {
+                switch type {
+                case let type as String:
+                    result = !type.isEmpty
+                case let type as Int:
+                    result = true
+                case let type as Double:
+                    result = true
+                case let type as NSDate:
+                    result = true
+                default:
+                    break
+                }
             }
         }
-        
-        var result = String()
-        
-        result += self.key
-        
-        result += self.serializeParameters()
-        
-        result += kCOLON
-        
-        if let s = valStr {
-            result += s.escapeForiCalendar()
-        } else if let v: AnyObject = JSONify(self.propertyValue) {
-            result += "\(v)".escapeForiCalendar()
-        }
-
-        result = result.foldiCalendarString()
-//        if result.len > 73 {
-//            result = result.insertString(kCRLF + " ", everyXCharacters: 73)
-//        }
-        
-        result += kCRLF
         
         return result
     }
