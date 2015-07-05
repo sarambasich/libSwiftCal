@@ -75,7 +75,7 @@ public class ExceptionDate: ReminderProperty {
             for d in self.date {
                 if d !== self.date.first { result += kCOMMA }
                 
-                result += d.toString(dateFormat: DateFormats.ISO8601Date)
+                result += d.toString(DateFormats.ISO8601Date)
             }
         } else if self.dateTime.count > 0 {
             for d in self.dateTime {
@@ -94,7 +94,7 @@ public class ExceptionDate: ReminderProperty {
     
     
     // MARK: - NSCoding
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

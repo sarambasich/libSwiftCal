@@ -73,7 +73,7 @@ public class Parameter: CalendarObject {
     
     
     // MARK: - NSCoding
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

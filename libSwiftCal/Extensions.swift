@@ -37,7 +37,7 @@ public func += (a: [String : AnyObject], b: [String : AnyObject]?) -> [String : 
         return a
     }
     
-    return combineDicts(a, b!)
+    return combineDicts(a, b: b!)
 }
 
 public func + (a: [String : AnyObject], b: [String : AnyObject]?) -> [String : AnyObject] {
@@ -45,7 +45,7 @@ public func + (a: [String : AnyObject], b: [String : AnyObject]?) -> [String : A
         return a
     }
     
-    return combineDicts(a, b!)
+    return combineDicts(a, b: b!)
 }
 
 private func combineDicts(a: [String : AnyObject], b: [String : AnyObject]) -> [String : AnyObject] {
@@ -120,7 +120,7 @@ public extension NSDate {
     
     public func stripTime() -> NSDate {
         let cal = NSCalendar.currentCalendar()
-        let flags: NSCalendarUnit = .CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay
+        let flags: NSCalendarUnit = [.Year, .Month, .Day]
         let comps = cal.components(flags, fromDate: self)
         
         return cal.dateFromComponents(comps)!
@@ -153,9 +153,9 @@ public extension NSDate {
     }
     
     public func hasTimeComponent() -> Bool {
-        let seconds = self.valueForCalendarComponentUnit(.CalendarUnitSecond) == 0
-        let minutes = self.valueForCalendarComponentUnit(.CalendarUnitMinute) == 0
-        let hours = self.valueForCalendarComponentUnit(.CalendarUnitHour) == 0
+        let seconds = self.valueForCalendarComponentUnit(.Second) == 0
+        let minutes = self.valueForCalendarComponentUnit(.Minute) == 0
+        let hours = self.valueForCalendarComponentUnit(.Hour) == 0
         
         return seconds && minutes && hours
     }
@@ -195,7 +195,7 @@ public extension String {
     
     public var len: Int {
         get {
-            return count(self) as Int
+            return self.characters.count as Int
         }
     }
     
@@ -208,7 +208,7 @@ public extension String {
         return self.stringByReplacingOccurrencesOfString(source, withString: replacement)
     }
     
-    public func contains(otherString: String, options: NSStringCompareOptions = nil) -> Bool {
+    public func contains(otherString: String, options: NSStringCompareOptions = []) -> Bool {
         return self.rangeOfString(otherString, options: options) != nil
     }
     
@@ -218,7 +218,7 @@ public extension String {
     
         `;Mis;sis;sip;pi`
     
-        :param: char The character to
+        - parameter char: The character to
     */
     public func insertString(str: String, everyXCharacters n: Int, indexZero: Bool = false) -> String {
         var result = self
@@ -253,12 +253,16 @@ public extension String {
     }
     
     public func unfoldiCalendarString() -> String {
-        var result = NSMutableString(string: self)
+        let result = NSMutableString(string: self)
         
-        var err: NSError?
-        let regex = NSRegularExpression(pattern: "\\r\\n\\s", options: nil, error: &err)
+        let regex: NSRegularExpression?
+        do {
+            regex = try NSRegularExpression(pattern: "\\r\\n\\s", options: [])
+        } catch {
+            regex = nil
+        }
         let rg = NSMakeRange(0, result.length)
-        regex?.replaceMatchesInString(result, options: nil, range: rg, withTemplate: "")
+        regex?.replaceMatchesInString(result, options: [], range: rg, withTemplate: "")
         
         return result as String
     }

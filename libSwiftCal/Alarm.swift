@@ -52,7 +52,7 @@ public class Alarm: CalendarObject {
     /// Attendees for use in email action
     public var attendees = [Attendee]()
     /// An integer representing the number of times to repeat the alarm after its initial trigger
-    public var repeat: AlarmProperty! = AlarmProperty()
+    public var `repeat`: AlarmProperty! = AlarmProperty()
     /// Non-standard "X-" properties
     public var xProperties = [GenericProperty]()
     /// IANA-registered property names
@@ -86,7 +86,7 @@ public class Alarm: CalendarObject {
     
     
     // MARK: - NSCoding
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         nscoder__initWithCoder(aDecoder, mirror: reflect(self), onObject: self)

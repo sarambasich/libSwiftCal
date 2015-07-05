@@ -29,7 +29,7 @@ import CoreLocation
 /**
     Returns a localized friendly status name for the given input.
 
-    :param: status The status level to get a friendly name for.
+    - parameter status: The status level to get a friendly name for.
 
     :return: A string description of the status or nil if invalid.
 */
@@ -121,11 +121,11 @@ public class Property: CalendarObject, TypedValue {
                 switch type {
                 case let type as String:
                     result = !type.isEmpty
-                case let type as Int:
+                case _ as Int:
                     result = true
-                case let type as Double:
+                case _ as Double:
                     result = true
-                case let type as NSDate:
+                case _ as NSDate:
                     result = true
                 default:
                     break
@@ -151,7 +151,7 @@ public class Property: CalendarObject, TypedValue {
 
     
     // MARK: - NSCoding
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -161,24 +161,23 @@ public class Property: CalendarObject, TypedValue {
         super.init(dictionary: dictionary)
         
         if let s = self.stringValue {
-            self.stringValue = self.stringValue!.removeiCalendarEscapes()
+            self.stringValue = s.removeiCalendarEscapes()
         }
     }
     
     public override func toDictionary() -> [String : AnyObject] {
-        if let k = self.key {
+        if let _ = self.key {
             if let str = self.stringValue {
                 if str.isEmpty {
                     return [:]
                 }
             }
             
-            if let p: AnyObject = self.propertyValue {
-                if let j: AnyObject = JSONify(self.propertyValue) {
-                    var dict = [String : AnyObject]()
-                    serializable__addToDict(&dict, mirror: reflect(self), onObject: self)
-                    return dict
-                }
+            if let _ = self.propertyValue,
+              let _ = JSONify(self.propertyValue) {
+                var dict = [String : AnyObject]()
+                serializable__addToDict(&dict, mirror: reflect(self), onObject: self)
+                return dict
             }
         }
         
@@ -336,7 +335,7 @@ public class Geo: Property {
     
     
     // MARK: - NSCoding
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -378,7 +377,7 @@ public class CalendarProperty: Property {
         super.init(dictionary: dictionary)
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -397,7 +396,7 @@ public class ReminderProperty: Property {
         super.init(dictionary: dictionary)
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -417,7 +416,7 @@ public class AlarmProperty: Property {
         super.init(dictionary: dictionary)
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -449,7 +448,7 @@ public class Trigger: AlarmProperty {
     }
 }
 
-extension Trigger: iCalendarSerializable {
+extension Trigger {
     public override func serializeToiCal() -> String {
         var result = String(kTRIGGER + kCOLON)
         
@@ -473,7 +472,7 @@ public class AudioAction: AlarmProperty {
         self.stringValue = "AUDIO"
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -525,7 +524,7 @@ public class GenericProperty: Property {
         super.init(dictionary: dictionary)
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -557,7 +556,7 @@ public class IANAProperty: Property {
         super.init(dictionary: dictionary)
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

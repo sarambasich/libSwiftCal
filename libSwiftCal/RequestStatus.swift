@@ -78,8 +78,6 @@ public struct RequestStatus {
                     case .SchedulingError:
                         result = NSLocalizedString("SchedulingError", comment: "")
                         break
-                    default:
-                        break
                 }
             }
             

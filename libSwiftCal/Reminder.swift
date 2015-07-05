@@ -157,7 +157,7 @@ public class Reminder: CalendarObject {
     // ***
     
     public override func generateUUID(format: String? = nil) {
-        super.generateUUID(format: format)
+        super.generateUUID(format)
         
         self.uid.key = kUID
         self.uid.stringValue = self.id
@@ -168,7 +168,7 @@ public class Reminder: CalendarObject {
         get {
             if let s = self.status.stringValue {
                 let wsp = NSCharacterSet.whitespaceAndNewlineCharacterSet()
-                if let st = Status(rawValue: self.status.stringValue!.stringByTrimmingCharactersInSet(wsp)) {
+                if let st = Status(rawValue: s.stringByTrimmingCharactersInSet(wsp)) {
                     return st
                 }
             }

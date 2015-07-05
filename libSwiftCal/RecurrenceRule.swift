@@ -327,7 +327,7 @@ public class RecurrenceRule: ReminderProperty {
     
     
     // MARK: - NSCoding
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -349,15 +349,16 @@ public class RecurrenceRule: ReminderProperty {
                 if dayVal.len > 2 {
                     let dayValIndex = advance(dayVal.endIndex, -2)
                     let intStr = dayVal.substringToIndex(dayValIndex)
-                    let occurrence = intStr.toInt()
+                    occurrence = Int(intStr)
                     dayStr = dayVal.substringFromIndex(dayValIndex)
                 } else {
                     dayStr = dayVal
                 }
                 
-                if let day = DayOfWeek(rawValue: dayVal) {
+                if let day = DayOfWeek(rawValue: dayStr) {
                     let dotw = DayOfTheWeek(dayOfWeek: day, occurrence: occurrence)
                     self.byDay.append(dotw)
+                    dotw.occurrence = occurrence
                 }
             }
         }

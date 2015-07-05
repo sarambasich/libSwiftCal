@@ -27,12 +27,19 @@
 import Foundation
 
 public class JSON {
-    public class func parse(data input: NSData, inout error e: NSError?) -> [String : AnyObject]? {
-        return NSJSONSerialization.JSONObjectWithData(input, options: nil, error: &e) as? [String : AnyObject]
+    public class func parse(data input: NSData) throws -> [String : AnyObject] {
+        let e: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
+        if let value = try NSJSONSerialization.JSONObjectWithData(input, options: []) as? [String : AnyObject] {
+            return value
+        }
+        throw e
     }
     
     public class func make(input: AnyObject) -> NSData?  {
-        var err: NSError?
-        return NSJSONSerialization.dataWithJSONObject(input, options: nil, error: &err)
+        do {
+            return try NSJSONSerialization.dataWithJSONObject(input, options: [])
+        } catch {
+            return nil
+        }
     }
 }

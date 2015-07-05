@@ -27,7 +27,7 @@
 /**
     Represents a duration in time.
 */
-public class Duration: CalendarObject, FloatLiteralConvertible, Printable {
+public class Duration: CalendarObject, FloatLiteralConvertible {
     public static let keyLetters: [Character] = ["W", "D", "H", "M", "S"]
     public static let otherCharacters: [Character] = ["P", "T", "+", "-"]
     
@@ -60,13 +60,13 @@ public class Duration: CalendarObject, FloatLiteralConvertible, Printable {
         var dictionary = [String : AnyObject]()
         
         var period = string.uppercaseString
-        var negative = period.contains("-", options: .CaseInsensitiveSearch)
+        let negative = period.contains("-", options: .CaseInsensitiveSearch)
         
         period = period.stringByReplacingOccurrencesOfString(String("+"), withString: "")
         period = period.stringByReplacingOccurrencesOfString(String("-"), withString: "")
         period = period.stringByReplacingOccurrencesOfString(String("P"), withString: "")
         
-        var periods = period.componentsSeparatedByString("T")
+        let periods = period.componentsSeparatedByString("T")
         var date = periods.first!
         var time: String?
         if periods.count == 2 {
@@ -77,8 +77,8 @@ public class Duration: CalendarObject, FloatLiteralConvertible, Printable {
         var curDateEndIdx = date.endIndex
         
         for var i = date.len - 1; i >= 0; i-- {
-            var char = date[advance(date.startIndex, i)]
-            if contains(Duration.keyLetters, char) {
+            let char = date[advance(date.startIndex, i)]
+            if Duration.keyLetters.contains(char) {
                 let intStr = date.substringWithRange(Range(start: curDateStartIdx, end: curDateEndIdx))
                 let scanner = NSScanner(string: intStr)
                 var int = Int.max
@@ -100,8 +100,8 @@ public class Duration: CalendarObject, FloatLiteralConvertible, Printable {
             var curTimeEndIdx = curTimeStartIdx
             
             for i in 0 ..< time.len {
-                var char = time[advance(time.startIndex, i)]
-                if contains(Duration.keyLetters, char) {
+                let char = time[advance(time.startIndex, i)]
+                if Duration.keyLetters.contains(char) {
                     let intStr = time.substringWithRange(Range(start: curTimeStartIdx, end: curTimeEndIdx))
                     let scanner = NSScanner(string: intStr)
                     var int: Int = -1
@@ -129,21 +129,21 @@ public class Duration: CalendarObject, FloatLiteralConvertible, Printable {
     public required init(floatLiteral value: FloatLiteralType) {
         super.init()
         
-        var negative = value < 0
+        let negative = value < 0 ? -1 : 1
         var curValue = value
         let weekVal = Int(curValue / NSTimeInterval(Conversions.Time.SecondsInAWeek))
-        self.weeks = weekVal
+        self.weeks = weekVal * negative
         curValue -= Conversions.Time.SecondsInAWeek * NSTimeInterval(weekVal)
         let dayVal = Int(curValue / NSTimeInterval(Conversions.Time.SecondsInADay))
-        self.days = dayVal
+        self.days = dayVal * negative
         curValue -= Conversions.Time.SecondsInADay * NSTimeInterval(dayVal)
         let hourVal = Int(curValue / NSTimeInterval(Conversions.Time.SecondsInAnHour))
-        self.hours = hourVal
+        self.hours = hourVal * negative
         curValue -= Conversions.Time.SecondsInAnHour * NSTimeInterval(hourVal)
         let minVal = Int(curValue / NSTimeInterval(Conversions.Time.SecondsInAMinute))
-        self.minutes = minVal
+        self.minutes = minVal * negative
         curValue -= Conversions.Time.SecondsInAMinute * NSTimeInterval(minVal)
-        self.seconds = Int(curValue)
+        self.seconds = Int(curValue) * negative
     }
     
     
@@ -154,7 +154,7 @@ public class Duration: CalendarObject, FloatLiteralConvertible, Printable {
     
     
     // MARK: - NSCoding
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

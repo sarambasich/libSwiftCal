@@ -27,7 +27,7 @@
 /**
     Represents a period of time.
 */
-public class TimePeriod: CalendarObject, Printable {
+public class TimePeriod: CalendarObject {
     /// The beginning of the time period. If nil, means now and onward
     public private(set) var start: NSDate! {
         didSet {

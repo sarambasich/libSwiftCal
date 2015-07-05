@@ -91,15 +91,20 @@ public class Calendar: CalendarObject, ParserObserver {
         issue. Most likely, there is something wrong in your calendar file such that it
         doesn't quite fit the parsing grammar.
     
-        :param: s The string to parse from iCalendar into libSwiftCal.
+        - parameter s: The string to parse from iCalendar into libSwiftCal.
     */
-    public init?(stringToParse s: String, inout error: NSError?) {
+    public init(stringToParse s: String) throws {
+        var error: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
         super.init()
         self.parser = CalParser(delegate: self)
         let str = s.unfoldiCalendarString()
-        self.parser.parseString(str, error: &error)
+        do {
+            try self.parser.parseString(str)
+        } catch let error1 as NSError {
+            error = error1
+        }
         if error != nil {
-            return nil
+            throw error
         }
     }
     
@@ -123,7 +128,7 @@ public class Calendar: CalendarObject, ParserObserver {
 
     
     // MARK: - NSCoding
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -200,7 +205,7 @@ extension Calendar {
     
     public func parser(key: String!, didMatchRrule value: PropertyMatch!) {
         var dict = value.toDictionary()
-        var strVal = value.value as! String
+        let strVal = value.value as! String
         let rules = strVal.componentsSeparatedByString(kSEMICOLON)
         for r in rules {
             let split = r.componentsSeparatedByString(kEQUALS)
@@ -227,7 +232,6 @@ extension Calendar {
     }
     
     public func parser(key: String!, didMatchGeo value: PropertyMatch!) {
-        let g = Geo()
         let comps = (value.value as! String).componentsSeparatedByString(";")
         if comps.count == 2 {
             let lat = (comps[0] as NSString).doubleValue
@@ -276,16 +280,16 @@ extension Calendar {
                     } else {
                         let dur = Duration(string: split.last!)
                         let dic = dur.toDictionary()
-                        timePeriodDict[TimePeriod.SerializationKeys.Duration] = dur.toDictionary()
+                        timePeriodDict[TimePeriod.SerializationKeys.Duration] = dic
                     }
                     
                     timePers.append(timePeriodDict)
                 }
             }
         } else if let d = value.value as? NSDate {
-            let s = d.valueForCalendarComponentUnit(NSCalendarUnit.CalendarUnitSecond)
-            let m = d.valueForCalendarComponentUnit(NSCalendarUnit.CalendarUnitMinute)
-            let h = d.valueForCalendarComponentUnit(NSCalendarUnit.CalendarUnitHour)
+            let s = d.valueForCalendarComponentUnit(NSCalendarUnit.Second)
+            let m = d.valueForCalendarComponentUnit(NSCalendarUnit.Minute)
+            let h = d.valueForCalendarComponentUnit(NSCalendarUnit.Hour)
             
             if s == 0 && m == 0 && h == 0 { // I.e. we have no time info
                 dates.append(d)
@@ -323,10 +327,8 @@ extension Calendar {
             
             for dateStr in dateStrs {
                 if let dt = NSDate.parseDate(dateStr) {
-                    var newExdate = value.toDictionary() as! [String : AnyObject]
                     dateTimes.append(dt)
                 } else if let d = NSDate.parseDate(dateStr, format: DateFormats.ISO8601Date) {
-                    var newExdate = value.toDictionary() as! [String : AnyObject]
                     dates.append(d)
                 }
             }

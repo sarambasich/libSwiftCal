@@ -42,7 +42,7 @@ import Foundation
         Serializes the receiver into its iCalendar format suitable for saving in
         .ics files.
     
-        :param: key When provided, adds this item as a value of a key separated by
+        - parameter key: When provided, adds this item as a value of a key separated by
                 an equals "=" sign.
         
         :return: The key-value pair string representation of the receiver.

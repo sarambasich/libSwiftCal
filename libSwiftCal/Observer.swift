@@ -35,8 +35,8 @@
     /**
         A callback function invoked when the observed model has been changed.
         
-        :param: model The model that has been changed.
-        :param: e An `NSError` object describing an error if one has occurred or 
+        - parameter model: The model that has been changed.
+        - parameter e: An `NSError` object describing an error if one has occurred or 
                     nil if nothing went wrong.
     */
     func notify(model: AnyObject, error e: NSError?)

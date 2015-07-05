@@ -40,7 +40,7 @@ public protocol Observable: NSObjectProtocol {
         this object is created, updated, deleted, or is otherwise modified in such
         a way that a listener would be interested in knowing of that change.
         
-        :param: o The Observer that should listen for changes to this object.
+        - parameter o: The Observer that should listen for changes to this object.
     */
     func addObserver(o: Observer)
     
@@ -48,7 +48,7 @@ public protocol Observable: NSObjectProtocol {
         Removes an observer from this object. The observer object will no longer
         receive updates when this model is modified.
         
-        :param: o The Observer object to remove.
+        - parameter o: The Observer object to remove.
     */
     func removeObserver(o: Observer)
     
@@ -56,7 +56,7 @@ public protocol Observable: NSObjectProtocol {
         Sends a notification to observers that this object has been changed with an
         optional error object to indicate a failure of an operation.
         
-        :param: e An NSError object describing an error if one has occurred.
+        - parameter e: An NSError object describing an error if one has occurred.
             Defaults to nil.
     */
     func notifyObservers(e: NSError?)

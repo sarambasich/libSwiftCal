@@ -66,8 +66,8 @@ func model__getDiffBetweenCalendarObjects(modelOne m1: MirrorType, modelTwo m2: 
         if p == "super" {
             return model__getDiffBetweenCalendarObjects(modelOne: c1, modelTwo: c2)
         } else {
-            var c1o = c1.value as? NSObject
-            var c2o = c2.value as? NSObject
+            let c1o = c1.value as? NSObject
+            let c2o = c2.value as? NSObject
             
             if c1o != nil && c2o != nil {
                 if c1o != c2o {
@@ -96,7 +96,6 @@ func model__serializeiCalChildren(model: CalendarObject) -> String {
     let mirrors = object__getAllMirrorValues(mirror: reflect(model))
     for i in 0 ..< mirrors.count {
         let m = mirrors[i]
-        let p = m.0
         let child = m.1.value
         if let calObj = child as? CalendarObject {
             result += calObj.serializeToiCal()
@@ -116,14 +115,14 @@ func model__serializeiCalChildren(model: CalendarObject) -> String {
 
 public func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObject, forSerializationKey key: String, model m: T) {
     let varNames = object__getVarNames(mirror: reflect(m))
-    if let i = find(m.serializationKeys, key) {
+    if let i = m.serializationKeys.indexOf(key) {
         let mrs = object__getAllMirrorValues(mirror: reflect(m))
         let mr = mrs[i]
         
         // This allows us to have nested dictionary representations
         // of Serializable constructs and have them init properly TODO: not generic :(
         if let dict = value as? [String : AnyObject] {
-            let __v = mr.1.value
+//            let __v = mr.1.value
             if let t1 = mr.1.value as? NSObject {
                 if let t2 = t1 as? CalendarObject {
                     let finalObj = t2.dynamicType(dictionary: dict)
@@ -174,7 +173,6 @@ public func model__setValue<T where T: NSObject, T: Serializable>(value: AnyObje
                 m.setValue(xProps, forKey: varNames[i])
             }
         } else {
-            let v = value as? String
             if let valStr = value as? String {
                 m.setValue(toTypeFromString(valStr), forKey: varNames[i])
             } else {
@@ -201,7 +199,7 @@ func nscoder__addToCoder<T: Serializable>(aCoder: NSCoder, mirror m: MirrorType,
         if p == "super" {
             nscoder__addToCoder(aCoder, mirror: c, onObject: o)
         } else {
-            let j = find(object__getVarNames(mirror: reflect(o)), p)
+            let j = object__getVarNames(mirror: reflect(o)).indexOf(p)
             aCoder.setValue(c.value as! NSObject, forKey: o.serializationKeys[j!])
         }
     }
@@ -227,7 +225,7 @@ func nscopying__copyWithZone<T: NSObject where T: NSCopying>(fromMirror fm: Mirr
             if let o = c.value as? NSObject {
                 toObj.setValue(o, forKey: p)
             } else {
-                println("Couldn't copy value for variable \(p)")
+                print("Couldn't copy value for variable \(p)")
             }
         }
     }
@@ -267,7 +265,7 @@ func object__getAllMirrorValues(mirror m: MirrorType) -> [(String, MirrorType)] 
 
 public func serializable__dictInit<T where T: NSObject, T: Serializable>(dictionary: [String: AnyObject], model m: T) {
     for (key, value) in dictionary {
-        if let i = find(m.serializationKeys, key) {
+        if let _ = m.serializationKeys.indexOf(key) {
             model__setValue(value as! NSObject, forSerializationKey: key, model: m)
         }
     }
@@ -281,10 +279,10 @@ public func serializable__addToDict<T: Serializable>(inout dict: [String : AnyOb
         if p == "super" {
             serializable__addToDict(&dict, mirror: c, onObject: o)
         } else {
-            let j = find(object__getVarNames(mirror: reflect(o)), p)
+            let j = object__getVarNames(mirror: reflect(o)).indexOf(p)
             let ks = o.serializationKeys
-            if j < o.serializationKeys.count {
-                let k = o.serializationKeys[j!]
+            if j < ks.count {
+                let k = ks[j!]
                 if !k.isEmpty {
                     if let val = c.value as? String {
                         if val.isEmpty {
@@ -366,7 +364,7 @@ public class CalendarObject: NSObject, CalendarType {
     /**
         Generates a UUID (an `id`) for this object if one does not yet exist.
     
-        :param: format Optional - a string for the formatting of the UUID.
+        - parameter format: Optional - a string for the formatting of the UUID.
     
         :note: May fail to generate a UUUID if one exists or no suitable one could be generated.
     */
@@ -396,7 +394,7 @@ public class CalendarObject: NSObject, CalendarType {
     
     
     // MARK: - NSCoding
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init()
         
         nscoder__initWithCoder(aDecoder, mirror: reflect(self), onObject: self)
