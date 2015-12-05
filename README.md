@@ -1,3 +1,5 @@
+**This library is out of date and deprecated. It should not be used in projects but as an experimental learning tool.**
+
 #libSwiftCal
 
 libSwiftCal is a Cocoa Touch Framework iCalendar library for use in iOS and OS X projects. It consists of an iCalendar wrapper framework written in Swift and a parsing engine written in Objective-C.
